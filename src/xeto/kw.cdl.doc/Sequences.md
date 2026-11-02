@@ -10,6 +10,8 @@ license:    Licensed under the Academic Free License version 3.0
 
 The Guideline 36 sequences are CDL composites. Each MBL composite under `Buildings.Controls.OBC.ASHRAE.G36`, outside Plants, becomes one spec that subtypes `kw.cdl::CdlBlock`. Its name joins the MBL package path and class, with acronyms case-folded, so `TerminalUnits.CoolingOnly.Controller` is `TerminalUnitsCoolingOnlyController` and `AHUs.MultiZone.VAV.Controller` is `AhusMultiZoneVavController`.
 
+The generator in `src/gen` writes every composite from modelica-json's output for its MBL class. See [Intro](Intro.md#source) for how it is pinned and run.
+
 | Library | Composites | Also holds |
 |-|-|-|
 | `kw.cdl.g36.common` | 14 | 10 enumerations, 4 constant packages |

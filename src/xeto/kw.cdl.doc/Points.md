@@ -26,6 +26,8 @@ The point specs come from Project Haystack's `ph.points` and `ph.points.x` libra
 
 511 connectors carry `cdlPointSpec` and 25 carry `cdlPointSpecCases`. Each of those 536 carries `cdlPointScope`.
 
+21 more connectors resolve to a case spec but carry no point meta. Their spec depends on the `heaCoi`, `cooCoi` or `minOADes` parameter, and they sit in composites nested inside a controller, such as `yVal` of `TerminalUnitsReheatSubsequencesDamperValves`. Those composites do not declare the parameter the case reads, so the case cannot be written there. The controller that wraps each one declares it and carries `cdlPointSpecCases` on its own connector, and a binder binds the controller.
+
 A plain spec, from `TerminalUnitsCoolingOnlyController`:
 
 ```
