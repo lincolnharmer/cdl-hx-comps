@@ -338,6 +338,31 @@ def test_no_mbl_source_is_kept_in_the_repo():
     assert not (HERE / "mbl-source").exists()
 
 
+# What marks a file as modelica-json output: CXF names the S231 vocabulary, and the json output names its class
+# definitions and its .mo file.
+MODELICA_JSON_MARKS = ("data.ashrae.org/S231", '"stored_class_definitions"', '"modelicaFile"')
+
+
+def _modelica_json_output(names, read):
+    """The names among `names` that are CXF (.jsonld) or carry a mark of modelica-json's json output."""
+    return [n for n in names if n.lower().endswith(".jsonld")
+            or n.lower().endswith(".json") and any(m in read(n) for m in MODELICA_JSON_MARKS)]
+
+
+def test_no_modelica_json_output_is_kept_in_the_repo():
+    # Wrong behavior caught: the generator's inputs, CXF or modelica-json's json output for MBL's classes, committed
+    # to the repo, when they are rebuilt on each machine and only their sha256 is kept (source_manifest.json).
+    tracked = subprocess.run(["git", "-C", str(ROOT), "ls-files"], capture_output=True, check=True, text=True).stdout
+    assert _modelica_json_output(tracked.splitlines(), lambda n: (ROOT / n).read_text(encoding="utf-8")) == []
+
+
+def test_the_modelica_json_guard_finds_cxf_and_json_output(tmp_path):
+    # The guard's own red condition: a CXF file, and a json file of either kind, are found; a plain table is not.
+    files = {"a.jsonld": "{}", "b.json": '{"@context": {"S231": "http://data.ashrae.org/S231#"}}',
+             "c.json": '{"stored_class_definitions": []}', "d.json": '{"modelicaFile": "x.mo"}', "e.json": '{"a": 1}'}
+    assert _modelica_json_output(sorted(files), files.get) == ["a.jsonld", "b.json", "c.json", "d.json"]
+
+
 def test_the_cache_is_mbl_at_the_tag_byte_for_byte(mbl_cdl):
     # Wrong behavior caught: the generator reading a cache that differs from the manifest. source_dir verified it;
     # this reads it again here so the check does not rest on the code it checks.
