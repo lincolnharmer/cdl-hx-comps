@@ -64,19 +64,6 @@ HAND_CONSTANTS = {OBC + "CDL.Reals.Sources.CalendarTime.firstYear": 2010.0,   # 
 CDL_PREFIX = OBC + "CDL."
 G36_PREFIX = OBC + "ASHRAE.G36."
 
-# A fixed set of elementary classes. SCOPE "cone" generates only these; the default, "all", generates every Clause 7
-# class, as clause7.json lists them.
-CONE = ["Reals.Line", "Reals.Switch", "Reals.Add", "Reals.Subtract", "Reals.Multiply", "Reals.Min", "Reals.Max",
-        "Reals.Abs", "Reals.MultiplyByParameter", "Reals.AddParameter", "Reals.GreaterThreshold",
-        "Reals.LessThreshold", "Reals.Greater", "Reals.Less", "Reals.Sources.Constant",
-        "Integers.Switch", "Integers.Add", "Integers.LessThreshold", "Integers.GreaterThreshold", "Integers.Equal",
-        "Integers.Sources.Constant",
-        "Logical.And", "Logical.Not", "Logical.Latch", "Logical.TrueDelay", "Logical.TrueFalseHold",
-        "Logical.Sources.Constant", "Logical.Sources.SampleTrigger",
-        "Discrete.Sampler", "Discrete.UnitDelay",
-        "Conversions.IntegerToReal", "Conversions.BooleanToInteger",
-        "Utilities.Assert"]
-SCOPE = "all"
 # Contained instances are maybe slots ("maybe"), never values on a record.
 INSTANCE_SLOT = "maybe"
 # The names Clause 7 prints differently from MBL, by clause number: Clause 7 as printed -> MBL 12.1.0.
@@ -131,15 +118,10 @@ def g36_lib(cls):
     raise CxfError("%s: G36 package %s belongs to no open lib" % (cls, pkg))
 
 
-def lib_of(cls):
-    return "kw.cdl" if cls.startswith(CDL_PREFIX) else g36_lib(cls)
-
-
 # Four G36 composites, in dependency order: TrimAndRespond before SupplyTemperature, which instantiates it. A link
 # test anchors on them; generation covers every pinned G36 class.
 G36 = ["Generic.TrimAndRespond", "AHUs.MultiZone.VAV.SetPoints.SupplyTemperature",
        "AHUs.MultiZone.VAV.SetPoints.SupplyFan", "TerminalUnits.Reheat.Subsequences.SystemRequests"]
-G36_ENUMS = ["Types.HeatingCoil"]
 # Packages of constants. `Types.OperationModes` is a package of `constant Integer`, not an enumeration, and
 # modelica-json 5460add3's CXF writes no node for it, so a binding that names one (SupplyFan's conInt.k =
 # ...Types.OperationModes.coolDown) resolves to nothing. The generator reads each package from modelica-json's json
@@ -1835,12 +1817,6 @@ def main(argv=None):
         raise CxfError("not in 231 Clause 7, so not in kw.cdl (kw.cdl.mbl is reserved): " + ", ".join(outside))
     if load_classes.report:
         print("left out, with reasons:\n  " + "\n  ".join(load_classes.report))
-    if SCOPE == "cone":
-        want = {CDL_PREFIX + c for c in CONE}
-        missing = want - set(elem)
-        if missing:
-            raise CxfError("cone classes missing from the pinned CXF: " + ", ".join(sorted(missing)))
-        elem = sorted(want)
     out = pathlib.Path(a.out)
     for lib in OPEN_LIBS:
         (out / LIBS / lib).mkdir(parents=True, exist_ok=True)

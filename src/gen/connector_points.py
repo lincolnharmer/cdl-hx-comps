@@ -20,13 +20,5 @@ SCOPES = ("self", "upstreamAir", "upstreamAir(coldDeck)", "upstreamAir(hotDeck)"
           "perSupplyFan")
 
 
-def render(doc):
-    """The table as connector-points.json holds it: the header indented, then one connector per line."""
-    head = {k: v for k, v in doc.items() if k != "connectors"}
-    lines = json.dumps(head, indent=1, ensure_ascii=False)[:-2] + ',\n "connectors": [\n'
-    lines += ",\n".join("  " + json.dumps(x, ensure_ascii=False, sort_keys=False) for x in doc["connectors"])
-    return lines + "\n ]\n}\n"
-
-
 def load():
     return json.loads(OUT.read_text(encoding="utf-8"))
