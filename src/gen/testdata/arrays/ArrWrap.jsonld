@@ -1,0 +1,154 @@
+{
+  "@context": {
+    "S231": "http://data.ashrae.org/S231#",
+    "ex": "http://example.org#"
+  },
+  "@graph": [
+    {
+      "@id": "ex:Probe.ArrWrap",
+      "@type": "S231:Block",
+      "S231:containsBlock": {
+        "@id": "ex:Probe.ArrWrap.seq"
+      },
+      "S231:hasInput": [
+        {
+          "@id": "ex:Probe.ArrWrap.r1"
+        },
+        {
+          "@id": "ex:Probe.ArrWrap.r2"
+        },
+        {
+          "@id": "ex:Probe.ArrWrap.T1"
+        },
+        {
+          "@id": "ex:Probe.ArrWrap.T2"
+        },
+        {
+          "@id": "ex:Probe.ArrWrap.T3"
+        }
+      ],
+      "S231:hasOutput": [
+        {
+          "@id": "ex:Probe.ArrWrap.y"
+        },
+        {
+          "@id": "ex:Probe.ArrWrap.yInt"
+        }
+      ],
+      "S231:label": "ArrWrap"
+    },
+    {
+      "@id": "ex:Probe.ArrWrap.r1",
+      "@type": "S231:IntegerInput",
+      "S231:accessSpecifier": "public",
+      "S231:description": "r1",
+      "S231:isConnectedTo": {
+        "@id": "ex:Probe.ArrWrap.seq.req1"
+      },
+      "S231:label": "r1"
+    },
+    {
+      "@id": "ex:Probe.ArrWrap.r2",
+      "@type": "S231:IntegerInput",
+      "S231:accessSpecifier": "public",
+      "S231:description": "r2",
+      "S231:isConnectedTo": {
+        "@id": "ex:Probe.ArrWrap.seq.req2"
+      },
+      "S231:label": "r2"
+    },
+    {
+      "@id": "ex:Probe.ArrWrap.seq",
+      "@type": "ex:Probe.ArrSum",
+      "S231:accessSpecifier": "public",
+      "S231:description": "intent",
+      "S231:hasInstance": [
+        {
+          "@id": "ex:Probe.ArrWrap.seq.nZon"
+        },
+        {
+          "@id": "ex:Probe.ArrWrap.seq.req1"
+        },
+        {
+          "@id": "ex:Probe.ArrWrap.seq.req2"
+        },
+        {
+          "@id": "http://example.org#Probe.ArrWrap.seq.TZon%5B1%5D"
+        },
+        {
+          "@id": "http://example.org#Probe.ArrWrap.seq.TZon%5B2%5D"
+        },
+        {
+          "@id": "http://example.org#Probe.ArrWrap.seq.TZon%5B3%5D"
+        },
+        {
+          "@id": "ex:Probe.ArrWrap.seq.y"
+        },
+        {
+          "@id": "ex:Probe.ArrWrap.seq.yInt"
+        }
+      ],
+      "S231:label": "seq"
+    },
+    {
+      "@id": "ex:Probe.ArrWrap.seq.nZon",
+      "S231:value": 3
+    },
+    {
+      "@id": "ex:Probe.ArrWrap.seq.y",
+      "S231:isConnectedTo": {
+        "@id": "ex:Probe.ArrWrap.y"
+      }
+    },
+    {
+      "@id": "ex:Probe.ArrWrap.seq.yInt",
+      "S231:isConnectedTo": {
+        "@id": "ex:Probe.ArrWrap.yInt"
+      }
+    },
+    {
+      "@id": "ex:Probe.ArrWrap.T1",
+      "@type": "S231:RealInput",
+      "S231:accessSpecifier": "public",
+      "S231:description": "t1",
+      "S231:isConnectedTo": {
+        "@id": "http://example.org#Probe.ArrWrap.seq.TZon%5B1%5D"
+      },
+      "S231:label": "T1"
+    },
+    {
+      "@id": "ex:Probe.ArrWrap.T2",
+      "@type": "S231:RealInput",
+      "S231:accessSpecifier": "public",
+      "S231:description": "t2",
+      "S231:isConnectedTo": {
+        "@id": "http://example.org#Probe.ArrWrap.seq.TZon%5B2%5D"
+      },
+      "S231:label": "T2"
+    },
+    {
+      "@id": "ex:Probe.ArrWrap.T3",
+      "@type": "S231:RealInput",
+      "S231:accessSpecifier": "public",
+      "S231:description": "t3",
+      "S231:isConnectedTo": {
+        "@id": "http://example.org#Probe.ArrWrap.seq.TZon%5B3%5D"
+      },
+      "S231:label": "T3"
+    },
+    {
+      "@id": "ex:Probe.ArrWrap.y",
+      "@type": "S231:RealOutput",
+      "S231:accessSpecifier": "public",
+      "S231:description": "y",
+      "S231:label": "y"
+    },
+    {
+      "@id": "ex:Probe.ArrWrap.yInt",
+      "@type": "S231:IntegerOutput",
+      "S231:accessSpecifier": "public",
+      "S231:description": "yi",
+      "S231:label": "yInt"
+    }
+  ]
+}

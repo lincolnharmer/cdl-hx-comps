@@ -1750,6 +1750,114 @@ def _all_classes():
     return dict(_ALL_CLASSES[0])
 
 
+# ---- reading array CXF, on a fixture ----
+# testdata/arrays holds the CXF modelica-json 5460add3 wrote for two small Modelica models kW Engineering wrote to
+# exercise CDL arrays; the models themselves are not kept. ArrSum declares an array parameter, an array input, two
+# vectorized instances and two MultiSums, one fed by indexed connects; ArrWrap instantiates it and drives
+# seq.TZon[k] element by element. They name CDL classes only, and carry no MBL model or value.
+ARRAYS = HERE / "testdata" / "arrays"
+
+
+def _probe_docs():
+    return {f.name: json.loads(f.read_text(encoding="utf-8")) for f in sorted(ARRAYS.glob("*.jsonld"))}
+
+
+def _node(docs, file, suffix):
+    return next(n for n in docs[file]["@graph"] if n["@id"].endswith(suffix))
+
+
+def _load_probe(tmp_path, docs=None):
+    """(the class that instantiates the other, every class): the fixture's classes read by generate.read_class, as
+    a design is read, and oriented, beside every pinned class."""
+    docs = docs or _probe_docs()
+    for name, d in docs.items():
+        (tmp_path / name).write_text(json.dumps(d), encoding="utf-8")
+    loaded = [cxf.Cxf.load(tmp_path / name) for name in sorted(docs)]
+    defined = {cxf.local(nid): (d, nid) for d in loaded for nid, n in d.nodes.items()
+               if n.get("@type") == cxf.S231 + "Block"}
+    classes = _all_classes()
+    known = set(classes) | set(defined)
+    enums = {c for c in classes if classes[c].kind == "enum"}
+    for c, (d, nid) in defined.items():
+        classes[c] = generate.read_class(d, nid, known, enums, design=True)
+    for c in defined:
+        generate.orient(classes[c], classes)
+    wrapper = next(c for c in defined if any(i.cls in defined for i in classes[c].insts))
+    return wrapper, classes
+
+
+@pytest.mark.inputs
+def test_a_design_cxf_with_arrays_is_read(tmp_path):
+    """Red when the reader refuses or drops the array forms modelica-json writes: a size kept with its parentheses
+    or lost, an element endpoint left encoded, an element listed under hasInstance read as a modifier, or an indexed
+    connect not oriented."""
+    template, allc = _load_probe(tmp_path)
+    assert template == "Probe.ArrWrap"
+    s = allc["Probe.ArrSum"]
+    assert s.param("gai").size == "nZon" and s.param("gai").expr == "fill(2,nZon)"
+    assert s.param("nZon").size is None
+    assert s.conn("TZon").size == "nZon" and s.conn("req1").size is None
+    assert s.inst("gaiBlo").size == "nZon" and s.inst("addPar").size == "nZon"
+    assert s.inst("mulSum").size is None and s.inst("intSum").size is None
+    assert s.inst("intSum").binds == {"nin": (2.0, None)}            # u[1], u[2] are endpoints, not modifiers
+    assert s.inst("gaiBlo").binds == {"k": (None, "gai")}
+    assert ("req1", "intSum.u[1]") in s.edges and ("req2", "intSum.u[2]") in s.edges
+    assert ("TZon", "gaiBlo.u") in s.edges and ("addPar.y", "mulSum.u") in s.edges
+    w = allc["Probe.ArrWrap"]
+    assert w.inst("seq").binds == {"nZon": (3.0, None)}
+    assert ("T2", "seq.TZon[2]") in w.edges
+
+
+@pytest.mark.inputs
+def test_the_size_strips_one_outer_pair_and_keeps_whitespace(tmp_path):
+    """Red when the size keeps its parentheses, strips more than one pair, or normalizes whitespace."""
+    docs = _probe_docs()
+    _node(docs, "ArrSum.jsonld", "ArrSum.gai")["S231:sizeOfDimensions"] = "((nZon + 0))"
+    _, allc = _load_probe(tmp_path, docs)
+    assert allc["Probe.ArrSum"].param("gai").size == "(nZon + 0)"
+
+
+@pytest.mark.inputs
+def test_three_dimensions_refuse_by_name(tmp_path):
+    """Red when a three-dimensional array is read as fewer dimensions."""
+    docs = _probe_docs()
+    _node(docs, "ArrSum.jsonld", "ArrSum.gai")["S231:numberDimensions"] = 3
+    with pytest.raises(cxf.CxfError, match=r"Probe.ArrSum: gai has 3 dimensions; one or two are supported"):
+        _load_probe(tmp_path, docs)
+
+
+@pytest.mark.inputs
+def test_an_array_with_no_size_refuses_by_name(tmp_path):
+    """Red when an array with no sizeOfDimensions is read as a scalar or with an empty size."""
+    docs = _probe_docs()
+    del _node(docs, "ArrSum.jsonld", "ArrSum.gaiBlo")["S231:sizeOfDimensions"]
+    with pytest.raises(cxf.CxfError, match="Probe.ArrSum: gaiBlo is an array with no size"):
+        _load_probe(tmp_path, docs)
+
+
+@pytest.mark.inputs
+def test_an_element_node_carrying_a_value_refuses_by_name(tmp_path):
+    """Red when an element node carrying anything but a connection (here a value, an element modifier) is
+    silently skipped or read as a modifier of the whole instance."""
+    docs = _probe_docs()
+    docs["ArrSum.jsonld"]["@graph"].append({"@id": "http://example.org#Probe.ArrSum.intSum.u%5B1%5D",
+                                            "S231:value": 4})
+    with pytest.raises(cxf.CxfError, match=r"ArrSum.jsonld: Probe.ArrSum.intSum.u\[1\] is an array element "
+                                           r"carrying value; only connections may name an element"):
+        _load_probe(tmp_path, docs)
+
+
+@pytest.mark.inputs
+def test_a_two_dimensional_instance_array_refuses_by_name(tmp_path):
+    """Red when gaiBlo[nZon,2] is read as a one-dimensional vectorized instance."""
+    docs = _probe_docs()
+    _node(docs, "ArrSum.jsonld", "ArrSum.gaiBlo").update({"S231:numberDimensions": 2,
+                                                          "S231:sizeOfDimensions": "(nZon,2)"})
+    with pytest.raises(cxf.CxfError,
+                       match=r"Probe.ArrSum: instance gaiBlo has 2 dimensions; a vectorized instance has one"):
+        _load_probe(tmp_path, docs)
+
+
 @pytest.mark.inputs
 def test_the_multisum_classes_carry_their_array_sizes():
     """Red when load_classes leaves MultiSum's u and k without a size, so an expander could not count their

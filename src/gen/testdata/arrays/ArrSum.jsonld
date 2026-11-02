@@ -1,0 +1,250 @@
+{
+  "@context": {
+    "S231": "http://data.ashrae.org/S231#",
+    "ex": "http://example.org#"
+  },
+  "@graph": [
+    {
+      "@id": "ex:Probe.ArrSum",
+      "@type": "S231:Block",
+      "S231:containsBlock": [
+        {
+          "@id": "ex:Probe.ArrSum.addPar"
+        },
+        {
+          "@id": "ex:Probe.ArrSum.gaiBlo"
+        },
+        {
+          "@id": "ex:Probe.ArrSum.intSum"
+        },
+        {
+          "@id": "ex:Probe.ArrSum.mulSum"
+        }
+      ],
+      "S231:hasInput": [
+        {
+          "@id": "ex:Probe.ArrSum.req1"
+        },
+        {
+          "@id": "ex:Probe.ArrSum.req2"
+        },
+        {
+          "@id": "ex:Probe.ArrSum.TZon"
+        }
+      ],
+      "S231:hasOutput": [
+        {
+          "@id": "ex:Probe.ArrSum.y"
+        },
+        {
+          "@id": "ex:Probe.ArrSum.yInt"
+        }
+      ],
+      "S231:hasParameter": [
+        {
+          "@id": "ex:Probe.ArrSum.gai"
+        },
+        {
+          "@id": "ex:Probe.ArrSum.nZon"
+        }
+      ],
+      "S231:label": "ArrSum"
+    },
+    {
+      "@id": "ex:Probe.ArrSum.addPar",
+      "@type": "ex:Buildings.Controls.OBC.CDL.Reals.AddParameter",
+      "S231:accessSpecifier": "public",
+      "S231:description": "each probe",
+      "S231:hasInstance": [
+        {
+          "@id": "ex:Probe.ArrSum.addPar.p"
+        },
+        {
+          "@id": "ex:Probe.ArrSum.addPar.u"
+        },
+        {
+          "@id": "ex:Probe.ArrSum.addPar.y"
+        }
+      ],
+      "S231:isArray": true,
+      "S231:label": "addPar[nZon]",
+      "S231:numberDimensions": 1,
+      "S231:sizeOfDimensions": "(nZon)"
+    },
+    {
+      "@id": "ex:Probe.ArrSum.addPar.p",
+      "S231:value": {
+        "@value": "1.5",
+        "@type": "http://www.w3.org/2001/XMLSchema#decimal"
+      }
+    },
+    {
+      "@id": "ex:Probe.ArrSum.addPar.y",
+      "S231:isConnectedTo": {
+        "@id": "ex:Probe.ArrSum.mulSum.u"
+      }
+    },
+    {
+      "@id": "ex:Probe.ArrSum.gai",
+      "@type": "S231:Parameter",
+      "S231:accessSpecifier": "public",
+      "S231:description": "Gains",
+      "S231:isArray": true,
+      "S231:isOfDataType": {
+        "@id": "S231:Real"
+      },
+      "S231:label": "gai[nZon]",
+      "S231:numberDimensions": 1,
+      "S231:sizeOfDimensions": "(nZon)",
+      "S231:value": "fill(2,nZon)"
+    },
+    {
+      "@id": "ex:Probe.ArrSum.gaiBlo",
+      "@type": "ex:Buildings.Controls.OBC.CDL.Reals.MultiplyByParameter",
+      "S231:accessSpecifier": "public",
+      "S231:description": "Gains per zone",
+      "S231:hasInstance": [
+        {
+          "@id": "ex:Probe.ArrSum.gaiBlo.k"
+        },
+        {
+          "@id": "ex:Probe.ArrSum.gaiBlo.u"
+        },
+        {
+          "@id": "ex:Probe.ArrSum.gaiBlo.y"
+        }
+      ],
+      "S231:isArray": true,
+      "S231:label": "gaiBlo[nZon]",
+      "S231:numberDimensions": 1,
+      "S231:sizeOfDimensions": "(nZon)"
+    },
+    {
+      "@id": "ex:Probe.ArrSum.gaiBlo.k",
+      "S231:value": "gai"
+    },
+    {
+      "@id": "ex:Probe.ArrSum.gaiBlo.y",
+      "S231:isConnectedTo": {
+        "@id": "ex:Probe.ArrSum.addPar.u"
+      }
+    },
+    {
+      "@id": "ex:Probe.ArrSum.intSum",
+      "@type": "ex:Buildings.Controls.OBC.CDL.Integers.MultiSum",
+      "S231:accessSpecifier": "public",
+      "S231:description": "Int sum",
+      "S231:hasInstance": [
+        {
+          "@id": "ex:Probe.ArrSum.intSum.nin"
+        },
+        {
+          "@id": "http://example.org#Probe.ArrSum.intSum.u%5B1%5D"
+        },
+        {
+          "@id": "http://example.org#Probe.ArrSum.intSum.u%5B2%5D"
+        },
+        {
+          "@id": "ex:Probe.ArrSum.intSum.y"
+        }
+      ],
+      "S231:label": "intSum"
+    },
+    {
+      "@id": "ex:Probe.ArrSum.intSum.nin",
+      "S231:value": 2
+    },
+    {
+      "@id": "ex:Probe.ArrSum.intSum.y",
+      "S231:isConnectedTo": {
+        "@id": "ex:Probe.ArrSum.yInt"
+      }
+    },
+    {
+      "@id": "ex:Probe.ArrSum.mulSum",
+      "@type": "ex:Buildings.Controls.OBC.CDL.Reals.MultiSum",
+      "S231:accessSpecifier": "public",
+      "S231:description": "Sum of zones",
+      "S231:hasInstance": [
+        {
+          "@id": "ex:Probe.ArrSum.mulSum.nin"
+        },
+        {
+          "@id": "ex:Probe.ArrSum.mulSum.u"
+        },
+        {
+          "@id": "ex:Probe.ArrSum.mulSum.y"
+        }
+      ],
+      "S231:label": "mulSum"
+    },
+    {
+      "@id": "ex:Probe.ArrSum.mulSum.nin",
+      "S231:value": "nZon"
+    },
+    {
+      "@id": "ex:Probe.ArrSum.mulSum.y",
+      "S231:isConnectedTo": {
+        "@id": "ex:Probe.ArrSum.y"
+      }
+    },
+    {
+      "@id": "ex:Probe.ArrSum.nZon",
+      "@type": "S231:Parameter",
+      "S231:accessSpecifier": "public",
+      "S231:description": "Number of zones",
+      "S231:isOfDataType": {
+        "@id": "S231:Integer"
+      },
+      "S231:label": "nZon",
+      "S231:value": 3
+    },
+    {
+      "@id": "ex:Probe.ArrSum.req1",
+      "@type": "S231:IntegerInput",
+      "S231:accessSpecifier": "public",
+      "S231:description": "r1",
+      "S231:isConnectedTo": {
+        "@id": "http://example.org#Probe.ArrSum.intSum.u%5B1%5D"
+      },
+      "S231:label": "req1"
+    },
+    {
+      "@id": "ex:Probe.ArrSum.req2",
+      "@type": "S231:IntegerInput",
+      "S231:accessSpecifier": "public",
+      "S231:description": "r2",
+      "S231:isConnectedTo": {
+        "@id": "http://example.org#Probe.ArrSum.intSum.u%5B2%5D"
+      },
+      "S231:label": "req2"
+    },
+    {
+      "@id": "ex:Probe.ArrSum.TZon",
+      "@type": "S231:RealInput",
+      "S231:accessSpecifier": "public",
+      "S231:description": "Zone temperatures",
+      "S231:isArray": true,
+      "S231:isConnectedTo": {
+        "@id": "ex:Probe.ArrSum.gaiBlo.u"
+      },
+      "S231:label": "TZon[nZon]",
+      "S231:numberDimensions": 1,
+      "S231:sizeOfDimensions": "(nZon)"
+    },
+    {
+      "@id": "ex:Probe.ArrSum.y",
+      "@type": "S231:RealOutput",
+      "S231:accessSpecifier": "public",
+      "S231:description": "Sum",
+      "S231:label": "y"
+    },
+    {
+      "@id": "ex:Probe.ArrSum.yInt",
+      "@type": "S231:IntegerOutput",
+      "S231:accessSpecifier": "public",
+      "S231:description": "Int sum",
+      "S231:label": "yInt"
+    }
+  ]
+}

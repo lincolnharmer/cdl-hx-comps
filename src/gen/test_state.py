@@ -356,11 +356,24 @@ def _modelica_json_output(names, read):
             or n.lower().endswith(".json") and any(m in read(n) for m in MODELICA_JSON_MARKS)]
 
 
+# The one exception: the array fixtures under src/gen/testdata/arrays, CXF modelica-json wrote for two small models
+# kW Engineering wrote. They define classes in their own package, Probe, and name CDL classes only.
+FIXTURES = "src/gen/testdata/arrays/"
+FIXTURE_FILES = ["src/gen/testdata/arrays/ArrSum.jsonld", "src/gen/testdata/arrays/ArrWrap.jsonld"]
+
+
 def test_no_modelica_json_output_is_kept_in_the_repo():
     # Wrong behavior caught: the generator's inputs, CXF or modelica-json's json output for MBL's classes, committed
     # to the repo, when they are rebuilt on each machine and only their sha256 is kept (source_manifest.json).
     tracked = subprocess.run(["git", "-C", str(ROOT), "ls-files"], capture_output=True, check=True, text=True).stdout
-    assert _modelica_json_output(tracked.splitlines(), lambda n: (ROOT / n).read_text(encoding="utf-8")) == []
+    found = _modelica_json_output(tracked.splitlines(), lambda n: (ROOT / n).read_text(encoding="utf-8"))
+    assert [n for n in found if not n.startswith(FIXTURES)] == []
+    # The exception stays the two named files, and they define no MBL class.
+    assert sorted(n for n in found if n.startswith(FIXTURES)) == FIXTURE_FILES
+    for n in FIXTURE_FILES:
+        doc = json.loads((ROOT / n).read_text(encoding="utf-8"))
+        blocks = [x["@id"] for x in doc["@graph"] if x.get("@type") in ("S231:Block", "S231:ElementaryBlock")]
+        assert blocks and all(b.startswith("ex:Probe.") for b in blocks), (n, blocks)
 
 
 def test_the_modelica_json_guard_finds_cxf_and_json_output(tmp_path):
