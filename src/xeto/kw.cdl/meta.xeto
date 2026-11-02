@@ -1,0 +1,209 @@
+//
+// Copyright (c) 2026, kW Engineering
+// Licensed under the Academic Free License version 3.0
+//
+// Meta tags the generated CDL specs carry. Read by the generator and by any importer.
++Spec {
+  // The MBL class path a spec was generated from
+  cdlClass: Str?
+  // Marks a spec generated from a CDL elementary block
+  cdlElementary: Marker?
+  // Marks a slot that is a CDL parameter
+  cdlParam: Marker?
+  // Marks a slot that is a CDL input connector
+  cdlInput: Marker?
+  // Marks a slot that is a CDL output connector
+  cdlOutput: Marker?
+  // Marks a slot of a composite that is a contained block instance
+  cdlInstance: Marker?
+  // The CDL name of a slot, before its first letter was lowered
+  cdlName: Str?
+  // The CDL data type: Real, Integer, Boolean, or an enum spec qname
+  cdlType: Str?
+  // The CDL unit, for example K, s or 1
+  cdlUnit: Str?
+  // The QUDT quantity kind as CXF wrote it, for example ThermodynamicTemperature
+  cdlQuantityKind: Str?
+  // A parameter default that is an expression of other parameters
+  cdlDefault: Str?
+  // Marks a protected parameter, computed at expansion and never stored on a record
+  cdlProtected: Marker?
+  // Marks a final parameter: a design modifier on it refuses import
+  cdlFinal: Marker?
+  // The binding modifiers of a contained instance that stay expressions, CDL parameter (first letter lowered) to CDL
+  // expression in the composite's parameters. They resolve when a sequence is instantiated for a building. A
+  // literal binding on an hx.comps child is written as the comp slot's value instead
+  cdlBind: Dict?
+  // The cdlBind entries MBL marks final, comma-separated Xeto slot names: fixed values a design must not override
+  cdlFinalBind: Str?
+  // The guard of a conditional instance or connector, a CDL expression
+  cdlCondition: Str?
+  // The size of a vector connector, or of a vectorized instance (a CDL expression, such as nZon)
+  cdlArraySize: Str?
+  // A connector's declared minimum and maximum (conflicts are checked between connected connectors, 231 5.8.6)
+  cdlMin: Number?
+  cdlMax: Number?
+  // The MBL expression a slot's minVal (a connector's cdlMin) was resolved from, where MBL writes the bound with a
+  // CDL constant or a constant of the class (min=100*Constants.eps). The number beside it is that expression's value
+  // at the pinned MBL. Absent where the bound is a literal of the slot's own declaration.
+  cdlMinConst: Str?
+  // The same for maxVal (a connector's cdlMax), for example max=-Constants.small
+  cdlMaxConst: Str?
+  // Where a parameter's minVal was propagated from: the instance path, in Xeto slot names, of the block parameter it
+  // is bound into by bare name and whose own bound it carries (kVal: "supSig.conTSup.k", PIDWithReset.k's
+  // min=100*Constants.eps). Modelica checks that bound on the value the parameter passes. Only unguarded paths give
+  // a minVal
+  cdlMinVia: Str?
+  // The same for maxVal
+  cdlMaxVia: Str?
+  // MBL's own min on a parameter where a block downstream is tighter and minVal carries the tighter number
+  // (SupplyFan.Td: own 0, minVal 1e-13 from its PID). The intersection is the valid range; this keeps MBL's value
+  cdlMinOwn: Number?
+  // The same for max
+  cdlMaxOwn: Number?
+  // The mins only guarded instances impose, never a minVal: when a guard removes its instance the parameter is unused,
+  // and a hard bound could refuse a harmless value or a G36 default. One CdlBoundWhen per value, tightest first; a
+  // configuration tool applies each whose cond holds. Guards that together cover every configuration give a minVal instead
+  cdlMinWhen: List? <of:CdlBoundWhen>
+  // The same for max
+  cdlMaxWhen: List? <of:CdlBoundWhen>
+  // A parameter's min written as a CDL expression of the class's other parameters (min=outDamPhy_min, min=0.001/n).
+  // No static minVal can hold it, so fits does not check it: a configuration tool evaluates it against the answers. A
+  // minVal beside it came from elsewhere (cdlMinVia)
+  cdlMinExpr: Str?
+  // The same for max (max=outDamPhy_max)
+  cdlMaxExpr: Str?
+  // The 231 Clause 7 number of an elementary class, for example "7.5.2.1"
+  cdlClause: Str?
+  // Clause 7's spelling of the class where it differs from MBL's (seven classes, and two headings printed with a stray 7)
+  cdl231Name: Str?
+  // Alternative drivers of a sink, comma-separated, each on a conditional instance or connector
+  cdlAltLink: Str?
+  // A parameter's Dialog(enable): a CDL expression of the class's parameters; the parameter applies only where it
+  // is true (the MBL author's statement, from modelica-json's json output)
+  cdlEnable: Str?
+  // A parameter's Dialog(group): the group a form shows it under
+  cdlGroup: Str?
+  // A parameter's Dialog(tab): the tab a form shows it on
+  cdlTab: Str?
+  // A parameter's __cdl(ValueInReference): whether MBL's reference results carry its value
+  cdlValueInReference: Bool?
+  // Marks a K slot whose quantity (temperature or temperature difference) neither CXF nor MBL states: the generator
+  // took it from MBL's displayUnit, or from a recorded decision in the generator's inputs
+  cdlQuantityInferred: Marker?
+  // The CDL unit of a slot MBL declares with no unit and no quantity, which the generator took from a recorded
+  // decision in the generator's inputs (one carrying `unit`). The slot carries no cdlUnit, since CXF states none;
+  // a resolver reads this tag where it would read cdlUnit. The decision names the MBL declaration it is read from
+  cdlUnitInferred: Str?
+  // On a parameter whose cdlUnitInferred came from a binding: the instance path, in Xeto slot names, to the parameter
+  // of a contained block that declares the unit and that this parameter is bound into by bare name
+  cdlUnitVia: Str?
+  // On a child that runs on its CdlClass's compoundGain comp instead of its own, because its gain's unit is one
+  // the unit database lacks: {unit, gain, per, perGroup}. unit is the gain's CDL unit (s/K). The resolver writes the
+  // gain's value on the feed linked into the `gain` slot in the numerator unit (s), unconverted. The feed linked
+  // into the `per` slot holds 1 in the denominator unit (1 K), a difference: the resolver converts it with the unit
+  // group of the CDL connector `perGroup` (u), as a difference, so 1 K becomes 1.8 Fahrenheit degrees where u is
+  // in Fahrenheit. The comp does not convert it: Line refuses a difference beside an absolute value
+  cdlCompoundGain: Dict?
+  // On a feed: the CDL connector, as instance.connector, whose unit group the resolver converts the feed's value
+  // with (the per point of a compound gain)
+  cdlUnitGroup: Str?
+  // On a slot whose unit MBL declares wrongly, corrected by a recorded decision: the unit MBL declares. cdlUnit
+  // holds the corrected one
+  cdlUnitOverride: Str?
+  // On a slot MBL declares unit "1": the unit its number is counted in at the point. "ppm" (a recorded decision:
+  // the CO2 concentration) binds a ppm point as it is, and the slot's value is written unitless; "%" comes with
+  // cdlPointScale
+  cdlPointUnit: Str?
+  // On a unit "1" connector whose Project Haystack point specs carry %: the factor a binder multiplies the point's
+  // value by to give the slot's (0.01: 100 % is 1), and divides a written value by on the way out
+  cdlPointScale: Number?
+  // On a parameter a resolver shows in the bound point's unit (K, Pa, m3/s, J/kg, 1/s): the SI lower bound MBL
+  // declares, as a Number carrying the SI unit. It takes the place of minVal there, which fits compares as a bare
+  // number and so would hold an SI bound against a converted value. A resolver checks it before it converts.
+  // cdlMinVia, cdlMinOwn, cdlMinWhen and cdlMinExpr on such a slot are in its cdlUnit
+  cdlSiMin: Number?
+  // The upper bound beside cdlSiMin, in place of maxVal; cdlMaxVia, cdlMaxOwn, cdlMaxWhen and cdlMaxExpr on such a
+  // slot are in its cdlUnit
+  cdlSiMax: Number?
+  // A contained instance's units on its own connectors, sub-connector slot to CDL unit: MBL's per-instance typing of a
+  // polymorphic block, for example conErr(u1(final unit="Pa"))
+  cdlConnUnits: Dict?
+  // Whether an elementary class holds state, read from MBL's equations in the pinned MBL
+  // source. On every elementary class. A class is "stateful" when its own equations,
+  // algorithms or declarations use pre(), edge(), change(), a when-clause, der(), delay(), sample() or reinit(),
+  // declare a discrete variable, or declare a parameter computed at initialization (fixed=false); or when it contains
+  // an instance, conditional or not, of a stateful class. It is "undecided" when no such construct appears and some
+  // part of it cannot be read: an instance of a class outside the pins, an impure function, any call outside the
+  // classified vocabulary, or a parse failure. It is "stateless" otherwise. A reference to time alone is not state
+  cdlState: Str?
+  // On a stateful class only. "readsInput" when at least one output's value at the initial instant reads an input
+  // connector, in every configuration of its conditional instances, through the initial equations and the equations
+  // active at that instant (Latch: y = not clr and u; Timer: y = if u then time - entryTime else 0, though its passed
+  // output starts from a parameter). It assumes a native comp computes all its outputs in one execute that waits on
+  // its inputs. "noInput" otherwise: MBL's equations alone do not show that a comp cannot
+  // initialize before an input arrives, which says nothing about whether a given comp can. "undecided" when an
+  // unclassified call, an unread instance or an unproven conditional path stands in the way
+  cdlStateInit: Str?
+  // On a noInput class only: why no output reads an input at the initial instant. "noInputConnector": the class
+  // declares none (SampleTrigger). "preDelayed": after that instant every output reads the inputs only through
+  // pre(), so the class has no direct feedthrough, MBL's way of breaking an algebraic loop (UnitDelay, Pre).
+  // "parameterInit": the class reads an input after that instant, but its initial outputs come from parameters,
+  // start values or time (TriggeredSampler: y = y_start until trigger rises). "undecided": a class with inputs and
+  // contained instances, whose paths this reading does not follow
+  cdlStateInitBasis: Str?
+  // On a class that is not stateless: the constructs behind cdlState, then each stateful instance by name, then each
+  // part of the source left unread ("unread: ..."), joined with "; "
+  cdlStateBasis: Str?
+}
+
++Spec {
+  // On a composite's child: the CdlClass instance of the CDL elementary class the child runs
+  cdlOf: Ref? <of:CdlClass>
+  // On a child: the CDL parameters (first letter lowered, comma-separated) whose value the generator wrote from the
+  // CDL default because the CDL instance leaves them unbound
+  cdlDefaulted: Str?
+  // On a comp the generator adds beside a child: the child and the CDL parameter or connector it supplies,
+  // "inst.name". A NumberConst or BoolConst supplies a value, a StatusNumberToNumber or StatusBoolToBool a signal
+  cdlFeed: Str?
+  // On a link that replaced one or more CDL instances whose class compiles to a link (IntegerToReal, Pre): their
+  // names, comma-separated, nearest the target first
+  cdlLinkVia: Str?
+  // Marks a spec that expands when a sequence is instantiated for a building: an array class, or a composite that
+  // holds a vector connector, a vectorized instance, or a child that expands
+  cdlExpand: Marker?
+  // On a connector that reads or writes a building point: the Project Haystack point spec that answers it
+  cdlPointSpec: Ref? <of:Spec>
+  // The same, where the spec depends on an enumeration parameter of the composite: one {when, pointSpec} per case, where
+  // `when` is a CDL expression in the composite's parameters
+  cdlPointSpecCases: List? <of:Dict>
+  // Marks a temperature difference (quantity temperatureDifferential). A temperature is spelled K whether it is
+  // absolute or a difference; a difference converts by scale (K to a Fahrenheit difference), an absolute value with
+  // the offset. On a literal, cdlLiteralDelta carries the same mark
+  cdlDelta: Marker?
+  // On a child: the SI unit of each literal the generator wrote on it, comp slot (or CDL parameter, on a composite
+  // child) to Haystack unit symbol, "1" for a dimensionless value. A temperature literal is written in K whether
+  // it is absolute or a difference, since hx.comps takes K less K as K and refuses K plus a K difference
+  cdlLiteralUnits: Dict?
+  // The literals of cdlLiteralUnits that are differences, comma-separated: a difference converts by scale (K to
+  // a Fahrenheit difference), an absolute value with the offset
+  cdlLiteralDelta: Str?
+  // The MBL expression each literal was evaluated from, where it was written as one (273.15+27.0, or a G36 package
+  // constant), comp slot to expression
+  cdlLiteralExprs: Dict?
+  // On a connector that carries cdlPointSpec or cdlPointSpecCases: the equipment the point belongs to. "self" (the controlled unit), "upstreamAir" (the air handler feeding it, optionally
+  // "(coldDeck)" or "(hotDeck)"), "zone", or one element of an array of them ("perZone", "perReliefFan",
+  // "perSupplyFan")
+  cdlPointScope: Str?
+}
+
+// One guarded bound (cdlMinWhen, cdlMaxWhen): val applies when cond holds.
+CdlBoundWhen: Dict {
+  // The bound, in the slot's stored unit
+  val: Number
+  // A CDL expression in the CDL names of the class's parameters (as cdlEnable), lifted from each guard on the way
+  cond: Str
+  // The instance paths that impose it, in Xeto slot names, comma-separated: several paths can give one value under
+  // one condition, where cdlMinVia names the one path of a hard bound
+  via: Str
+}

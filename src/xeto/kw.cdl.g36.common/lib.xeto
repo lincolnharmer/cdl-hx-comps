@@ -1,0 +1,34 @@
+//
+// Copyright (c) 2026, kW Engineering
+// Licensed under the Academic Free License version 3.0
+//
+// kw.cdl.g36.common - the packages of LBNL's Guideline 36 sample library that
+// both the AHU and the terminal unit sequences use: Generic, Types (the G36
+// enumerations, and its packages of constants as kw.cdl::CdlConstants
+// instances), ThermalZones, VentilationZones and ZoneGroups. ASHRAE 231
+// links this sample library informatively (A2.1) and does not make it
+// normative. These specs are the sample's types, not Guideline 36's text.
+//
+// GENERATED from the Modelica Buildings Library through modelica-json; the
+// versions are pinned and named in every generated header. Each child is the
+// hx.comps comp that runs its CDL class, wired on hx.comps slot names, and
+// each connector that reads or writes a building point names its Project
+// Haystack point spec. MBL's names, descriptions and defaults
+// are redistributed under MBL's license, reproduced in NOTICE. kw.cdl.g36.ahu
+// and kw.cdl.g36.terminal depend on this lib and never on each other.
+// NOT hxSysOnly, for the same reason as kw.cdl.
+
+pragma: Lib <
+  doc: "The Generic, Types, ThermalZones, VentilationZones and ZoneGroups packages of LBNL's Guideline 36 sample library, generated from the Modelica Buildings Library and wired from hx.comps comps"
+  version: "0.8.0"
+  depends: {
+    { lib: "sys" }
+    { lib: "sys.comp" }
+    { lib: "hx.comps" }
+    { lib: "kw.cdl" }
+    { lib: "ph" }
+    { lib: "ph.points" }
+    { lib: "ph.points.x" }
+  }
+  publish: {"/NOTICE"}
+>

@@ -1,0 +1,35 @@
+//
+// Copyright (c) 2026, kW Engineering
+// Licensed under the Academic Free License version 3.0
+//
+// kw.cdl - the Control Description Language block set of ANSI/ASHRAE 231-2026,
+// Clause 7, on hx.comps. A CDL elementary class is the hx.comps comp that
+// runs it. The CdlClass instance named @cdl-<class> records which comp that
+// is and what CDL calls its connectors and parameters (classes.xeto). The lib
+// also holds the CDL meta, the CDL enumerations, the block base CdlBlock, the
+// CdlConstants spec, the array classes as abstract specs that expand when a
+// sequence is instantiated, and small composites for the classes no single
+// comp runs (Nand, Nor, and the Reals and Integers pulse sources). It names
+// no building ontology.
+//
+// blocks.xeto and classes.xeto are GENERATED from LBNL's Modelica Buildings
+// Library, its reference implementation, through modelica-json. CXF carries
+// no MBL version, so the version is pinned (MBL 14.0.0, commit ad48324b,
+// through modelica-json 5460add3) and named in every generated header. The
+// comps are hx.comps with the additions of haxall pull requests #138 to #152.
+// MBL's names, descriptions and defaults are redistributed under MBL's
+// license, reproduced in NOTICE.
+//
+// NOT hxSysOnly, deliberately: a project enables it, and 4.0.6 refuses a
+// project-scope enable of an hxSysOnly lib.
+
+pragma: Lib <
+  doc: "The ANSI/ASHRAE 231-2026 Clause 7 elementary block set on hx.comps: the CDL meta, the CDL enumerations, the block base, and one CdlClass instance per class naming the comp that runs it"
+  version: "0.8.0"
+  depends: {
+    { lib: "sys" }
+    { lib: "sys.comp" }
+    { lib: "hx.comps" }
+  }
+  publish: {"/NOTICE"}
+>

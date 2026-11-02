@@ -1,0 +1,14 @@
+//
+// Copyright (c) 2026, kW Engineering
+// Licensed under the Academic Free License version 3.0
+//
+
++Funcs {
+
+  // Resolve one configured CDL composite into a flat hx.comps comp graph,
+  // returned as sys.comp data. `qname` names the composite and `params`
+  // gives its parameter values by CDL name, with units. `opts` may give
+  // `pointUnits` (connector CDL name to unit) and `id` (the root id).
+  cdlResolve: Func { qname: Str, params: Dict, opts: Dict?, returns: Dict }
+
+}

@@ -1,0 +1,16 @@
+//
+// Copyright (c) 2026, kW Engineering
+// Licensed under the Academic Free License version 3.0
+//
+// kw.cdl.resolve - the Axon function of the cdlResolve pod, which resolves
+// one configured CDL composite into a flat hx.comps comp graph.
+
+pragma: Lib <
+  doc: "Resolves one configured CDL composite into a flat hx.comps comp graph"
+  version: "0.1.0"
+  depends: {
+    { lib: "sys" }
+    { lib: "axon" }
+    { lib: "hx" }
+  }
+>

@@ -1,0 +1,18 @@
+//
+// Copyright (c) 2026, kW Engineering
+// Licensed under the Academic Free License version 3.0
+//
+// The abstract base of every generated CDL block, elementary or composite. Hand-written, not generated.
+//
+// A plain sys.comp::Comp with no runtime slot of its own. A composite that extends it holds hx.comps comps as
+// children, and an array class that extends it is abstract, since it expands when a sequence is instantiated.
+
+// One CDL block instance. cdlPath is its instance path in the design (compName is the leaf), cdlLayer says which
+// class of the design it came from ("intent" or "plant"), and cdlCites records where each parameter value came from.
+CdlBlock: sys.comp::Comp <abstract> {
+  cdlBlock
+  cdlPath: Str?                // the instance path in the design, e.g. "seq.supTem"
+  cdlLayer: Str?               // "intent" (the design-intent class) or "plant" (the plant-adaptation wrapper)
+  cdlCites: Dict?              // per parameter: {source, expr?}. source: "design" (a CDL modifier, with the
+                               //   translator's re-serialized expression) or "referenceDefault" (MBL's default, stated)
+}

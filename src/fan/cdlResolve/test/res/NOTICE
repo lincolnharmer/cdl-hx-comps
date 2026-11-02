@@ -1,0 +1,5 @@
+expression-cases.json is a copy of the expression grammar cases of kW Engineering's CDL library
+generator, which is not published. It is kW Engineering's work, licensed under
+the Academic Free License version 3.0. Its expressions name classes, enumeration items and parameters of
+the Modelica Buildings Library, which are redistributed under that library's license, reproduced in
+src/xeto/kw.cdl/NOTICE.

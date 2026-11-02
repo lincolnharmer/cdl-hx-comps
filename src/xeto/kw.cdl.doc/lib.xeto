@@ -1,0 +1,14 @@
+//
+// Copyright (c) 2026, kW Engineering
+// Licensed under the Academic Free License version 3.0
+//
+
+pragma: Lib <
+  doc: "Documentation for the CDL and Guideline 36 libraries"
+  version: "0.8.0"
+  depends: {
+    { lib: "sys" }
+  }
+  publish: {"/NOTICE"}
+  categories: {"doc"}
+>

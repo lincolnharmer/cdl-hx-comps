@@ -1,0 +1,1582 @@
+// Copyright (c) 2026, kW Engineering
+// Licensed under the Academic Free License version 3.0
+//
+// kw.cdl: the CdlClass instance of each CDL elementary class, and the classes refused by name
+// GENERATED from MBL 14.0.0 (ad48324b) via modelica-json 5460add3 and the class-to-comp table. Do not edit.
+// The comps are hx.comps with the additions of haxall pull requests #138 to #152.
+// MBL's class names and defaults are redistributed under MBL's license: see NOTICE.
+
+@cdl-ConversionsBooleanToInteger: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Conversions.BooleanToInteger"
+  grade: "nativeParams"
+  clause: "7.5.72.1"
+  comp: hx.comps::NumberSwitch
+  connectors: {u:"inSwitch", y:"out"}
+  feeds: {integerFalse:{slot:"inFalse", via:hx.comps::NumberConst}, integerTrue:{slot:"inTrue", via:hx.comps::NumberConst}}
+  cdlDefaults: {integerFalse:"0", integerTrue:"1"}
+  departures: {"`inTrue` and `inFalse` are not transient, so a direct set would also be saved. The NumberConst feed follows the existing binding.", "ValSwitch: a null `inSwitch` gives null `out`. An invalid `inSwitch` holds the last `out`.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"E", note:"Integers carry no unit"}
+  state: "stateless"
+}
+
+@cdl-ConversionsBooleanToReal: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Conversions.BooleanToReal"
+  grade: "nativeParams"
+  clause: "7.5.73.1"
+  comp: hx.comps::NumberSwitch
+  connectors: {u:"inSwitch", y:"out"}
+  feeds: {realFalse:{slot:"inFalse", via:hx.comps::NumberConst}, realTrue:{slot:"inTrue", via:hx.comps::NumberConst}}
+  cdlDefaults: {realFalse:"0", realTrue:"1"}
+  departures: {"`inTrue` and `inFalse` are not transient, so a direct set would also be saved. The NumberConst feed follows the existing binding.", "ValSwitch: a null `inSwitch` gives null `out`. An invalid `inSwitch` holds the last `out`.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"A", keep:"realTrue,realFalse,y"}
+  state: "stateless"
+}
+
+@cdl-ConversionsIntegerToReal: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Conversions.IntegerToReal"
+  grade: "link"
+  clause: "7.5.74.1"
+  linkFrom: "u"
+  linkTo: "y"
+  departures: {"CDL Integer and Real both ride StatusNumber, so the wire carries the value unchanged."}
+  unitRule: {family:"E", seeds:{y:"1"}, note:"a count is dimensionless"}
+  state: "stateless"
+}
+
+@cdl-ConversionsRealToInteger: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Conversions.RealToInteger"
+  grade: "native"
+  clause: "7.5.75.1"
+  comp: hx.comps::Round
+  connectors: {u:"in", y:"out"}
+  fixed: {n:0}
+  departures: {"`n` must be 0. That is its default, so nothing is written unless a default changes.", "`out` is a whole Number that keeps the unit of `in`. CDL Integer has no unit, and `Equal` downstream compares units.", "Round: a null `in` gives null `out` and an invalid `in` gives NaN with its status.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"E", note:"Integers carry no unit"}
+  state: "stateless"
+}
+
+@cdl-DiscreteFirstOrderHold: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Discrete.FirstOrderHold"
+  grade: "nativeParams"
+  clause: "7.5.88.1"
+  comp: hx.comps::FirstOrderHold
+  connectors: {u:"in", y:"out"}
+  params: {samplePeriod:"period"}
+  convert: {samplePeriod:"sec"}
+  departures: {"Until the first instant `out` is the first `in`.", "Between instants `out` updates every second, not continuously.", "Cut in a loop, the line starts from 0 and is off CDL by up to one cycle of slope.", "Instants sit on a grid of whole periods from 1 Jan 1970 UTC, so a period of 1day aligns to 00:00 UTC, not local midnight. A period shorter than the cycle cannot be met.", "CDL `samplePeriod` has no default. The comp defaults `period` to 1min.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"A", keep:"u,y"}
+  bounds: {samplePeriod:{minVal:"0.001"}}
+  state: "stateful"
+  stateInit: "readsInput"
+  stateBasis: "pre; when; sample; initialParameter"
+}
+
+@cdl-DiscreteSampler: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Discrete.Sampler"
+  grade: "nativeParams"
+  clause: "7.5.89.1"
+  comp: hx.comps::Sampler
+  connectors: {u:"in", y:"out"}
+  params: {samplePeriod:"period"}
+  convert: {samplePeriod:"sec"}
+  departures: {"Direct feedthrough. Never cut a loop at it.", "An instant takes the value of `in` on the first execute at or after it.", "Instants sit on a grid of whole periods from 1 Jan 1970 UTC, so a period of 1day aligns to 00:00 UTC, not local midnight. A period shorter than the cycle cannot be met.", "A null input gives null outputs and an invalid input holds them with the merged status, keeping the state (cited in the comp doc).", "CDL `samplePeriod` has no default. The comp defaults `period` to 1min.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"A", keep:"u,y"}
+  bounds: {samplePeriod:{minVal:"0.001"}}
+  state: "stateful"
+  stateInit: "readsInput"
+  stateBasis: "when; sample; initialParameter"
+}
+
+@cdl-DiscreteTriggeredMax: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Discrete.TriggeredMax"
+  grade: "native"
+  clause: "7.5.90.1"
+  comp: hx.comps::TriggeredMax
+  connectors: {trigger:"trigger", u:"in", y:"out"}
+  departures: {"The first execute sets `out` to `in`, not its absolute value, as MBL `y = u` at initialization.", "TriggeredComp reads the rise of `trigger` on execute. A `trigger` true on consecutive executes is one rise. A null input gives null `out` and an invalid input holds `out`. A rise while `in` is null, invalid or NaN takes no sample.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"A", keep:"u,y"}
+  state: "stateful"
+  stateInit: "readsInput"
+  stateBasis: "pre; when"
+}
+
+@cdl-DiscreteTriggeredMovingMean: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Discrete.TriggeredMovingMean"
+  grade: "nativeParams"
+  clause: "7.5.91.1"
+  comp: hx.comps::TriggeredMovingMean
+  connectors: {trigger:"trigger", u:"in", y:"out"}
+  params: {n:"n"}
+  convert: {n:"int"}
+  departures: {"The first execute takes a sample, and until `n` samples the mean is over those taken.", "A change of `n` starts the mean again.", "CDL `n` has no default. The comp defaults it to 1.", "TriggeredComp reads the rise of `trigger` on execute. A `trigger` true on consecutive executes is one rise. A null input gives null `out` and an invalid input holds `out`. A rise while `in` is null, invalid or NaN takes no sample.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"A", keep:"u,y"}
+  bounds: {n:{minVal:"1"}}
+  state: "stateful"
+  stateInit: "readsInput"
+  stateBasis: "pre; when; discrete"
+}
+
+@cdl-DiscreteTriggeredSampler: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Discrete.TriggeredSampler"
+  grade: "nativeParams"
+  clause: "7.5.92.1"
+  comp: hx.comps::TriggeredSampler
+  connectors: {trigger:"trigger", u:"in", y:"out"}
+  params: {y_start:"yStart"}
+  departures: {"TriggeredComp reads the rise of `trigger` on execute. A `trigger` true on consecutive executes is one rise. A null input gives null `out` and an invalid input holds `out`. A rise while `in` is null, invalid or NaN takes no sample.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"A", keep:"u,y,y_start"}
+  state: "stateful"
+  stateInit: "noInput"
+  stateInitBasis: "parameterInit"
+  stateBasis: "when"
+}
+
+@cdl-DiscreteUnitDelay: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Discrete.UnitDelay"
+  grade: "nativeParams"
+  clause: "7.5.93.1"
+  comp: hx.comps::UnitDelay
+  connectors: {u:"in", y:"out"}
+  params: {samplePeriod:"period", y_start:"yStart"}
+  convert: {samplePeriod:"sec"}
+  loopCut: "u"
+  departures: {"It captures `in` on the cycle after an instant and emits it at the next.", "A null, invalid or NaN `in` keeps the last capture and `out` stays ok.", "Instants sit on a grid of whole periods from 1 Jan 1970 UTC, so a period of 1day aligns to 00:00 UTC, not local midnight. A period shorter than the cycle cannot be met.", "CDL `samplePeriod` has no default. The comp defaults `period` to 1min.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"A", keep:"u,y,y_start"}
+  bounds: {samplePeriod:{minVal:"0.001"}}
+  state: "stateful"
+  stateInit: "noInput"
+  stateInitBasis: "preDelayed"
+  stateBasis: "pre; when; sample; discrete; initialParameter"
+}
+
+@cdl-DiscreteZeroOrderHold: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Discrete.ZeroOrderHold"
+  grade: "nativeParams"
+  clause: "7.5.94.1"
+  comp: hx.comps::ZeroOrderHold
+  connectors: {u:"in", y:"out"}
+  params: {samplePeriod:"period"}
+  convert: {samplePeriod:"sec"}
+  departures: {"A loop may be cut at it with a `loopCut` marker on the link into `in`. The spec carries `loopBreak`.", "Uncut, `out` is null before the first sample. CDL holds `y = pre(ySample)` from the start.", "Cut, a null, invalid or NaN `in` takes no sample and `out` is 0 and ok until the first valid `in`.", "Instants sit on a grid of whole periods from 1 Jan 1970 UTC, so a period of 1day aligns to 00:00 UTC, not local midnight. A period shorter than the cycle cannot be met.", "CDL `samplePeriod` has no default. The comp defaults `period` to 1min.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"A", keep:"u,y"}
+  bounds: {samplePeriod:{minVal:"0.001"}}
+  state: "stateful"
+  stateInit: "noInput"
+  stateInitBasis: "preDelayed"
+  stateBasis: "pre; when; sample; initialParameter"
+}
+
+@cdl-IntegersAbs: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Integers.Abs"
+  grade: "native"
+  clause: "7.5.1.2"
+  comp: hx.comps::AbsValue
+  connectors: {u:"inA", y:"out"}
+  departures: {"UnaryMath: a null `inA` gives null `out`. An invalid `inA` is still computed and its status is copied to `out`.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"E", note:"Integers carry no unit"}
+  state: "stateless"
+}
+
+@cdl-IntegersAdd: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Integers.Add"
+  grade: "native"
+  clause: "7.5.2.2"
+  comp: hx.comps::Add
+  connectors: {u1:"inA", u2:"inB", y:"out"}
+  departures: {"QuadMath computes from the valid inputs and skips a null or invalid one. Fewer valid inputs than the comp needs give null `out`. Otherwise `out` merges the status of every input, valid or not, so an invalid status propagates as the spec doc says. A unit error adds fault.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"E", note:"Integers carry no unit"}
+  state: "stateless"
+}
+
+@cdl-IntegersAddParameter: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Integers.AddParameter"
+  grade: "nativeParams"
+  clause: "7.5.3.2"
+  comp: hx.comps::Add
+  connectors: {u:"inA", y:"out"}
+  feeds: {p:{slot:"inB", via:hx.comps::NumberConst}}
+  departures: {"QuadMath computes from the valid inputs and skips a null or invalid one. Fewer valid inputs than the comp needs give null `out`. Otherwise `out` merges the status of every input, valid or not, so an invalid status propagates as the spec doc says. A unit error adds fault.", "The target slot is transient, so a fixed value must arrive on a linked NumberConst. A value set on a transient slot is not saved.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"E", note:"Integers carry no unit"}
+  state: "stateless"
+}
+
+@cdl-IntegersChange: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Integers.Change"
+  grade: "nativeParams"
+  clause: "7.5.39.2"
+  name231: "CDL.Integer.Change"
+  comp: hx.comps::NumberChange
+  connectors: {u:"in", down:"down", up:"up", y:"out"}
+  params: {pre_u_start:"initPrev"}
+  departures: {"The values compare as floats and the unit is ignored.", "A NaN `in` with a valid status, or a NaN `initPrev`, is a fault.", "CDL gives a true output at the event instant only. The comp holds it true for one execute and clears it on the next cycle.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"E", note:"Integers carry no unit"}
+  state: "stateful"
+  stateInit: "readsInput"
+  stateBasis: "pre; change"
+}
+
+@cdl-IntegersEqual: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Integers.Equal"
+  grade: "native"
+  clause: "7.5.57.1"
+  comp: hx.comps::Equal
+  connectors: {u1:"inA", u2:"inB", y:"out"}
+  departures: {"Comparison: a null input gives null `out`. An invalid input gives false with the merged status. Mismatched units give false with fault.", "Equal is false when the two inputs carry different non-null units. CDL Integers carry none, so an Integer that picked up a unit upstream compares unequal.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"E", note:"Integers carry no unit"}
+  state: "stateless"
+}
+
+@cdl-IntegersGreater: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Integers.Greater"
+  grade: "native"
+  clause: "7.5.58.2"
+  comp: hx.comps::GreaterThan
+  connectors: {u1:"inA", u2:"inB", y:"out"}
+  departures: {"Comparison: a null input gives null `out`. An invalid input gives false with the merged status. Mismatched units give false with fault.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"E", note:"Integers carry no unit"}
+  state: "stateless"
+}
+
+@cdl-IntegersGreaterEqual: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Integers.GreaterEqual"
+  grade: "native"
+  clause: "7.5.59.1"
+  comp: hx.comps::GreaterThanEqual
+  connectors: {u1:"inA", u2:"inB", y:"out"}
+  departures: {"Comparison: a null input gives null `out`. An invalid input gives false with the merged status. Mismatched units give false with fault.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"E", note:"Integers carry no unit"}
+  state: "stateless"
+}
+
+@cdl-IntegersGreaterEqualThreshold: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Integers.GreaterEqualThreshold"
+  grade: "nativeParams"
+  clause: "7.5.60.1"
+  comp: hx.comps::GreaterThanEqual
+  connectors: {u:"inA", y:"out"}
+  feeds: {t:{slot:"inB", via:hx.comps::NumberConst}}
+  cdlDefaults: {t:"0"}
+  departures: {"Comparison: a null input gives null `out`. An invalid input gives false with the merged status. Mismatched units give false with fault.", "The target slot is transient, so a fixed value must arrive on a linked NumberConst. A value set on a transient slot is not saved.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"E", note:"Integers carry no unit"}
+  state: "stateless"
+}
+
+@cdl-IntegersGreaterThreshold: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Integers.GreaterThreshold"
+  grade: "nativeParams"
+  clause: "7.5.61.2"
+  comp: hx.comps::GreaterThan
+  connectors: {u:"inA", y:"out"}
+  feeds: {t:{slot:"inB", via:hx.comps::NumberConst}}
+  cdlDefaults: {t:"0"}
+  departures: {"Comparison: a null input gives null `out`. An invalid input gives false with the merged status. Mismatched units give false with fault.", "The target slot is transient, so a fixed value must arrive on a linked NumberConst. A value set on a transient slot is not saved.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"E", note:"Integers carry no unit"}
+  state: "stateless"
+}
+
+@cdl-IntegersLess: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Integers.Less"
+  grade: "native"
+  clause: "7.5.63.2"
+  comp: hx.comps::LessThan
+  connectors: {u1:"inA", u2:"inB", y:"out"}
+  departures: {"Comparison: a null input gives null `out`. An invalid input gives false with the merged status. Mismatched units give false with fault.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"E", note:"Integers carry no unit"}
+  state: "stateless"
+}
+
+@cdl-IntegersLessEqual: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Integers.LessEqual"
+  grade: "native"
+  clause: "7.5.64.1"
+  comp: hx.comps::LessThanEqual
+  connectors: {u1:"inA", u2:"inB", y:"out"}
+  departures: {"Comparison: a null input gives null `out`. An invalid input gives false with the merged status. Mismatched units give false with fault.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"E", note:"Integers carry no unit"}
+  state: "stateless"
+}
+
+@cdl-IntegersLessEqualThreshold: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Integers.LessEqualThreshold"
+  grade: "nativeParams"
+  clause: "7.5.65.1"
+  name231: "7CDL.Integers.LessEqualThreshold"
+  comp: hx.comps::LessThanEqual
+  connectors: {u:"inA", y:"out"}
+  feeds: {t:{slot:"inB", via:hx.comps::NumberConst}}
+  cdlDefaults: {t:"0"}
+  departures: {"Comparison: a null input gives null `out`. An invalid input gives false with the merged status. Mismatched units give false with fault.", "The target slot is transient, so a fixed value must arrive on a linked NumberConst. A value set on a transient slot is not saved.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"E", note:"Integers carry no unit"}
+  state: "stateless"
+}
+
+@cdl-IntegersLessThreshold: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Integers.LessThreshold"
+  grade: "nativeParams"
+  clause: "7.5.66.2"
+  name231: "CDL.Integers.LessEqualThreshold"
+  comp: hx.comps::LessThan
+  connectors: {u:"inA", y:"out"}
+  feeds: {t:{slot:"inB", via:hx.comps::NumberConst}}
+  cdlDefaults: {t:"0"}
+  departures: {"Comparison: a null input gives null `out`. An invalid input gives false with the merged status. Mismatched units give false with fault.", "The target slot is transient, so a fixed value must arrive on a linked NumberConst. A value set on a transient slot is not saved.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"E", note:"Integers carry no unit"}
+  state: "stateless"
+}
+
+@cdl-IntegersMax: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Integers.Max"
+  grade: "native"
+  clause: "7.5.21.2"
+  comp: hx.comps::Maximum
+  connectors: {u1:"inA", u2:"inB", y:"out"}
+  departures: {"QuadMath computes from the valid inputs and skips a null or invalid one. Fewer valid inputs than the comp needs give null `out`. Otherwise `out` merges the status of every input, valid or not, so an invalid status propagates as the spec doc says. A unit error adds fault.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"E", note:"Integers carry no unit"}
+  state: "stateless"
+}
+
+@cdl-IntegersMin: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Integers.Min"
+  grade: "native"
+  clause: "7.5.22.2"
+  comp: hx.comps::Minimum
+  connectors: {u1:"inA", u2:"inB", y:"out"}
+  departures: {"QuadMath computes from the valid inputs and skips a null or invalid one. Fewer valid inputs than the comp needs give null `out`. Otherwise `out` merges the status of every input, valid or not, so an invalid status propagates as the spec doc says. A unit error adds fault.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"E", note:"Integers carry no unit"}
+  state: "stateless"
+}
+
+@cdl-IntegersMultiSum: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Integers.MultiSum"
+  grade: "array"
+  clause: "7.5.29.2"
+  name231: "CDL.Integers.Multisum"
+  comp: kw.cdl::IntegersMultiSum
+  unitRule: {family:"array", note:"Integers or Booleans"}
+  state: "stateless"
+}
+
+@cdl-IntegersMultiply: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Integers.Multiply"
+  grade: "native"
+  clause: "7.5.27.2"
+  comp: hx.comps::Multiply
+  connectors: {u1:"inA", u2:"inB", y:"out"}
+  departures: {"QuadMath computes from the valid inputs and skips a null or invalid one. Fewer valid inputs than the comp needs give null `out`. Otherwise `out` merges the status of every input, valid or not, so an invalid status propagates as the spec doc says. A unit error adds fault.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"E", note:"Integers carry no unit"}
+  state: "stateless"
+}
+
+@cdl-IntegersOnCounter: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Integers.OnCounter"
+  grade: "nativeParams"
+  clause: "7.5.68.1"
+  comp: hx.comps::Counter
+  connectors: {reset:"reset", trigger:"trigger", y:"out"}
+  params: {y_start:"initVal"}
+  convert: {y_start:"int"}
+  linkAlways: {reset:"false"}
+  departures: {"A null input sets `out` null and an invalid one holds it, both keeping the count.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"E", note:"Integers carry no unit"}
+  state: "stateful"
+  stateInit: "noInput"
+  stateInitBasis: "parameterInit"
+  stateBasis: "pre; when"
+}
+
+@cdl-IntegersSourcesConstant: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Integers.Sources.Constant"
+  grade: "const"
+  clause: "7.5.82.2"
+  comp: hx.comps::NumberConst
+  connectors: {y:"out"}
+  params: {k:"out"}
+  unitRule: {family:"E", note:"Integers carry no unit"}
+  state: "stateless"
+}
+
+@cdl-IntegersSourcesPulse: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Integers.Sources.Pulse"
+  grade: "composite"
+  clause: "7.5.83.2"
+  comp: kw.cdl::IntegersSourcesPulse
+  unitRule: {family:"E", note:"Integers carry no unit"}
+  state: "stateful"
+  stateInit: "noInput"
+  stateInitBasis: "noInputConnector"
+  stateBasis: "instance booPul"
+}
+
+@cdl-IntegersSourcesTimeTable: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Integers.Sources.TimeTable"
+  grade: "array"
+  clause: "7.5.87.2"
+  comp: kw.cdl::IntegersSourcesTimeTable
+  unitRule: {family:"array", note:"Integers or Booleans"}
+  state: "stateful"
+  stateInit: "noInput"
+  stateInitBasis: "noInputConnector"
+  stateBasis: "when; sample; initialParameter"
+}
+
+@cdl-IntegersStage: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Integers.Stage"
+  grade: "nativeParams"
+  clause: "7.5.71.1"
+  name231: "CDL.Reals.Stage"
+  comp: hx.comps::Stage
+  connectors: {u:"in", y:"out"}
+  params: {h:"h", holdDuration:"holdDuration", n:"n", pre_y_start:"initVal"}
+  convert: {h:"float", holdDuration:"sec", n:"int", pre_y_start:"int"}
+  departures: {"A null `h` is 0.02/n, the CDL default.", "It fires on the level of its condition, not its rise. At a hold of 0 MBL can stick and this comp does not.", "CDL `holdDuration` and `n` have no default. The comp defaults them to 1min and 1.", "Timed comps see time only at executes, so an event resolves on the first execute at or after it. A step of the clock backward counts as no time. State is not persisted and restarts from initial values after a task rebuild.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"E", note:"Integers carry no unit"}
+  bounds: {h:{cdlMinExpr:"0.001/n", cdlMaxExpr:"0.5/n"}, holdDuration:{minVal:"0"}, n:{minVal:"1"}, u:{cdlMin:"0", cdlMax:"1"}, y:{cdlMin:"1"}}
+  state: "stateful"
+  stateInit: "noInput"
+  stateInitBasis: "parameterInit"
+  stateBasis: "pre; when; discrete"
+}
+
+@cdl-IntegersSubtract: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Integers.Subtract"
+  grade: "native"
+  clause: "7.5.36.2"
+  comp: hx.comps::Subtract
+  connectors: {u1:"inA", u2:"inB", y:"out"}
+  departures: {"BinaryMath: a null input gives null `out`. An invalid input gives NaN with the merged status. A unit error gives NaN with fault.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"E", note:"Integers carry no unit"}
+  state: "stateless"
+}
+
+@cdl-IntegersSwitch: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Integers.Switch"
+  grade: "native"
+  clause: "7.5.50.2"
+  comp: hx.comps::NumberSwitch
+  connectors: {u1:"inTrue", u2:"inSwitch", u3:"inFalse", y:"out"}
+  departures: {"ValSwitch: a null `inSwitch` gives null `out`. An invalid `inSwitch` holds the last `out`.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"E", note:"Integers carry no unit"}
+  state: "stateless"
+}
+
+@cdl-LogicalAnd: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Logical.And"
+  grade: "native"
+  clause: "7.5.38.1"
+  comp: hx.comps::And
+  connectors: {u1:"inA", u2:"inB", y:"out"}
+  departures: {"QuadLogic computes from the valid inputs and skips a null or invalid one. Fewer non-null inputs than the comp needs give null `out`. Otherwise `out` merges the status of every input, so an invalid status propagates as the spec doc says.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"F", note:"Booleans; a time parameter declares its unit"}
+  state: "stateless"
+}
+
+@cdl-LogicalChange: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Logical.Change"
+  grade: "nativeParams"
+  clause: "7.5.39.1"
+  comp: hx.comps::BoolEdge
+  connectors: {u:"in", y:"out"}
+  params: {pre_u_start:"initPrev"}
+  fixed: {edge:"change"}
+  departures: {"`edge` must be `change`, not the default `rising`.", "After a restart the first valid execute compares `in` with `initPrev` again.", "CDL gives a true output at the event instant only. The comp holds it true for one execute and clears it on the next cycle.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"F", note:"Booleans; a time parameter declares its unit"}
+  state: "stateful"
+  stateInit: "readsInput"
+  stateBasis: "change"
+}
+
+@cdl-LogicalEdge: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Logical.Edge"
+  grade: "nativeParams"
+  clause: "7.5.40.1"
+  comp: hx.comps::BoolEdge
+  connectors: {u:"in", y:"out"}
+  params: {pre_u_start:"initPrev"}
+  fixed: {edge:"rising"}
+  departures: {"`edge` must be `rising`, its default.", "After a restart the first valid execute compares `in` with `initPrev` again.", "CDL gives a true output at the event instant only. The comp holds it true for one execute and clears it on the next cycle.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"F", note:"Booleans; a time parameter declares its unit"}
+  state: "stateful"
+  stateInit: "readsInput"
+  stateBasis: "edge"
+}
+
+@cdl-LogicalFallingEdge: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Logical.FallingEdge"
+  grade: "nativeParams"
+  clause: "7.5.41.1"
+  comp: hx.comps::BoolEdge
+  connectors: {u:"in", y:"out"}
+  params: {pre_u_start:"initPrev"}
+  fixed: {edge:"falling"}
+  departures: {"`edge` must be `falling`, not the default `rising`.", "After a restart the first valid execute compares `in` with `initPrev` again.", "CDL gives a true output at the event instant only. The comp holds it true for one execute and clears it on the next cycle.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"F", note:"Booleans; a time parameter declares its unit"}
+  state: "stateful"
+  stateInit: "readsInput"
+  stateBasis: "edge"
+}
+
+@cdl-LogicalLatch: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Logical.Latch"
+  grade: "native"
+  clause: "7.5.42.1"
+  comp: hx.comps::SetResetLatch
+  connectors: {clr:"inClear", u:"in", y:"out"}
+  departures: {"A rise of `inClear` wins over a rise of `in` on one execute.", "The first valid execute sets `out` to `in` and not `inClear`, as MBL initializes `y`.", "A rise of a valid `inClear` clears even while `in` is null or invalid.", "A null input gives null outputs and an invalid input holds them with the merged status, keeping the state (cited in the comp doc).", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"F", note:"Booleans; a time parameter declares its unit"}
+  state: "stateful"
+  stateInit: "readsInput"
+  stateBasis: "when"
+}
+
+@cdl-LogicalMultiAnd: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Logical.MultiAnd"
+  grade: "array"
+  clause: "7.5.43.1"
+  comp: kw.cdl::LogicalMultiAnd
+  unitRule: {family:"array", note:"Integers or Booleans"}
+  state: "stateless"
+}
+
+@cdl-LogicalMultiOr: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Logical.MultiOr"
+  grade: "array"
+  clause: "7.5.44.1"
+  comp: kw.cdl::LogicalMultiOr
+  unitRule: {family:"array", note:"Integers or Booleans"}
+  state: "stateless"
+}
+
+@cdl-LogicalNand: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Logical.Nand"
+  grade: "composite"
+  clause: "7.5.45.1"
+  comp: kw.cdl::LogicalNand
+  unitRule: {family:"F", note:"Booleans; a time parameter declares its unit"}
+  state: "stateless"
+}
+
+@cdl-LogicalNor: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Logical.Nor"
+  grade: "composite"
+  clause: "7.5.46.1"
+  comp: kw.cdl::LogicalNor
+  unitRule: {family:"F", note:"Booleans; a time parameter declares its unit"}
+  state: "stateless"
+}
+
+@cdl-LogicalNot: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Logical.Not"
+  grade: "native"
+  clause: "7.5.47.1"
+  comp: hx.comps::Not
+  connectors: {u:"in", y:"out"}
+  departures: {"An invalid `in` gives false with its status, not the negation.", "A null `in` gives null `out`.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"F", note:"Booleans; a time parameter declares its unit"}
+  state: "stateless"
+}
+
+@cdl-LogicalOr: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Logical.Or"
+  grade: "native"
+  clause: "7.5.48.1"
+  comp: hx.comps::Or
+  connectors: {u1:"inA", u2:"inB", y:"out"}
+  departures: {"QuadLogic computes from the valid inputs and skips a null or invalid one. Fewer non-null inputs than the comp needs give null `out`. Otherwise `out` merges the status of every input, so an invalid status propagates as the spec doc says.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"F", note:"Booleans; a time parameter declares its unit"}
+  state: "stateless"
+}
+
+@cdl-LogicalPre: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Logical.Pre"
+  grade: "link"
+  clause: "7.5.69.1"
+  loopCut: "u"
+  linkFrom: "u"
+  linkTo: "y"
+  departures: {"The link reads null on the first cycle where MBL reads `pre_u_start`. From the second cycle on it reads the previous cycle value of `u`, as MBL.", "A `loopCut` link delivers the previous cycle value at the end of the execute cycle, in any order."}
+  unitRule: {family:"F", note:"Booleans; a time parameter declares its unit"}
+  state: "stateful"
+  stateInit: "noInput"
+  stateInitBasis: "preDelayed"
+  stateBasis: "pre"
+}
+
+@cdl-LogicalProof: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Logical.Proof"
+  grade: "nativeParams"
+  clause: "7.5.49.1"
+  comp: hx.comps::Proof
+  connectors: {u_m:"inMeas", u_s:"inSet", yLocFal:"lockedFalse", yLocTru:"lockedTrue"}
+  params: {debounce:"debounce", feedbackDelay:"feedbackDelay"}
+  convert: {debounce:"sec", feedbackDelay:"sec"}
+  departures: {"CDL `debounce` and `feedbackDelay` have no default. The comp defaults them to 10sec and 1min.", "A change of `debounce` or `feedbackDelay` restarts the comp.", "Timed comps see time only at executes, so an event resolves on the first execute at or after it. A step of the clock backward counts as no time. State is not persisted and restarts from initial values after a task rebuild.", "A null input gives null outputs and an invalid input holds them with the merged status, keeping the state (cited in the comp doc).", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"F", note:"Booleans; a time parameter declares its unit"}
+  state: "stateful"
+  stateInit: "readsInput"
+  stateBasis: "instance delChe1; instance delChe2; instance holTru; instance holTru1; instance pasDeb; instance samInpEdg; instance truDel1; instance valTru"
+}
+
+@cdl-LogicalSourcesConstant: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Logical.Sources.Constant"
+  grade: "const"
+  clause: "7.5.82.3"
+  name231: "CDL.Logicals.Sources.Constant"
+  comp: hx.comps::BoolConst
+  connectors: {y:"out"}
+  params: {k:"out"}
+  unitRule: {family:"F", note:"Booleans; a time parameter declares its unit"}
+  state: "stateless"
+}
+
+@cdl-LogicalSourcesPulse: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Logical.Sources.Pulse"
+  grade: "nativeParams"
+  clause: "7.5.83.3"
+  name231: "CDL.Logicals.Sources.Pulse"
+  comp: hx.comps::BoolPulse
+  connectors: {y:"out"}
+  params: {period:"period", shift:"shift", width:"width"}
+  convert: {period:"sec", shift:"sec", width:"float"}
+  departures: {"Rises sit at `shift` plus each whole `period` from 1 Jan 1970 UTC. MBL aligns `t0` to `integer(time/period)*period + mod(shift, period)`, the same grid when `time` is epoch seconds.", "Each execute sets `out` from where the clock falls, so a pulse or gap shorter than the cycle can be missed.", "CDL `period` has no default. The comp defaults it to 1min.", "Instants sit on a grid of whole periods from 1 Jan 1970 UTC, so a period of 1day aligns to 00:00 UTC, not local midnight. A period shorter than the cycle cannot be met.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"F", note:"Booleans; a time parameter declares its unit"}
+  bounds: {period:{minVal:"1e-37", cdlMinConst:"Constants.small"}, width:{minVal:"1e-37", maxVal:"1", cdlMinConst:"Constants.small"}}
+  state: "stateful"
+  stateInit: "noInput"
+  stateInitBasis: "noInputConnector"
+  stateBasis: "when; sample; initialParameter"
+}
+
+@cdl-LogicalSourcesSampleTrigger: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Logical.Sources.SampleTrigger"
+  grade: "nativeParams"
+  clause: "7.5.85.1"
+  comp: hx.comps::SampleTrigger
+  connectors: {y:"out"}
+  params: {period:"period", shift:"shift"}
+  convert: {period:"sec", shift:"sec"}
+  departures: {"`out` is true for one execute at each instant.", "Instants on consecutive cycles keep `out` true, so a rise-triggered consumer sees one rise.", "A late cycle that passes several instants pulses once.", "CDL `period` has no default. The comp defaults it to 1min.", "Instants sit on a grid of whole periods from 1 Jan 1970 UTC, so a period of 1day aligns to 00:00 UTC, not local midnight. A period shorter than the cycle cannot be met.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"F", note:"Booleans; a time parameter declares its unit"}
+  bounds: {period:{minVal:"1e-37", cdlMinConst:"Constants.small"}}
+  state: "stateful"
+  stateInit: "noInput"
+  stateInitBasis: "noInputConnector"
+  stateBasis: "sample; initialParameter"
+}
+
+@cdl-LogicalSourcesTimeTable: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Logical.Sources.TimeTable"
+  grade: "array"
+  clause: "7.5.87.3"
+  comp: kw.cdl::LogicalSourcesTimeTable
+  unitRule: {family:"array", note:"Integers or Booleans"}
+  state: "stateful"
+  stateInit: "noInput"
+  stateInitBasis: "noInputConnector"
+  stateBasis: "instance intTimTab"
+}
+
+@cdl-LogicalSwitch: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Logical.Switch"
+  grade: "native"
+  clause: "7.5.50.3"
+  comp: hx.comps::BoolSwitch
+  connectors: {u1:"inTrue", u2:"inSwitch", u3:"inFalse", y:"out"}
+  departures: {"ValSwitch: a null `inSwitch` gives null `out`. An invalid `inSwitch` holds the last `out`.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"F", note:"Booleans; a time parameter declares its unit"}
+  state: "stateless"
+}
+
+@cdl-LogicalTimer: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Logical.Timer"
+  grade: "nativeParams"
+  clause: "7.5.76.1"
+  name231: "7CDL.Logical.Timer"
+  comp: hx.comps::Timer
+  connectors: {u:"in", passed:"passed", y:"out"}
+  params: {t:"threshold"}
+  convert: {t:"sec"}
+  departures: {"At start-up with `t` <= 0, MBL starts `passed` true while `u` is false. The comp starts `passed` false, so the two differ until `u` first turns true.", "While `in` is true, `out` refreshes once a second, so `y` steps rather than ramps.", "With a threshold of 0, `passed` stays false until `in` turns true, and a negative threshold acts as 0.", "Timed comps see time only at executes, so an event resolves on the first execute at or after it. A step of the clock backward counts as no time. State is not persisted and restarts from initial values after a task rebuild.", "A null input gives null outputs and an invalid input holds them with the merged status, keeping the state (cited in the comp doc).", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"F", note:"Booleans; a time parameter declares its unit"}
+  state: "stateful"
+  stateInit: "readsInput"
+  stateBasis: "pre; when; discrete"
+}
+
+@cdl-LogicalTimerAccumulating: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Logical.TimerAccumulating"
+  grade: "nativeParams"
+  clause: "7.5.77.1"
+  comp: hx.comps::AccumTimer
+  connectors: {reset:"reset", u:"in", passed:"passed", y:"out"}
+  params: {t:"threshold"}
+  convert: {t:"sec"}
+  linkAlways: {reset:"false"}
+  departures: {"With a threshold of 0 or less, `passed` is true from the start and right after each reset.", "The total starts from 0 on the first valid execute and does not survive a restart.", "`out` carries the unit `s`.", "Timed comps see time only at executes, so an event resolves on the first execute at or after it. A step of the clock backward counts as no time. State is not persisted and restarts from initial values after a task rebuild.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"F", note:"Booleans; a time parameter declares its unit"}
+  state: "stateful"
+  stateInit: "readsInput"
+  stateBasis: "pre; when; discrete"
+}
+
+@cdl-LogicalToggle: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Logical.Toggle"
+  grade: "native"
+  clause: "7.5.51.1"
+  comp: hx.comps::Toggle
+  connectors: {clr:"inClear", u:"in", y:"out"}
+  departures: {"A rise of `inClear` sets `out` false and wins over a rise of `in`.", "The first valid execute sets `out` to `in` and not `inClear`, as MBL `y = if clr then false else u` at initial().", "A null input gives null outputs and an invalid input holds them with the merged status, keeping the state (cited in the comp doc).", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"F", note:"Booleans; a time parameter declares its unit"}
+  state: "stateful"
+  stateInit: "readsInput"
+  stateBasis: "pre; change; when"
+}
+
+@cdl-LogicalTrueDelay: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Logical.TrueDelay"
+  grade: "nativeParams"
+  clause: "7.5.78.1"
+  comp: hx.comps::BoolDelay
+  connectors: {u:"in", y:"out"}
+  params: {delayOnInit:"delayOnInit", delayTime:"onDelay"}
+  convert: {delayTime:"sec"}
+  fixed: {offDelay:0sec}
+  departures: {"`offDelay` must be set to 0sec. Its default is 1sec, which would delay every fall by a second.", "CDL `delayTime` has no default. `onDelay` defaults to 1sec.", "A change to a delay applies to a pending timer.", "A null `in` sets `out` null and an invalid `in` holds it, keeping the timer state.", "Timed comps see time only at executes, so an event resolves on the first execute at or after it. A step of the clock backward counts as no time. State is not persisted and restarts from initial values after a task rebuild.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"F", note:"Booleans; a time parameter declares its unit"}
+  state: "stateful"
+  stateInit: "readsInput"
+  stateBasis: "pre; when; initialParameter"
+}
+
+@cdl-LogicalTrueFalseHold: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Logical.TrueFalseHold"
+  grade: "nativeParams"
+  clause: "7.5.79.1"
+  comp: hx.comps::BoolHold
+  connectors: {u:"in", y:"out"}
+  params: {falseHoldDuration:"falseHold", trueHoldDuration:"trueHold"}
+  convert: {falseHoldDuration:"sec", trueHoldDuration:"sec"}
+  cdlDefaults: {falseHoldDuration:"trueHoldDuration"}
+  departures: {"A change of `in` passes at once unless a hold is running.", "Timed comps see time only at executes, so an event resolves on the first execute at or after it. A step of the clock backward counts as no time. State is not persisted and restarts from initial values after a task rebuild.", "A null input gives null outputs and an invalid input holds them with the merged status, keeping the state (cited in the comp doc).", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"F", note:"Booleans; a time parameter declares its unit"}
+  state: "stateful"
+  stateInit: "readsInput"
+  stateBasis: "pre; edge; when; discrete"
+}
+
+@cdl-LogicalVariablePulse: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Logical.VariablePulse"
+  grade: "nativeParams"
+  clause: "7.5.52.1"
+  comp: hx.comps::VariablePulse
+  connectors: {u:"in", y:"out"}
+  params: {deltaU:"deltaU", minTruFalHol:"minHold", period:"period"}
+  convert: {deltaU:"float", minTruFalHol:"sec", period:"sec"}
+  departures: {"A null `minHold` is 0.01 times `period`, the CDL default.", "The run period is the larger of `period` and 2.02 times `minHold`.", "CDL `period` has no default. The comp defaults it to 1min.", "Timed comps see time only at executes, so an event resolves on the first execute at or after it. A step of the clock backward counts as no time. State is not persisted and restarts from initial values after a task rebuild.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"F", note:"Booleans; a time parameter declares its unit"}
+  bounds: {deltaU:{minVal:"0.001", maxVal:"0.5"}, minTruFalHol:{minVal:"1e-37", cdlMinConst:"Constants.small"}, u:{cdlMin:"0", cdlMax:"1"}}
+  state: "stateful"
+  stateInit: "readsInput"
+  stateBasis: "instance cycOut; instance edg2; instance greThr; instance preBre; instance triSam; instance truFalHol"
+}
+
+@cdl-LogicalXor: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Logical.Xor"
+  grade: "native"
+  clause: "7.5.53.1"
+  comp: hx.comps::Xor
+  connectors: {u1:"inA", u2:"inB", y:"out"}
+  departures: {"Xor needs 2 non-null inputs (`minInputs := 2`), so one null input gives null `out`, where And and Or compute from the other input.", "QuadLogic computes from the valid inputs and skips a null or invalid one. Fewer non-null inputs than the comp needs give null `out`. Otherwise `out` merges the status of every input, so an invalid status propagates as the spec doc says.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"F", note:"Booleans; a time parameter declares its unit"}
+  state: "stateless"
+}
+
+@cdl-PsychrometricsDewPoint_TDryBulPhi: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Psychrometrics.DewPoint_TDryBulPhi"
+  grade: "native"
+  clause: "7.5.54.1"
+  comp: hx.comps::DewPoint
+  connectors: {phi:"inRelHumidity", tDryBul:"inDryBulb", tDewPoi:"out"}
+  departures: {"Below the triple point `out` is the frost point over ice, where MBL gives a dew point over liquid water.", "A dew point below 100 K gives NaN with fault.", "`out` is in the unit of `inDryBulb`.", "`inDryBulb` is in kelvin when unitless, and K, °C and °F convert. `inRelHumidity` is a fraction when unitless, and % converts.", "An out of range or non-finite input gives NaN with no fault.", "It computes with the 2025 ASHRAE Handbook and IAPWS-IF97, not the 2009 equations named in ASHRAE 231 7.5.54 and 7.5.55.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"A", keep:"TDryBul,TDewPoi"}
+  cdlNames: {tDryBul:"TDryBul", tDewPoi:"TDewPoi"}
+  bounds: {phi:{cdlMin:"0", cdlMax:"1"}, tDryBul:{cdlMin:"100"}, tDewPoi:{cdlMin:"100"}}
+  state: "stateless"
+}
+
+@cdl-PsychrometricsSpecificEnthalpy_TDryBulPhi: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Psychrometrics.SpecificEnthalpy_TDryBulPhi"
+  grade: "nativeParams"
+  clause: "7.5.55.1"
+  comp: hx.comps::SpecificEnthalpy
+  connectors: {phi:"inRelHumidity", tDryBul:"inDryBulb", h:"out"}
+  params: {pAtm:"pAtm"}
+  departures: {"Below 0 °C p_ws is over liquid water, where MBL takes it over ice. `out` is 247 J/kg higher at -5 °C and 80 %.", "`out` carries `J/kg` only when `inDryBulb` has a unit.", "`inDryBulb` is in kelvin when unitless, and K, °C and °F convert. `inRelHumidity` is a fraction when unitless, and % converts.", "An out of range or non-finite input gives NaN with no fault.", "It computes with the 2025 ASHRAE Handbook and IAPWS-IF97, not the 2009 equations named in ASHRAE 231 7.5.54 and 7.5.55.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"D", note:"every connector and pAtm declare their unit"}
+  cdlNames: {tDryBul:"TDryBul"}
+  bounds: {phi:{cdlMin:"0", cdlMax:"1"}, tDryBul:{cdlMin:"100"}}
+  state: "stateless"
+}
+
+@cdl-PsychrometricsWetBulb_TDryBulPhi: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Psychrometrics.WetBulb_TDryBulPhi"
+  grade: "native"
+  clause: "7.5.56.1"
+  comp: hx.comps::WetBulb
+  connectors: {phi:"inRelHumidity", tDryBul:"inDryBulb", tWetBul:"out"}
+  departures: {"It uses the Stull (2011) approximation, valid for 5 % to 99 % and -20 °C to 50 °C within -1 K to +0.65 K.", "`out` is in the unit of `inDryBulb`.", "`inDryBulb` is in kelvin when unitless, and K, °C and °F convert. `inRelHumidity` is a fraction when unitless, and % converts.", "An out of range or non-finite input gives NaN with no fault.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"A", keep:"TDryBul,TWetBul"}
+  cdlNames: {tDryBul:"TDryBul", tWetBul:"TWetBul"}
+  bounds: {phi:{cdlMin:"0", cdlMax:"1"}, tDryBul:{cdlMin:"100"}, tWetBul:{cdlMin:"100"}}
+  state: "stateless"
+}
+
+@cdl-RealsAbs: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Reals.Abs"
+  grade: "native"
+  clause: "7.5.1.1"
+  comp: hx.comps::AbsValue
+  connectors: {u:"inA", y:"out"}
+  departures: {"UnaryMath: a null `inA` gives null `out`. An invalid `inA` is still computed and its status is copied to `out`.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"A", keep:"u,y"}
+  state: "stateless"
+}
+
+@cdl-RealsAcos: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Reals.Acos"
+  grade: "native"
+  clause: "7.5.4.1"
+  comp: hx.comps::ArcCosine
+  connectors: {u:"inA", y:"out"}
+  departures: {"CDL `y` is in rad. The comp writes a unitless Number.", "UnaryMath: a null `inA` gives null `out`. An invalid `inA` is still computed and its status is copied to `out`.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"D", note:"math on dimensionless numbers; the comp ignores the input unit"}
+  state: "stateless"
+}
+
+@cdl-RealsAdd: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Reals.Add"
+  grade: "native"
+  clause: "7.5.2.1"
+  comp: hx.comps::Add
+  connectors: {u1:"inA", u2:"inB", y:"out"}
+  departures: {"QuadMath computes from the valid inputs and skips a null or invalid one. Fewer valid inputs than the comp needs give null `out`. Otherwise `out` merges the status of every input, valid or not, so an invalid status propagates as the spec doc says. A unit error adds fault.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"C", op:"add", ins:"u1,u2", out:"y"}
+  state: "stateless"
+}
+
+@cdl-RealsAddParameter: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Reals.AddParameter"
+  grade: "nativeParams"
+  clause: "7.5.3.1"
+  comp: hx.comps::Add
+  connectors: {u:"inA", y:"out"}
+  feeds: {p:{slot:"inB", via:hx.comps::NumberConst}}
+  departures: {"QuadMath computes from the valid inputs and skips a null or invalid one. Fewer valid inputs than the comp needs give null `out`. Otherwise `out` merges the status of every input, valid or not, so an invalid status propagates as the spec doc says. A unit error adds fault.", "The target slot is transient, so a fixed value must arrive on a linked NumberConst. A value set on a transient slot is not saved.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"C", op:"add", ins:"u,p", out:"y"}
+  state: "stateless"
+}
+
+@cdl-RealsAsin: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Reals.Asin"
+  grade: "native"
+  clause: "7.5.5.1"
+  comp: hx.comps::ArcSine
+  connectors: {u:"inA", y:"out"}
+  departures: {"CDL `y` is in rad. The comp writes a unitless Number.", "UnaryMath: a null `inA` gives null `out`. An invalid `inA` is still computed and its status is copied to `out`.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"D", note:"math on dimensionless numbers; the comp ignores the input unit"}
+  state: "stateless"
+}
+
+@cdl-RealsAtan: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Reals.Atan"
+  grade: "native"
+  clause: "7.5.6.1"
+  comp: hx.comps::ArcTangent
+  connectors: {u:"inA", y:"out"}
+  departures: {"CDL `y` is in rad. The comp writes a unitless Number.", "UnaryMath: a null `inA` gives null `out`. An invalid `inA` is still computed and its status is copied to `out`.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"D", note:"math on dimensionless numbers; the comp ignores the input unit"}
+  state: "stateless"
+}
+
+@cdl-RealsAtan2: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Reals.Atan2"
+  grade: "native"
+  clause: "7.5.7.1"
+  comp: hx.comps::ArcTangent2
+  connectors: {u1:"inA", u2:"inB", y:"out"}
+  departures: {"`out` is unitless where CDL `y` is in rad, and 0 at the origin.", "`inB` converts to the unit of `inA` by scale only. A temperature difference against a temperature faults.", "BinaryMath: a null input gives null `out`. An invalid input gives NaN with the merged status. A unit error gives NaN with fault.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"A", keep:"u1,u2", seeds:{y:"1"}, note:"the comp writes an unitless angle"}
+  state: "stateless"
+}
+
+@cdl-RealsAverage: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Reals.Average"
+  grade: "native"
+  clause: "7.5.8.1"
+  comp: hx.comps::Average
+  connectors: {u1:"inA", u2:"inB", y:"out"}
+  departures: {"CDL Average is (u1+u2)/2. With one input skipped, `out` is the other input, not half of it.", "QuadMath computes from the valid inputs and skips a null or invalid one. Fewer valid inputs than the comp needs give null `out`. Otherwise `out` merges the status of every input, valid or not, so an invalid status propagates as the spec doc says. A unit error adds fault.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"A", keep:"u1,u2,y"}
+  state: "stateless"
+}
+
+@cdl-RealsCos: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Reals.Cos"
+  grade: "native"
+  clause: "7.5.9.1"
+  comp: hx.comps::Cosine
+  connectors: {u:"inA", y:"out"}
+  departures: {"CDL `u` is in rad. UnaryMath ignores the input unit, so an input in degrees is not converted.", "UnaryMath: a null `inA` gives null `out`. An invalid `inA` is still computed and its status is copied to `out`.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"D", note:"math on dimensionless numbers; the comp ignores the input unit"}
+  state: "stateless"
+}
+
+@cdl-RealsDerivative: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Reals.Derivative"
+  grade: "nativeParams"
+  clause: "7.5.10.1"
+  comp: hx.comps::Derivative
+  connectors: {u:"in", y:"out"}
+  params: {y_start:"yStart"}
+  feeds: {k:{slot:"k", via:hx.comps::StatusNumberToNumber}, t:{slot:"timeConst", via:hx.comps::StatusNumberToNumber}}
+  whenNull: {k:1, t:1}
+  departures: {"CDL `k` and `T` are input connectors. On the comp they are plain Number slots.", "`timeConst` is in seconds unless it carries a time unit. A `timeConst` below 0 faults. CDL requires `T` at least 1E-13.", "`out` has no unit.", "The comp executes every cycle and steps on its own CycleClock. A step longer than both 1min and 10 times the longest of the last 8 steps is a stall or a gap. Results depend on the cycle length.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"D", note:"y is k times the derivative of u, a compound unit"}
+  cdlNames: {t:"T"}
+  bounds: {t:{cdlMin:"1e-13", cdlMinConst:"100*Buildings.Controls.OBC.CDL.Constants.eps"}}
+  state: "stateful"
+  stateInit: "readsInput"
+  stateBasis: "der"
+}
+
+@cdl-RealsDivide: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Reals.Divide"
+  grade: "native"
+  clause: "7.5.11.1"
+  comp: hx.comps::Divide
+  connectors: {u1:"inA", u2:"inB", y:"out"}
+  departures: {"A zero `inB` gives the Fantom float result (INF or NaN) with no fault. MBL Divide has no guard either.", "BinaryMath: a null input gives null `out`. An invalid input gives NaN with the merged status. A unit error gives NaN with fault.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"C", op:"div", ins:"u1,u2", out:"y"}
+  state: "stateless"
+}
+
+@cdl-RealsExp: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Reals.Exp"
+  grade: "native"
+  clause: "7.5.12.1"
+  comp: hx.comps::Exponential
+  connectors: {u:"inA", y:"out"}
+  departures: {"UnaryMath: a null `inA` gives null `out`. An invalid `inA` is still computed and its status is copied to `out`.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"D", note:"math on dimensionless numbers; the comp ignores the input unit"}
+  state: "stateless"
+}
+
+@cdl-RealsGreater: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Reals.Greater"
+  grade: "nativeParams"
+  clause: "7.5.58.1"
+  comp: hx.comps::GreaterThanHys
+  connectors: {u1:"inA", u2:"inB", y:"out"}
+  params: {h:"deadband", pre_y_start:"initOut"}
+  departures: {"An invalid input holds the state and `out` with the merged status, where `Comparison` writes false.", "Mismatched `inA` and `inB` units fault and hold `out`.", "`deadband` is read in the unit of `inB` or its delta unit.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"B", keep:"u1,u2", op:"delta", ins:"u1", out:"h"}
+  bounds: {h:{minVal:"0"}}
+  state: "stateful"
+  stateInit: "readsInput"
+  stateBasis: "instance greHys (conditional)"
+}
+
+@cdl-RealsGreaterThreshold: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Reals.GreaterThreshold"
+  grade: "nativeParams"
+  clause: "7.5.61.1"
+  comp: hx.comps::GreaterThanHys
+  connectors: {u:"inA", y:"out"}
+  params: {h:"deadband", pre_y_start:"initOut"}
+  feeds: {t:{slot:"inB", via:hx.comps::NumberConst}}
+  cdlDefaults: {t:"0"}
+  departures: {"The threshold arrives on `inB` from a linked NumberConst.", "An invalid input holds the state and `out` with the merged status, where `Comparison` writes false.", "Mismatched `inA` and `inB` units fault and hold `out`.", "`deadband` is read in the unit of `inB` or its delta unit.", "The target slot is transient, so a fixed value must arrive on a linked NumberConst. A value set on a transient slot is not saved.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"B", keep:"u,t", op:"delta", ins:"u", out:"h"}
+  bounds: {h:{minVal:"0"}}
+  state: "stateful"
+  stateInit: "readsInput"
+  stateBasis: "instance greHys (conditional)"
+}
+
+@cdl-RealsHysteresis: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Reals.Hysteresis"
+  grade: "nativeParams"
+  clause: "7.5.62.1"
+  comp: hx.comps::Hysteresis
+  connectors: {u:"in", y:"out"}
+  params: {pre_y_start:"initOut", uHigh:"high", uLow:"low"}
+  departures: {"`high` not above `low` is a fault. MBL asserts uHigh > uLow at translation.", "Limits whose units differ from each other or from `in` fault, where a unitless value fits any unit.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"A", keep:"u,uLow,uHigh"}
+  state: "stateful"
+  stateInit: "readsInput"
+  stateBasis: "pre"
+}
+
+@cdl-RealsIntegratorWithReset: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Reals.IntegratorWithReset"
+  grade: "nativeParams"
+  clause: "7.5.13.1"
+  comp: hx.comps::Integrator
+  connectors: {trigger:"inReset", u:"in", y_reset_in:"inResetVal", y:"out"}
+  params: {k:"k", y_start:"yStart"}
+  departures: {"Each step is a trapezoid to the current `in`, so `out` has direct feedthrough from `in` where CDL has none. A loop through it needs a `loopCut` link.", "A reset while `inResetVal` is invalid or not finite waits until it is usable. A null `inResetVal` resets to `yStart`.", "`out` has no unit.", "After a restart `out` starts again from `yStart`.", "The comp executes every cycle and steps on its own CycleClock. A step longer than both 1min and 10 times the longest of the last 8 steps is a stall or a gap. Results depend on the cycle length.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"A", keep:"y,y_reset_in,y_start", note:"y is k times the integral of u, a compound unit"}
+  state: "stateful"
+  stateInit: "noInput"
+  stateInitBasis: "parameterInit"
+  stateBasis: "when; der; reinit"
+}
+
+@cdl-RealsLess: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Reals.Less"
+  grade: "nativeParams"
+  clause: "7.5.63.1"
+  comp: hx.comps::LessThanHys
+  connectors: {u1:"inA", u2:"inB", y:"out"}
+  params: {h:"deadband", pre_y_start:"initOut"}
+  departures: {"An invalid input holds the state and `out` with the merged status, where `Comparison` writes false.", "Mismatched `inA` and `inB` units fault and hold `out`.", "`deadband` is read in the unit of `inB` or its delta unit.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"B", keep:"u1,u2", op:"delta", ins:"u1", out:"h"}
+  bounds: {h:{minVal:"0"}}
+  state: "stateful"
+  stateInit: "readsInput"
+  stateBasis: "instance lesHys (conditional)"
+}
+
+@cdl-RealsLessThreshold: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Reals.LessThreshold"
+  grade: "nativeParams"
+  clause: "7.5.66.1"
+  comp: hx.comps::LessThanHys
+  connectors: {u:"inA", y:"out"}
+  params: {h:"deadband", pre_y_start:"initOut"}
+  feeds: {t:{slot:"inB", via:hx.comps::NumberConst}}
+  cdlDefaults: {t:"0"}
+  departures: {"The threshold arrives on `inB` from a linked NumberConst.", "An invalid input holds the state and `out` with the merged status, where `Comparison` writes false.", "Mismatched `inA` and `inB` units fault and hold `out`.", "`deadband` is read in the unit of `inB` or its delta unit.", "The target slot is transient, so a fixed value must arrive on a linked NumberConst. A value set on a transient slot is not saved.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"B", keep:"u,t", op:"delta", ins:"u", out:"h"}
+  bounds: {h:{minVal:"0"}}
+  state: "stateful"
+  stateInit: "readsInput"
+  stateBasis: "instance lesHys (conditional)"
+}
+
+@cdl-RealsLimitSlewRate: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Reals.LimitSlewRate"
+  grade: "nativeParams"
+  clause: "7.5.14.1"
+  comp: hx.comps::SlewRateLimit
+  connectors: {u:"in", y:"out"}
+  params: {enable:"enable", fallingSlewRate:"fallingSlewRate", raisingSlewRate:"raisingSlewRate", td:"timeConst"}
+  convert: {td:"sec"}
+  departures: {"A null `fallingSlewRate` is minus `raisingSlewRate` and a null `timeConst` is `raisingSlewRate` times 10 s, the CDL defaults.", "Rates are in units of `in` per second unless they carry a time unit, matching CDL `1/s` on a unitless `u`.", "Each step is backward Euler to the current `in`, so `out` has direct feedthrough.", "The comp executes every cycle and steps on its own CycleClock. A step longer than both 1min and 10 times the longest of the last 8 steps is a stall or a gap. Results depend on the cycle length.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"A", keep:"u,y", note:"a slew rate is the unit of u per second, a compound with no symbol"}
+  cdlNames: {td:"Td"}
+  bounds: {fallingSlewRate:{maxVal:"-1e-37", cdlMaxConst:"-Constants.small"}, raisingSlewRate:{minVal:"1e-37", cdlMinConst:"Constants.small"}, td:{minVal:"1e-15", cdlMinConst:"Constants.eps"}}
+  state: "stateful"
+  stateInit: "readsInput"
+  stateBasis: "der"
+}
+
+@cdl-RealsLimiter: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Reals.Limiter"
+  grade: "nativeParams"
+  clause: "7.5.67.1"
+  comp: hx.comps::Limiter
+  connectors: {u:"in", y:"out"}
+  params: {uMax:"uMax", uMin:"uMin"}
+  departures: {"Equal limits give that value. MBL rejects them.", "Limits convert to the unit of `in`, an offset included, so a °C limit fits a °F `in`.", "`uMax` and `uMin` have no default and `out` is NaN with fault until both are set.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"A", keep:"u,uMin,uMax,y"}
+  state: "stateless"
+}
+
+@cdl-RealsLine: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Reals.Line"
+  grade: "nativeParams"
+  clause: "7.5.15.1"
+  comp: hx.comps::Line
+  connectors: {f1:"inF1", f2:"inF2", u:"in", x1:"inX1", x2:"inX2", y:"out"}
+  params: {limitAbove:"limitAbove", limitBelow:"limitBelow"}
+  departures: {"An `inX2` not above `inX1` while a limit is on gives NaN with fault, where MBL warns.", "Each axis converts to the unit of its first input with a unit.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"A", keep:"f1,f2,y;u,x1,x2"}
+  state: "stateless"
+}
+
+@cdl-RealsLog: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Reals.Log"
+  grade: "native"
+  clause: "7.5.16.1"
+  comp: hx.comps::LogNatural
+  connectors: {u:"inA", y:"out"}
+  departures: {"UnaryMath: a null `inA` gives null `out`. An invalid `inA` is still computed and its status is copied to `out`.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"D", note:"math on dimensionless numbers; the comp ignores the input unit"}
+  state: "stateless"
+}
+
+@cdl-RealsLog10: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Reals.Log10"
+  grade: "native"
+  clause: "7.5.17.1"
+  comp: hx.comps::LogBase10
+  connectors: {u:"inA", y:"out"}
+  departures: {"UnaryMath: a null `inA` gives null `out`. An invalid `inA` is still computed and its status is copied to `out`.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"D", note:"math on dimensionless numbers; the comp ignores the input unit"}
+  state: "stateless"
+}
+
+@cdl-RealsMatrixGain: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Reals.MatrixGain"
+  grade: "array"
+  clause: "7.5.18.1"
+  comp: kw.cdl::RealsMatrixGain
+  unitRule: {family:"array", note:"expanded when instantiated; its units follow the expansion"}
+  state: "stateless"
+}
+
+@cdl-RealsMatrixMax: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Reals.MatrixMax"
+  grade: "array"
+  clause: "7.5.19.1"
+  comp: kw.cdl::RealsMatrixMax
+  unitRule: {family:"array", note:"expanded when instantiated; its units follow the expansion"}
+  state: "stateless"
+}
+
+@cdl-RealsMatrixMin: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Reals.MatrixMin"
+  grade: "array"
+  clause: "7.5.20.1"
+  comp: kw.cdl::RealsMatrixMin
+  unitRule: {family:"array", note:"expanded when instantiated; its units follow the expansion"}
+  state: "stateless"
+}
+
+@cdl-RealsMax: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Reals.Max"
+  grade: "native"
+  clause: "7.5.21.1"
+  comp: hx.comps::Maximum
+  connectors: {u1:"inA", u2:"inB", y:"out"}
+  departures: {"QuadMath computes from the valid inputs and skips a null or invalid one. Fewer valid inputs than the comp needs give null `out`. Otherwise `out` merges the status of every input, valid or not, so an invalid status propagates as the spec doc says. A unit error adds fault.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"A", keep:"u1,u2,y"}
+  state: "stateless"
+}
+
+@cdl-RealsMin: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Reals.Min"
+  grade: "native"
+  clause: "7.5.22.1"
+  comp: hx.comps::Minimum
+  connectors: {u1:"inA", u2:"inB", y:"out"}
+  departures: {"QuadMath computes from the valid inputs and skips a null or invalid one. Fewer valid inputs than the comp needs give null `out`. Otherwise `out` merges the status of every input, valid or not, so an invalid status propagates as the spec doc says. A unit error adds fault.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"A", keep:"u1,u2,y"}
+  state: "stateless"
+}
+
+@cdl-RealsModulo: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Reals.Modulo"
+  grade: "native"
+  clause: "7.5.23.1"
+  comp: hx.comps::FlooredModulus
+  connectors: {u1:"inA", u2:"inB", y:"out"}
+  departures: {"A zero `inB` or an infinite input gives NaN.", "BinaryMath: a null input gives null `out`. An invalid input gives NaN with the merged status. A unit error gives NaN with fault.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"A", keep:"u1,u2,y"}
+  state: "stateless"
+}
+
+@cdl-RealsMovingAverage: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Reals.MovingAverage"
+  grade: "nativeParams"
+  clause: "7.5.24.1"
+  comp: hx.comps::MovingAverage
+  connectors: {u:"in", y:"out"}
+  params: {delta:"window"}
+  convert: {delta:"sec"}
+  departures: {"Before a full window the elapsed time is guarded by 1E-10 s, as ASHRAE 231 7.5.24. MBL adds 1E-3 s, so the first seconds differ slightly.", "The comp keeps one entry per execute in the window. A long window at a short cycle holds many entries.", "CDL `delta` has no default. `window` defaults to 1min.", "The comp executes every cycle and steps on its own CycleClock. A step longer than both 1min and 10 times the longest of the last 8 steps is a stall or a gap. Results depend on the cycle length.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"A", keep:"u,y"}
+  bounds: {delta:{minVal:"1e-05"}}
+  state: "stateful"
+  stateInit: "noInput"
+  stateInitBasis: "parameterInit"
+  stateBasis: "when; der; delay; initialParameter"
+}
+
+@cdl-RealsMultiMax: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Reals.MultiMax"
+  grade: "array"
+  clause: "7.5.25.1"
+  comp: kw.cdl::RealsMultiMax
+  unitRule: {family:"array", keep:"u,y"}
+  state: "stateless"
+}
+
+@cdl-RealsMultiMin: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Reals.MultiMin"
+  grade: "array"
+  clause: "7.5.26.1"
+  comp: kw.cdl::RealsMultiMin
+  unitRule: {family:"array", keep:"u,y"}
+  state: "stateless"
+}
+
+@cdl-RealsMultiSum: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Reals.MultiSum"
+  grade: "array"
+  clause: "7.5.29.1"
+  name231: "CDL.Reals.Multisum"
+  comp: kw.cdl::RealsMultiSum
+  unitRule: {family:"array", op:"sum", ins:"u", out:"y", note:"a weighted sum of absolute temperatures gives no unit until its weights are known"}
+  state: "stateless"
+}
+
+@cdl-RealsMultiply: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Reals.Multiply"
+  grade: "native"
+  clause: "7.5.27.1"
+  comp: hx.comps::Multiply
+  connectors: {u1:"inA", u2:"inB", y:"out"}
+  departures: {"QuadMath computes from the valid inputs and skips a null or invalid one. Fewer valid inputs than the comp needs give null `out`. Otherwise `out` merges the status of every input, valid or not, so an invalid status propagates as the spec doc says. A unit error adds fault.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"C", op:"mul", ins:"u1,u2", out:"y"}
+  state: "stateless"
+}
+
+@cdl-RealsMultiplyByParameter: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Reals.MultiplyByParameter"
+  grade: "nativeParams"
+  clause: "7.5.28.1"
+  comp: hx.comps::Multiply
+  connectors: {u:"inA", y:"out"}
+  feeds: {k:{slot:"inB", via:hx.comps::NumberConst}}
+  compoundGain: {comp:"hx.comps::Line", gain:"inF2", per:"inX2", perGroup:"u", zero:"inX1,inF1", fixed:{limitBelow:"false", limitAbove:"false"}}
+  departures: {"A gain bound to a unit the unit database lacks (s/K, the change rate chaRat of Generic.TimeSuppression) runs on `Line` instead, through (0, 0) and (1 K, chaRat s). Multiply would give the product the unit of `u`, K, and a K value then meets seconds in a comparison and faults. Line gives `out` the unit of its second axis, seconds. Its first axis takes the unit of `u`, and Line does not convert a difference against an absolute value, so the resolver converts the point 1 K with the unit group of `u`, as a difference (1.8 Fahrenheit degrees on a Fahrenheit building), and writes chaRat in seconds unconverted. 540 s per kelvin then acts as 300 s per Fahrenheit degree.", "QuadMath computes from the valid inputs and skips a null or invalid one. Fewer valid inputs than the comp needs give null `out`. Otherwise `out` merges the status of every input, valid or not, so an invalid status propagates as the spec doc says. A unit error adds fault.", "The target slot is transient, so a fixed value must arrive on a linked NumberConst. A value set on a transient slot is not saved.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"C", op:"mul", ins:"u,k", out:"y"}
+  state: "stateless"
+}
+
+@cdl-RealsPid: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Reals.PID"
+  grade: "nativeParams"
+  clause: "7.5.30.1"
+  comp: hx.comps::CdlPid
+  connectors: {u_m:"inMeasurement", u_s:"inSetpoint", y:"out"}
+  params: {controllerType:"controllerType", k:"k", nd:"nd", ni:"ni", r:"r", reverseActing:"reverseActing", td:"td", ti:"ti", xi_start:"xiStart", yd_start:"ydStart", yMax:"yMax", yMin:"yMin"}
+  convert: {controllerType:"enum P=p PI=pi PD=pd PID=pid", k:"float", nd:"float", ni:"float", r:"float", td:"sec", ti:"sec", xi_start:"float", yd_start:"float", yMax:"float", yMin:"float"}
+  writeWhenUnit: "r"
+  departures: {"`k`, `r`, `yMax`, `yMin`, `xi_start`, `yd_start` and `y_reset` are Float slots, which carry no unit. `r` scales the control error, so on points that are not SI it must be converted into their difference unit (5 K is 9 Fahrenheit degrees), and the comp cannot catch a conversion that was missed. `r` is written on every loop whose setpoint carries a unit. Any `1/K` is provenance only and is never converted (in G36 every one is the `k` of a PID): converting `r` alone converts the loop.", "Equal `yMin` and `yMax` give that value. MBL rejects them.", "Parameters are checked only for the terms the controller type uses.", "The comp executes every cycle with backward Euler steps and an implicit anti-windup, so its response depends on the cycle length.", "An invalid input holds the state and `out` and propagates the status. A non-finite input faults.", "The comp executes every cycle and steps on its own CycleClock. A step longer than both 1min and 10 times the longest of the last 8 steps is a stall or a gap. Results depend on the cycle length.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"B", keep:"u_s,u_m", op:"delta", ins:"u_s", out:"r", seeds:{xi_start:"1", y:"1", yMax:"1", yMin:"1", yd_start:"1"}, note:"r scales the control error, so it is a difference in the unit of u_s"}
+  cdlNames: {nd:"Nd", ni:"Ni", td:"Td", ti:"Ti"}
+  bounds: {k:{minVal:"1e-13", cdlMinConst:"100*Constants.eps"}, nd:{minVal:"1e-13", cdlMinConst:"100*Constants.eps"}, ni:{minVal:"1e-13", cdlMinConst:"100*Constants.eps"}, r:{minVal:"1e-13", cdlMinConst:"100*Constants.eps"}, td:{minVal:"1e-13", cdlMinConst:"100*Constants.eps"}, ti:{minVal:"1e-13", cdlMinConst:"100*Constants.eps"}}
+  state: "stateful"
+  stateInit: "readsInput"
+  stateBasis: "instance D (conditional); instance I (conditional)"
+}
+
+@cdl-RealsPidWithReset: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Reals.PIDWithReset"
+  grade: "nativeParams"
+  clause: "7.5.31.1"
+  comp: hx.comps::CdlPid
+  connectors: {trigger:"inReset", u_m:"inMeasurement", u_s:"inSetpoint", y:"out"}
+  params: {controllerType:"controllerType", k:"k", nd:"nd", ni:"ni", r:"r", reverseActing:"reverseActing", td:"td", ti:"ti", xi_start:"xiStart", y_reset:"yReset", yd_start:"ydStart", yMax:"yMax", yMin:"yMin"}
+  convert: {controllerType:"enum P=p PI=pi PD=pd PID=pid", k:"float", nd:"float", ni:"float", r:"float", td:"sec", ti:"sec", xi_start:"float", y_reset:"float", yd_start:"float", yMax:"float", yMin:"float"}
+  cdlDefaults: {y_reset:"xi_start"}
+  writeWhenUnit: "r"
+  departures: {"`k`, `r`, `yMax`, `yMin`, `xi_start`, `yd_start` and `y_reset` are Float slots, which carry no unit. `r` scales the control error, so on points that are not SI it must be converted into their difference unit (5 K is 9 Fahrenheit degrees), and the comp cannot catch a conversion that was missed. `r` is written on every loop whose setpoint carries a unit. Any `1/K` is provenance only and is never converted (in G36 every one is the `k` of a PID): converting `r` alone converts the loop.", "On a rise of `inReset`, PI and PID set the integrator so the output before the limits is `yReset`. With P or PD, `inReset` does nothing.", "Equal `yMin` and `yMax` give that value. MBL rejects them.", "Parameters are checked only for the terms the controller type uses.", "The comp executes every cycle with backward Euler steps and an implicit anti-windup, so its response depends on the cycle length.", "An invalid input holds the state and `out` and propagates the status. A non-finite input faults.", "The comp executes every cycle and steps on its own CycleClock. A step longer than both 1min and 10 times the longest of the last 8 steps is a stall or a gap. Results depend on the cycle length.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"B", keep:"u_s,u_m", op:"delta", ins:"u_s", out:"r", seeds:{xi_start:"1", y:"1", yMax:"1", yMin:"1", y_reset:"1", yd_start:"1"}, note:"r scales the control error, so it is a difference in the unit of u_s"}
+  cdlNames: {nd:"Nd", ni:"Ni", td:"Td", ti:"Ti"}
+  bounds: {k:{minVal:"1e-13", cdlMinConst:"100*Constants.eps"}, nd:{minVal:"1e-13", cdlMinConst:"100*Constants.eps"}, ni:{minVal:"1e-13", cdlMinConst:"100*Constants.eps"}, r:{minVal:"1e-13", cdlMinConst:"100*Constants.eps"}, td:{minVal:"1e-13", cdlMinConst:"100*Constants.eps"}, ti:{minVal:"1e-13", cdlMinConst:"100*Constants.eps"}}
+  state: "stateful"
+  stateInit: "readsInput"
+  stateBasis: "instance D (conditional); instance I (conditional)"
+}
+
+@cdl-RealsRamp: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Reals.Ramp"
+  grade: "nativeParams"
+  clause: "7.5.70.1"
+  comp: hx.comps::SlewRateLimit
+  connectors: {u:"in", y:"out"}
+  params: {fallingSlewRate:"fallingSlewRate", raisingSlewRate:"raisingSlewRate", td:"timeConst"}
+  feeds: {active:{slot:"enable", via:hx.comps::StatusBoolToBool}}
+  convert: {td:"sec"}
+  cdlDefaults: {td:"raisingSlewRate*0.001"}
+  departures: {"CDL `active` is an input. The comp `enable` is a plain Bool slot, reached through a StatusBoolToBool feed. A null `active` then reads `whenNull`, false by default, so `out` follows `in`.", "MBL Ramp reinitializes the ramp to `u` on a rise of `active` and outputs `u` while inactive. The comp gives `out = in` while disabled, so it starts from `in` on enable too.", "The comp executes every cycle and steps on its own CycleClock. A step longer than both 1min and 10 times the longest of the last 8 steps is a stall or a gap. Results depend on the cycle length.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"A", keep:"u,y", note:"a slew rate is the unit of u per second, a compound with no symbol"}
+  cdlNames: {td:"Td"}
+  bounds: {fallingSlewRate:{maxVal:"-1e-37", cdlMaxConst:"-Constants.small"}, raisingSlewRate:{minVal:"1e-37", cdlMinConst:"Constants.small"}, td:{minVal:"1e-15", cdlMinConst:"Constants.eps"}}
+  state: "stateful"
+  stateInit: "readsInput"
+  stateBasis: "when; der; reinit"
+}
+
+@cdl-RealsRound: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Reals.Round"
+  grade: "nativeParams"
+  clause: "7.5.32.1"
+  comp: hx.comps::Round
+  connectors: {u:"in", y:"out"}
+  params: {n:"n"}
+  convert: {n:"int"}
+  departures: {"CDL `n` has no default. The comp defaults it to 0.", "A zero result is positive zero.", "Round: a null `in` gives null `out` and an invalid `in` gives NaN with its status.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"A", keep:"u,y"}
+  state: "stateless"
+}
+
+@cdl-RealsSin: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Reals.Sin"
+  grade: "native"
+  clause: "7.5.33.1"
+  comp: hx.comps::Sine
+  connectors: {u:"inA", y:"out"}
+  departures: {"CDL `u` is in rad. UnaryMath ignores the input unit, so an input in degrees is not converted.", "UnaryMath: a null `inA` gives null `out`. An invalid `inA` is still computed and its status is copied to `out`.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"D", note:"math on dimensionless numbers; the comp ignores the input unit"}
+  state: "stateless"
+}
+
+@cdl-RealsSort: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Reals.Sort"
+  grade: "array"
+  clause: "7.5.34.1"
+  comp: kw.cdl::RealsSort
+  unitRule: {family:"array", note:"expanded when instantiated; its units follow the expansion"}
+  state: "stateless"
+}
+
+@cdl-RealsSourcesConstant: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Reals.Sources.Constant"
+  grade: "const"
+  clause: "7.5.82.1"
+  comp: hx.comps::NumberConst
+  connectors: {y:"out"}
+  params: {k:"out"}
+  unitRule: {family:"A", keep:"k,y", note:"the constant's y is its k"}
+  state: "stateless"
+}
+
+@cdl-RealsSourcesPulse: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Reals.Sources.Pulse"
+  grade: "composite"
+  clause: "7.5.83.1"
+  comp: kw.cdl::RealsSourcesPulse
+  unitRule: {family:"C", op:"add", ins:"offset,amplitude", out:"y", note:"y is offset while off and offset plus amplitude while on, so amplitude is a difference beside an absolute offset"}
+  state: "stateful"
+  stateInit: "noInput"
+  stateInitBasis: "noInputConnector"
+  stateBasis: "instance booPul"
+}
+
+@cdl-RealsSourcesTimeTable: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Reals.Sources.TimeTable"
+  grade: "array"
+  clause: "7.5.87.1"
+  comp: kw.cdl::RealsSourcesTimeTable
+  unitRule: {family:"array", note:"expanded when instantiated; its units follow the expansion"}
+  state: "stateful"
+  stateInit: "noInput"
+  stateInitBasis: "noInputConnector"
+  stateBasis: "initialParameter; unread: instance tab is of Modelica.Blocks.Sources.CombiTimeTable, which the pinned source does not hold"
+}
+
+@cdl-RealsSqrt: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Reals.Sqrt"
+  grade: "native"
+  clause: "7.5.35.1"
+  comp: hx.comps::SquareRoot
+  connectors: {u:"inA", y:"out"}
+  departures: {"UnaryMath: a null `inA` gives null `out`. An invalid `inA` is still computed and its status is copied to `out`.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"D", note:"math on dimensionless numbers; the comp ignores the input unit"}
+  state: "stateless"
+}
+
+@cdl-RealsSubtract: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Reals.Subtract"
+  grade: "native"
+  clause: "7.5.36.1"
+  comp: hx.comps::Subtract
+  connectors: {u1:"inA", u2:"inB", y:"out"}
+  departures: {"BinaryMath: a null input gives null `out`. An invalid input gives NaN with the merged status. A unit error gives NaN with fault.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"C", op:"sub", ins:"u1,u2", out:"y"}
+  state: "stateless"
+}
+
+@cdl-RealsSwitch: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Reals.Switch"
+  grade: "native"
+  clause: "7.5.50.1"
+  comp: hx.comps::NumberSwitch
+  connectors: {u1:"inTrue", u2:"inSwitch", u3:"inFalse", y:"out"}
+  departures: {"ValSwitch: a null `inSwitch` gives null `out`. An invalid `inSwitch` holds the last `out`.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"A", keep:"u1,u3,y"}
+  state: "stateless"
+}
+
+@cdl-RealsTan: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Reals.Tan"
+  grade: "native"
+  clause: "7.5.37.1"
+  comp: hx.comps::Tangent
+  connectors: {u:"inA", y:"out"}
+  departures: {"CDL `u` is in rad. UnaryMath ignores the input unit, so an input in degrees is not converted.", "UnaryMath: a null `inA` gives null `out`. An invalid `inA` is still computed and its status is copied to `out`.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"D", note:"math on dimensionless numbers; the comp ignores the input unit"}
+  state: "stateless"
+}
+
+@cdl-RoutingBooleanExtractSignal: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Routing.BooleanExtractSignal"
+  grade: "array"
+  clause: "7.5.95.3"
+  comp: kw.cdl::RoutingBooleanExtractSignal
+  unitRule: {family:"array", note:"Integers or Booleans"}
+  state: "stateless"
+}
+
+@cdl-RoutingBooleanExtractor: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Routing.BooleanExtractor"
+  grade: "array"
+  clause: "7.5.96.3"
+  comp: kw.cdl::RoutingBooleanExtractor
+  unitRule: {family:"array", note:"Integers or Booleans"}
+  state: "stateless"
+}
+
+@cdl-RoutingBooleanScalarReplicator: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Routing.BooleanScalarReplicator"
+  grade: "array"
+  clause: "7.5.97.3"
+  comp: kw.cdl::RoutingBooleanScalarReplicator
+  unitRule: {family:"array", note:"Integers or Booleans"}
+  state: "stateless"
+}
+
+@cdl-RoutingBooleanVectorFilter: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Routing.BooleanVectorFilter"
+  grade: "array"
+  clause: "7.5.98.3"
+  comp: kw.cdl::RoutingBooleanVectorFilter
+  unitRule: {family:"array", note:"Integers or Booleans"}
+  state: "stateless"
+}
+
+@cdl-RoutingBooleanVectorReplicator: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Routing.BooleanVectorReplicator"
+  grade: "array"
+  clause: "7.5.99.3"
+  comp: kw.cdl::RoutingBooleanVectorReplicator
+  unitRule: {family:"array", note:"Integers or Booleans"}
+  state: "stateless"
+}
+
+@cdl-RoutingIntegerExtractSignal: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Routing.IntegerExtractSignal"
+  grade: "array"
+  clause: "7.5.95.2"
+  comp: kw.cdl::RoutingIntegerExtractSignal
+  unitRule: {family:"array", note:"Integers or Booleans"}
+  state: "stateless"
+}
+
+@cdl-RoutingIntegerExtractor: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Routing.IntegerExtractor"
+  grade: "array"
+  clause: "7.5.96.2"
+  comp: kw.cdl::RoutingIntegerExtractor
+  unitRule: {family:"array", note:"Integers or Booleans"}
+  state: "stateless"
+}
+
+@cdl-RoutingIntegerScalarReplicator: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Routing.IntegerScalarReplicator"
+  grade: "array"
+  clause: "7.5.97.2"
+  comp: kw.cdl::RoutingIntegerScalarReplicator
+  unitRule: {family:"array", note:"Integers or Booleans"}
+  state: "stateless"
+}
+
+@cdl-RoutingIntegerVectorFilter: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Routing.IntegerVectorFilter"
+  grade: "array"
+  clause: "7.5.98.2"
+  comp: kw.cdl::RoutingIntegerVectorFilter
+  unitRule: {family:"array", note:"Integers or Booleans"}
+  state: "stateless"
+}
+
+@cdl-RoutingIntegerVectorReplicator: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Routing.IntegerVectorReplicator"
+  grade: "array"
+  clause: "7.5.99.2"
+  comp: kw.cdl::RoutingIntegerVectorReplicator
+  unitRule: {family:"array", note:"Integers or Booleans"}
+  state: "stateless"
+}
+
+@cdl-RoutingRealExtractSignal: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Routing.RealExtractSignal"
+  grade: "array"
+  clause: "7.5.95.1"
+  comp: kw.cdl::RoutingRealExtractSignal
+  unitRule: {family:"array", keep:"u,y"}
+  state: "stateless"
+}
+
+@cdl-RoutingRealExtractor: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Routing.RealExtractor"
+  grade: "array"
+  clause: "7.5.96.1"
+  comp: kw.cdl::RoutingRealExtractor
+  unitRule: {family:"array", keep:"u,y"}
+  state: "stateless"
+}
+
+@cdl-RoutingRealScalarReplicator: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Routing.RealScalarReplicator"
+  grade: "array"
+  clause: "7.5.97.1"
+  comp: kw.cdl::RoutingRealScalarReplicator
+  unitRule: {family:"array", keep:"u,y"}
+  state: "stateless"
+}
+
+@cdl-RoutingRealVectorFilter: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Routing.RealVectorFilter"
+  grade: "array"
+  clause: "7.5.98.1"
+  comp: kw.cdl::RoutingRealVectorFilter
+  unitRule: {family:"array", keep:"u,y"}
+  state: "stateless"
+}
+
+@cdl-RoutingRealVectorReplicator: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Routing.RealVectorReplicator"
+  grade: "array"
+  clause: "7.5.99.1"
+  comp: kw.cdl::RoutingRealVectorReplicator
+  unitRule: {family:"array", keep:"u,y"}
+  state: "stateless"
+}
+
+@cdl-UtilitiesAssert: CdlClass {
+  cdlClass: "Buildings.Controls.OBC.CDL.Utilities.Assert"
+  grade: "nativeParams"
+  clause: "7.5.100.1"
+  comp: hx.comps::Assert
+  connectors: {u:"in"}
+  params: {message:"message"}
+  departures: {"When `in` turns false the comp logs a warning to the `hxComps` log, at most hourly. It never throws or faults.", "An invalid `in` is not checked.", "CDL values are never null and carry no status. Every hx.comps comp has its own null and status rule, given among its departures. A G36 sequence sees the difference only when an input point is null, stale or faulted."}
+  unitRule: {family:"F", note:"Booleans; a time parameter declares its unit"}
+  state: "stateless"
+}
+
+// The CDL elementary classes no hx.comps comp or composition runs, and no G36 sequence uses.
+@cdl-refused: CdlRefused {
+  classes: {
+    CdlRefusal {name:"RealsSourcesCalendarTime", cdlClass:"Buildings.Controls.OBC.CDL.Reals.Sources.CalendarTime", clause:"7.5.80.1", reason:"No comp outputs year, month, day, hour, minute and weekday as numbers", state:"stateful", stateInit:"noInput", stateInitBasis:"noInputConnector", stateBasis:"discrete; unread: instance calTim is of Buildings.Utilities.Time.CalendarTime, which the pinned source does not hold"}
+    CdlRefusal {name:"RealsSourcesCivilTime", cdlClass:"Buildings.Controls.OBC.CDL.Reals.Sources.CivilTime", clause:"7.5.81.1", reason:"No comp outputs time as seconds", state:"stateless"}
+    CdlRefusal {name:"RealsSourcesRamp", cdlClass:"Buildings.Controls.OBC.CDL.Reals.Sources.Ramp", clause:"7.5.84.1", reason:"CDL Ramp is one-shot: `offset` before `startTime`, then a rise of `height` over `duration`", state:"stateless"}
+    CdlRefusal {name:"RealsSourcesSin", cdlClass:"Buildings.Controls.OBC.CDL.Reals.Sources.Sin", clause:"7.5.86.1", reason:"SineWave has no `phase` or `startTime`, measures `amplitude` peak to peak, takes a `period` of at least 1sec, and is phased from its own start", state:"stateless"}
+    CdlRefusal {name:"UtilitiesSunRiseSet", cdlClass:"Buildings.Controls.OBC.CDL.Utilities.SunRiseSet", clause:"7.5.101.1", reason:"No comp computes sunrise or sunset times", state:"stateful", stateInit:"noInput", stateInitBasis:"noInputConnector", stateBasis:"pre; when; initialParameter"}
+  }
+}

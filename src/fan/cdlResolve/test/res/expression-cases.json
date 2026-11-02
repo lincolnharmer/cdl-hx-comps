@@ -1,0 +1,211 @@
+{
+ "schema": "kw.cdl expression grammar cases, version 1",
+ "about": "The one table of the CDL expression grammar. The libraries' generator runs every case through its own evaluator, and the resolver runs the same file through its evaluator. An env value is a number, a Boolean, an enum item name or a list. A dotted name under the `enumPrefix` is an enum literal whose value is its last segment; any other dotted name is unknown. `want` is the value; a refused case refuses with an error that quotes `src`.",
+ "enumPrefix": "Buildings.Controls.OBC.ASHRAE.G36.Types.",
+ "accept": [
+  {
+   "src": "273.15 + (55 - 32)/1.8",
+   "env": {},
+   "want": 285.92777777777775
+  },
+  {
+   "src": "delTim +samplePeriod",
+   "env": {
+    "delTim": 600.0,
+    "samplePeriod": 120.0
+   },
+   "want": 720.0
+  },
+  {
+   "src": "not have_hol",
+   "env": {
+    "have_hol": false
+   },
+   "want": true
+  },
+  {
+   "src": "100*1e-15",
+   "env": {},
+   "want": 1e-13
+  },
+  {
+   "src": "-0.2",
+   "env": {},
+   "want": -0.2
+  },
+  {
+   "src": "heaCoi == Buildings.Controls.OBC.ASHRAE.G36.Types.HeatingCoil.WaterBased",
+   "env": {
+    "heaCoi": "WaterBased"
+   },
+   "want": true
+  },
+  {
+   "src": "a > 1 and b <> 2 or false",
+   "env": {
+    "a": 2.0,
+    "b": 2.0
+   },
+   "want": false
+  },
+  {
+   "src": "not a == b",
+   "env": {
+    "a": 1.0,
+    "b": 2.0
+   },
+   "want": true,
+   "note": "not binds looser than =="
+  },
+  {
+   "src": "1E-10 * 2",
+   "env": {},
+   "want": 2e-10,
+   "note": "upper-case exponent"
+  },
+  {
+   "src": "heaCoi <> Buildings.Controls.OBC.ASHRAE.G36.Types.HeatingCoil.None",
+   "env": {
+    "heaCoi": "None"
+   },
+   "want": false
+  },
+  {
+   "src": "if have_hotWatCoi then Buildings.Controls.OBC.ASHRAE.G36.Types.HeatingCoil.WaterBased else Buildings.Controls.OBC.ASHRAE.G36.Types.HeatingCoil.Electric",
+   "env": {
+    "have_hotWatCoi": true
+   },
+   "want": "WaterBased",
+   "note": "TerminalUnits.Reheat.Controller's protected heaCoi, the only if-expression in a G36 default"
+  },
+  {
+   "src": "if have_hotWatCoi then Buildings.Controls.OBC.ASHRAE.G36.Types.HeatingCoil.WaterBased else Buildings.Controls.OBC.ASHRAE.G36.Types.HeatingCoil.Electric",
+   "env": {
+    "have_hotWatCoi": false
+   },
+   "want": "Electric"
+  },
+  {
+   "src": " if rowMax then size(u,1) else size(u,2)",
+   "env": {
+    "rowMax": false,
+    "u": [
+     [
+      1.0,
+      2.0,
+      3.0
+     ],
+     [
+      4.0,
+      5.0,
+      6.0
+     ]
+    ]
+   },
+   "want": 3.0,
+   "note": "kw.cdl's MatrixMax output size; MatrixMin's is the same with rowMin"
+  },
+  {
+   "src": "if a then if b then 1 else 2 else 3",
+   "env": {
+    "a": true,
+    "b": false
+   },
+   "want": 2.0,
+   "note": "nesting: an if in a then branch"
+  },
+  {
+   "src": "if a then 1 else if b then 2 else 3",
+   "env": {
+    "a": false,
+    "b": false
+   },
+   "want": 3.0,
+   "note": "nesting: an if in an else branch, Modelica's way to write elseif"
+  },
+  {
+   "src": "if a then 1 else 2 + 3",
+   "env": {
+    "a": false
+   },
+   "want": 5.0,
+   "note": "precedence: the else branch extends as far as it can"
+  },
+  {
+   "src": "if a > 1 and not b then 10 else 20",
+   "env": {
+    "a": 2.0,
+    "b": false
+   },
+   "want": 10.0,
+   "note": "precedence: the whole condition up to then"
+  },
+  {
+   "src": "2 * (if a then 3 else 4)",
+   "env": {
+    "a": true
+   },
+   "want": 6.0,
+   "note": "an if inside an operator, in parentheses"
+  },
+  {
+   "src": "fill(if a then 1 else 0, 2)",
+   "env": {
+    "a": false
+   },
+   "want": [
+    0.0,
+    0.0
+   ],
+   "note": "an if as a function argument"
+  }
+ ],
+ "refuse": [
+  {
+   "src": "max(a, b)",
+   "env": {
+    "a": 1.0,
+    "b": 1.0
+   }
+  },
+  {
+   "src": "a[1]",
+   "env": {
+    "a": 1.0
+   }
+  },
+  {
+   "src": "x.y",
+   "env": {}
+  },
+  {
+   "src": "if a then 1 elseif b then 2 else 3",
+   "env": {
+    "a": false,
+    "b": true
+   },
+   "note": "elseif occurs in no G36 expression, so it is not supported"
+  },
+  {
+   "src": "if a then 1",
+   "env": {
+    "a": true
+   },
+   "note": "no else"
+  },
+  {
+   "src": "if a then 1 else 2",
+   "env": {
+    "a": 1.0
+   },
+   "note": "a condition that is not a Boolean"
+  },
+  {
+   "src": "2 * if a then 3 else 4",
+   "env": {
+    "a": true
+   },
+   "note": "an if inside an operator without parentheses"
+  }
+ ]
+}

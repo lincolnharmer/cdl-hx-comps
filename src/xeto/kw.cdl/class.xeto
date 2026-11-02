@@ -1,0 +1,84 @@
+//
+// Copyright (c) 2026, kW Engineering
+// Licensed under the Academic Free License version 3.0
+//
+// How a CDL elementary class runs on hx.comps. Hand-written; the instances in classes.xeto are GENERATED.
+//
+// One CdlClass instance per class, named @cdl-<the class's kw.cdl spec name> (@cdl-RealsLimiter). A composite's
+// child is typed as the comp itself, and its cdlOf meta names the instance, so CXF import and export and a
+// conformance report can read the CDL class and its CDL names back.
+
+// How a CDL elementary class runs
+CdlGrade: Enum {
+  native         // one comp, the connectors renamed
+  nativeParams   // one comp, with parameters set on its slots or fed by a linked comp
+  const          // a constant comp whose output the parameter sets
+  link           // a wire from one connector to the other, with no comp
+  composite      // a kw.cdl composite of comps
+  array          // an abstract kw.cdl spec that expands when a sequence is instantiated
+}
+
+// One CDL elementary class and the comp that runs it. Keys of the dicts are CDL names with the first letter lowered;
+// cdlNames restores the exact spelling where the two differ.
+CdlClass: Dict {
+  cdlClass: Str           // the MBL class path, for example "Buildings.Controls.OBC.CDL.Reals.Limiter"
+  grade: CdlGrade
+  clause: Str             // the ASHRAE 231 Clause 7 number of the class
+  name231: Str?           // Clause 7's spelling of the class, where it differs from MBL's
+  comp: Ref? <of:Spec>    // the hx.comps comp, or the kw.cdl spec of a composite or array class
+  connectors: Dict?       // CDL connector to comp slot
+  params: Dict?           // CDL parameter to the comp slot it is set on
+  feeds: Dict?            // CDL name to {slot, via}: the slot is linked from a comp of spec `via`. A NumberConst
+                          // supplies a parameter's value; a StatusNumberToNumber or StatusBoolToBool carries a
+                          // signal onto a plain slot
+  convert: Dict?          // CDL parameter to its conversion: "sec" (Real seconds to Duration), "int", "float", or
+                          // "enum A=a ..." (each CDL enum key to the comp's key)
+  fixed: Dict?            // comp slot to the value it always takes
+  cdlDefaults: Dict?      // CDL parameter to the CDL default written when an instance leaves it unbound
+  linkAlways: Dict?       // CDL input to the constant linked into it where CDL leaves it unconnected
+  loopCut: Str?           // CDL inputs whose incoming link carries loopCut, comma-separated
+  whenNull: Dict?         // CDL input to the whenNull of the feed that carries it
+  writeWhenUnit: Str?     // CDL parameters written explicitly whenever their unit group carries a unit, comma-
+                          // separated (a PID's r). A resolver converts them. Any 1/K is provenance only and is
+                          // never converted (in G36 every one is a PID's k), so converting r alone converts the loop
+  compoundGain: Dict?     // the comp an instance runs on when its gain is bound to a unit the unit database lacks
+                          // (s/K): {comp, gain, per, perGroup, zero, fixed}. Each point comes through a NumberConst
+                          // feed. per is a difference in the unit group of the CDL connector perGroup, which the
+                          // resolver converts it with; the comp does not. The instance carries cdlCompoundGain
+  linkFrom: Str?          // for a link class: the input the wire starts at
+  linkTo: Str?            // and the output it replaces
+  departures: List? <of:Str>  // each way the comp differs from MBL that a sequence can see
+  unitRule: Dict?         // how the class carries units: {family, keep, op, ins, out, seeds, note}. keep lists
+                          // the CDL names that share one unit (`;` between groups, `,` within one); op (add, sub,
+                          // mul, div, sum or delta) gives out's unit from the units of ins; seeds fixes a name's
+                          // unit. A resolver propagates them to give each literal its unit
+  cdlNames: Dict?         // lowered key to exact CDL name, where they differ
+  bounds: Dict?           // CDL parameter or connector to the bounds its declaration gives it: minVal and maxVal
+                          // (cdlMin and cdlMax on a connector), and the meta that says where each came from
+  state: Str              // the class's state fact, as cdlState: stateless, stateful or undecided
+  stateInit: Str?         // as cdlStateInit, on a stateful class
+  stateInitBasis: Str?    // as cdlStateInitBasis, on a noInput class
+  stateBasis: Str?        // as cdlStateBasis, on a class that is not stateless
+}
+
+// One class refused by name: no comp or composition runs it, and no G36 sequence uses it
+CdlRefusal: Dict {
+  name: Str               // the class's kw.cdl spec name
+  cdlClass: Str           // the MBL class path
+  clause: Str             // the ASHRAE 231 Clause 7 number of the class
+  name231: Str?           // Clause 7's spelling of the class, where it differs from MBL's
+  reason: Str
+  state: Str              // the state facts, as on CdlClass
+  stateInit: Str?
+  stateInitBasis: Str?
+  stateBasis: Str?
+}
+
+// The classes refused by name
+CdlRefused: Dict {
+  classes: List <of:CdlRefusal>
+}
+
+// A record of a CDL instance whose class compiles to a link (Conversions.IntegerToReal, Logical.Pre). It is data,
+// not a comp: each link through it runs from its source, with cdlLinkVia naming it.
+CdlWire: Dict

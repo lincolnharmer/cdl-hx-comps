@@ -1,0 +1,504 @@
+// Copyright (c) 2026, kW Engineering
+// Licensed under the Academic Free License version 3.0
+//
+// kw.cdl: the CDL.Types enumerations, the array classes, and the classes composed from other classes
+// GENERATED from MBL 14.0.0 (ad48324b) via modelica-json 5460add3. Do not edit.
+// CXF carries no MBL version; the version above is pinned by the generator.
+// MBL's class names, descriptions and defaults are redistributed under MBL's license: see NOTICE.
+
+// Enumeration defining the extrapolation of time table interpolation
+// GENERATED from Buildings.Controls.OBC.CDL.Types.Extrapolation, MBL 14.0.0 (ad48324b). Do not edit.
+TypesExtrapolation: Enum <cdlClass:"Buildings.Controls.OBC.CDL.Types.Extrapolation"> {
+  holdLastPoint <key:"HoldLastPoint">
+  lastTwoPoints <key:"LastTwoPoints">
+  periodic <key:"Periodic">
+}
+
+// Enumeration defining P, PI, PD, or PID simple controller type
+// GENERATED from Buildings.Controls.OBC.CDL.Types.SimpleController, MBL 14.0.0 (ad48324b). Do not edit.
+TypesSimpleController: Enum <cdlClass:"Buildings.Controls.OBC.CDL.Types.SimpleController"> {
+  p <key:"P">
+  pD <key:"PD">
+  pI <key:"PI">
+  pID <key:"PID">
+}
+
+// Enumeration defining the smoothness of table interpolation
+// GENERATED from Buildings.Controls.OBC.CDL.Types.Smoothness, MBL 14.0.0 (ad48324b). Do not edit.
+TypesSmoothness: Enum <cdlClass:"Buildings.Controls.OBC.CDL.Types.Smoothness"> {
+  constantSegments <key:"ConstantSegments">
+  linearSegments <key:"LinearSegments">
+}
+
+// Use this to set the date corresponding to time = 0
+// GENERATED from Buildings.Controls.OBC.CDL.Types.ZeroTime, MBL 14.0.0 (ad48324b). Do not edit.
+TypesZeroTime: Enum <cdlClass:"Buildings.Controls.OBC.CDL.Types.ZeroTime"> {
+  custom <key:"Custom">
+  nY2010 <key:"NY2010">
+  nY2011 <key:"NY2011">
+  nY2012 <key:"NY2012">
+  nY2013 <key:"NY2013">
+  nY2014 <key:"NY2014">
+  nY2015 <key:"NY2015">
+  nY2016 <key:"NY2016">
+  nY2017 <key:"NY2017">
+  nY2018 <key:"NY2018">
+  nY2019 <key:"NY2019">
+  nY2020 <key:"NY2020">
+  nY2021 <key:"NY2021">
+  nY2022 <key:"NY2022">
+  nY2023 <key:"NY2023">
+  nY2024 <key:"NY2024">
+  nY2025 <key:"NY2025">
+  nY2026 <key:"NY2026">
+  nY2027 <key:"NY2027">
+  nY2028 <key:"NY2028">
+  nY2029 <key:"NY2029">
+  nY2030 <key:"NY2030">
+  nY2031 <key:"NY2031">
+  nY2032 <key:"NY2032">
+  nY2033 <key:"NY2033">
+  nY2034 <key:"NY2034">
+  nY2035 <key:"NY2035">
+  nY2036 <key:"NY2036">
+  nY2037 <key:"NY2037">
+  nY2038 <key:"NY2038">
+  nY2039 <key:"NY2039">
+  nY2040 <key:"NY2040">
+  nY2041 <key:"NY2041">
+  nY2042 <key:"NY2042">
+  nY2043 <key:"NY2043">
+  nY2044 <key:"NY2044">
+  nY2045 <key:"NY2045">
+  nY2046 <key:"NY2046">
+  nY2047 <key:"NY2047">
+  nY2048 <key:"NY2048">
+  nY2049 <key:"NY2049">
+  nY2050 <key:"NY2050">
+  unixTimeStamp <key:"UnixTimeStamp">
+  unixTimeStampGMT <key:"UnixTimeStampGMT">
+}
+
+// GENERATED from Buildings.Controls.OBC.CDL.Integers.MultiSum, MBL 14.0.0 (ad48324b). Do not edit.
+IntegersMultiSum: CdlBlock <cdlClass:"Buildings.Controls.OBC.CDL.Integers.MultiSum", abstract, cdlExpand, cdlElementary, cdlClause:"7.5.29.2", cdl231Name:"CDL.Integers.Multisum", cdlState:"stateless"> {
+  // Input gains
+  k: List? <cdlParam, cdlName:"k", cdlType:"Integer", cdlArraySize:"(nin)", cdlDefault:"fill(1,nin)">
+  // Number of input connections
+  nin: Int? <cdlParam, cdlName:"nin", cdlType:"Integer", minVal:"0"> "0"
+  // Inputs to be multipled with gain and added
+  u: List? <cdlInput, cdlName:"u", cdlType:"Integer", cdlArraySize:"(nin)">
+  // Sum of inputs multiplied by the gain
+  y: hx.comps::StatusNumber? <cdlOutput, cdlName:"y", cdlType:"Integer", transient, readonly>
+}
+
+// GENERATED from Buildings.Controls.OBC.CDL.Integers.Sources.TimeTable, MBL 14.0.0 (ad48324b). Do not edit.
+IntegersSourcesTimeTable: CdlBlock <cdlClass:"Buildings.Controls.OBC.CDL.Integers.Sources.TimeTable", abstract, cdlExpand, cdlElementary, cdlClause:"7.5.87.2", cdlState:"stateful", cdlStateInit:"noInput", cdlStateInitBasis:"noInputConnector", cdlStateBasis:"when; sample; initialParameter"> {
+  // Periodicity of table
+  period: Number <cdlParam, cdlName:"period", cdlType:"Real", cdlUnit:"s", cdlQuantityKind:"Time", quantity:"time", unit:"sec", minVal:"1e-06">
+  // Table matrix with time as a first table column (in seconds, unless timeScale is not 1) and Integers in all other columns
+  table: List? <cdlParam, cdlName:"table", cdlType:"Real", cdlArraySize:"">
+  // Time scale of first table column. Set to 3600 if time in table is in hours
+  timeScale: Number? <cdlParam, cdlName:"timeScale", cdlType:"Real", cdlUnit:"1", unitless> "1"
+  // Output with tabulated values
+  y: List? <cdlOutput, cdlName:"y", cdlType:"Integer", cdlArraySize:"(nout)", transient, readonly>
+}
+
+// GENERATED from Buildings.Controls.OBC.CDL.Logical.MultiAnd, MBL 14.0.0 (ad48324b). Do not edit.
+LogicalMultiAnd: CdlBlock <cdlClass:"Buildings.Controls.OBC.CDL.Logical.MultiAnd", abstract, cdlExpand, cdlElementary, cdlClause:"7.5.43.1", cdlState:"stateless"> {
+  // Number of input connections
+  nin: Int? <cdlParam, cdlName:"nin", cdlType:"Integer", minVal:"0"> "0"
+  // Input signals
+  u: List? <cdlInput, cdlName:"u", cdlType:"Boolean", cdlArraySize:"(nin)">
+  // Output with true if all input signals are true
+  y: hx.comps::StatusBool? <cdlOutput, cdlName:"y", cdlType:"Boolean", transient, readonly>
+}
+
+// GENERATED from Buildings.Controls.OBC.CDL.Logical.MultiOr, MBL 14.0.0 (ad48324b). Do not edit.
+LogicalMultiOr: CdlBlock <cdlClass:"Buildings.Controls.OBC.CDL.Logical.MultiOr", abstract, cdlExpand, cdlElementary, cdlClause:"7.5.44.1", cdlState:"stateless"> {
+  // Number of input connections
+  nin: Int? <cdlParam, cdlName:"nin", cdlType:"Integer", minVal:"0"> "0"
+  // Input signals
+  u: List? <cdlInput, cdlName:"u", cdlType:"Boolean", cdlArraySize:"(nin)">
+  // Output with true if at least one input is true
+  y: hx.comps::StatusBool? <cdlOutput, cdlName:"y", cdlType:"Boolean", transient, readonly>
+}
+
+// GENERATED from Buildings.Controls.OBC.CDL.Logical.Sources.TimeTable, MBL 14.0.0 (ad48324b). Do not edit.
+LogicalSourcesTimeTable: CdlBlock <cdlClass:"Buildings.Controls.OBC.CDL.Logical.Sources.TimeTable", abstract, cdlExpand, cdlElementary, cdlClause:"7.5.87.3", cdlState:"stateful", cdlStateInit:"noInput", cdlStateInitBasis:"noInputConnector", cdlStateBasis:"instance intTimTab"> {
+  // Periodicity of table
+  period: Number <cdlParam, cdlName:"period", cdlType:"Real", cdlUnit:"s", cdlQuantityKind:"Time", quantity:"time", unit:"sec">
+  // Table matrix with time as a first column (in seconds, unless timeScale is not 1) and 0 for False or 1 for True in all other columns
+  table: List? <cdlParam, cdlName:"table", cdlType:"Real", cdlArraySize:"">
+  // Time scale of first table column. Set to 3600 if time in table is in hours
+  timeScale: Number? <cdlParam, cdlName:"timeScale", cdlType:"Real", cdlUnit:"1", unitless> "1"
+  // Output with tabulated values
+  y: List? <cdlOutput, cdlName:"y", cdlType:"Boolean", cdlArraySize:"(nout)", transient, readonly>
+}
+
+// GENERATED from Buildings.Controls.OBC.CDL.Reals.MatrixGain, MBL 14.0.0 (ad48324b). Do not edit.
+RealsMatrixGain: CdlBlock <cdlClass:"Buildings.Controls.OBC.CDL.Reals.MatrixGain", abstract, cdlExpand, cdlElementary, cdlClause:"7.5.18.1", cdlState:"stateless"> {
+  // Gain matrix which is multiplied with the input
+  k: List? <cdlParam, cdlName:"K", cdlType:"Real", cdlArraySize:"", cdlDefault:"[1,0;0,1]">
+  // Input to be multiplied with the gain matrix
+  u: List? <cdlInput, cdlName:"u", cdlType:"Real", cdlArraySize:"(nin)">
+  // Product of gain matrix times the input
+  y: List? <cdlOutput, cdlName:"y", cdlType:"Real", cdlArraySize:"(nout)", transient, readonly>
+}
+
+// GENERATED from Buildings.Controls.OBC.CDL.Reals.MatrixMax, MBL 14.0.0 (ad48324b). Do not edit.
+RealsMatrixMax: CdlBlock <cdlClass:"Buildings.Controls.OBC.CDL.Reals.MatrixMax", abstract, cdlExpand, cdlElementary, cdlClause:"7.5.19.1", cdlState:"stateless"> {
+  // Number of columns in input matrix
+  nCol: Int <cdlParam, cdlName:"nCol", cdlType:"Integer", minVal:"1">
+  // Number of rows in input matrix
+  nRow: Int <cdlParam, cdlName:"nRow", cdlType:"Integer", minVal:"1">
+  // If true, outputs row-wise maximum, otherwise column-wise
+  rowMax: Bool? <cdlParam, cdlName:"rowMax", cdlType:"Boolean"> "true"
+  // Input for the matrix max function
+  u: List? <cdlInput, cdlName:"u", cdlType:"Real", cdlArraySize:"(nRow,nCol)">
+  // Output with vector of row- or colum-wise maximum of the input matrix
+  y: List? <cdlOutput, cdlName:"y", cdlType:"Real", cdlArraySize:" if rowMax then size(u,1) else size(u,2)", transient, readonly>
+}
+
+// GENERATED from Buildings.Controls.OBC.CDL.Reals.MatrixMin, MBL 14.0.0 (ad48324b). Do not edit.
+RealsMatrixMin: CdlBlock <cdlClass:"Buildings.Controls.OBC.CDL.Reals.MatrixMin", abstract, cdlExpand, cdlElementary, cdlClause:"7.5.20.1", cdlState:"stateless"> {
+  // Number of columns in input matrix
+  nCol: Int <cdlParam, cdlName:"nCol", cdlType:"Integer", minVal:"1">
+  // Number of rows in input matrix
+  nRow: Int <cdlParam, cdlName:"nRow", cdlType:"Integer", minVal:"1">
+  // If true, outputs row-wise minimum, otherwise column-wise
+  rowMin: Bool? <cdlParam, cdlName:"rowMin", cdlType:"Boolean"> "true"
+  // Input for the matrix min function
+  u: List? <cdlInput, cdlName:"u", cdlType:"Real", cdlArraySize:"(nRow,nCol)">
+  // Output with vector of row- or colum-wise minimum of the input matrix
+  y: List? <cdlOutput, cdlName:"y", cdlType:"Real", cdlArraySize:" if rowMin then size(u,1) else size(u,2)", transient, readonly>
+}
+
+// GENERATED from Buildings.Controls.OBC.CDL.Reals.MultiMax, MBL 14.0.0 (ad48324b). Do not edit.
+RealsMultiMax: CdlBlock <cdlClass:"Buildings.Controls.OBC.CDL.Reals.MultiMax", abstract, cdlExpand, cdlElementary, cdlClause:"7.5.25.1", cdlState:"stateless"> {
+  // Number of input signals
+  nin: Int? <cdlParam, cdlName:"nin", cdlType:"Integer", minVal:"0"> "0"
+  // Input to max function
+  u: List? <cdlInput, cdlName:"u", cdlType:"Real", cdlArraySize:"(nin)">
+  // Largest element of the input vector
+  y: hx.comps::StatusNumber? <cdlOutput, cdlName:"y", cdlType:"Real", transient, readonly>
+}
+
+// GENERATED from Buildings.Controls.OBC.CDL.Reals.MultiMin, MBL 14.0.0 (ad48324b). Do not edit.
+RealsMultiMin: CdlBlock <cdlClass:"Buildings.Controls.OBC.CDL.Reals.MultiMin", abstract, cdlExpand, cdlElementary, cdlClause:"7.5.26.1", cdlState:"stateless"> {
+  // Number of input signals
+  nin: Int? <cdlParam, cdlName:"nin", cdlType:"Integer", minVal:"0"> "0"
+  // Input to the min function
+  u: List? <cdlInput, cdlName:"u", cdlType:"Real", cdlArraySize:"(nin)">
+  // Smallest element of the input vector
+  y: hx.comps::StatusNumber? <cdlOutput, cdlName:"y", cdlType:"Real", transient, readonly>
+}
+
+// GENERATED from Buildings.Controls.OBC.CDL.Reals.MultiSum, MBL 14.0.0 (ad48324b). Do not edit.
+RealsMultiSum: CdlBlock <cdlClass:"Buildings.Controls.OBC.CDL.Reals.MultiSum", abstract, cdlExpand, cdlElementary, cdlClause:"7.5.29.1", cdl231Name:"CDL.Reals.Multisum", cdlState:"stateless"> {
+  // Input gains
+  k: List? <cdlParam, cdlName:"k", cdlType:"Real", cdlArraySize:"(nin)", cdlDefault:"fill(1,nin)">
+  // Number of input signals
+  nin: Int? <cdlParam, cdlName:"nin", cdlType:"Integer", minVal:"0"> "0"
+  // Input to multiplied by gain and then added
+  u: List? <cdlInput, cdlName:"u", cdlType:"Real", cdlArraySize:"(nin)">
+  // Sum of inputs times gains
+  y: hx.comps::StatusNumber? <cdlOutput, cdlName:"y", cdlType:"Real", transient, readonly>
+}
+
+// GENERATED from Buildings.Controls.OBC.CDL.Reals.Sort, MBL 14.0.0 (ad48324b). Do not edit.
+RealsSort: CdlBlock <cdlClass:"Buildings.Controls.OBC.CDL.Reals.Sort", abstract, cdlExpand, cdlElementary, cdlClause:"7.5.34.1", cdlState:"stateless"> {
+  // Set to true if ascending order, otherwise order is descending
+  ascending: Bool? <cdlParam, cdlName:"ascending", cdlType:"Boolean"> "true"
+  // Number of input signals
+  nin: Int? <cdlParam, cdlName:"nin", cdlType:"Integer", minVal:"0"> "0"
+  // Input to be sorted
+  u: List? <cdlInput, cdlName:"u", cdlType:"Real", cdlArraySize:"(nin)">
+  // Output with sorted input
+  y: List? <cdlOutput, cdlName:"y", cdlType:"Real", cdlArraySize:"(nin)", transient, readonly>
+  // Indices of the sorted vector with respect to the original vector
+  yIdx: List? <cdlOutput, cdlName:"yIdx", cdlType:"Integer", cdlArraySize:"(nin)", transient, readonly>
+}
+
+// GENERATED from Buildings.Controls.OBC.CDL.Reals.Sources.TimeTable, MBL 14.0.0 (ad48324b). Do not edit.
+RealsSourcesTimeTable: CdlBlock <cdlClass:"Buildings.Controls.OBC.CDL.Reals.Sources.TimeTable", abstract, cdlExpand, cdlElementary, cdlClause:"7.5.87.1", cdlState:"stateful", cdlStateInit:"noInput", cdlStateInitBasis:"noInputConnector", cdlStateBasis:"initialParameter; unread: instance tab is of Modelica.Blocks.Sources.CombiTimeTable, which the pinned source does not hold"> {
+  // Extrapolation of data outside the definition range
+  extrapolation: kw.cdl::TypesExtrapolation? <cdlParam, cdlName:"extrapolation", cdlType:"kw.cdl::TypesExtrapolation"> "Periodic"
+  // Offsets of output signals as a vector with length equal to number of table matrix columns less one
+  offset: List? <cdlParam, cdlName:"offset", cdlType:"Real", cdlArraySize:"", cdlDefault:"fill(0,nout)">
+  // Smoothness of table interpolation
+  smoothness: kw.cdl::TypesSmoothness? <cdlParam, cdlName:"smoothness", cdlType:"kw.cdl::TypesSmoothness"> "LinearSegments"
+  // Table matrix (time = first column is time in seconds, unless timeScale <> 1)
+  table: List? <cdlParam, cdlName:"table", cdlType:"Real", cdlArraySize:"">
+  // Time scale of first table column. Set to 3600 if time in table is in hours
+  timeScale: Number? <cdlParam, cdlName:"timeScale", cdlType:"Real", cdlUnit:"1", unitless> "1"
+  // Output with tabulated values
+  y: List? <cdlOutput, cdlName:"y", cdlType:"Real", cdlArraySize:"(nout)", transient, readonly>
+}
+
+// GENERATED from Buildings.Controls.OBC.CDL.Routing.BooleanExtractSignal, MBL 14.0.0 (ad48324b). Do not edit.
+RoutingBooleanExtractSignal: CdlBlock <cdlClass:"Buildings.Controls.OBC.CDL.Routing.BooleanExtractSignal", abstract, cdlExpand, cdlElementary, cdlClause:"7.5.95.3", cdlState:"stateless"> {
+  // Extracting vector
+  extract: List? <cdlParam, cdlName:"extract", cdlType:"Integer", cdlArraySize:"(nout)", cdlDefault:"1:nout">
+  // Number of inputs
+  nin: Int? <cdlParam, cdlName:"nin", cdlType:"Integer"> "1"
+  // Number of outputs
+  nout: Int? <cdlParam, cdlName:"nout", cdlType:"Integer"> "1"
+  // Boolean input signals
+  u: List? <cdlInput, cdlName:"u", cdlType:"Boolean", cdlArraySize:"(nin)">
+  // Boolean signals extracted from the input vector with the extraction scheme specified by the integer vector
+  y: List? <cdlOutput, cdlName:"y", cdlType:"Boolean", cdlArraySize:"(nout)", transient, readonly>
+}
+
+// GENERATED from Buildings.Controls.OBC.CDL.Routing.BooleanExtractor, MBL 14.0.0 (ad48324b). Do not edit.
+RoutingBooleanExtractor: CdlBlock <cdlClass:"Buildings.Controls.OBC.CDL.Routing.BooleanExtractor", abstract, cdlExpand, cdlElementary, cdlClause:"7.5.96.3", cdlState:"stateless"> {
+  // Number of inputs
+  nin: Int? <cdlParam, cdlName:"nin", cdlType:"Integer"> "1"
+  // Index of input vector element to be extracted out
+  index: hx.comps::StatusNumber? <cdlInput, cdlName:"index", cdlType:"Integer">
+  // Boolean input signals
+  u: List? <cdlInput, cdlName:"u", cdlType:"Boolean", cdlArraySize:"(nin)">
+  // Boolean signal extracted from input vector, u[index]
+  y: hx.comps::StatusBool? <cdlOutput, cdlName:"y", cdlType:"Boolean", transient, readonly>
+}
+
+// GENERATED from Buildings.Controls.OBC.CDL.Routing.BooleanScalarReplicator, MBL 14.0.0 (ad48324b). Do not edit.
+RoutingBooleanScalarReplicator: CdlBlock <cdlClass:"Buildings.Controls.OBC.CDL.Routing.BooleanScalarReplicator", abstract, cdlExpand, cdlElementary, cdlClause:"7.5.97.3", cdlState:"stateless"> {
+  // Number of outputs
+  nout: Int? <cdlParam, cdlName:"nout", cdlType:"Integer"> "1"
+  // Input signal to be replicated
+  u: hx.comps::StatusBool? <cdlInput, cdlName:"u", cdlType:"Boolean">
+  // Output with replicated input signal
+  y: List? <cdlOutput, cdlName:"y", cdlType:"Boolean", cdlArraySize:"(nout)", transient, readonly>
+}
+
+// GENERATED from Buildings.Controls.OBC.CDL.Routing.BooleanVectorFilter, MBL 14.0.0 (ad48324b). Do not edit.
+RoutingBooleanVectorFilter: CdlBlock <cdlClass:"Buildings.Controls.OBC.CDL.Routing.BooleanVectorFilter", abstract, cdlExpand, cdlElementary, cdlClause:"7.5.98.3", cdlState:"stateless"> {
+  // Array mask
+  msk: List? <cdlParam, cdlName:"msk", cdlType:"Boolean", cdlArraySize:"(nin)", cdlDefault:"fill(true,nin)">
+  // Size of input vector
+  nin: Int <cdlParam, cdlName:"nin", cdlType:"Integer">
+  // Size of output vector
+  nout: Int <cdlParam, cdlName:"nout", cdlType:"Integer">
+  // Input signals from which values are extracted
+  u: List? <cdlInput, cdlName:"u", cdlType:"Boolean", cdlArraySize:"(nin)">
+  // Output with extracted input signals
+  y: List? <cdlOutput, cdlName:"y", cdlType:"Boolean", cdlArraySize:"(nout)", transient, readonly>
+}
+
+// GENERATED from Buildings.Controls.OBC.CDL.Routing.BooleanVectorReplicator, MBL 14.0.0 (ad48324b). Do not edit.
+RoutingBooleanVectorReplicator: CdlBlock <cdlClass:"Buildings.Controls.OBC.CDL.Routing.BooleanVectorReplicator", abstract, cdlExpand, cdlElementary, cdlClause:"7.5.99.3", cdlState:"stateless"> {
+  // Size of input vector
+  nin: Int? <cdlParam, cdlName:"nin", cdlType:"Integer"> "1"
+  // Number of row in output
+  nout: Int? <cdlParam, cdlName:"nout", cdlType:"Integer"> "1"
+  // Input signal to be replicated
+  u: List? <cdlInput, cdlName:"u", cdlType:"Boolean", cdlArraySize:"(nin)">
+  // Output with replicated input signal
+  y: List? <cdlOutput, cdlName:"y", cdlType:"Boolean", cdlArraySize:"(nout,nin)", transient, readonly>
+}
+
+// GENERATED from Buildings.Controls.OBC.CDL.Routing.IntegerExtractSignal, MBL 14.0.0 (ad48324b). Do not edit.
+RoutingIntegerExtractSignal: CdlBlock <cdlClass:"Buildings.Controls.OBC.CDL.Routing.IntegerExtractSignal", abstract, cdlExpand, cdlElementary, cdlClause:"7.5.95.2", cdlState:"stateless"> {
+  // Extracting vector
+  extract: List? <cdlParam, cdlName:"extract", cdlType:"Integer", cdlArraySize:"(nout)", cdlDefault:"1:nout">
+  // Number of inputs
+  nin: Int? <cdlParam, cdlName:"nin", cdlType:"Integer"> "1"
+  // Number of outputs
+  nout: Int? <cdlParam, cdlName:"nout", cdlType:"Integer"> "1"
+  // Integer input signals
+  u: List? <cdlInput, cdlName:"u", cdlType:"Integer", cdlArraySize:"(nin)">
+  // Integer signals extracted from the input vector with the extraction scheme specified by the integer vector
+  y: List? <cdlOutput, cdlName:"y", cdlType:"Integer", cdlArraySize:"(nout)", transient, readonly>
+}
+
+// GENERATED from Buildings.Controls.OBC.CDL.Routing.IntegerExtractor, MBL 14.0.0 (ad48324b). Do not edit.
+RoutingIntegerExtractor: CdlBlock <cdlClass:"Buildings.Controls.OBC.CDL.Routing.IntegerExtractor", abstract, cdlExpand, cdlElementary, cdlClause:"7.5.96.2", cdlState:"stateless"> {
+  // Number of inputs
+  nin: Int? <cdlParam, cdlName:"nin", cdlType:"Integer"> "1"
+  // Index of input vector element to be extracted out
+  index: hx.comps::StatusNumber? <cdlInput, cdlName:"index", cdlType:"Integer">
+  // Integer input signals
+  u: List? <cdlInput, cdlName:"u", cdlType:"Integer", cdlArraySize:"(nin)">
+  // Integer signal extracted from input vector, u[index]
+  y: hx.comps::StatusNumber? <cdlOutput, cdlName:"y", cdlType:"Integer", transient, readonly>
+}
+
+// GENERATED from Buildings.Controls.OBC.CDL.Routing.IntegerScalarReplicator, MBL 14.0.0 (ad48324b). Do not edit.
+RoutingIntegerScalarReplicator: CdlBlock <cdlClass:"Buildings.Controls.OBC.CDL.Routing.IntegerScalarReplicator", abstract, cdlExpand, cdlElementary, cdlClause:"7.5.97.2", cdlState:"stateless"> {
+  // Number of outputs
+  nout: Int? <cdlParam, cdlName:"nout", cdlType:"Integer"> "1"
+  // Input signal to be replicated
+  u: hx.comps::StatusNumber? <cdlInput, cdlName:"u", cdlType:"Integer">
+  // Output with replicated input signal
+  y: List? <cdlOutput, cdlName:"y", cdlType:"Integer", cdlArraySize:"(nout)", transient, readonly>
+}
+
+// GENERATED from Buildings.Controls.OBC.CDL.Routing.IntegerVectorFilter, MBL 14.0.0 (ad48324b). Do not edit.
+RoutingIntegerVectorFilter: CdlBlock <cdlClass:"Buildings.Controls.OBC.CDL.Routing.IntegerVectorFilter", abstract, cdlExpand, cdlElementary, cdlClause:"7.5.98.2", cdlState:"stateless"> {
+  // Array mask
+  msk: List? <cdlParam, cdlName:"msk", cdlType:"Boolean", cdlArraySize:"(nin)", cdlDefault:"fill(true,nin)">
+  // Size of input vector
+  nin: Int <cdlParam, cdlName:"nin", cdlType:"Integer">
+  // Size of output vector
+  nout: Int <cdlParam, cdlName:"nout", cdlType:"Integer">
+  // Input signals from which values are extracted
+  u: List? <cdlInput, cdlName:"u", cdlType:"Integer", cdlArraySize:"(nin)">
+  // Output with extracted input signals
+  y: List? <cdlOutput, cdlName:"y", cdlType:"Integer", cdlArraySize:"(nout)", transient, readonly>
+}
+
+// GENERATED from Buildings.Controls.OBC.CDL.Routing.IntegerVectorReplicator, MBL 14.0.0 (ad48324b). Do not edit.
+RoutingIntegerVectorReplicator: CdlBlock <cdlClass:"Buildings.Controls.OBC.CDL.Routing.IntegerVectorReplicator", abstract, cdlExpand, cdlElementary, cdlClause:"7.5.99.2", cdlState:"stateless"> {
+  // Size of input vector
+  nin: Int? <cdlParam, cdlName:"nin", cdlType:"Integer"> "1"
+  // Number of row in output
+  nout: Int? <cdlParam, cdlName:"nout", cdlType:"Integer"> "1"
+  // Input signal to be replicated
+  u: List? <cdlInput, cdlName:"u", cdlType:"Integer", cdlArraySize:"(nin)">
+  // Output with replicated input signal
+  y: List? <cdlOutput, cdlName:"y", cdlType:"Integer", cdlArraySize:"(nout,nin)", transient, readonly>
+}
+
+// GENERATED from Buildings.Controls.OBC.CDL.Routing.RealExtractSignal, MBL 14.0.0 (ad48324b). Do not edit.
+RoutingRealExtractSignal: CdlBlock <cdlClass:"Buildings.Controls.OBC.CDL.Routing.RealExtractSignal", abstract, cdlExpand, cdlElementary, cdlClause:"7.5.95.1", cdlState:"stateless"> {
+  // Extracting vector
+  extract: List? <cdlParam, cdlName:"extract", cdlType:"Integer", cdlArraySize:"(nout)", cdlDefault:"1:nout">
+  // Number of inputs
+  nin: Int? <cdlParam, cdlName:"nin", cdlType:"Integer"> "1"
+  // Number of outputs
+  nout: Int? <cdlParam, cdlName:"nout", cdlType:"Integer"> "1"
+  // Real input signals
+  u: List? <cdlInput, cdlName:"u", cdlType:"Real", cdlArraySize:"(nin)">
+  // Real signals extracted from the input vector with the extraction scheme specified by the integer vector
+  y: List? <cdlOutput, cdlName:"y", cdlType:"Real", cdlArraySize:"(nout)", transient, readonly>
+}
+
+// GENERATED from Buildings.Controls.OBC.CDL.Routing.RealExtractor, MBL 14.0.0 (ad48324b). Do not edit.
+RoutingRealExtractor: CdlBlock <cdlClass:"Buildings.Controls.OBC.CDL.Routing.RealExtractor", abstract, cdlExpand, cdlElementary, cdlClause:"7.5.96.1", cdlState:"stateless"> {
+  // Number of inputs
+  nin: Int? <cdlParam, cdlName:"nin", cdlType:"Integer"> "1"
+  // Index of input vector element to be extracted out
+  index: hx.comps::StatusNumber? <cdlInput, cdlName:"index", cdlType:"Integer">
+  // Real input signals
+  u: List? <cdlInput, cdlName:"u", cdlType:"Real", cdlArraySize:"(nin)">
+  // Real signal extracted from input vector, u[index]
+  y: hx.comps::StatusNumber? <cdlOutput, cdlName:"y", cdlType:"Real", transient, readonly>
+}
+
+// GENERATED from Buildings.Controls.OBC.CDL.Routing.RealScalarReplicator, MBL 14.0.0 (ad48324b). Do not edit.
+RoutingRealScalarReplicator: CdlBlock <cdlClass:"Buildings.Controls.OBC.CDL.Routing.RealScalarReplicator", abstract, cdlExpand, cdlElementary, cdlClause:"7.5.97.1", cdlState:"stateless"> {
+  // Number of outputs
+  nout: Int? <cdlParam, cdlName:"nout", cdlType:"Integer"> "1"
+  // Input signal to be replicated
+  u: hx.comps::StatusNumber? <cdlInput, cdlName:"u", cdlType:"Real">
+  // Output with replicated input signal
+  y: List? <cdlOutput, cdlName:"y", cdlType:"Real", cdlArraySize:"(nout)", transient, readonly>
+}
+
+// GENERATED from Buildings.Controls.OBC.CDL.Routing.RealVectorFilter, MBL 14.0.0 (ad48324b). Do not edit.
+RoutingRealVectorFilter: CdlBlock <cdlClass:"Buildings.Controls.OBC.CDL.Routing.RealVectorFilter", abstract, cdlExpand, cdlElementary, cdlClause:"7.5.98.1", cdlState:"stateless"> {
+  // Array mask
+  msk: List? <cdlParam, cdlName:"msk", cdlType:"Boolean", cdlArraySize:"(nin)", cdlDefault:"fill(true,nin)">
+  // Size of input vector
+  nin: Int <cdlParam, cdlName:"nin", cdlType:"Integer">
+  // Size of output vector
+  nout: Int <cdlParam, cdlName:"nout", cdlType:"Integer">
+  // Input signals from which values are extracted
+  u: List? <cdlInput, cdlName:"u", cdlType:"Real", cdlArraySize:"(nin)">
+  // Output with extracted input signals
+  y: List? <cdlOutput, cdlName:"y", cdlType:"Real", cdlArraySize:"(nout)", transient, readonly>
+}
+
+// GENERATED from Buildings.Controls.OBC.CDL.Routing.RealVectorReplicator, MBL 14.0.0 (ad48324b). Do not edit.
+RoutingRealVectorReplicator: CdlBlock <cdlClass:"Buildings.Controls.OBC.CDL.Routing.RealVectorReplicator", abstract, cdlExpand, cdlElementary, cdlClause:"7.5.99.1", cdlState:"stateless"> {
+  // Size of input vector
+  nin: Int? <cdlParam, cdlName:"nin", cdlType:"Integer"> "1"
+  // Number of row in output
+  nout: Int? <cdlParam, cdlName:"nout", cdlType:"Integer"> "1"
+  // Input signal to be replicated
+  u: List? <cdlInput, cdlName:"u", cdlType:"Real", cdlArraySize:"(nin)">
+  // Output with replicated input signal
+  y: List? <cdlOutput, cdlName:"y", cdlType:"Real", cdlArraySize:"(nout,nin)", transient, readonly>
+}
+
+// GENERATED from Buildings.Controls.OBC.CDL.Integers.Sources.Pulse, MBL 14.0.0 (ad48324b). Do not edit.
+IntegersSourcesPulse: CdlBlock <cdlClass:"Buildings.Controls.OBC.CDL.Integers.Sources.Pulse"> {
+  // Amplitude of pulse
+  amplitude: Int? <cdlParam, cdlName:"amplitude", cdlType:"Integer"> "1"
+  // Offset of output signals
+  offset: Int? <cdlParam, cdlName:"offset", cdlType:"Integer"> "0"
+  // Time for one period
+  period: Number <cdlParam, cdlName:"period", cdlType:"Real", cdlUnit:"s", cdlQuantityKind:"Time", quantity:"time", unit:"sec", minVal:"1e-37", cdlMinConst:"Constants.small">
+  // Shift time for output
+  shift: Number? <cdlParam, cdlName:"shift", cdlType:"Real", cdlUnit:"s", cdlQuantityKind:"Time", quantity:"time", unit:"sec"> "0"
+  // Width of pulse in fraction of period
+  width: Number? <cdlParam, cdlName:"width", cdlType:"Real", cdlUnit:"1", unitless, minVal:"1e-37", maxVal:"1", cdlMinConst:"Constants.small"> "0.5"
+  // Output connector with pulse value
+  y: hx.comps::StatusNumber? <cdlOutput, cdlName:"y", cdlType:"Integer", transient, readonly, link:"booTo.out">
+  pul: hx.comps::BoolPulse? <cdlInstance, cdlName:"pul", cdlOf:@kw.cdl::cdl-LogicalSourcesPulse, cdlBind:{period:"period", shift:"shift", width:"width"}>
+  booTo: hx.comps::NumberSwitch? <cdlInstance, cdlName:"booTo", cdlOf:@kw.cdl::cdl-ConversionsBooleanToInteger, cdlBind:{integerFalse:"offset", integerTrue:"offset+amplitude"}> {
+    inFalse: <link:"booTo_integerFalse.out">
+    inTrue: <link:"booTo_integerTrue.out">
+    inSwitch: <link:"pul.out">
+  }
+  booTo_integerFalse: hx.comps::NumberConst? <cdlFeed:"booTo.integerFalse">
+  booTo_integerTrue: hx.comps::NumberConst? <cdlFeed:"booTo.integerTrue">
+}
+
+// GENERATED from Buildings.Controls.OBC.CDL.Logical.Nand, MBL 14.0.0 (ad48324b). Do not edit.
+LogicalNand: CdlBlock <cdlClass:"Buildings.Controls.OBC.CDL.Logical.Nand"> {
+  // Input signal for 'nand'
+  u1: hx.comps::StatusBool? <cdlInput, cdlName:"u1", cdlType:"Boolean">
+  // Input signal for 'nand'
+  u2: hx.comps::StatusBool? <cdlInput, cdlName:"u2", cdlType:"Boolean">
+  // Output with false if both inputs are true
+  y: hx.comps::StatusBool? <cdlOutput, cdlName:"y", cdlType:"Boolean", transient, readonly, link:"not1.out">
+  and1: hx.comps::And? <cdlInstance, cdlName:"and1", cdlOf:@kw.cdl::cdl-LogicalAnd> {
+    inA: <link:"u1">
+    inB: <link:"u2">
+  }
+  not1: hx.comps::Not? <cdlInstance, cdlName:"not1", cdlOf:@kw.cdl::cdl-LogicalNot> {
+    in: <link:"and1.out">
+  }
+}
+
+// GENERATED from Buildings.Controls.OBC.CDL.Logical.Nor, MBL 14.0.0 (ad48324b). Do not edit.
+LogicalNor: CdlBlock <cdlClass:"Buildings.Controls.OBC.CDL.Logical.Nor"> {
+  // Input signal for 'nor'
+  u1: hx.comps::StatusBool? <cdlInput, cdlName:"u1", cdlType:"Boolean">
+  // Input signal for 'nor'
+  u2: hx.comps::StatusBool? <cdlInput, cdlName:"u2", cdlType:"Boolean">
+  // Output with false if at least one of the inputs is true
+  y: hx.comps::StatusBool? <cdlOutput, cdlName:"y", cdlType:"Boolean", transient, readonly, link:"not1.out">
+  or1: hx.comps::Or? <cdlInstance, cdlName:"or1", cdlOf:@kw.cdl::cdl-LogicalOr> {
+    inA: <link:"u1">
+    inB: <link:"u2">
+  }
+  not1: hx.comps::Not? <cdlInstance, cdlName:"not1", cdlOf:@kw.cdl::cdl-LogicalNot> {
+    in: <link:"or1.out">
+  }
+}
+
+// GENERATED from Buildings.Controls.OBC.CDL.Reals.Sources.Pulse, MBL 14.0.0 (ad48324b). Do not edit.
+RealsSourcesPulse: CdlBlock <cdlClass:"Buildings.Controls.OBC.CDL.Reals.Sources.Pulse"> {
+  // Amplitude of pulse
+  amplitude: Number? <cdlParam, cdlName:"amplitude", cdlType:"Real"> "1"
+  // Offset of output signals
+  offset: Number? <cdlParam, cdlName:"offset", cdlType:"Real"> "0"
+  // Time for one period
+  period: Number <cdlParam, cdlName:"period", cdlType:"Real", cdlUnit:"s", cdlQuantityKind:"Time", quantity:"time", unit:"sec", minVal:"1e-37", cdlMinConst:"Constants.small">
+  // Shift time for output
+  shift: Number? <cdlParam, cdlName:"shift", cdlType:"Real", cdlUnit:"s", cdlQuantityKind:"Time", quantity:"time", unit:"sec"> "0"
+  // Width of pulse in fraction of period
+  width: Number? <cdlParam, cdlName:"width", cdlType:"Real", cdlUnit:"1", unitless, minVal:"1e-37", maxVal:"1", cdlMinConst:"Constants.small"> "0.5"
+  // Pulse output signal
+  y: hx.comps::StatusNumber? <cdlOutput, cdlName:"y", cdlType:"Real", transient, readonly, link:"booTo.out">
+  pul: hx.comps::BoolPulse? <cdlInstance, cdlName:"pul", cdlOf:@kw.cdl::cdl-LogicalSourcesPulse, cdlBind:{period:"period", shift:"shift", width:"width"}>
+  booTo: hx.comps::NumberSwitch? <cdlInstance, cdlName:"booTo", cdlOf:@kw.cdl::cdl-ConversionsBooleanToReal, cdlBind:{realFalse:"offset", realTrue:"offset+amplitude"}> {
+    inFalse: <link:"booTo_realFalse.out">
+    inTrue: <link:"booTo_realTrue.out">
+    inSwitch: <link:"pul.out">
+  }
+  booTo_realFalse: hx.comps::NumberConst? <cdlFeed:"booTo.realFalse">
+  booTo_realTrue: hx.comps::NumberConst? <cdlFeed:"booTo.realTrue">
+}

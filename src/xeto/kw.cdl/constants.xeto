@@ -1,0 +1,20 @@
+//
+// Copyright (c) 2026, kW Engineering
+// Licensed under the Academic Free License version 3.0
+//
+// A package of CDL constants, as data. Hand-written; the instances are GENERATED.
+//
+// Modelica lets a package hold `constant` declarations that are not a block and not an enumeration:
+// G36's Types.OperationModes is a package of `constant Integer` (occupied 1 ... unoccupied 7), and
+// SupplyFan binds its mode constants to them (conInt.k = ...Types.OperationModes.coolDown). CXF writes
+// no node for such a package (modelica-json 5460add3), so the generator reads it from
+// modelica-json's json output and emits one instance of this spec per package. The importer
+// resolves a dotted name through these instances, never by string search.
+
+// One package of constants: its MBL path, the one CDL type its constants share, and each constant's
+// name to its value.
+CdlConstants: Dict {
+  cdlClass: Str        // the package's MBL path, e.g. "Buildings.Controls.OBC.ASHRAE.G36.Types.OperationModes"
+  cdlType: Str         // Integer, Real or Boolean
+  cdlConstants: Dict   // constant name to its value, e.g. coolDown: 2
+}

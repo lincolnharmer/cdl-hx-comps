@@ -1,0 +1,35 @@
+//
+// Copyright (c) 2026, kW Engineering
+// Licensed under the Academic Free License version 3.0
+//
+// kw.cdl.g36.ahu - the AHUs package of LBNL's Guideline 36 sample library
+// (single-zone and multiple-zone VAV air handlers, including the supply air
+// temperature and duct static pressure setpoint resets) and its FanCoilUnits
+// package, which instantiates AHUs.SingleZone.VAV.SetPoints.ModeAndSetPoints
+// and so belongs beside it. ASHRAE 231 links
+// this sample library informatively (A2.1). These specs are the sample's
+// types, not Guideline 36's text.
+//
+// GENERATED from the Modelica Buildings Library through modelica-json; the
+// versions are pinned and named in every generated header. Each child is the
+// hx.comps comp that runs its CDL class, wired on hx.comps slot names, and
+// each connector that reads or writes a building point names its Project
+// Haystack point spec. MBL's names, descriptions and defaults
+// are redistributed under MBL's license, reproduced in NOTICE. Depends on
+// kw.cdl.g36.common, never on kw.cdl.g36.terminal. NOT hxSysOnly.
+
+pragma: Lib <
+  doc: "The AHUs and FanCoilUnits packages of LBNL's Guideline 36 sample library, generated from the Modelica Buildings Library and wired from hx.comps comps"
+  version: "0.8.0"
+  depends: {
+    { lib: "sys" }
+    { lib: "sys.comp" }
+    { lib: "hx.comps" }
+    { lib: "kw.cdl" }
+    { lib: "ph" }
+    { lib: "ph.points" }
+    { lib: "ph.points.x" }
+    { lib: "kw.cdl.g36.common" }
+  }
+  publish: {"/NOTICE"}
+>
