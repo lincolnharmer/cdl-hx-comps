@@ -24,7 +24,7 @@ Every CDL elementary block the libraries run is an `hx.comps` comp, a link, a sm
 
 # Requirements
 
-The libraries and the resolver need a Haxall release that carries the `hx.comps` additions of haxall pull requests #138 to #152. Those pull requests are based on haxall main, and they rely on `hx.comps` changes made on main after the v4.0.7 release, so Haxall v4.0.7 alone is not enough. The same holds for a SkySpark release, which ships Haxall's pods. Everything here is version 0.8.0, alpha, and not released.
+The libraries and the resolver need Haxall main after the v4.0.7 release with the `hx.comps` additions proposed in haxall/haxall pull requests #138 to #152. Haxall v4.0.7 alone is not enough. The same holds for a SkySpark release, which ships Haxall's pods. The pull requests are proposals: Haxall's maintainers may solve the same issues their own way, and the libraries will be regenerated against what ships. The validation ran on a fork commit carrying 13 of the 15; `validation/mbl-g36/README.md` names it. Everything here is version 0.8.0, alpha, and not released.
 
 # Building
 

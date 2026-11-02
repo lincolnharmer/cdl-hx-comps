@@ -47,7 +47,7 @@ The libraries depend only on open platform libraries and Project Haystack's `ph`
 
 The comps come from `hx.comps` with the additions of haxall pull requests #138 to #152. Those pull requests add most of the CDL blocks the stock engine lacked: hysteresis comparators, latches, edges, holds, counters and timers, sampled and triggered blocks, `loopCut` links with `UnitDelay`, continuous blocks, `CdlPid`, the CDL math and psychrometric blocks, and others.
 
-The libraries need a Haxall and SkySpark release that carries those pull requests. They do not load on a release without them, and there is no shim for one.
+The libraries need a Haxall or SkySpark build that carries those additions. They do not load on a release without them, and there is no shim for one. The pull requests are proposals, so the libraries will be regenerated against whatever Haxall ships.
 
 # Status
 
