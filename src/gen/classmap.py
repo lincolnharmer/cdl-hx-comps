@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+#
+# Copyright (c) 2026, kW Engineering
+# Licensed under the Academic Free License version 3.0
+#
 """The CDL class-to-comp table: check it and write class-map.json.
 
   python -X utf8 src/gen/classmap.py              # check the table and rewrite src/gen/class-map.json

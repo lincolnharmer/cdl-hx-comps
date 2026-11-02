@@ -1,3 +1,7 @@
+#
+# Copyright (c) 2026, kW Engineering
+# Licensed under the Academic Free License version 3.0
+#
 """Shared setup for the generator's tests.
 
 The tests read three things that are not in the repo, and the session stops before any test runs when one is

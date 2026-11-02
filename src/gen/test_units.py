@@ -1,3 +1,7 @@
+#
+# Copyright (c) 2026, kW Engineering
+# Licensed under the Academic Free License version 3.0
+#
 """Tests for the units on literals (units.py, the unitRule rows, and their use in hxemit.py).
 Run from the repo root: python -X utf8 -m pytest src/gen -q"""
 import copy

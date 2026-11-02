@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+#
+# Copyright (c) 2026, kW Engineering
+# Licensed under the Academic Free License version 3.0
+#
 """Generate the open libs from the pinned CXF: kw.cdl/blocks.xeto and kw.cdl.g36.{common,ahu,terminal}/g36.xeto.
 
 Run from the repo root:

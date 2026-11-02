@@ -1,3 +1,7 @@
+#
+# Copyright (c) 2026, kW Engineering
+# Licensed under the Academic Free License version 3.0
+#
 """What MBL's source says about the state of a CDL elementary class: the reader behind kw.cdl's cdlState,
 cdlStateInit, cdlStateInitBasis and cdlStateBasis.
 

@@ -1,3 +1,7 @@
+#
+# Copyright (c) 2026, kW Engineering
+# Licensed under the Academic Free License version 3.0
+#
 """Static unit propagation over one CDL composite, to give every literal on a signal path its SI unit.
 
 A unit is a pair (symbol, delta): the Haystack symbol of the canonical SI unit (`K`, `Pa`, `m³/s`, `1` for a

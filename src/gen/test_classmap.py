@@ -1,3 +1,7 @@
+#
+# Copyright (c) 2026, kW Engineering
+# Licensed under the Academic Free License version 3.0
+#
 """Tests for the class-to-comp table (classmap.py, classmap_table.py). Run: python -X utf8 -m pytest src/gen -q"""
 import copy
 import json

@@ -1,3 +1,7 @@
+#
+# Copyright (c) 2026, kW Engineering
+# Licensed under the Academic Free License version 3.0
+#
 """The hx.comps form of the CDL libraries: CdlClass instances, the kw.cdl composites, and the G36 composites wired
 from hx.comps comps.
 

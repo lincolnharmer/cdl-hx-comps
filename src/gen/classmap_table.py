@@ -1,3 +1,7 @@
+#
+# Copyright (c) 2026, kW Engineering
+# Licensed under the Academic Free License version 3.0
+#
 # The class-to-comp table, hand-entered from the sources. classmap.py checks it and writes class-map.json.
 NC = 'hx.comps::NumberConst'
 BC = 'hx.comps::BoolConst'

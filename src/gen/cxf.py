@@ -1,3 +1,7 @@
+#
+# Copyright (c) 2026, kW Engineering
+# Licensed under the Academic Free License version 3.0
+#
 """Read modelica-json CXF (JSON-LD) into a normalized form.
 
 Shared by generate.py, classmap.py, hxemit.py and mjson.py. mo_reader.py shares nothing with it on purpose:

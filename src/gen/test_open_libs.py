@@ -1,3 +1,7 @@
+#
+# Copyright (c) 2026, kW Engineering
+# Licensed under the Academic Free License version 3.0
+#
 """Tests for the lib check (check_open_libs.py). Run from the repo root: python -X utf8 -m pytest src/gen -q"""
 import json
 import os

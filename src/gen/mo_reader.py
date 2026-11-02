@@ -1,3 +1,7 @@
+#
+# Copyright (c) 2026, kW Engineering
+# Licensed under the Academic Free License version 3.0
+#
 """An independent reader for the subset of Modelica the CDL blocks use.
 
 It shares no code with cxf.py or generate.py on purpose. The round trip checks the

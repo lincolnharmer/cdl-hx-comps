@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+#
+# Copyright (c) 2026, kW Engineering
+# Licensed under the Academic Free License version 3.0
+#
 """Index the hx.comps Xeto source: every spec with its file, line, base and slots, its base's slots included.
 
   python -X utf8 src/gen/hx_comps_index.py <hx.comps source dir> src/gen/hx_comps_index.json

@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+#
+# Copyright (c) 2026, kW Engineering
+# Licensed under the Academic Free License version 3.0
+#
 """MBL's .mo source for the state facts, fetched at its release tag and verified, never vendored. Nothing
 MBL-authored is kept in the repo: the generator downloads MBL 14.0.0 at its release tag and verifies each file's
 sha256, so regeneration stays reproducible.

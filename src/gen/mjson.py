@@ -1,3 +1,7 @@
+#
+# Copyright (c) 2026, kW Engineering
+# Licensed under the Academic Free License version 3.0
+#
 """Read modelica-json's json output for what its CXF drops.
 
 CXF (modelica-json 5460add3) writes no type for a parameter typed by an enumeration, and drops every Dialog and
