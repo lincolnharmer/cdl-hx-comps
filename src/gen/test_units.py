@@ -91,6 +91,7 @@ def test_two_units_join_into_a_conflict_but_a_difference_without_offset_does_not
     assert m.unit_of(val, "c")[0] == ("Pa", True)
 
 
+@pytest.mark.inputs
 def test_every_class_that_runs_has_a_unit_rule_and_a_bad_rule_is_refused():
     # Wrong behavior caught: a class with no rule silently left unitless, or a rule naming a connector the class
     # does not have, so the propagation stops at it.
@@ -166,6 +167,7 @@ def _literal_unit(cls, inst, name):
     return m.literal_unit(m.ci.inst(inst), name)[0]
 
 
+@pytest.mark.inputs
 @pytest.mark.parametrize("cls, inst, name, want", [
     ("ZoneGroups.OperationMode", "hys9", "uLow", DK),
     ("ZoneGroups.OperationMode", "hys10", "uHigh", DK),
@@ -178,6 +180,7 @@ def test_a_constant_with_a_known_unit_passes_it_forward(cls, inst, name, want):
     assert _literal_unit(cls, inst, name) == want
 
 
+@pytest.mark.inputs
 def test_every_pid_whose_setpoint_carries_a_unit_records_its_error_scale():
     # Wrong behavior caught: 18 temperature and pressure loops left r at the comp default 1 with
     # no record of its unit, so a resolver converting the loop to °F gave 1.8 times the gain, silently.
@@ -299,6 +302,7 @@ def test_a_dimensionless_factor_beside_a_value_of_known_unit_is_recorded_as_dime
     assert "ThermalZones.Setpoints booToRea" not in report and "TrimAndRespond gai.k" not in report
 
 
+@pytest.mark.inputs
 def test_a_literal_unit_decision_naming_no_literal_refuses(tmp_path, monkeypatch):
     # Wrong behavior caught: a literalUnits decision that outlived the literal it named (MBL renamed an instance)
     # applied to nothing and passed silently.

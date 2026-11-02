@@ -37,12 +37,14 @@ def built(classes):
     return doc
 
 
+@pytest.mark.inputs
 def test_the_committed_class_map_is_what_the_table_builds(built):
     # Wrong behavior caught: an edit to classmap_table.py, the hx.comps index or the pinned CXF that is not carried
     # into class-map.json, so the committed map and the table the generator reads disagree.
     assert classmap.CLASS_MAP.read_text(encoding="utf-8") == classmap.render(built)
 
 
+@pytest.mark.inputs
 def test_the_table_grades_every_elementary_class_once(built):
     # Wrong behavior caught: a class dropped from the table, or one graded outside the known grades.
     assert len(built["classes"]) == 132 == len(generate.CLAUSE7)
@@ -80,6 +82,7 @@ def _set(row, path, value):
 _DELETE = object()
 
 
+@pytest.mark.inputs
 @pytest.mark.parametrize("edit, want", [
     # TrueDelay's offDelay defaults to 1sec, which would delay every fall by a second.
     (_set("LogicalTrueDelay", ["fixed", "offDelay"], _DELETE), "LogicalTrueDelay: config slots ['offDelay'] are left unset"),
@@ -94,6 +97,7 @@ def test_a_config_slot_left_unset_is_refused(classes, edit, want):
     assert any(e.startswith(want) for e in _planted(classes, edit))
 
 
+@pytest.mark.inputs
 def test_a_map_that_is_not_one_to_one_is_refused(classes):
     # Wrong behavior caught: two CDL connectors on one comp slot (PID u_s and u_m both on inSetpoint) merge the
     # setpoint and the measurement into one signal, and the old check accepted it.
@@ -101,6 +105,7 @@ def test_a_map_that_is_not_one_to_one_is_refused(classes):
     assert any("comp slot inSetpoint carries u_s, u_m; the map must be one to one" in e for e in errors)
 
 
+@pytest.mark.inputs
 @pytest.mark.parametrize("edit, want", [
     # PID k is a Float on the comp; without the conversion a Real lands on a Float slot unconverted.
     (_set("RealsPid", ["params", "k"], {"slot": "k", "feed": "set"}), "RealsPid: param k -> k: CDL Real does not fit slot type Float"),
@@ -116,6 +121,7 @@ def test_a_slot_type_that_does_not_fit_the_cdl_type_is_refused(classes, edit, wa
     assert any(e.startswith(want) for e in _planted(classes, edit))
 
 
+@pytest.mark.inputs
 def test_an_unknown_conversion_is_refused(classes):
     # Wrong behavior caught: a renamed conversion label dropped silently from the generated library (18 of 19 `sec`
     # conversions vanished when the label was edited).
@@ -124,6 +130,7 @@ def test_an_unknown_conversion_is_refused(classes):
                for e in _planted(classes, edit))
 
 
+@pytest.mark.inputs
 @pytest.mark.parametrize("edit, want", [
     (_set("ConversionsRealToInteger", ["fixed", "n"], "0"), "ConversionsRealToInteger: fixed n: '0' is not a Int"),
     (_set("LogicalTrueDelay", ["fixed", "offDelay"], "0"), "LogicalTrueDelay: fixed offDelay: '0' is not a Duration"),
@@ -141,6 +148,7 @@ def _compose(row, f):
     return edit
 
 
+@pytest.mark.inputs
 @pytest.mark.parametrize("edit, want", [
     (_compose("RealsSourcesPulse", lambda c: c["insts"][1][2].update(realTrue="ofset+amplitude")),
      "RealsSourcesPulse: instance booTo binds realTrue to 'ofset+amplitude', which names ofset"),
@@ -154,6 +162,7 @@ def test_a_composite_row_that_misbinds_or_miswires_is_refused(classes, edit, wan
     assert any(e.startswith(want) for e in _planted(classes, edit))
 
 
+@pytest.mark.inputs
 def test_the_timer_start_up_departure_is_recorded(built):
     # Wrong behavior caught: LogicalTimer's row was silent that MBL starts `passed` true at t <= 0 while u is false
     # (Logical/Timer.mo:28) and the comp starts it false (Timer.fan:106), so a reader took the two to agree.
@@ -161,6 +170,7 @@ def test_the_timer_start_up_departure_is_recorded(built):
     assert any("start-up" in d and "`passed`" in d and "t` <= 0" in d for d in deps)
 
 
+@pytest.mark.inputs
 def test_the_generator_requirements_are_fields(built):
     # Wrong behavior caught: three requirements lived only in prose (always link `reset` on Counter and AccumTimer,
     # `loopCut` into UnitDelay, `whenNull` on the Derivative feeds), so a generator reading the map met none of them.
@@ -171,6 +181,7 @@ def test_the_generator_requirements_are_fields(built):
     assert rows["RealsDerivative"]["requires"] == {"whenNull": {"k": 1, "T": 1}}
 
 
+@pytest.mark.inputs
 @pytest.mark.parametrize("edit, want", [
     (_set("IntegersOnCounter", ["requires", "linkAlways"], {"trigger": 1}), "IntegersOnCounter: requires.linkAlways.trigger: 1 is not a value"),
     (_set("DiscreteUnitDelay", ["requires", "loopCut"], ["y"]), "DiscreteUnitDelay: requires.loopCut names y, which is no CDL input"),
@@ -183,6 +194,7 @@ def test_a_requirement_the_generator_cannot_act_on_is_refused(classes, edit, wan
     assert any(e.startswith(want) for e in _planted(classes, edit))
 
 
+@pytest.mark.inputs
 def test_every_fed_parameter_carries_its_cdl_default(built):
     # Wrong behavior caught: an earlier draft carried only three hand-listed defaults, so a threshold `t`, a
     # BooleanToReal `realFalse` or a BooleanToInteger `integerTrue` left unbound in G36 (19, 131 and 75 instances)

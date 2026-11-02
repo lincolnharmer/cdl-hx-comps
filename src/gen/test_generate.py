@@ -39,6 +39,7 @@ def test_relative_class_resolves_by_modelica_scope():
         cxf.resolve_class("CDL.Reals.NoSuchBlock", scope, known)
 
 
+@pytest.mark.inputs
 def test_the_measured_relative_name_is_in_the_pinned_source():
     # The relative name the test above resolves is real, not invented: the pinned CXF carries it.
     doc = cxf.Cxf.load(SRC / "kw.cdl.g36.ahu/cxf/AHUs/MultiZone/VAV/SetPoints/SupplyTemperature.jsonld")
@@ -139,6 +140,7 @@ def _regen(tmp_path):
     return out
 
 
+@pytest.mark.inputs
 def test_byte_stable_regeneration(tmp_path, mbl_cdl):
     # Wrong behavior caught: a hand edit to a generated file, or a generator that is not deterministic. Each open
     # lib's lib.xeto pragma is generated too: check_open_libs.py accepts only that form.
@@ -147,6 +149,7 @@ def test_byte_stable_regeneration(tmp_path, mbl_cdl):
         assert (out / rel).read_bytes() == (ROOT / rel).read_bytes(), rel + " differs from a fresh regeneration"
 
 
+@pytest.mark.inputs
 def test_two_regenerations_are_byte_identical(tmp_path, mbl_cdl):
     # Wrong behavior caught: output that depends on set or dict iteration order (propagate_bounds walks sets of
     # candidate paths), which a single comparison against the checked-in files could pass by luck.
@@ -171,6 +174,7 @@ def test_slot_names_lower_and_keep_the_cdl_name():
     assert 'tSupCoo_min: Number? <cdlParam, cdlName:"TSupCoo_min"' in text    # MBL default 285.15: a maybe slot
 
 
+@pytest.mark.inputs
 def test_every_generated_link_path_resolves_inside_its_spec():
     # Xeto compile does not check that a link path resolves, so this does.
     text = g36_text()
@@ -280,6 +284,7 @@ def _generated_classes():
 ACCEPTED = {}
 
 
+@pytest.mark.inputs
 @pytest.mark.parametrize("cls", _generated_classes())
 def test_round_trip_against_mbl_source(cls):
     # Wrong behavior caught: a dropped or renamed connector, parameter, default, unit, component, connection,
@@ -296,6 +301,7 @@ def test_round_trip_against_mbl_source(cls):
     assert sorted(accepted - set(problems)) == [], "accepted differences that no longer occur"
 
 
+@pytest.mark.inputs
 def test_generator_loads_every_clause7_class_with_no_load_error():
     # The generator must load and emit all 132 Clause 7 classes from the real CXF. Measured on modelica-json
     # 5460add3's CXF-Core.jsonld: 132 classes, 4 CDL.Types enumerations, and one class left out by rule
@@ -337,6 +343,7 @@ def test_a_qudt_unit_with_no_haystack_symbol_refuses():
         generate._unit(node, None)
 
 
+@pytest.mark.inputs
 def test_a_hand_connector_that_cxf_already_lists_refuses():
     # Wrong behavior caught: a modelica-json that types CalendarTime.year, and the hand rule adding it a second time.
     doc = cxf.Cxf(json.loads((SRC / "kw.cdl/cdl-elementary.jsonld").read_text(encoding="utf-8")))
@@ -356,6 +363,7 @@ def test_conditional_alternative_drivers_become_one_link_and_an_alt_link():
     assert 'in: <link:"fal.out", cdlAltLink:"truHol.out">' in text
 
 
+@pytest.mark.inputs
 def test_round_trip_catches_a_dropped_connection(tmp_path):
     # RED evidence for the round trip itself: drop one connection from TrimAndRespond's CXF in memory.
     src = json.loads((SRC / "kw.cdl.g36.common/cxf/Generic/TrimAndRespond.jsonld").read_text(encoding="utf-8"))
@@ -379,6 +387,7 @@ def test_every_slot_name_that_is_a_ph_tag_has_a_recorded_decision():
 
 
 
+@pytest.mark.inputs
 def test_an_output_to_output_connect_refuses():
     classes = generate.load_classes(SRC)
     ci = classes[OBC + "ASHRAE.G36.Generic.TrimAndRespond"]
@@ -387,6 +396,7 @@ def test_an_output_to_output_connect_refuses():
         generate.orient(ci, classes)
 
 
+@pytest.mark.inputs
 def test_an_untyped_enum_parameter_takes_its_type_from_its_default():
     # SystemRequests.heaCoi has no @type and no isOfDataType
     classes = generate.load_classes(SRC)
@@ -598,6 +608,7 @@ def test_no_open_lib_names_a_lib_outside_its_depends():
 OPM = OBC + "ASHRAE.G36.Types.OperationModes"
 
 
+@pytest.mark.inputs
 def test_operation_modes_read_from_the_pinned_json_equal_mbl_source():
     # Wrong behavior caught: a constant read from the json output with the wrong value, or one dropped, so a mode
     # comparison in SupplyFan tests the wrong integer. The reference is MBL's own package.mo, read by a regex that
@@ -622,6 +633,7 @@ def test_g36_lib_carries_one_constants_instance_with_every_mode():
         assert re.search(r"\n    %s: Number \"%d\"" % (n, v), block), n
 
 
+@pytest.mark.inputs
 def test_a_dotted_name_no_package_defines_refuses_at_generation():
     # Wrong behavior caught: a generated binding naming a constant of a package nobody generated, which would ship
     # and refuse only at expansion on a project.
@@ -673,6 +685,7 @@ def allines_all(regen):
     return regen["kw.cdl"] + regen["kw.cdl.g36"]
 
 
+@pytest.mark.inputs
 def test_every_cdl_unit_maps_to_canonical_unit_meta(regen):
     """Red when a differential slot gets K (fits would then accept an absolute temperature on a difference),
     a seconds slot gets s (the Xeto Unit enum keys a second as sec, so nothing fits it), a cdlUnit slot ships
@@ -741,6 +754,7 @@ def test_every_cdl_unit_maps_to_canonical_unit_meta(regen):
     assert not any(_meta(l, "cdlUnit") in ("Pa", "J/kg", "m³/s") and _meta(l, "quantity") is None for l in allines)
 
 
+@pytest.mark.inputs
 def test_a_connector_or_parameter_with_no_cdl_unit_carries_no_unit_meta(regen):
     """Red when a polymorphic connector is typed in the lib, so every instance inherits a wrong unit. Absence of
     unit meta means "polymorphic, typed per instance", and this is what enforces it."""
@@ -758,6 +772,7 @@ def test_a_connector_or_parameter_with_no_cdl_unit_carries_no_unit_meta(regen):
         assert bad == [], "%s: %s" % (lib, bad[:5])
 
 
+@pytest.mark.inputs
 def test_reals_add_connectors_stay_unit_free():
     """The named case of the test above. Red when RealsAdd's u1, u2 or y (one block for every quantity) carries
     unit or unitless. The class runs as hx.comps::Add and has no kw.cdl spec, so this renders the CDL model of it
@@ -774,6 +789,7 @@ def _stamp():
     return json.loads((HERE / "stamp.json").read_text(encoding="utf-8"))
 
 
+@pytest.mark.inputs
 @pytest.mark.parametrize("kind", ["param", "conn"])
 def test_an_unmapped_cdl_unit_fails_generation_by_name(kind):
     """Red when a new MBL unit (here %, which generate.UNITS maps from qudt PERCENT) ships with no unit meta and
@@ -792,6 +808,7 @@ def test_an_unmapped_cdl_unit_fails_generation_by_name(kind):
     assert cls in msg and target.name in msg and "%" in msg, msg
 
 
+@pytest.mark.inputs
 def test_a_kelvin_slot_with_no_quantity_kind_fails_generation_by_name():
     """The K row of the test above. Red when a K slot with no quantity kind is guessed as an absolute temperature
     (or a difference) instead of refusing: K alone cannot say which, and the wrong guess converts 0.3 ΔK to
@@ -833,6 +850,7 @@ def _legal_lines(commit):
     return [" ".join(l.split()) for l in text.splitlines() if l.strip()]
 
 
+@pytest.mark.inputs
 def test_every_open_lib_notice_reproduces_mbl_license_at_the_pin():
     # Wrong behavior caught: a NOTICE that keeps 12.1.0's copyright years (1998-2024) or drops a clause of MBL's
     # license, which its first condition requires every redistribution to retain.
@@ -857,6 +875,7 @@ import mjson  # noqa: E402
 AHU_CTRL = OBC + "ASHRAE.G36.AHUs.MultiZone.VAV.Controller"
 
 
+@pytest.mark.inputs
 def test_an_untyped_enum_parameter_with_no_default_takes_its_type_from_the_json_output():
     # Wrong behavior caught: venStd, eneStd or ecoHigLimCon (no @type, no isOfDataType, no default in CXF) left out of
     # the generated set, or typed as anything but MBL's enumeration.
@@ -908,6 +927,7 @@ def _loaded_g36_composites():
     return classes, sorted(p for p, ci in classes.items() if p.startswith(generate.G36_PREFIX) and ci.kind == "composite")
 
 
+@pytest.mark.inputs
 def test_every_loadable_g36_composite_round_trips_with_its_dialog_annotations():
     # Wrong behavior caught: a Dialog(enable), group, tab or __cdl(ValueInReference) read from the json output that
     # differs from MBL's own .mo (mo_reader reads the annotation text independently), or a G36 composite whose
@@ -939,6 +959,7 @@ def _emit_slot(cls, slot):
     return next(l for l in text.splitlines() if l.startswith("  %s: " % slot))
 
 
+@pytest.mark.inputs
 @pytest.mark.parametrize("cls,slot,unit", [
     ("AHUs.MultiZone.VAV.SetPoints.SupplySignals", "kTSup", "1/K"),
     ("TerminalUnits.Reheat.Subsequences.DamperValves", "kVal", "1/K"),
@@ -952,6 +973,7 @@ def test_a_unit_with_no_haystack_symbol_keeps_cdl_unit_and_claims_no_canonical_u
     assert _meta(line, "unit") is None and not _has_unitless(line), line
 
 
+@pytest.mark.inputs
 @pytest.mark.parametrize("cls,slot,quantity,unit", [
     ("AHUs.SingleZone.VAV.SetPoints.ModeAndSetPoints", "tActCoo_max", "temperature", False),           # displayUnit degC
     ("AHUs.MultiZone.VAV.Economizers.Controller", "delTOutHis", "temperatureDifferential", True),    # displayUnit K
@@ -967,6 +989,7 @@ def test_a_kelvin_slot_without_a_quantity_takes_mbls_display_unit_or_a_recorded_
     assert _meta(line, "cdlQuantityKind") is None, line           # cdlQuantityKind stays what CXF wrote: nothing
 
 
+@pytest.mark.inputs
 def test_every_kelvin_slot_without_a_quantity_or_display_unit_is_decided():
     # Wrong behavior caught: a new MBL slot of unit K with no quantity and no displayUnit generated by a guess, or a
     # recorded decision for a slot that no longer needs one (the list cannot rot).
@@ -1009,6 +1032,7 @@ def test_every_kelvin_slot_without_a_quantity_or_display_unit_is_decided():
     assert not any("quantity" in v for v in decided.values() if v.get("unit", "K") != "K")
 
 
+@pytest.mark.inputs
 def test_an_undecided_kelvin_slot_refuses_its_class_by_name():
     # Wrong behavior caught: a K slot with no quantity, no displayUnit and no recorded decision generated anyway.
     cls = OBC + "ASHRAE.G36.AHUs.MultiZone.VAV.SetPoints.FreezeProtection"
@@ -1027,6 +1051,7 @@ def test_an_undecided_kelvin_slot_refuses_its_class_by_name():
     assert cls + ".THys" in str(e.value) and "unit K" in str(e.value)
 
 
+@pytest.mark.inputs
 @pytest.mark.parametrize("cls,slot", [
     ("AHUs.SingleZone.VAV.Controller", "cooSetAdj"),                       # RealInput, no unit, no quantity in MBL
     ("AHUs.SingleZone.VAV.SetPoints.ModeAndSetPoints", "incTSetDem_1"),   # parameter, no unit in MBL
@@ -1063,6 +1088,7 @@ def test_a_recorded_unit_on_a_slot_cxf_already_types_refuses():
 MODULATION = OBC + "ASHRAE.G36.AHUs.SingleZone.VAV.Economizers.Subsequences.Modulation"
 
 
+@pytest.mark.inputs
 def test_an_input_to_input_connect_gives_both_inputs_the_sets_driver():
     # Wrong behavior caught: connect(HeaCoi.u, retDamPos.u) refusing the single-zone Modulation (and the single-zone
     # controllers above it), or HeaCoi.u left undriven, or driven by anything but uTSup.y, the one driver of the set.
@@ -1073,6 +1099,7 @@ def test_an_input_to_input_connect_gives_both_inputs_the_sets_driver():
     assert not any(a.endswith(".u") and b.endswith(".u") for a, b in ci.edges)
 
 
+@pytest.mark.inputs
 def test_connected_inputs_with_no_driver_refuse_by_name():
     # Wrong behavior caught: two inputs joined to each other and to nothing else emitted with no link, so both read
     # null on every record instead of the generator refusing the class.
@@ -1152,6 +1179,7 @@ def test_a_link_endpoint_with_no_declared_causality_refuses():
     assert any("no declared causality for c.u" in x for x in generate.compare(want, got))
 
 
+@pytest.mark.inputs
 def test_per_instance_connector_units_reach_the_spec_and_the_round_trip_checks_them():
     # Wrong behavior caught: MBL's conErr(u1(final unit="Pa"), ...) dropped, which leaves a
     # polymorphic block untyped where MBL typed it, while the round trip agreed because mo_reader skipped it too.
@@ -1181,6 +1209,7 @@ def test_a_plain_enable_text_outside_the_grammar_refuses(text):
 G36_TYPES = MBL_DIR / "Buildings/Controls/OBC/ASHRAE/G36/Types"
 
 
+@pytest.mark.inputs
 def test_every_g36_constants_package_is_generated_and_equals_mbl_source():
     # Wrong behavior caught: a G36 package of constants left ungenerated (a binding naming
     # Types.DemandLimitLevels.cooling1 would then refuse at expansion on a project), or a constant generated with the
@@ -1203,6 +1232,7 @@ def test_every_g36_constants_package_is_generated_and_equals_mbl_source():
 
 # ---- full generation, MBL 14.0.0 ----
 
+@pytest.mark.inputs
 def test_every_g36_class_outside_plants_is_generated_into_its_lib_with_zero_refusals():
     # Wrong behavior caught: a G36 class left out of the libs (zero refusals: the report holds only the
     # CDL.Constants rule), a class in the wrong lib, or a lib whose size drifts from the measured split (common 24,
@@ -1235,6 +1265,7 @@ def test_thys_is_thys_in_the_generated_ahu_specs():
         assert any('cdlName:"THys"' in l for l in _spec_lines(text, spec)), spec
 
 
+@pytest.mark.inputs
 @pytest.mark.parametrize("cls", _g36_generated("enum"))
 def test_every_g36_enumeration_equals_mbl_source(cls):
     # Wrong behavior caught: an enumeration item dropped, renamed or invented between MBL's .mo and the generated Enum,
@@ -1291,6 +1322,7 @@ def _mbl_cdl_constants():
     return {n: float(re.search(r"constant\s+Real\s+%s\s*=\s*([-+0-9.eE]+)" % n, src).group(1)) for n in ("eps", "small")}
 
 
+@pytest.mark.inputs
 @pytest.mark.parametrize("rel,spec,slot,key,num,src_key,src", [
     ("kw.cdl/classes.xeto", "RealsPidWithReset", "k", "minVal", "1e-13", "cdlMinConst", "100*Constants.eps"),
     ("kw.cdl/classes.xeto", "RealsPid", "ti", "minVal", "1e-13", "cdlMinConst", "100*Constants.eps"),
@@ -1312,6 +1344,7 @@ def test_a_bound_written_with_a_cdl_constant_emits_its_number(bounds_regen, rel,
     assert meta.get(src_key) == src, (spec, slot, meta)
 
 
+@pytest.mark.inputs
 def test_every_constant_bound_equals_the_value_mbl_source_gives():
     # Wrong behavior caught: a constant resolved to the wrong number (a stale eps, small taken as 1E-60, lastYear
     # without its +21), or a constant-written bound that still reaches no minVal/maxVal. The values come from MBL's
@@ -1348,6 +1381,7 @@ def test_every_constant_bound_equals_the_value_mbl_source_gives():
     assert seen == {"param": 26, "conn": 1}, seen
 
 
+@pytest.mark.inputs
 def test_a_bound_naming_nothing_the_class_or_cdl_defines_refuses():
     # Wrong behavior caught: a bound expression that resolves to nothing (a constant MBL renamed, a typo in a pinned
     # CXF) dropped silently, which is how 29 bounds went missing before 0.6.0.
@@ -1426,6 +1460,7 @@ def test_an_own_bound_looser_than_a_path_is_intersected_and_both_sources_kept():
     assert any(l.startswith("A.x min: own 0.05 tightened to 0.1") and "b2.k" in l for l in report["tightened"]), report
 
 
+@pytest.mark.inputs
 def test_supply_fan_td_takes_the_pid_min_and_records_mbls_own(bounds_regen):
     # Wrong behavior caught: the real case of the test above, SupplyFan.Td emitted as MBL's 0 so fits accepts Td = 0.
     meta = _slot_meta(bounds_regen, "kw.cdl.g36.ahu/g36.xeto", "AhusMultiZoneVavSetPointsSupplyFan", "td")
@@ -1480,6 +1515,7 @@ def test_a_default_that_breaks_a_guarded_bound_still_fits_when_the_instance_is_a
     assert line.endswith('> "0"') and "minVal" not in line and "cdlMinWhen" in line, line
 
 
+@pytest.mark.inputs
 def test_the_multizone_root_carries_tddp_as_a_conditional_bound(bounds_regen):
     # Wrong behavior caught: TdDp, used only by the separate-damper-with-DP economizer section, made a hard minVal.
     meta = _slot_meta(bounds_regen, "kw.cdl.g36.ahu/g36.xeto", "AhusMultiZoneVavController", "tdDp")
@@ -1501,6 +1537,7 @@ def test_a_unit_mismatch_across_a_binding_is_carried_and_named():
     assert any("A.x" in l and "b2.k" in l for l in report["unit"]), report
 
 
+@pytest.mark.inputs
 @pytest.mark.parametrize("slot,key,num,via_key,via", [
     ("kVal", "minVal", "1e-13", "cdlMinVia", "supSig.conTSup.k"),
     # frePro exists only with have_frePro, so not hard. THys is a K difference (inferred through the bindings), so
@@ -1515,6 +1552,7 @@ def test_the_multizone_ahu_root_takes_the_bounds_of_the_blocks_it_feeds(bounds_r
     assert meta.get(via_key) == via, meta
 
 
+@pytest.mark.inputs
 @pytest.mark.parametrize("rel,spec,slot,lo,hi", [
     ("kw.cdl.g36.ahu/g36.xeto", "AhusSingleZoneVavEconomizersController", "outDamMinFloMinSpe", "outDamPhy_min",
      "outDamPhy_max"),
@@ -1536,6 +1574,7 @@ def test_a_parameter_referencing_bound_emits_its_expression(bounds_regen, rel, s
             assert ("cdlMinVia" if key == "minVal" else "cdlMaxVia") in meta, meta
 
 
+@pytest.mark.inputs
 def test_every_parameter_bound_in_the_cxf_reaches_the_spec_as_a_number_or_an_expression(bounds_regen):
     # Wrong behavior caught: any parameter bound MBL declares and CXF carries that reaches neither minVal/maxVal nor
     # cdlMinExpr/cdlMaxExpr: the silent drop before 0.6.0, in any form a later generator change might reintroduce.
@@ -1577,6 +1616,7 @@ def test_every_parameter_bound_in_the_cxf_reaches_the_spec_as_a_number_or_an_exp
     assert exprs == 21, exprs
 
 
+@pytest.mark.inputs
 def test_the_report_names_every_expression_bound_and_every_connector_bound_not_emitted(bounds_regen):
     # Wrong behavior caught: an expression bound emitted as meta but absent from the report a reviewer reads, or a
     # connector bound that names a parameter (Stage.y max=n) dropped with no line anywhere.
@@ -1628,6 +1668,7 @@ def test_a_weaker_guarded_bound_under_another_condition_is_kept():
     assert r.min_when == [{"val": 0.1, "cond": "f1", "via": "b7.k"}, {"val": 0.0, "cond": "f2", "via": "b8.h"}]
 
 
+@pytest.mark.inputs
 @pytest.mark.parametrize("rel,spec,slot,key,num", [
     ("kw.cdl.g36.terminal/g36.xeto", "TerminalUnitsDualDuctSnapActingController", "kDam", "minVal", "1e-13"),
     ("kw.cdl.g36.terminal/g36.xeto", "TerminalUnitsDualDuctSnapActingController", "tiDam", "minVal", "1e-13"),
@@ -1709,6 +1750,7 @@ def _all_classes():
     return dict(_ALL_CLASSES[0])
 
 
+@pytest.mark.inputs
 def test_the_multisum_classes_carry_their_array_sizes():
     """Red when load_classes leaves MultiSum's u and k without a size, so an expander could not count their
     elements, or when the size it reads differs from the cdlArraySize the generated spec carries."""
@@ -1772,6 +1814,7 @@ def test_two_dimensional_forms_refuse_what_they_must(src, env):
     assert repr(src) in str(e.value) or src in str(e.value)
 
 
+@pytest.mark.inputs
 def test_mbl_two_dimensional_declarations_are_read_with_paired_sizes():
     """Red when a two-dimensional MBL connector or parameter is read with one size, a joined string, or the
     wrong dimension count, or when the unsized MatrixGain.K gets a size."""
@@ -1835,6 +1878,7 @@ def _mbl_bounds(cls):
     return out
 
 
+@pytest.mark.inputs
 def test_the_cdlclass_bounds_are_the_bounds_mbl_declares(bounds_regen):
     # Wrong behavior caught: the bounds that moved from the retired elementary specs onto the CdlClass
     # instances no longer checked against MBL, so a wrong or lost bound (a PID k that may be 0) ships unseen.
@@ -1873,6 +1917,7 @@ def test_the_cdlclass_bounds_are_the_bounds_mbl_declares(bounds_regen):
     assert problems == [] and checked > 40, (checked, problems[:10])
 
 
+@pytest.mark.inputs
 @pytest.mark.parametrize("cls,slot,unit,via", [
     # MBL declares dpAbsMinOutDam=5 with no unit on the controllers; Limits.SeparateWithDP declares it Pa
     ("AHUs.MultiZone.VAV.Controller", "dpAbsMinOutDam", "Pa", "ecoCon.sepDp.dpAbsMinOutDam"),
@@ -1925,6 +1970,7 @@ def test_a_parameter_bound_into_two_declared_units_that_disagree_refuses_its_cla
     assert list(generate.infer_bound_units(kk)) == ["Top"]
 
 
+@pytest.mark.inputs
 def test_a_converted_parameter_carries_its_bounds_with_their_si_unit_not_as_minval(regen):
     # Wrong behavior caught: minVal and maxVal on a slot a resolver converts, which fits compares as
     # bare numbers, so dpBuiSet's maxVal 30 (Pa) passed 30 inH2O and bouLim's minVal 0.5 (K) passed 0.6 degrees F.

@@ -152,6 +152,7 @@ def fact_violations(text):
 
 # ---- the generated lib ----
 
+@pytest.mark.inputs
 def test_every_elementary_class_carries_one_state_fact_and_agrees_with_mbl():
     # Wrong behavior caught: a class with no fact, a fact outside its vocabulary, an init fact on a class that is not
     # stateful, or a verdict the independent reading of MBL's source contradicts.
@@ -173,6 +174,7 @@ def _replace_head(text, spec, new_tags):
     return text[:m.start(1)] + body + text[m.end(1):]
 
 
+@pytest.mark.inputs
 def test_a_planted_stateless_class_marked_stateful_is_caught():
     # The check's red condition: Reals.Add (y = k1*u1 + k2*u2, Reals/Add.mo) claimed stateful.
     planted = _replace_head(blocks_text(), "RealsAdd", ', cdlState:"stateful", cdlStateInit:"readsInput", '
@@ -182,6 +184,7 @@ def test_a_planted_stateless_class_marked_stateful_is_caught():
     assert any(b.startswith(CDL + "Reals.Add: basis names pre") for b in bad), bad
 
 
+@pytest.mark.inputs
 def test_a_planted_stateful_class_marked_stateless_is_caught():
     # The check's red condition: Logical.Latch (when {clr, u} then y = not clr and u, Logical/Latch.mo) claimed
     # stateless, which would let a native latch run with no restore and drop a held alarm on every rebuild.
@@ -190,6 +193,7 @@ def test_a_planted_stateful_class_marked_stateless_is_caught():
     assert any(b.startswith(CDL + "Logical.Latch: cdlState is stateless, MBL's source reads stateful") for b in bad), bad
 
 
+@pytest.mark.inputs
 def test_a_planted_class_with_no_fact_is_caught():
     # The check's red condition: a class whose fact went missing. A reader treats it as not known stateless, which
     # fails closed, but the generated lib promises a fact on all 132.
@@ -198,6 +202,7 @@ def test_a_planted_class_with_no_fact_is_caught():
     assert any(b.startswith(CDL + "Reals.Abs: carries no cdlState") for b in bad), bad
 
 
+@pytest.mark.inputs
 def test_a_planted_init_fact_on_a_stateless_class_is_caught():
     planted = _replace_head(blocks_text(), "RealsAbs", ', cdlState:"stateless", cdlStateInit:"noInput"')
     assert any(b.startswith(CDL + "Reals.Abs: cdlStateInit") for b in fact_violations(planted))
@@ -297,6 +302,7 @@ def test_the_new_tags_are_kw_cdls_own():
 MANIFEST = mbl_fetch.manifest()
 
 
+@pytest.mark.inputs
 def test_the_manifest_lists_exactly_the_elementary_classes():
     # Wrong behavior caught: a class whose .mo the manifest does not pin (it would get no fact) or a stray entry.
     listed = sorted(mo_state.path_of(p[len(mbl_fetch.CDL_DIR) + 1:]) for p in MANIFEST["files"])
@@ -316,6 +322,7 @@ def test_the_manifest_is_the_release_the_stamp_pins():
     assert re.fullmatch(r"[0-9a-f]{40}", MANIFEST["commit"])
 
 
+@pytest.mark.inputs
 def test_every_hash_is_mbl_source_at_the_tag():
     # Wrong behavior caught: a hash taken from an edited file, from another commit or from a CRLF checkout, so the
     # fetch would refuse MBL's own file or accept another. MBL_DIR is a checkout holding the tag.
@@ -363,6 +370,7 @@ def test_the_modelica_json_guard_finds_cxf_and_json_output(tmp_path):
     assert _modelica_json_output(sorted(files), files.get) == ["a.jsonld", "b.json", "c.json", "d.json"]
 
 
+@pytest.mark.inputs
 def test_the_cache_is_mbl_at_the_tag_byte_for_byte(mbl_cdl):
     # Wrong behavior caught: the generator reading a cache that differs from the manifest. source_dir verified it;
     # this reads it again here so the check does not rest on the code it checks.
@@ -485,6 +493,7 @@ def test_a_cache_that_does_not_verify_fails_without_fetching(tmp_path, fault, ma
         mbl_fetch.source_dir(fetch_missing=False, cache=tmp_path / "empty", man=man)
 
 
+@pytest.mark.inputs
 def test_generation_without_the_cache_and_without_fetching_stops_naming_the_fetch(tmp_path, monkeypatch):
     # Wrong behavior caught: a --no-fetch regeneration writing kw.cdl with no state facts, or with stale ones, when
     # the source is not there. It must stop and say how to get it.
@@ -494,6 +503,7 @@ def test_generation_without_the_cache_and_without_fetching_stops_naming_the_fetc
     assert not (tmp_path / "out" / "kw.cdl" / "blocks.xeto").exists()
 
 
+@pytest.mark.inputs
 def test_a_missing_class_refuses_generation_by_name(tmp_path, mbl_cdl):
     # Wrong behavior caught: a class with no source generated with no fact, or with a guessed one.
     shutil.copytree(mbl_cdl, tmp_path / "mo")
@@ -502,6 +512,7 @@ def test_a_missing_class_refuses_generation_by_name(tmp_path, mbl_cdl):
         generate.state_facts(tmp_path / "mo", elementary())
 
 
+@pytest.mark.inputs
 def test_a_stray_class_refuses_generation_by_name(tmp_path, mbl_cdl):
     shutil.copytree(mbl_cdl, tmp_path / "mo")
     (tmp_path / "mo" / "Logical" / "Bogus.mo").write_text("block Bogus\nend Bogus;\n", encoding="utf-8")
@@ -708,6 +719,7 @@ CORPUS_CALLS = {
 LOCAL_FUNCTIONS = {"computeSunRise", "computeSunSet", "getIndex", "nextHourAngle"}   # declared inside their classes
 
 
+@pytest.mark.inputs
 def test_the_classified_calls_are_exactly_the_corpus_calls(mbl_cdl):
     # Wrong behavior caught: a classified vocabulary wider than the corpus (a name no class uses, classified with
     # nothing to check it against) or narrower (a corpus call read as undecided), and a pin bump that brings a new call
@@ -778,6 +790,7 @@ def test_an_output_read_directly_after_init_is_not_pre_delayed():
     assert (f.init, f.init_basis) == ("noInput", "parameterInit"), f
 
 
+@pytest.mark.inputs
 def test_a_noinput_class_with_no_basis_is_caught():
     planted = _replace_head(blocks_text(), "LogicalPre", ', cdlState:"stateful", cdlStateInit:"noInput", '
                                                          'cdlStateBasis:"pre"')

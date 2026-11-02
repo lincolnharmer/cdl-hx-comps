@@ -80,6 +80,7 @@ def test_every_constant_feed_carries_a_value_or_its_child_carries_the_expression
     assert n > 900 and empty == []
 
 
+@pytest.mark.inputs
 def test_every_defaulted_value_is_the_cdl_default(mapped):
     # Wrong behavior caught: a value the generator wrote for an unbound parameter that is not CDL's default (a wrong
     # row, a dropped substitution), which the round trip cannot see because it drops every defaulted value.
@@ -147,6 +148,7 @@ def _synthetic(mapped, insts, edges, conns):
     return "\n".join(hxemit.Mapper(ci, every, rows).emit(stamp, "TestRequirements", "kw.cdl::CdlBlock", False))
 
 
+@pytest.mark.inputs
 def test_the_requirements_of_the_class_map_are_applied(mapped):
     # Wrong behavior caught: requires.linkAlways, requires.loopCut or requires.whenNull read by nobody, so an
     # unconnected Counter reset leaves `out` null, a UnitDelay loop depends on creation order, and a null Derivative
@@ -166,6 +168,7 @@ def test_the_requirements_of_the_class_map_are_applied(mapped):
     assert '    timeConst: <link:"der_T.out">' in cou
 
 
+@pytest.mark.inputs
 def test_a_linked_reset_takes_no_constant(mapped):
     # Wrong behavior caught: linkAlways adding a constant on top of a real link, so `reset` has two drivers.
     text = _synthetic(mapped, [("cou", "Integers.OnCounter", {})],
@@ -185,6 +188,7 @@ def test_seconds_and_fixed_slots_are_written_with_their_unit_and_value():
         hxemit._unconvert("180", "sec", "Real")
 
 
+@pytest.mark.inputs
 def test_the_round_trip_refuses_a_dropped_fixed_slot(mapped):
     allc, rows = mapped
     cls = G36 + "Generic.TrimAndRespond"
@@ -287,6 +291,7 @@ def test_overrides_and_alarms_stay_unbound_and_fan_powered_primary_flow_is_inlet
 
 # ---- kw.cdl ----
 
+@pytest.mark.inputs
 def test_the_refused_classes_are_the_five_with_no_comp_and_no_g36_use(mapped):
     # Wrong behavior caught: a class refused that G36 uses (its sequences would not generate), or a refusal item that
     # carries the reserved entity tag `spec`.
@@ -363,6 +368,7 @@ def test_point_spec_cases_key_their_spec_as_point_spec_not_the_reserved_spec_tag
         assert re.search(r"pointSpec:ph\.points(\.x)?::\w+", c), c
 
 
+@pytest.mark.inputs
 def test_with_every_driver_guarded_the_primary_link_is_the_one_that_holds_at_the_defaults(mapped):
     # Wrong behavior caught: the primary link chosen alphabetically, which wired MZ FreezeProtection's
     # ySupFan to the `not have_frePro` branch while have_frePro defaults to true.
@@ -371,6 +377,7 @@ def test_with_every_driver_guarded_the_primary_link_is_the_one_that_holds_at_the
     assert 'link:"supFan.out"' in line and 'cdlAltLink:"gai11.out,gai7.out"' in line, line
 
 
+@pytest.mark.inputs
 def test_with_no_guard_holding_at_the_defaults_no_driver_is_primary(mapped):
     # Wrong behavior caught: a primary link picked when the defaults do not decide, so an instance runs a branch the
     # parameters never chose.
