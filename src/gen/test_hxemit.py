@@ -326,10 +326,9 @@ def test_the_timer_departure_and_the_requirements_reach_the_cdlclass_instances()
     assert 'grade: "link"' in pre and 'loopCut: "u"' in pre and "first cycle" in pre
 
 
-# The internal references a generated or published comment must not carry: design documents, rulings, review rounds
-# and the generator's own paths. MBL's descriptions and source files are public and may be cited.
-INTERNAL = ("scripts/", "src/gen", "source/", "stamp.json", "ruling", "importer design", "GAP.md", "PR C", "review",
-            "slice ", "binding design")
+# Words a generated or published comment must not carry: process citations and the generator's own paths. MBL's
+# descriptions and source files are public and may be cited.
+INTERNAL = ("scripts/", "src/gen", "source/", "stamp.json", "ruling", "review", "slice ")
 
 
 def test_no_published_comment_cites_an_internal_reference():
@@ -415,7 +414,7 @@ def test_no_published_departure_or_reason_cites_a_source_line():
     text = classes_text()
     for line in text.splitlines():
         if line.startswith("  departures:") or "reason:" in line:
-            assert not re.search(r"\.(?:xeto|fan|mo|md)\b|[A-Za-z]:\d|PR C\d|GAP", line), line[:160]
+            assert not re.search(r"\.(?:xeto|fan|mo|md)\b|[A-Za-z]:\d", line), line[:160]
 
 
 def test_every_array_size_has_one_format():

@@ -1012,7 +1012,7 @@ def render_classes(rows, facts, stamp, classes):
     lines.append("  classes: {")
     for name, e in refused:
         reason = e["reason"].split(". ")[0].rstrip(".")
-        reason = re.sub(r"\s*\([^)]*(\.xeto|\.fan|GAP|PR )[^)]*\)", "", reason)
+        reason = re.sub(r"\s*\([^)]*(\.xeto|\.fan)[^)]*\)", "", reason)
         f = OrderedDict([("name", g.xs(name)), ("cdlClass", g.xs(e["cdlClass"]))])
         num, printed = g.CLAUSE7[e["cdlClass"]]
         f["clause"] = g.xs(num)

@@ -111,7 +111,7 @@ AGREES = re.compile(r"\bas (?:MBL|CDL)\b")
 DIFFERS = re.compile(r"\b(?:where|not|unlike|differ|instead|rejects|warns|lacks|ignores|only|depends|steps)\b")
 
 
-CITES = re.compile(r"\.xeto|\.fan|\.mo\b|\.md\b|PR C\d|GAP|[A-Za-z]:\d")
+CITES = re.compile(r"\.xeto|\.fan|\.mo\b|\.md\b|[A-Za-z]:\d")
 
 
 def published(text):

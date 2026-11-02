@@ -7,8 +7,8 @@
 
   python -X utf8 src/gen/hx_comps_index.py <hx.comps source dir> src/gen/hx_comps_index.json
 
-classmap.py checks the class-to-comp table against the index. The committed index was written from haxall
-commit 411b33e5, src/xeto/hx.comps. test_classmap.py rewrites it from that source when
+classmap.py checks the class-to-comp table against the index. The committed index was written from src/xeto/hx.comps
+of a haxall tree carrying haxall pull requests #138 to #152. test_classmap.py rewrites it from that source when
 HX_COMPS_SRC names the directory, and compares.
 """
 import json
