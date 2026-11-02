@@ -1,0 +1,7 @@
+{
+  "max": "keep: the slot keeps its CDL name; it is a slot of a CDL spec, read on a comp, not a tag on a Project Haystack entity",
+  "min": "keep: the slot keeps its CDL name; it is a slot of a CDL spec, read on a comp, not a tag on a Project Haystack entity",
+  "occ": "keep: the slot keeps its CDL name; it is a slot of a CDL spec, read on a comp, not a tag on a Project Haystack entity",
+  "switch": "keep: the slot keeps its CDL name; it is a slot of a CDL spec, read on a comp, not a tag on a Project Haystack entity",
+  "width": "keep: the slot keeps its CDL name; it is a slot of a CDL spec, read on a comp, not a tag on a Project Haystack entity"
+}

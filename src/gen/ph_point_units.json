@@ -1,0 +1,1349 @@
+{
+ "commit": "8ba9d7ffc3fe8ace52070f9b0bdc9239ad36a9f5",
+ "libs": [
+  "ph",
+  "ph.points",
+  "ph.points.x"
+ ],
+ "schema": "kw.cdl: the unit of each Project Haystack point spec, by ph_point_units.py",
+ "specs": {
+  "ph.points.x::ChilledWaterEnteringPressureSensor": {
+   "from": "ph.points::WaterPressureSensor",
+   "invariant": false,
+   "quantity": null,
+   "unit": "psi"
+  },
+  "ph.points.x::ChilledWaterEnteringPressureSp": {
+   "from": "ph.points::WaterPressureSp",
+   "invariant": false,
+   "quantity": null,
+   "unit": "psi"
+  },
+  "ph.points.x::ChilledWaterEnteringTempSensor": {
+   "from": "ph.points::FluidTempPoint",
+   "invariant": false,
+   "quantity": "temperature",
+   "unit": "°F"
+  },
+  "ph.points.x::ChilledWaterFlowSensor": {
+   "from": "ph.points::WaterFlowSensor",
+   "invariant": false,
+   "quantity": null,
+   "unit": "gal/min"
+  },
+  "ph.points.x::ChilledWaterFlowSp": {
+   "from": "ph.points::WaterFlowSp",
+   "invariant": false,
+   "quantity": null,
+   "unit": "gal/min"
+  },
+  "ph.points.x::ChilledWaterLeavingPressureSensor": {
+   "from": "ph.points::WaterPressureSensor",
+   "invariant": false,
+   "quantity": null,
+   "unit": "psi"
+  },
+  "ph.points.x::ChilledWaterLeavingPressureSp": {
+   "from": "ph.points::WaterPressureSp",
+   "invariant": false,
+   "quantity": null,
+   "unit": "psi"
+  },
+  "ph.points.x::ChilledWaterLeavingTempSensor": {
+   "from": "ph.points::FluidTempPoint",
+   "invariant": false,
+   "quantity": "temperature",
+   "unit": "°F"
+  },
+  "ph.points.x::ChilledWaterLeavingTempSp": {
+   "from": "ph.points::FluidTempPoint",
+   "invariant": false,
+   "quantity": "temperature",
+   "unit": "°F"
+  },
+  "ph.points.x::ChilledWaterValveModulatingCmd": {
+   "from": "ph.points::ModulatingPoint",
+   "invariant": true,
+   "quantity": null,
+   "unit": "%"
+  },
+  "ph.points.x::ChilledWaterValveModulatingSensor": {
+   "from": "ph.points::ModulatingPoint",
+   "invariant": true,
+   "quantity": null,
+   "unit": "%"
+  },
+  "ph.points.x::ColdDeckDischargeAirDamperModulatingCmd": {
+   "from": "ph.points::ModulatingPoint",
+   "invariant": true,
+   "quantity": null,
+   "unit": "%"
+  },
+  "ph.points.x::ColdDeckDischargeAirDamperModulatingSensor": {
+   "from": "ph.points::ModulatingPoint",
+   "invariant": true,
+   "quantity": null,
+   "unit": "%"
+  },
+  "ph.points.x::ColdDeckDischargeAirFlowSensor": {
+   "from": "ph.points::AirFlowSensor",
+   "invariant": false,
+   "quantity": null,
+   "unit": "cfm"
+  },
+  "ph.points.x::ColdDeckDischargeAirFlowSp": {
+   "from": "ph.points::AirFlowSp",
+   "invariant": false,
+   "quantity": null,
+   "unit": "cfm"
+  },
+  "ph.points.x::CondenserWaterEnteringTempSensor": {
+   "from": "ph.points::FluidTempPoint",
+   "invariant": false,
+   "quantity": "temperature",
+   "unit": "°F"
+  },
+  "ph.points.x::CondenserWaterLeavingTempSensor": {
+   "from": "ph.points::FluidTempPoint",
+   "invariant": false,
+   "quantity": "temperature",
+   "unit": "°F"
+  },
+  "ph.points.x::CondenserWaterLeavingTempSp": {
+   "from": "ph.points::FluidTempPoint",
+   "invariant": false,
+   "quantity": "temperature",
+   "unit": "°F"
+  },
+  "ph.points.x::DischargeAirDamperModulatingCmd": {
+   "from": "ph.points::ModulatingPoint",
+   "invariant": true,
+   "quantity": null,
+   "unit": "%"
+  },
+  "ph.points.x::DischargeAirDamperModulatingSensor": {
+   "from": "ph.points::ModulatingPoint",
+   "invariant": true,
+   "quantity": null,
+   "unit": "%"
+  },
+  "ph.points.x::DischargeAirFlowSensor": {
+   "from": "ph.points::AirFlowSensor",
+   "invariant": false,
+   "quantity": null,
+   "unit": "cfm"
+  },
+  "ph.points.x::DischargeAirFlowSp": {
+   "from": "ph.points::AirFlowSp",
+   "invariant": false,
+   "quantity": null,
+   "unit": "cfm"
+  },
+  "ph.points.x::DischargeAirHumiditySensor": {
+   "from": "ph.points::AirHumidityPoint",
+   "invariant": true,
+   "quantity": null,
+   "unit": "%RH"
+  },
+  "ph.points.x::DischargeAirHumiditySp": {
+   "from": "ph.points::AirHumidityPoint",
+   "invariant": true,
+   "quantity": null,
+   "unit": "%RH"
+  },
+  "ph.points.x::DischargeAirPressureSensor": {
+   "from": "ph.points::AirPressureSensor",
+   "invariant": false,
+   "quantity": null,
+   "unit": "inH₂O"
+  },
+  "ph.points.x::DischargeAirPressureSp": {
+   "from": "ph.points::AirPressureSp",
+   "invariant": false,
+   "quantity": null,
+   "unit": "inH₂O"
+  },
+  "ph.points.x::DischargeAirTempSensor": {
+   "from": "ph.points::FluidTempPoint",
+   "invariant": false,
+   "quantity": "temperature",
+   "unit": "°F"
+  },
+  "ph.points.x::DischargeAirTempSp": {
+   "from": "ph.points::FluidTempPoint",
+   "invariant": false,
+   "quantity": "temperature",
+   "unit": "°F"
+  },
+  "ph.points.x::DischargeFanSpeedModulatingCmd": {
+   "from": "ph.points::ModulatingPoint",
+   "invariant": true,
+   "quantity": null,
+   "unit": "%"
+  },
+  "ph.points.x::DischargeFanSpeedModulatingSensor": {
+   "from": "ph.points::ModulatingPoint",
+   "invariant": true,
+   "quantity": null,
+   "unit": "%"
+  },
+  "ph.points.x::DomesticWaterFlowSensor": {
+   "from": "ph.points::WaterFlowSensor",
+   "invariant": false,
+   "quantity": null,
+   "unit": "gal/min"
+  },
+  "ph.points.x::DomesticWaterFlowSp": {
+   "from": "ph.points::WaterFlowSp",
+   "invariant": false,
+   "quantity": null,
+   "unit": "gal/min"
+  },
+  "ph.points.x::DomesticWaterVolumeSensor": {
+   "from": "ph.points::WaterVolumePoint",
+   "invariant": false,
+   "quantity": null,
+   "unit": "gal"
+  },
+  "ph.points.x::DomesticWaterVolumeSp": {
+   "from": "ph.points::WaterVolumePoint",
+   "invariant": false,
+   "quantity": null,
+   "unit": "gal"
+  },
+  "ph.points.x::EconomizerAirDamperModulatingCmd": {
+   "from": "ph.points::ModulatingPoint",
+   "invariant": true,
+   "quantity": null,
+   "unit": "%"
+  },
+  "ph.points.x::EconomizerAirDamperModulatingSensor": {
+   "from": "ph.points::ModulatingPoint",
+   "invariant": true,
+   "quantity": null,
+   "unit": "%"
+  },
+  "ph.points.x::EconomizerAirFlowSensor": {
+   "from": "ph.points::AirFlowSensor",
+   "invariant": false,
+   "quantity": null,
+   "unit": "cfm"
+  },
+  "ph.points.x::EconomizerAirFlowSp": {
+   "from": "ph.points::AirFlowSp",
+   "invariant": false,
+   "quantity": null,
+   "unit": "cfm"
+  },
+  "ph.points.x::EconomizerAirTempSensor": {
+   "from": "ph.points::FluidTempPoint",
+   "invariant": false,
+   "quantity": "temperature",
+   "unit": "°F"
+  },
+  "ph.points.x::ElecCableTempSensor": {
+   "from": "ph.points::SurfaceTempPoint",
+   "invariant": false,
+   "quantity": "temperature",
+   "unit": "°F"
+  },
+  "ph.points.x::EvseCableTempSensor": {
+   "from": "ph.points::SurfaceTempPoint",
+   "invariant": false,
+   "quantity": "temperature",
+   "unit": "°F"
+  },
+  "ph.points.x::EvseConnectorTempSensor": {
+   "from": "ph.points::SurfaceTempPoint",
+   "invariant": false,
+   "quantity": "temperature",
+   "unit": "°F"
+  },
+  "ph.points.x::ExhaustAirDamperModulatingCmd": {
+   "from": "ph.points::ModulatingPoint",
+   "invariant": true,
+   "quantity": null,
+   "unit": "%"
+  },
+  "ph.points.x::ExhaustAirDamperModulatingSensor": {
+   "from": "ph.points::ModulatingPoint",
+   "invariant": true,
+   "quantity": null,
+   "unit": "%"
+  },
+  "ph.points.x::ExhaustAirFlowSensor": {
+   "from": "ph.points::AirFlowSensor",
+   "invariant": false,
+   "quantity": null,
+   "unit": "cfm"
+  },
+  "ph.points.x::ExhaustAirFlowSp": {
+   "from": "ph.points::AirFlowSp",
+   "invariant": false,
+   "quantity": null,
+   "unit": "cfm"
+  },
+  "ph.points.x::HeatsinkTempSensor": {
+   "from": "ph.points::SurfaceTempPoint",
+   "invariant": false,
+   "quantity": "temperature",
+   "unit": "°F"
+  },
+  "ph.points.x::HotDeckDischargeAirDamperModulatingCmd": {
+   "from": "ph.points::ModulatingPoint",
+   "invariant": true,
+   "quantity": null,
+   "unit": "%"
+  },
+  "ph.points.x::HotDeckDischargeAirDamperModulatingSensor": {
+   "from": "ph.points::ModulatingPoint",
+   "invariant": true,
+   "quantity": null,
+   "unit": "%"
+  },
+  "ph.points.x::HotDeckDischargeAirFlowSensor": {
+   "from": "ph.points::AirFlowSensor",
+   "invariant": false,
+   "quantity": null,
+   "unit": "cfm"
+  },
+  "ph.points.x::HotDeckDischargeAirFlowSp": {
+   "from": "ph.points::AirFlowSp",
+   "invariant": false,
+   "quantity": null,
+   "unit": "cfm"
+  },
+  "ph.points.x::HotWaterEnteringPressureSensor": {
+   "from": "ph.points::WaterPressureSensor",
+   "invariant": false,
+   "quantity": null,
+   "unit": "psi"
+  },
+  "ph.points.x::HotWaterEnteringPressureSp": {
+   "from": "ph.points::WaterPressureSp",
+   "invariant": false,
+   "quantity": null,
+   "unit": "psi"
+  },
+  "ph.points.x::HotWaterEnteringTempSensor": {
+   "from": "ph.points::FluidTempPoint",
+   "invariant": false,
+   "quantity": "temperature",
+   "unit": "°F"
+  },
+  "ph.points.x::HotWaterFlowSensor": {
+   "from": "ph.points::WaterFlowSensor",
+   "invariant": false,
+   "quantity": null,
+   "unit": "gal/min"
+  },
+  "ph.points.x::HotWaterFlowSp": {
+   "from": "ph.points::WaterFlowSp",
+   "invariant": false,
+   "quantity": null,
+   "unit": "gal/min"
+  },
+  "ph.points.x::HotWaterLeavingPressureSensor": {
+   "from": "ph.points::WaterPressureSensor",
+   "invariant": false,
+   "quantity": null,
+   "unit": "psi"
+  },
+  "ph.points.x::HotWaterLeavingPressureSp": {
+   "from": "ph.points::WaterPressureSp",
+   "invariant": false,
+   "quantity": null,
+   "unit": "psi"
+  },
+  "ph.points.x::HotWaterLeavingTempSensor": {
+   "from": "ph.points::FluidTempPoint",
+   "invariant": false,
+   "quantity": "temperature",
+   "unit": "°F"
+  },
+  "ph.points.x::HotWaterLeavingTempSp": {
+   "from": "ph.points::FluidTempPoint",
+   "invariant": false,
+   "quantity": "temperature",
+   "unit": "°F"
+  },
+  "ph.points.x::HotWaterValveModulatingCmd": {
+   "from": "ph.points::ModulatingPoint",
+   "invariant": true,
+   "quantity": null,
+   "unit": "%"
+  },
+  "ph.points.x::HotWaterValveModulatingSensor": {
+   "from": "ph.points::ModulatingPoint",
+   "invariant": true,
+   "quantity": null,
+   "unit": "%"
+  },
+  "ph.points.x::InletAirFlowSensor": {
+   "from": "ph.points::AirFlowSensor",
+   "invariant": false,
+   "quantity": null,
+   "unit": "cfm"
+  },
+  "ph.points.x::InletAirFlowSp": {
+   "from": "ph.points::AirFlowSp",
+   "invariant": false,
+   "quantity": null,
+   "unit": "cfm"
+  },
+  "ph.points.x::InletAirTempSensor": {
+   "from": "ph.points::FluidTempPoint",
+   "invariant": false,
+   "quantity": "temperature",
+   "unit": "°F"
+  },
+  "ph.points.x::InletAirTempSp": {
+   "from": "ph.points::FluidTempPoint",
+   "invariant": false,
+   "quantity": "temperature",
+   "unit": "°F"
+  },
+  "ph.points.x::MixedAirDamperModulatingCmd": {
+   "from": "ph.points::ModulatingPoint",
+   "invariant": true,
+   "quantity": null,
+   "unit": "%"
+  },
+  "ph.points.x::MixedAirDamperModulatingSensor": {
+   "from": "ph.points::ModulatingPoint",
+   "invariant": true,
+   "quantity": null,
+   "unit": "%"
+  },
+  "ph.points.x::MixedAirTempSensor": {
+   "from": "ph.points::FluidTempPoint",
+   "invariant": false,
+   "quantity": "temperature",
+   "unit": "°F"
+  },
+  "ph.points.x::MixedAirTempSp": {
+   "from": "ph.points::FluidTempPoint",
+   "invariant": false,
+   "quantity": "temperature",
+   "unit": "°F"
+  },
+  "ph.points.x::MotorBearingTempSensor": {
+   "from": "ph.points::SurfaceTempPoint",
+   "invariant": false,
+   "quantity": "temperature",
+   "unit": "°F"
+  },
+  "ph.points.x::MotorTempSensor": {
+   "from": "ph.points::SurfaceTempPoint",
+   "invariant": false,
+   "quantity": "temperature",
+   "unit": "°F"
+  },
+  "ph.points.x::MotorWindingTempSensor": {
+   "from": "ph.points::SurfaceTempPoint",
+   "invariant": false,
+   "quantity": "temperature",
+   "unit": "°F"
+  },
+  "ph.points.x::NaturalGasEnergySensor": {
+   "from": "ph.points.x::NaturalGasEnergySensor",
+   "invariant": false,
+   "quantity": null,
+   "unit": "Ccf_natural_gas"
+  },
+  "ph.points.x::NaturalGasEnergySp": {
+   "from": "ph.points.x::NaturalGasEnergySp",
+   "invariant": false,
+   "quantity": null,
+   "unit": "Ccf_natural_gas"
+  },
+  "ph.points.x::NaturalGasFlowSensor": {
+   "from": "ph.points.x::NaturalGasFlowSensor",
+   "invariant": false,
+   "quantity": null,
+   "unit": "cfm"
+  },
+  "ph.points.x::NaturalGasFlowSp": {
+   "from": "ph.points.x::NaturalGasFlowSp",
+   "invariant": false,
+   "quantity": null,
+   "unit": "cfm"
+  },
+  "ph.points.x::NaturalGasVolumeSensor": {
+   "from": "ph.points.x::NaturalGasVolumeSensor",
+   "invariant": false,
+   "quantity": null,
+   "unit": "Ccf"
+  },
+  "ph.points.x::NaturalGasVolumeSp": {
+   "from": "ph.points.x::NaturalGasVolumeSp",
+   "invariant": false,
+   "quantity": null,
+   "unit": "Ccf"
+  },
+  "ph.points.x::OutsideAirDamperModulatingCmd": {
+   "from": "ph.points::ModulatingPoint",
+   "invariant": true,
+   "quantity": null,
+   "unit": "%"
+  },
+  "ph.points.x::OutsideAirDamperModulatingSensor": {
+   "from": "ph.points::ModulatingPoint",
+   "invariant": true,
+   "quantity": null,
+   "unit": "%"
+  },
+  "ph.points.x::OutsideAirFlowSensor": {
+   "from": "ph.points::AirFlowSensor",
+   "invariant": false,
+   "quantity": null,
+   "unit": "cfm"
+  },
+  "ph.points.x::OutsideAirFlowSp": {
+   "from": "ph.points::AirFlowSp",
+   "invariant": false,
+   "quantity": null,
+   "unit": "cfm"
+  },
+  "ph.points.x::OutsideAirHumiditySensor": {
+   "from": "ph.points::AirHumidityPoint",
+   "invariant": true,
+   "quantity": null,
+   "unit": "%RH"
+  },
+  "ph.points.x::OutsideAirHumiditySp": {
+   "from": "ph.points::AirHumidityPoint",
+   "invariant": true,
+   "quantity": null,
+   "unit": "%RH"
+  },
+  "ph.points.x::OutsideAirTempSensor": {
+   "from": "ph.points::FluidTempPoint",
+   "invariant": false,
+   "quantity": "temperature",
+   "unit": "°F"
+  },
+  "ph.points.x::ReturnAirDamperModulatingCmd": {
+   "from": "ph.points::ModulatingPoint",
+   "invariant": true,
+   "quantity": null,
+   "unit": "%"
+  },
+  "ph.points.x::ReturnAirDamperModulatingSensor": {
+   "from": "ph.points::ModulatingPoint",
+   "invariant": true,
+   "quantity": null,
+   "unit": "%"
+  },
+  "ph.points.x::ReturnAirFlowSensor": {
+   "from": "ph.points::AirFlowSensor",
+   "invariant": false,
+   "quantity": null,
+   "unit": "cfm"
+  },
+  "ph.points.x::ReturnAirFlowSp": {
+   "from": "ph.points::AirFlowSp",
+   "invariant": false,
+   "quantity": null,
+   "unit": "cfm"
+  },
+  "ph.points.x::ReturnAirPressureSensor": {
+   "from": "ph.points::AirPressureSensor",
+   "invariant": false,
+   "quantity": null,
+   "unit": "inH₂O"
+  },
+  "ph.points.x::ReturnAirPressureSp": {
+   "from": "ph.points::AirPressureSp",
+   "invariant": false,
+   "quantity": null,
+   "unit": "inH₂O"
+  },
+  "ph.points.x::ReturnAirTempSensor": {
+   "from": "ph.points::FluidTempPoint",
+   "invariant": false,
+   "quantity": "temperature",
+   "unit": "°F"
+  },
+  "ph.points.x::ReturnAirTempSp": {
+   "from": "ph.points::FluidTempPoint",
+   "invariant": false,
+   "quantity": "temperature",
+   "unit": "°F"
+  },
+  "ph.points.x::ReturnFanSpeedModulatingCmd": {
+   "from": "ph.points::ModulatingPoint",
+   "invariant": true,
+   "quantity": null,
+   "unit": "%"
+  },
+  "ph.points.x::ReturnFanSpeedModulatingSensor": {
+   "from": "ph.points::ModulatingPoint",
+   "invariant": true,
+   "quantity": null,
+   "unit": "%"
+  },
+  "ph.points.x::VentilationAirDamperModulatingCmd": {
+   "from": "ph.points::ModulatingPoint",
+   "invariant": true,
+   "quantity": null,
+   "unit": "%"
+  },
+  "ph.points.x::VentilationAirDamperModulatingSensor": {
+   "from": "ph.points::ModulatingPoint",
+   "invariant": true,
+   "quantity": null,
+   "unit": "%"
+  },
+  "ph.points.x::VentilationAirFlowSensor": {
+   "from": "ph.points::AirFlowSensor",
+   "invariant": false,
+   "quantity": null,
+   "unit": "cfm"
+  },
+  "ph.points.x::VentilationAirFlowSp": {
+   "from": "ph.points::AirFlowSp",
+   "invariant": false,
+   "quantity": null,
+   "unit": "cfm"
+  },
+  "ph.points.x::VentilationAirTempSensor": {
+   "from": "ph.points::FluidTempPoint",
+   "invariant": false,
+   "quantity": "temperature",
+   "unit": "°F"
+  },
+  "ph.points.x::ZoneAirTempCoolingSp": {
+   "from": "ph.points::FluidTempPoint",
+   "invariant": false,
+   "quantity": "temperature",
+   "unit": "°F"
+  },
+  "ph.points.x::ZoneAirTempEffectiveSp": {
+   "from": "ph.points::FluidTempPoint",
+   "invariant": false,
+   "quantity": "temperature",
+   "unit": "°F"
+  },
+  "ph.points.x::ZoneAirTempHeatingSp": {
+   "from": "ph.points::FluidTempPoint",
+   "invariant": false,
+   "quantity": "temperature",
+   "unit": "°F"
+  },
+  "ph.points.x::ZoneAirTempOccCoolingSp": {
+   "from": "ph.points::FluidTempPoint",
+   "invariant": false,
+   "quantity": "temperature",
+   "unit": "°F"
+  },
+  "ph.points.x::ZoneAirTempOccHeatingSp": {
+   "from": "ph.points::FluidTempPoint",
+   "invariant": false,
+   "quantity": "temperature",
+   "unit": "°F"
+  },
+  "ph.points.x::ZoneAirTempStandbyCoolingSp": {
+   "from": "ph.points::FluidTempPoint",
+   "invariant": false,
+   "quantity": "temperature",
+   "unit": "°F"
+  },
+  "ph.points.x::ZoneAirTempStandbyHeatingSp": {
+   "from": "ph.points::FluidTempPoint",
+   "invariant": false,
+   "quantity": "temperature",
+   "unit": "°F"
+  },
+  "ph.points.x::ZoneAirTempUnoccCoolingSp": {
+   "from": "ph.points::FluidTempPoint",
+   "invariant": false,
+   "quantity": "temperature",
+   "unit": "°F"
+  },
+  "ph.points.x::ZoneAirTempUnoccHeatingSp": {
+   "from": "ph.points::FluidTempPoint",
+   "invariant": false,
+   "quantity": "temperature",
+   "unit": "°F"
+  },
+  "ph.points::ActuatorModulatingCmd": {
+   "from": "ph.points::ModulatingPoint",
+   "invariant": true,
+   "quantity": null,
+   "unit": "%"
+  },
+  "ph.points::ActuatorModulatingSensor": {
+   "from": "ph.points::ModulatingPoint",
+   "invariant": true,
+   "quantity": null,
+   "unit": "%"
+  },
+  "ph.points::AirFlowSensor": {
+   "from": "ph.points::AirFlowSensor",
+   "invariant": false,
+   "quantity": null,
+   "unit": "cfm"
+  },
+  "ph.points::AirFlowSp": {
+   "from": "ph.points::AirFlowSp",
+   "invariant": false,
+   "quantity": null,
+   "unit": "cfm"
+  },
+  "ph.points::AirHumidityPoint": {
+   "from": "ph.points::AirHumidityPoint",
+   "invariant": true,
+   "quantity": null,
+   "unit": "%RH"
+  },
+  "ph.points::AirHumiditySensor": {
+   "from": "ph.points::AirHumidityPoint",
+   "invariant": true,
+   "quantity": null,
+   "unit": "%RH"
+  },
+  "ph.points::AirHumiditySp": {
+   "from": "ph.points::AirHumidityPoint",
+   "invariant": true,
+   "quantity": null,
+   "unit": "%RH"
+  },
+  "ph.points::AirPressureSensor": {
+   "from": "ph.points::AirPressureSensor",
+   "invariant": false,
+   "quantity": null,
+   "unit": "inH₂O"
+  },
+  "ph.points::AirPressureSp": {
+   "from": "ph.points::AirPressureSp",
+   "invariant": false,
+   "quantity": null,
+   "unit": "inH₂O"
+  },
+  "ph.points::AirTempSensor": {
+   "from": "ph.points::FluidTempPoint",
+   "invariant": false,
+   "quantity": "temperature",
+   "unit": "°F"
+  },
+  "ph.points::AirTempSp": {
+   "from": "ph.points::FluidTempPoint",
+   "invariant": false,
+   "quantity": "temperature",
+   "unit": "°F"
+  },
+  "ph.points::Co2Point": {
+   "from": "ph.points::Co2Point",
+   "invariant": true,
+   "quantity": null,
+   "unit": "ppm"
+  },
+  "ph.points::Co2Sensor": {
+   "from": "ph.points::Co2Point",
+   "invariant": true,
+   "quantity": null,
+   "unit": "ppm"
+  },
+  "ph.points::Co2Sp": {
+   "from": "ph.points::Co2Point",
+   "invariant": true,
+   "quantity": null,
+   "unit": "ppm"
+  },
+  "ph.points::CoolModulatingCmd": {
+   "from": "ph.points::ModulatingPoint",
+   "invariant": true,
+   "quantity": null,
+   "unit": "%"
+  },
+  "ph.points::CoolModulatingSensor": {
+   "from": "ph.points::ModulatingPoint",
+   "invariant": true,
+   "quantity": null,
+   "unit": "%"
+  },
+  "ph.points::DamperModulatingCmd": {
+   "from": "ph.points::ModulatingPoint",
+   "invariant": true,
+   "quantity": null,
+   "unit": "%"
+  },
+  "ph.points::DamperModulatingSensor": {
+   "from": "ph.points::ModulatingPoint",
+   "invariant": true,
+   "quantity": null,
+   "unit": "%"
+  },
+  "ph.points::DuctAirDamperModulatingCmd": {
+   "from": "ph.points::ModulatingPoint",
+   "invariant": true,
+   "quantity": null,
+   "unit": "%"
+  },
+  "ph.points::DuctAirDamperModulatingSensor": {
+   "from": "ph.points::ModulatingPoint",
+   "invariant": true,
+   "quantity": null,
+   "unit": "%"
+  },
+  "ph.points::DuctAirFlowSensor": {
+   "from": "ph.points::AirFlowSensor",
+   "invariant": false,
+   "quantity": null,
+   "unit": "cfm"
+  },
+  "ph.points::DuctAirFlowSp": {
+   "from": "ph.points::AirFlowSp",
+   "invariant": false,
+   "quantity": null,
+   "unit": "cfm"
+  },
+  "ph.points::DuctAirHumiditySensor": {
+   "from": "ph.points::AirHumidityPoint",
+   "invariant": true,
+   "quantity": null,
+   "unit": "%RH"
+  },
+  "ph.points::DuctAirHumiditySp": {
+   "from": "ph.points::AirHumidityPoint",
+   "invariant": true,
+   "quantity": null,
+   "unit": "%RH"
+  },
+  "ph.points::DuctAirPressureSensor": {
+   "from": "ph.points::AirPressureSensor",
+   "invariant": false,
+   "quantity": null,
+   "unit": "inH₂O"
+  },
+  "ph.points::DuctAirPressureSp": {
+   "from": "ph.points::AirPressureSp",
+   "invariant": false,
+   "quantity": null,
+   "unit": "inH₂O"
+  },
+  "ph.points::DuctAirTempSensor": {
+   "from": "ph.points::FluidTempPoint",
+   "invariant": false,
+   "quantity": "temperature",
+   "unit": "°F"
+  },
+  "ph.points::DuctAirTempSp": {
+   "from": "ph.points::FluidTempPoint",
+   "invariant": false,
+   "quantity": "temperature",
+   "unit": "°F"
+  },
+  "ph.points::DuctFanSpeedModulatingCmd": {
+   "from": "ph.points::ModulatingPoint",
+   "invariant": true,
+   "quantity": null,
+   "unit": "%"
+  },
+  "ph.points::DuctFanSpeedModulatingSensor": {
+   "from": "ph.points::ModulatingPoint",
+   "invariant": true,
+   "quantity": null,
+   "unit": "%"
+  },
+  "ph.points::EnclosureAirTempSensor": {
+   "from": "ph.points::FluidTempPoint",
+   "invariant": false,
+   "quantity": "temperature",
+   "unit": "°F"
+  },
+  "ph.points::FanSpeedModulatingCmd": {
+   "from": "ph.points::ModulatingPoint",
+   "invariant": true,
+   "quantity": null,
+   "unit": "%"
+  },
+  "ph.points::FanSpeedModulatingSensor": {
+   "from": "ph.points::ModulatingPoint",
+   "invariant": true,
+   "quantity": null,
+   "unit": "%"
+  },
+  "ph.points::FluidEnergyPoint": {
+   "from": "ph.points::FluidEnergyPoint",
+   "invariant": false,
+   "quantity": "energy",
+   "unit": null
+  },
+  "ph.points::FluidEnergySensor": {
+   "from": "ph.points::FluidEnergyPoint",
+   "invariant": false,
+   "quantity": "energy",
+   "unit": null
+  },
+  "ph.points::FluidEnergySp": {
+   "from": "ph.points::FluidEnergyPoint",
+   "invariant": false,
+   "quantity": "energy",
+   "unit": null
+  },
+  "ph.points::FluidMassFlowPoint": {
+   "from": "ph.points::FluidMassFlowPoint",
+   "invariant": false,
+   "quantity": "massFlow",
+   "unit": null
+  },
+  "ph.points::FluidMassFlowSensor": {
+   "from": "ph.points::FluidMassFlowPoint",
+   "invariant": false,
+   "quantity": "massFlow",
+   "unit": null
+  },
+  "ph.points::FluidMassFlowSp": {
+   "from": "ph.points::FluidMassFlowPoint",
+   "invariant": false,
+   "quantity": "massFlow",
+   "unit": null
+  },
+  "ph.points::FluidPressurePoint": {
+   "from": "ph.points::FluidPressurePoint",
+   "invariant": false,
+   "quantity": "pressure",
+   "unit": null
+  },
+  "ph.points::FluidPressureSensor": {
+   "from": "ph.points::FluidPressurePoint",
+   "invariant": false,
+   "quantity": "pressure",
+   "unit": null
+  },
+  "ph.points::FluidPressureSp": {
+   "from": "ph.points::FluidPressurePoint",
+   "invariant": false,
+   "quantity": "pressure",
+   "unit": null
+  },
+  "ph.points::FluidTempPoint": {
+   "from": "ph.points::FluidTempPoint",
+   "invariant": false,
+   "quantity": "temperature",
+   "unit": "°F"
+  },
+  "ph.points::FluidTempSensor": {
+   "from": "ph.points::FluidTempPoint",
+   "invariant": false,
+   "quantity": "temperature",
+   "unit": "°F"
+  },
+  "ph.points::FluidTempSp": {
+   "from": "ph.points::FluidTempPoint",
+   "invariant": false,
+   "quantity": "temperature",
+   "unit": "°F"
+  },
+  "ph.points::FluidVolumePoint": {
+   "from": "ph.points::FluidVolumePoint",
+   "invariant": false,
+   "quantity": "volume",
+   "unit": null
+  },
+  "ph.points::FluidVolumeSensor": {
+   "from": "ph.points::FluidVolumePoint",
+   "invariant": false,
+   "quantity": "volume",
+   "unit": null
+  },
+  "ph.points::FluidVolumeSp": {
+   "from": "ph.points::FluidVolumePoint",
+   "invariant": false,
+   "quantity": "volume",
+   "unit": null
+  },
+  "ph.points::FluidVolumetricFlowPoint": {
+   "from": "ph.points::FluidVolumetricFlowPoint",
+   "invariant": false,
+   "quantity": "volumetricFlow",
+   "unit": null
+  },
+  "ph.points::FluidVolumetricFlowSensor": {
+   "from": "ph.points::FluidVolumetricFlowPoint",
+   "invariant": false,
+   "quantity": "volumetricFlow",
+   "unit": null
+  },
+  "ph.points::FluidVolumetricFlowSp": {
+   "from": "ph.points::FluidVolumetricFlowPoint",
+   "invariant": false,
+   "quantity": "volumetricFlow",
+   "unit": null
+  },
+  "ph.points::HeatModulatingCmd": {
+   "from": "ph.points::ModulatingPoint",
+   "invariant": true,
+   "quantity": null,
+   "unit": "%"
+  },
+  "ph.points::HeatModulatingSensor": {
+   "from": "ph.points::ModulatingPoint",
+   "invariant": true,
+   "quantity": null,
+   "unit": "%"
+  },
+  "ph.points::MechRotationalFreqSensor": {
+   "from": "ph.points::MechRotationalFreqSensor",
+   "invariant": false,
+   "quantity": null,
+   "unit": "rpm"
+  },
+  "ph.points::ModulatingCmd": {
+   "from": "ph.points::ModulatingPoint",
+   "invariant": true,
+   "quantity": null,
+   "unit": "%"
+  },
+  "ph.points::ModulatingPoint": {
+   "from": "ph.points::ModulatingPoint",
+   "invariant": true,
+   "quantity": null,
+   "unit": "%"
+  },
+  "ph.points::ModulatingSensor": {
+   "from": "ph.points::ModulatingPoint",
+   "invariant": true,
+   "quantity": null,
+   "unit": "%"
+  },
+  "ph.points::MotorMechRotationalFreqSensor": {
+   "from": "ph.points::MechRotationalFreqSensor",
+   "invariant": false,
+   "quantity": null,
+   "unit": "rpm"
+  },
+  "ph.points::MotorSpeedModulatingCmd": {
+   "from": "ph.points::ModulatingPoint",
+   "invariant": true,
+   "quantity": null,
+   "unit": "%"
+  },
+  "ph.points::MotorSpeedModulatingSensor": {
+   "from": "ph.points::ModulatingPoint",
+   "invariant": true,
+   "quantity": null,
+   "unit": "%"
+  },
+  "ph.points::PipeWaterFlowSensor": {
+   "from": "ph.points::WaterFlowSensor",
+   "invariant": false,
+   "quantity": null,
+   "unit": "gal/min"
+  },
+  "ph.points::PipeWaterFlowSp": {
+   "from": "ph.points::WaterFlowSp",
+   "invariant": false,
+   "quantity": null,
+   "unit": "gal/min"
+  },
+  "ph.points::PipeWaterPressureSensor": {
+   "from": "ph.points::WaterPressureSensor",
+   "invariant": false,
+   "quantity": null,
+   "unit": "psi"
+  },
+  "ph.points::PipeWaterPressureSp": {
+   "from": "ph.points::WaterPressureSp",
+   "invariant": false,
+   "quantity": null,
+   "unit": "psi"
+  },
+  "ph.points::PipeWaterTempSensor": {
+   "from": "ph.points::FluidTempPoint",
+   "invariant": false,
+   "quantity": "temperature",
+   "unit": "°F"
+  },
+  "ph.points::PipeWaterTempSp": {
+   "from": "ph.points::FluidTempPoint",
+   "invariant": false,
+   "quantity": "temperature",
+   "unit": "°F"
+  },
+  "ph.points::RefrigMassFlowSensor": {
+   "from": "ph.points::RefrigMassFlowSensor",
+   "invariant": false,
+   "quantity": null,
+   "unit": "lb/min"
+  },
+  "ph.points::RefrigMassFlowSp": {
+   "from": "ph.points::RefrigMassFlowSp",
+   "invariant": false,
+   "quantity": null,
+   "unit": "lb/min"
+  },
+  "ph.points::RefrigPressureSensor": {
+   "from": "ph.points::RefrigPressureSensor",
+   "invariant": false,
+   "quantity": null,
+   "unit": "psi"
+  },
+  "ph.points::RefrigPressureSp": {
+   "from": "ph.points::RefrigPressureSp",
+   "invariant": false,
+   "quantity": null,
+   "unit": "psi"
+  },
+  "ph.points::RefrigTempSensor": {
+   "from": "ph.points::FluidTempPoint",
+   "invariant": false,
+   "quantity": "temperature",
+   "unit": "°F"
+  },
+  "ph.points::RefrigTempSp": {
+   "from": "ph.points::FluidTempPoint",
+   "invariant": false,
+   "quantity": "temperature",
+   "unit": "°F"
+  },
+  "ph.points::RuntimeSensor": {
+   "from": "ph.points::RuntimeSensor",
+   "invariant": false,
+   "quantity": "time",
+   "unit": "hr"
+  },
+  "ph.points::SteamMassFlowSensor": {
+   "from": "ph.points::SteamMassFlowSensor",
+   "invariant": false,
+   "quantity": null,
+   "unit": "lb/h"
+  },
+  "ph.points::SteamMassFlowSp": {
+   "from": "ph.points::SteamMassFlowSp",
+   "invariant": false,
+   "quantity": null,
+   "unit": "lb/h"
+  },
+  "ph.points::SteamPressureSensor": {
+   "from": "ph.points::SteamPressureSensor",
+   "invariant": false,
+   "quantity": null,
+   "unit": "psi"
+  },
+  "ph.points::SteamPressureSp": {
+   "from": "ph.points::SteamPressureSp",
+   "invariant": false,
+   "quantity": null,
+   "unit": "psi"
+  },
+  "ph.points::SteamTempSensor": {
+   "from": "ph.points::FluidTempPoint",
+   "invariant": false,
+   "quantity": "temperature",
+   "unit": "°F"
+  },
+  "ph.points::SteamTempSp": {
+   "from": "ph.points::FluidTempPoint",
+   "invariant": false,
+   "quantity": "temperature",
+   "unit": "°F"
+  },
+  "ph.points::SurfaceTempPoint": {
+   "from": "ph.points::SurfaceTempPoint",
+   "invariant": false,
+   "quantity": "temperature",
+   "unit": "°F"
+  },
+  "ph.points::SurfaceTempSensor": {
+   "from": "ph.points::SurfaceTempPoint",
+   "invariant": false,
+   "quantity": "temperature",
+   "unit": "°F"
+  },
+  "ph.points::ValveModulatingCmd": {
+   "from": "ph.points::ModulatingPoint",
+   "invariant": true,
+   "quantity": null,
+   "unit": "%"
+  },
+  "ph.points::ValveModulatingSensor": {
+   "from": "ph.points::ModulatingPoint",
+   "invariant": true,
+   "quantity": null,
+   "unit": "%"
+  },
+  "ph.points::WaterFlowSensor": {
+   "from": "ph.points::WaterFlowSensor",
+   "invariant": false,
+   "quantity": null,
+   "unit": "gal/min"
+  },
+  "ph.points::WaterFlowSp": {
+   "from": "ph.points::WaterFlowSp",
+   "invariant": false,
+   "quantity": null,
+   "unit": "gal/min"
+  },
+  "ph.points::WaterPressureSensor": {
+   "from": "ph.points::WaterPressureSensor",
+   "invariant": false,
+   "quantity": null,
+   "unit": "psi"
+  },
+  "ph.points::WaterPressureSp": {
+   "from": "ph.points::WaterPressureSp",
+   "invariant": false,
+   "quantity": null,
+   "unit": "psi"
+  },
+  "ph.points::WaterTempSensor": {
+   "from": "ph.points::FluidTempPoint",
+   "invariant": false,
+   "quantity": "temperature",
+   "unit": "°F"
+  },
+  "ph.points::WaterTempSp": {
+   "from": "ph.points::FluidTempPoint",
+   "invariant": false,
+   "quantity": "temperature",
+   "unit": "°F"
+  },
+  "ph.points::WaterValveModulatingCmd": {
+   "from": "ph.points::ModulatingPoint",
+   "invariant": true,
+   "quantity": null,
+   "unit": "%"
+  },
+  "ph.points::WaterValveModulatingSensor": {
+   "from": "ph.points::ModulatingPoint",
+   "invariant": true,
+   "quantity": null,
+   "unit": "%"
+  },
+  "ph.points::WaterVolumePoint": {
+   "from": "ph.points::WaterVolumePoint",
+   "invariant": false,
+   "quantity": null,
+   "unit": "gal"
+  },
+  "ph.points::WaterVolumeSensor": {
+   "from": "ph.points::WaterVolumePoint",
+   "invariant": false,
+   "quantity": null,
+   "unit": "gal"
+  },
+  "ph.points::WaterVolumeSp": {
+   "from": "ph.points::WaterVolumePoint",
+   "invariant": false,
+   "quantity": null,
+   "unit": "gal"
+  },
+  "ph.points::WeatherAtmosphericPressurePoint": {
+   "from": "ph.points::WeatherAtmosphericPressurePoint",
+   "invariant": false,
+   "quantity": "pressure",
+   "unit": "inHg"
+  },
+  "ph.points::WeatherCloudagePoint": {
+   "from": "ph.points::WeatherCloudagePoint",
+   "invariant": true,
+   "quantity": null,
+   "unit": "%"
+  },
+  "ph.points::WeatherDewPointPoint": {
+   "from": "ph.points::WeatherDewPointPoint",
+   "invariant": false,
+   "quantity": "temperature",
+   "unit": "°F"
+  },
+  "ph.points::WeatherEnthalpyPoint": {
+   "from": "ph.points::WeatherEnthalpyPoint",
+   "invariant": false,
+   "quantity": "specificEnthalpy",
+   "unit": "BTU/lb"
+  },
+  "ph.points::WeatherFeelsLikePoint": {
+   "from": "ph.points::WeatherFeelsLikePoint",
+   "invariant": false,
+   "quantity": "temperature",
+   "unit": "°F"
+  },
+  "ph.points::WeatherHumidityPoint": {
+   "from": "ph.points::WeatherHumidityPoint",
+   "invariant": true,
+   "quantity": null,
+   "unit": "%RH"
+  },
+  "ph.points::WeatherPrecipitationPoint": {
+   "from": "ph.points::WeatherPrecipitationPoint",
+   "invariant": false,
+   "quantity": "length",
+   "unit": "in"
+  },
+  "ph.points::WeatherSolarIrradiancePoint": {
+   "from": "ph.points::WeatherSolarIrradiancePoint",
+   "invariant": false,
+   "quantity": "energy",
+   "unit": "W/m²"
+  },
+  "ph.points::WeatherTempPoint": {
+   "from": "ph.points::WeatherTempPoint",
+   "invariant": false,
+   "quantity": "temperature",
+   "unit": "°F"
+  },
+  "ph.points::WeatherVisibilityPoint": {
+   "from": "ph.points::WeatherVisibilityPoint",
+   "invariant": false,
+   "quantity": "length",
+   "unit": "mile"
+  },
+  "ph.points::WeatherWetbulbPoint": {
+   "from": "ph.points::WeatherWetbulbPoint",
+   "invariant": false,
+   "quantity": "temperature",
+   "unit": "°F"
+  },
+  "ph.points::WeatherWindDirectionPoint": {
+   "from": "ph.points::WeatherWindDirectionPoint",
+   "invariant": true,
+   "quantity": null,
+   "unit": "deg"
+  },
+  "ph.points::WeatherWindSpeedPoint": {
+   "from": "ph.points::WeatherWindSpeedPoint",
+   "invariant": false,
+   "quantity": "velocity",
+   "unit": "mph"
+  },
+  "ph.points::ZoneAirHumiditySensor": {
+   "from": "ph.points::AirHumidityPoint",
+   "invariant": true,
+   "quantity": null,
+   "unit": "%RH"
+  },
+  "ph.points::ZoneAirHumiditySp": {
+   "from": "ph.points::AirHumidityPoint",
+   "invariant": true,
+   "quantity": null,
+   "unit": "%RH"
+  },
+  "ph.points::ZoneAirTempSensor": {
+   "from": "ph.points::FluidTempPoint",
+   "invariant": false,
+   "quantity": "temperature",
+   "unit": "°F"
+  },
+  "ph.points::ZoneAirTempSp": {
+   "from": "ph.points::FluidTempPoint",
+   "invariant": false,
+   "quantity": "temperature",
+   "unit": "°F"
+  },
+  "ph.points::ZoneCo2Sensor": {
+   "from": "ph.points::Co2Point",
+   "invariant": true,
+   "quantity": null,
+   "unit": "ppm"
+  },
+  "ph.points::ZoneCo2Sp": {
+   "from": "ph.points::Co2Point",
+   "invariant": true,
+   "quantity": null,
+   "unit": "ppm"
+  }
+ }
+}

@@ -1,0 +1,4952 @@
+{
+ "Assert": {
+  "file": "assert.xeto",
+  "line": 23,
+  "base": "HxComp",
+  "slots": {
+   "in": {
+    "type": "StatusBool?",
+    "line": 25,
+    "raw": "in: StatusBool? <summary, transient>",
+    "file": "assert.xeto"
+   },
+   "message": {
+    "type": "Str",
+    "line": 28,
+    "raw": "message: Str \"\"",
+    "file": "assert.xeto"
+   },
+   "out": {
+    "type": "StatusBool?",
+    "line": 31,
+    "raw": "out: StatusBool? <summary, transient, readonly, output>",
+    "file": "assert.xeto"
+   }
+  }
+ },
+ "BitMask": {
+  "file": "bits.xeto",
+  "line": 12,
+  "base": "HxComp",
+  "slots": {
+   "in": {
+    "type": "StatusNumber?",
+    "line": 14,
+    "raw": "in: StatusNumber? <summary, transient>",
+    "file": "bits.xeto"
+   },
+   "mask": {
+    "type": "StatusNumber?",
+    "line": 17,
+    "raw": "mask: StatusNumber? <summary>",
+    "file": "bits.xeto"
+   },
+   "out": {
+    "type": "StatusNumber?",
+    "line": 20,
+    "raw": "out: StatusNumber? <summary, transient, readonly, output>",
+    "file": "bits.xeto"
+   }
+  }
+ },
+ "BitAnd": {
+  "file": "bits.xeto",
+  "line": 24,
+  "base": "BitMask",
+  "slots": {
+   "in": {
+    "type": "StatusNumber?",
+    "line": 14,
+    "raw": "in: StatusNumber? <summary, transient>",
+    "file": "bits.xeto"
+   },
+   "mask": {
+    "type": "StatusNumber?",
+    "line": 17,
+    "raw": "mask: StatusNumber? <summary>",
+    "file": "bits.xeto"
+   },
+   "out": {
+    "type": "StatusNumber?",
+    "line": 20,
+    "raw": "out: StatusNumber? <summary, transient, readonly, output>",
+    "file": "bits.xeto"
+   }
+  }
+ },
+ "BitOr": {
+  "file": "bits.xeto",
+  "line": 27,
+  "base": "BitMask",
+  "slots": {
+   "in": {
+    "type": "StatusNumber?",
+    "line": 14,
+    "raw": "in: StatusNumber? <summary, transient>",
+    "file": "bits.xeto"
+   },
+   "mask": {
+    "type": "StatusNumber?",
+    "line": 17,
+    "raw": "mask: StatusNumber? <summary>",
+    "file": "bits.xeto"
+   },
+   "out": {
+    "type": "StatusNumber?",
+    "line": 20,
+    "raw": "out: StatusNumber? <summary, transient, readonly, output>",
+    "file": "bits.xeto"
+   }
+  }
+ },
+ "BitXor": {
+  "file": "bits.xeto",
+  "line": 30,
+  "base": "BitMask",
+  "slots": {
+   "in": {
+    "type": "StatusNumber?",
+    "line": 14,
+    "raw": "in: StatusNumber? <summary, transient>",
+    "file": "bits.xeto"
+   },
+   "mask": {
+    "type": "StatusNumber?",
+    "line": 17,
+    "raw": "mask: StatusNumber? <summary>",
+    "file": "bits.xeto"
+   },
+   "out": {
+    "type": "StatusNumber?",
+    "line": 20,
+    "raw": "out: StatusNumber? <summary, transient, readonly, output>",
+    "file": "bits.xeto"
+   }
+  }
+ },
+ "Const": {
+  "file": "constants.xeto",
+  "line": 10,
+  "base": "HxComp",
+  "slots": {}
+ },
+ "BoolConst": {
+  "file": "constants.xeto",
+  "line": 13,
+  "base": "Const",
+  "slots": {
+   "out": {
+    "type": "StatusBool?",
+    "line": 14,
+    "raw": "out: StatusBool? <summary>",
+    "file": "constants.xeto"
+   }
+  }
+ },
+ "NumberConst": {
+  "file": "constants.xeto",
+  "line": 18,
+  "base": "Const",
+  "slots": {
+   "out": {
+    "type": "StatusNumber?",
+    "line": 19,
+    "raw": "out: StatusNumber? <summary>",
+    "file": "constants.xeto"
+   }
+  }
+ },
+ "StrConst": {
+  "file": "constants.xeto",
+  "line": 23,
+  "base": "Const",
+  "slots": {
+   "out": {
+    "type": "StatusStr?",
+    "line": 24,
+    "raw": "out: StatusStr? <summary>",
+    "file": "constants.xeto"
+   }
+  }
+ },
+ "Integrator": {
+  "file": "continuous.xeto",
+  "line": 24,
+  "base": "HxComp",
+  "slots": {
+   "in": {
+    "type": "StatusNumber?",
+    "line": 26,
+    "raw": "in: StatusNumber? <summary, transient>",
+    "file": "continuous.xeto"
+   },
+   "inReset": {
+    "type": "StatusBool?",
+    "line": 29,
+    "raw": "inReset: StatusBool? <summary, transient>",
+    "file": "continuous.xeto"
+   },
+   "inResetVal": {
+    "type": "StatusNumber?",
+    "line": 32,
+    "raw": "inResetVal: StatusNumber? <summary, transient>",
+    "file": "continuous.xeto"
+   },
+   "k": {
+    "type": "Number",
+    "line": 35,
+    "raw": "k: Number 1",
+    "file": "continuous.xeto"
+   },
+   "yStart": {
+    "type": "Number",
+    "line": 38,
+    "raw": "yStart: Number 0",
+    "file": "continuous.xeto"
+   },
+   "out": {
+    "type": "StatusNumber?",
+    "line": 41,
+    "raw": "out: StatusNumber? <summary, transient, readonly, output>",
+    "file": "continuous.xeto"
+   }
+  }
+ },
+ "Derivative": {
+  "file": "continuous.xeto",
+  "line": 59,
+  "base": "HxComp",
+  "slots": {
+   "in": {
+    "type": "StatusNumber?",
+    "line": 61,
+    "raw": "in: StatusNumber? <summary, transient>",
+    "file": "continuous.xeto"
+   },
+   "k": {
+    "type": "Number",
+    "line": 64,
+    "raw": "k: Number 1",
+    "file": "continuous.xeto"
+   },
+   "timeConst": {
+    "type": "Number",
+    "line": 67,
+    "raw": "timeConst: Number 1",
+    "file": "continuous.xeto"
+   },
+   "yStart": {
+    "type": "Number",
+    "line": 70,
+    "raw": "yStart: Number 0",
+    "file": "continuous.xeto"
+   },
+   "out": {
+    "type": "StatusNumber?",
+    "line": 73,
+    "raw": "out: StatusNumber? <summary, transient, readonly, output>",
+    "file": "continuous.xeto"
+   }
+  }
+ },
+ "SlewRateLimit": {
+  "file": "continuous.xeto",
+  "line": 92,
+  "base": "HxComp",
+  "slots": {
+   "in": {
+    "type": "StatusNumber?",
+    "line": 94,
+    "raw": "in: StatusNumber? <summary, transient>",
+    "file": "continuous.xeto"
+   },
+   "raisingSlewRate": {
+    "type": "Number",
+    "line": 98,
+    "raw": "raisingSlewRate: Number",
+    "file": "continuous.xeto"
+   },
+   "fallingSlewRate": {
+    "type": "Number?",
+    "line": 102,
+    "raw": "fallingSlewRate: Number?",
+    "file": "continuous.xeto"
+   },
+   "timeConst": {
+    "type": "Duration?",
+    "line": 106,
+    "raw": "timeConst: Duration?",
+    "file": "continuous.xeto"
+   },
+   "enable": {
+    "type": "Bool",
+    "line": 109,
+    "raw": "enable: Bool \"true\"",
+    "file": "continuous.xeto"
+   },
+   "out": {
+    "type": "StatusNumber?",
+    "line": 112,
+    "raw": "out: StatusNumber? <summary, transient, readonly, output>",
+    "file": "continuous.xeto"
+   }
+  }
+ },
+ "MovingAverage": {
+  "file": "continuous.xeto",
+  "line": 132,
+  "base": "HxComp",
+  "slots": {
+   "in": {
+    "type": "StatusNumber?",
+    "line": 134,
+    "raw": "in: StatusNumber? <summary, transient>",
+    "file": "continuous.xeto"
+   },
+   "window": {
+    "type": "Duration",
+    "line": 137,
+    "raw": "window: Duration 1min",
+    "file": "continuous.xeto"
+   },
+   "out": {
+    "type": "StatusNumber?",
+    "line": 140,
+    "raw": "out: StatusNumber? <summary, transient, readonly, output>",
+    "file": "continuous.xeto"
+   }
+  }
+ },
+ "Pid": {
+  "file": "control.xeto",
+  "line": 27,
+  "base": "HxComp",
+  "slots": {
+   "out": {
+    "type": "StatusNumber?",
+    "line": 29,
+    "raw": "out: StatusNumber? <summary, transient, readonly, output>",
+    "file": "control.xeto"
+   },
+   "controlledVariable": {
+    "type": "StatusNumber?",
+    "line": 32,
+    "raw": "controlledVariable: StatusNumber? <summary, transient>",
+    "file": "control.xeto"
+   },
+   "setpoint": {
+    "type": "StatusNumber?",
+    "line": 35,
+    "raw": "setpoint: StatusNumber? <summary, transient>",
+    "file": "control.xeto"
+   },
+   "loopEnable": {
+    "type": "StatusBool?",
+    "line": 38,
+    "raw": "loopEnable: StatusBool? <transient>",
+    "file": "control.xeto"
+   },
+   "loopAction": {
+    "type": "PidAction",
+    "line": 42,
+    "raw": "loopAction: PidAction \"direct\"",
+    "file": "control.xeto"
+   },
+   "disableAction": {
+    "type": "PidDisableAction",
+    "line": 45,
+    "raw": "disableAction: PidDisableAction \"zero\"",
+    "file": "control.xeto"
+   },
+   "proportionalConstant": {
+    "type": "Float",
+    "line": 48,
+    "raw": "proportionalConstant: Float 1",
+    "file": "control.xeto"
+   },
+   "integralConstant": {
+    "type": "Float",
+    "line": 51,
+    "raw": "integralConstant: Float 0",
+    "file": "control.xeto"
+   },
+   "derivativeConstant": {
+    "type": "Float",
+    "line": 54,
+    "raw": "derivativeConstant: Float 0",
+    "file": "control.xeto"
+   },
+   "bias": {
+    "type": "Float",
+    "line": 57,
+    "raw": "bias: Float 50",
+    "file": "control.xeto"
+   },
+   "maximumOutput": {
+    "type": "Float",
+    "line": 60,
+    "raw": "maximumOutput: Float 100",
+    "file": "control.xeto"
+   },
+   "minimumOutput": {
+    "type": "Float",
+    "line": 63,
+    "raw": "minimumOutput: Float 0",
+    "file": "control.xeto"
+   },
+   "freq": {
+    "type": "Duration",
+    "line": 66,
+    "raw": "freq: Duration <minVal:1sec> 1sec",
+    "file": "control.xeto"
+   }
+  }
+ },
+ "PidAction": {
+  "file": "control.xeto",
+  "line": 70,
+  "base": "Enum",
+  "slots": {},
+  "items": [
+   "direct",
+   "reverse"
+  ]
+ },
+ "PidDisableAction": {
+  "file": "control.xeto",
+  "line": 79,
+  "base": "Enum",
+  "slots": {},
+  "items": [
+   "zero",
+   "hold",
+   "minValue",
+   "maxValue"
+  ]
+ },
+ "Conversion": {
+  "file": "conversions.xeto",
+  "line": 12,
+  "base": "HxComp",
+  "slots": {}
+ },
+ "BoolToStatusBool": {
+  "file": "conversions.xeto",
+  "line": 15,
+  "base": "Conversion",
+  "slots": {
+   "in": {
+    "type": "Bool",
+    "line": 16,
+    "raw": "in: Bool <summary, transient> \"false\"",
+    "file": "conversions.xeto"
+   },
+   "out": {
+    "type": "StatusBool",
+    "line": 18,
+    "raw": "out: StatusBool <summary, transient, readonly, output>",
+    "file": "conversions.xeto"
+   }
+  }
+ },
+ "StatusBoolToBool": {
+  "file": "conversions.xeto",
+  "line": 22,
+  "base": "Conversion",
+  "slots": {
+   "in": {
+    "type": "StatusBool?",
+    "line": 23,
+    "raw": "in: StatusBool? <summary, transient>",
+    "file": "conversions.xeto"
+   },
+   "out": {
+    "type": "Bool",
+    "line": 25,
+    "raw": "out: Bool <summary, transient, readonly, output>",
+    "file": "conversions.xeto"
+   },
+   "whenNull": {
+    "type": "Bool",
+    "line": 28,
+    "raw": "whenNull: Bool \"false\"",
+    "file": "conversions.xeto"
+   }
+  }
+ },
+ "NumberToStatusNumber": {
+  "file": "conversions.xeto",
+  "line": 43,
+  "base": "Conversion",
+  "slots": {
+   "in": {
+    "type": "Number",
+    "line": 44,
+    "raw": "in: Number <summary, transient>",
+    "file": "conversions.xeto"
+   },
+   "out": {
+    "type": "StatusNumber",
+    "line": 46,
+    "raw": "out: StatusNumber <summary, transient, readonly, output>",
+    "file": "conversions.xeto"
+   }
+  }
+ },
+ "StatusNumberToNumber": {
+  "file": "conversions.xeto",
+  "line": 50,
+  "base": "Conversion",
+  "slots": {
+   "in": {
+    "type": "StatusNumber?",
+    "line": 51,
+    "raw": "in: StatusNumber? <summary, transient>",
+    "file": "conversions.xeto"
+   },
+   "out": {
+    "type": "Number",
+    "line": 53,
+    "raw": "out: Number <summary, transient, readonly, output>",
+    "file": "conversions.xeto"
+   },
+   "whenNull": {
+    "type": "Number",
+    "line": 56,
+    "raw": "whenNull: Number",
+    "file": "conversions.xeto"
+   }
+  }
+ },
+ "StrToStatusStr": {
+  "file": "conversions.xeto",
+  "line": 60,
+  "base": "Conversion",
+  "slots": {
+   "in": {
+    "type": "Str",
+    "line": 61,
+    "raw": "in: Str <summary, transient>",
+    "file": "conversions.xeto"
+   },
+   "out": {
+    "type": "StatusStr",
+    "line": 63,
+    "raw": "out: StatusStr <summary, transient, readonly, output>",
+    "file": "conversions.xeto"
+   }
+  }
+ },
+ "StatusStrToStatusNumber": {
+  "file": "conversions.xeto",
+  "line": 68,
+  "base": "Conversion",
+  "slots": {
+   "in": {
+    "type": "StatusStr?",
+    "line": 69,
+    "raw": "in: StatusStr? <summary, transient>",
+    "file": "conversions.xeto"
+   },
+   "out": {
+    "type": "StatusNumber?",
+    "line": 71,
+    "raw": "out: StatusNumber? <summary, transient, readonly, output>",
+    "file": "conversions.xeto"
+   }
+  }
+ },
+ "Status": {
+  "file": "core.xeto",
+  "line": 10,
+  "base": "Dict",
+  "slots": {
+   "alarm": {
+    "type": "Marker?",
+    "line": 11,
+    "raw": "alarm: Marker?",
+    "file": "core.xeto"
+   },
+   "disabled": {
+    "type": "Marker?",
+    "line": 12,
+    "raw": "disabled: Marker?",
+    "file": "core.xeto"
+   },
+   "down": {
+    "type": "Marker?",
+    "line": 13,
+    "raw": "down: Marker?",
+    "file": "core.xeto"
+   },
+   "fault": {
+    "type": "Marker?",
+    "line": 14,
+    "raw": "fault: Marker?",
+    "file": "core.xeto"
+   },
+   "overridden": {
+    "type": "Marker?",
+    "line": 15,
+    "raw": "overridden: Marker?",
+    "file": "core.xeto"
+   },
+   "stale": {
+    "type": "Marker?",
+    "line": 16,
+    "raw": "stale: Marker?",
+    "file": "core.xeto"
+   },
+   "unacked": {
+    "type": "Marker?",
+    "line": 17,
+    "raw": "unacked: Marker?",
+    "file": "core.xeto"
+   }
+  }
+ },
+ "StatusVal": {
+  "file": "core.xeto",
+  "line": 21,
+  "base": "Dict",
+  "slots": {
+   "val": {
+    "type": "Scalar",
+    "line": 22,
+    "raw": "val: Scalar",
+    "file": "core.xeto"
+   },
+   "status": {
+    "type": "Status",
+    "line": 23,
+    "raw": "status: Status",
+    "file": "core.xeto"
+   }
+  }
+ },
+ "StatusNumber": {
+  "file": "core.xeto",
+  "line": 27,
+  "base": "StatusVal",
+  "slots": {
+   "val": {
+    "type": "Number",
+    "line": 28,
+    "raw": "val: Number",
+    "file": "core.xeto"
+   },
+   "status": {
+    "type": "Status",
+    "line": 23,
+    "raw": "status: Status",
+    "file": "core.xeto"
+   }
+  }
+ },
+ "StatusBool": {
+  "file": "core.xeto",
+  "line": 32,
+  "base": "StatusVal",
+  "slots": {
+   "val": {
+    "type": "Bool",
+    "line": 33,
+    "raw": "val: Bool",
+    "file": "core.xeto"
+   },
+   "status": {
+    "type": "Status",
+    "line": 23,
+    "raw": "status: Status",
+    "file": "core.xeto"
+   }
+  }
+ },
+ "StatusStr": {
+  "file": "core.xeto",
+  "line": 37,
+  "base": "StatusVal",
+  "slots": {
+   "val": {
+    "type": "Str",
+    "line": 38,
+    "raw": "val: Str",
+    "file": "core.xeto"
+   },
+   "status": {
+    "type": "Status",
+    "line": 23,
+    "raw": "status: Status",
+    "file": "core.xeto"
+   }
+  }
+ },
+ "HxComp": {
+  "file": "core.xeto",
+  "line": 42,
+  "base": "Comp",
+  "slots": {}
+ },
+ "DigitalInputDemux": {
+  "file": "demux.xeto",
+  "line": 12,
+  "base": "HxComp",
+  "slots": {
+   "in": {
+    "type": "StatusNumber?",
+    "line": 14,
+    "raw": "in: StatusNumber? <summary, transient>",
+    "file": "demux.xeto"
+   },
+   "offset": {
+    "type": "Float",
+    "line": 16,
+    "raw": "offset: Float",
+    "file": "demux.xeto"
+   },
+   "out1": {
+    "type": "StatusBool?",
+    "line": 18,
+    "raw": "out1: StatusBool? <summary, transient, readonly, output>",
+    "file": "demux.xeto"
+   },
+   "out2": {
+    "type": "StatusBool?",
+    "line": 20,
+    "raw": "out2: StatusBool? <summary, transient, readonly, output>",
+    "file": "demux.xeto"
+   },
+   "out3": {
+    "type": "StatusBool?",
+    "line": 22,
+    "raw": "out3: StatusBool? <summary, transient, readonly, output>",
+    "file": "demux.xeto"
+   },
+   "out4": {
+    "type": "StatusBool?",
+    "line": 24,
+    "raw": "out4: StatusBool? <summary, transient, readonly, output>",
+    "file": "demux.xeto"
+   },
+   "out1Value": {
+    "type": "Float",
+    "line": 26,
+    "raw": "out1Value: Float 4.80f",
+    "file": "demux.xeto"
+   },
+   "out2Value": {
+    "type": "Float",
+    "line": 28,
+    "raw": "out2Value: Float 2.40f",
+    "file": "demux.xeto"
+   },
+   "out3Value": {
+    "type": "Float",
+    "line": 30,
+    "raw": "out3Value: Float 1.2f",
+    "file": "demux.xeto"
+   },
+   "out4Value": {
+    "type": "Float",
+    "line": 32,
+    "raw": "out4Value: Float 0.60f",
+    "file": "demux.xeto"
+   },
+   "deadband": {
+    "type": "Float",
+    "line": 34,
+    "raw": "deadband: Float 0.10f",
+    "file": "demux.xeto"
+   }
+  }
+ },
+ "NumberToBitsDemux": {
+  "file": "demux.xeto",
+  "line": 39,
+  "base": "HxComp",
+  "slots": {
+   "in": {
+    "type": "StatusNumber?",
+    "line": 41,
+    "raw": "in: StatusNumber? <summary, transient>",
+    "file": "demux.xeto"
+   },
+   "bit0": {
+    "type": "StatusBool?",
+    "line": 44,
+    "raw": "bit0: StatusBool? <summary, transient, readonly, output>",
+    "file": "demux.xeto"
+   },
+   "bit1": {
+    "type": "StatusBool?",
+    "line": 47,
+    "raw": "bit1: StatusBool? <summary, transient, readonly, output>",
+    "file": "demux.xeto"
+   },
+   "bit2": {
+    "type": "StatusBool?",
+    "line": 50,
+    "raw": "bit2: StatusBool? <summary, transient, readonly, output>",
+    "file": "demux.xeto"
+   },
+   "bit3": {
+    "type": "StatusBool?",
+    "line": 53,
+    "raw": "bit3: StatusBool? <summary, transient, readonly, output>",
+    "file": "demux.xeto"
+   },
+   "bit4": {
+    "type": "StatusBool?",
+    "line": 56,
+    "raw": "bit4: StatusBool? <summary, transient, readonly, output>",
+    "file": "demux.xeto"
+   },
+   "bit5": {
+    "type": "StatusBool?",
+    "line": 59,
+    "raw": "bit5: StatusBool? <summary, transient, readonly, output>",
+    "file": "demux.xeto"
+   },
+   "bit6": {
+    "type": "StatusBool?",
+    "line": 62,
+    "raw": "bit6: StatusBool? <summary, transient, readonly, output>",
+    "file": "demux.xeto"
+   },
+   "bit7": {
+    "type": "StatusBool?",
+    "line": 65,
+    "raw": "bit7: StatusBool? <summary, transient, readonly, output>",
+    "file": "demux.xeto"
+   },
+   "bit8": {
+    "type": "StatusBool?",
+    "line": 68,
+    "raw": "bit8: StatusBool? <summary, transient, readonly, output>",
+    "file": "demux.xeto"
+   },
+   "bit9": {
+    "type": "StatusBool?",
+    "line": 71,
+    "raw": "bit9: StatusBool? <summary, transient, readonly, output>",
+    "file": "demux.xeto"
+   },
+   "bit10": {
+    "type": "StatusBool?",
+    "line": 74,
+    "raw": "bit10: StatusBool? <summary, transient, readonly, output>",
+    "file": "demux.xeto"
+   },
+   "bit11": {
+    "type": "StatusBool?",
+    "line": 77,
+    "raw": "bit11: StatusBool? <summary, transient, readonly, output>",
+    "file": "demux.xeto"
+   },
+   "bit12": {
+    "type": "StatusBool?",
+    "line": 80,
+    "raw": "bit12: StatusBool? <summary, transient, readonly, output>",
+    "file": "demux.xeto"
+   },
+   "bit13": {
+    "type": "StatusBool?",
+    "line": 83,
+    "raw": "bit13: StatusBool? <summary, transient, readonly, output>",
+    "file": "demux.xeto"
+   },
+   "bit14": {
+    "type": "StatusBool?",
+    "line": 86,
+    "raw": "bit14: StatusBool? <summary, transient, readonly, output>",
+    "file": "demux.xeto"
+   },
+   "bit15": {
+    "type": "StatusBool?",
+    "line": 89,
+    "raw": "bit15: StatusBool? <summary, transient, readonly, output>",
+    "file": "demux.xeto"
+   },
+   "bit16": {
+    "type": "StatusBool?",
+    "line": 92,
+    "raw": "bit16: StatusBool? <summary, transient, readonly, output>",
+    "file": "demux.xeto"
+   },
+   "bit17": {
+    "type": "StatusBool?",
+    "line": 95,
+    "raw": "bit17: StatusBool? <summary, transient, readonly, output>",
+    "file": "demux.xeto"
+   },
+   "bit18": {
+    "type": "StatusBool?",
+    "line": 98,
+    "raw": "bit18: StatusBool? <summary, transient, readonly, output>",
+    "file": "demux.xeto"
+   },
+   "bit19": {
+    "type": "StatusBool?",
+    "line": 101,
+    "raw": "bit19: StatusBool? <summary, transient, readonly, output>",
+    "file": "demux.xeto"
+   },
+   "bit20": {
+    "type": "StatusBool?",
+    "line": 104,
+    "raw": "bit20: StatusBool? <summary, transient, readonly, output>",
+    "file": "demux.xeto"
+   },
+   "bit21": {
+    "type": "StatusBool?",
+    "line": 107,
+    "raw": "bit21: StatusBool? <summary, transient, readonly, output>",
+    "file": "demux.xeto"
+   },
+   "bit22": {
+    "type": "StatusBool?",
+    "line": 110,
+    "raw": "bit22: StatusBool? <summary, transient, readonly, output>",
+    "file": "demux.xeto"
+   },
+   "bit23": {
+    "type": "StatusBool?",
+    "line": 113,
+    "raw": "bit23: StatusBool? <summary, transient, readonly, output>",
+    "file": "demux.xeto"
+   },
+   "bit24": {
+    "type": "StatusBool?",
+    "line": 116,
+    "raw": "bit24: StatusBool? <summary, transient, readonly, output>",
+    "file": "demux.xeto"
+   },
+   "bit25": {
+    "type": "StatusBool?",
+    "line": 119,
+    "raw": "bit25: StatusBool? <summary, transient, readonly, output>",
+    "file": "demux.xeto"
+   },
+   "bit26": {
+    "type": "StatusBool?",
+    "line": 122,
+    "raw": "bit26: StatusBool? <summary, transient, readonly, output>",
+    "file": "demux.xeto"
+   },
+   "bit27": {
+    "type": "StatusBool?",
+    "line": 125,
+    "raw": "bit27: StatusBool? <summary, transient, readonly, output>",
+    "file": "demux.xeto"
+   },
+   "bit28": {
+    "type": "StatusBool?",
+    "line": 128,
+    "raw": "bit28: StatusBool? <summary, transient, readonly, output>",
+    "file": "demux.xeto"
+   },
+   "bit29": {
+    "type": "StatusBool?",
+    "line": 131,
+    "raw": "bit29: StatusBool? <summary, transient, readonly, output>",
+    "file": "demux.xeto"
+   },
+   "bit30": {
+    "type": "StatusBool?",
+    "line": 134,
+    "raw": "bit30: StatusBool? <summary, transient, readonly, output>",
+    "file": "demux.xeto"
+   },
+   "bit31": {
+    "type": "StatusBool?",
+    "line": 137,
+    "raw": "bit31: StatusBool? <summary, transient, readonly, output>",
+    "file": "demux.xeto"
+   },
+   "bit32": {
+    "type": "StatusBool?",
+    "line": 140,
+    "raw": "bit32: StatusBool? <summary, transient, readonly, output>",
+    "file": "demux.xeto"
+   },
+   "bit33": {
+    "type": "StatusBool?",
+    "line": 143,
+    "raw": "bit33: StatusBool? <summary, transient, readonly, output>",
+    "file": "demux.xeto"
+   },
+   "bit34": {
+    "type": "StatusBool?",
+    "line": 146,
+    "raw": "bit34: StatusBool? <summary, transient, readonly, output>",
+    "file": "demux.xeto"
+   },
+   "bit35": {
+    "type": "StatusBool?",
+    "line": 149,
+    "raw": "bit35: StatusBool? <summary, transient, readonly, output>",
+    "file": "demux.xeto"
+   },
+   "bit36": {
+    "type": "StatusBool?",
+    "line": 152,
+    "raw": "bit36: StatusBool? <summary, transient, readonly, output>",
+    "file": "demux.xeto"
+   },
+   "bit37": {
+    "type": "StatusBool?",
+    "line": 155,
+    "raw": "bit37: StatusBool? <summary, transient, readonly, output>",
+    "file": "demux.xeto"
+   },
+   "bit38": {
+    "type": "StatusBool?",
+    "line": 158,
+    "raw": "bit38: StatusBool? <summary, transient, readonly, output>",
+    "file": "demux.xeto"
+   },
+   "bit39": {
+    "type": "StatusBool?",
+    "line": 161,
+    "raw": "bit39: StatusBool? <summary, transient, readonly, output>",
+    "file": "demux.xeto"
+   },
+   "bit40": {
+    "type": "StatusBool?",
+    "line": 164,
+    "raw": "bit40: StatusBool? <summary, transient, readonly, output>",
+    "file": "demux.xeto"
+   },
+   "bit41": {
+    "type": "StatusBool?",
+    "line": 167,
+    "raw": "bit41: StatusBool? <summary, transient, readonly, output>",
+    "file": "demux.xeto"
+   },
+   "bit42": {
+    "type": "StatusBool?",
+    "line": 170,
+    "raw": "bit42: StatusBool? <summary, transient, readonly, output>",
+    "file": "demux.xeto"
+   },
+   "bit43": {
+    "type": "StatusBool?",
+    "line": 173,
+    "raw": "bit43: StatusBool? <summary, transient, readonly, output>",
+    "file": "demux.xeto"
+   },
+   "bit44": {
+    "type": "StatusBool?",
+    "line": 176,
+    "raw": "bit44: StatusBool? <summary, transient, readonly, output>",
+    "file": "demux.xeto"
+   },
+   "bit45": {
+    "type": "StatusBool?",
+    "line": 179,
+    "raw": "bit45: StatusBool? <summary, transient, readonly, output>",
+    "file": "demux.xeto"
+   },
+   "bit46": {
+    "type": "StatusBool?",
+    "line": 182,
+    "raw": "bit46: StatusBool? <summary, transient, readonly, output>",
+    "file": "demux.xeto"
+   },
+   "bit47": {
+    "type": "StatusBool?",
+    "line": 185,
+    "raw": "bit47: StatusBool? <summary, transient, readonly, output>",
+    "file": "demux.xeto"
+   },
+   "bit48": {
+    "type": "StatusBool?",
+    "line": 188,
+    "raw": "bit48: StatusBool? <summary, transient, readonly, output>",
+    "file": "demux.xeto"
+   },
+   "bit49": {
+    "type": "StatusBool?",
+    "line": 191,
+    "raw": "bit49: StatusBool? <summary, transient, readonly, output>",
+    "file": "demux.xeto"
+   },
+   "bit50": {
+    "type": "StatusBool?",
+    "line": 194,
+    "raw": "bit50: StatusBool? <summary, transient, readonly, output>",
+    "file": "demux.xeto"
+   },
+   "bit51": {
+    "type": "StatusBool?",
+    "line": 197,
+    "raw": "bit51: StatusBool? <summary, transient, readonly, output>",
+    "file": "demux.xeto"
+   },
+   "bit52": {
+    "type": "StatusBool?",
+    "line": 200,
+    "raw": "bit52: StatusBool? <summary, transient, readonly, output>",
+    "file": "demux.xeto"
+   },
+   "bit53": {
+    "type": "StatusBool?",
+    "line": 203,
+    "raw": "bit53: StatusBool? <summary, transient, readonly, output>",
+    "file": "demux.xeto"
+   },
+   "bit54": {
+    "type": "StatusBool?",
+    "line": 206,
+    "raw": "bit54: StatusBool? <summary, transient, readonly, output>",
+    "file": "demux.xeto"
+   },
+   "bit55": {
+    "type": "StatusBool?",
+    "line": 209,
+    "raw": "bit55: StatusBool? <summary, transient, readonly, output>",
+    "file": "demux.xeto"
+   },
+   "bit56": {
+    "type": "StatusBool?",
+    "line": 212,
+    "raw": "bit56: StatusBool? <summary, transient, readonly, output>",
+    "file": "demux.xeto"
+   },
+   "bit57": {
+    "type": "StatusBool?",
+    "line": 215,
+    "raw": "bit57: StatusBool? <summary, transient, readonly, output>",
+    "file": "demux.xeto"
+   },
+   "bit58": {
+    "type": "StatusBool?",
+    "line": 218,
+    "raw": "bit58: StatusBool? <summary, transient, readonly, output>",
+    "file": "demux.xeto"
+   },
+   "bit59": {
+    "type": "StatusBool?",
+    "line": 221,
+    "raw": "bit59: StatusBool? <summary, transient, readonly, output>",
+    "file": "demux.xeto"
+   },
+   "bit60": {
+    "type": "StatusBool?",
+    "line": 224,
+    "raw": "bit60: StatusBool? <summary, transient, readonly, output>",
+    "file": "demux.xeto"
+   },
+   "bit61": {
+    "type": "StatusBool?",
+    "line": 227,
+    "raw": "bit61: StatusBool? <summary, transient, readonly, output>",
+    "file": "demux.xeto"
+   },
+   "bit62": {
+    "type": "StatusBool?",
+    "line": 230,
+    "raw": "bit62: StatusBool? <summary, transient, readonly, output>",
+    "file": "demux.xeto"
+   },
+   "bit63": {
+    "type": "StatusBool?",
+    "line": 233,
+    "raw": "bit63: StatusBool? <summary, transient, readonly, output>",
+    "file": "demux.xeto"
+   },
+   "byte0": {
+    "type": "StatusNumber?",
+    "line": 236,
+    "raw": "byte0: StatusNumber? <summary, transient, readonly, output>",
+    "file": "demux.xeto"
+   },
+   "byte1": {
+    "type": "StatusNumber?",
+    "line": 239,
+    "raw": "byte1: StatusNumber? <summary, transient, readonly, output>",
+    "file": "demux.xeto"
+   },
+   "byte2": {
+    "type": "StatusNumber?",
+    "line": 242,
+    "raw": "byte2: StatusNumber? <summary, transient, readonly, output>",
+    "file": "demux.xeto"
+   },
+   "byte3": {
+    "type": "StatusNumber?",
+    "line": 245,
+    "raw": "byte3: StatusNumber? <summary, transient, readonly, output>",
+    "file": "demux.xeto"
+   },
+   "byte4": {
+    "type": "StatusNumber?",
+    "line": 248,
+    "raw": "byte4: StatusNumber? <summary, transient, readonly, output>",
+    "file": "demux.xeto"
+   },
+   "byte5": {
+    "type": "StatusNumber?",
+    "line": 251,
+    "raw": "byte5: StatusNumber? <summary, transient, readonly, output>",
+    "file": "demux.xeto"
+   },
+   "byte6": {
+    "type": "StatusNumber?",
+    "line": 254,
+    "raw": "byte6: StatusNumber? <summary, transient, readonly, output>",
+    "file": "demux.xeto"
+   },
+   "byte7": {
+    "type": "StatusNumber?",
+    "line": 257,
+    "raw": "byte7: StatusNumber? <summary, transient, readonly, output>",
+    "file": "demux.xeto"
+   }
+  }
+ },
+ "Latch": {
+  "file": "latches.xeto",
+  "line": 14,
+  "base": "HxComp",
+  "slots": {
+   "clock": {
+    "type": "Bool",
+    "line": 17,
+    "raw": "clock: Bool <summary>",
+    "file": "latches.xeto"
+   },
+   "in": {
+    "type": "StatusVal?",
+    "line": 21,
+    "raw": "in: StatusVal? <summary, transient>",
+    "file": "latches.xeto"
+   },
+   "out": {
+    "type": "StatusVal?",
+    "line": 24,
+    "raw": "out: StatusVal? <summary, transient, readonly, output>",
+    "file": "latches.xeto"
+   }
+  }
+ },
+ "BoolLatch": {
+  "file": "latches.xeto",
+  "line": 28,
+  "base": "Latch",
+  "slots": {
+   "clock": {
+    "type": "Bool",
+    "line": 17,
+    "raw": "clock: Bool <summary>",
+    "file": "latches.xeto"
+   },
+   "in": {
+    "type": "StatusBool?",
+    "line": 29,
+    "raw": "in: StatusBool?",
+    "file": "latches.xeto"
+   },
+   "out": {
+    "type": "StatusBool?",
+    "line": 30,
+    "raw": "out: StatusBool?",
+    "file": "latches.xeto"
+   }
+  }
+ },
+ "NumberLatch": {
+  "file": "latches.xeto",
+  "line": 34,
+  "base": "Latch",
+  "slots": {
+   "clock": {
+    "type": "Bool",
+    "line": 17,
+    "raw": "clock: Bool <summary>",
+    "file": "latches.xeto"
+   },
+   "in": {
+    "type": "StatusNumber?",
+    "line": 35,
+    "raw": "in: StatusNumber?",
+    "file": "latches.xeto"
+   },
+   "out": {
+    "type": "StatusNumber?",
+    "line": 36,
+    "raw": "out: StatusNumber?",
+    "file": "latches.xeto"
+   }
+  }
+ },
+ "StrLatch": {
+  "file": "latches.xeto",
+  "line": 40,
+  "base": "Latch",
+  "slots": {
+   "clock": {
+    "type": "Bool",
+    "line": 17,
+    "raw": "clock: Bool <summary>",
+    "file": "latches.xeto"
+   },
+   "in": {
+    "type": "StatusStr?",
+    "line": 41,
+    "raw": "in: StatusStr?",
+    "file": "latches.xeto"
+   },
+   "out": {
+    "type": "StatusStr?",
+    "line": 42,
+    "raw": "out: StatusStr?",
+    "file": "latches.xeto"
+   }
+  }
+ },
+ "SetResetLatch": {
+  "file": "latches.xeto",
+  "line": 54,
+  "base": "Logic",
+  "slots": {
+   "out": {
+    "type": "StatusBool?",
+    "line": 12,
+    "raw": "out: StatusBool? <summary, transient, readonly, output>",
+    "file": "logic.xeto"
+   },
+   "in": {
+    "type": "StatusBool?",
+    "line": 56,
+    "raw": "in: StatusBool? <summary, transient>",
+    "file": "latches.xeto"
+   },
+   "inClear": {
+    "type": "StatusBool?",
+    "line": 59,
+    "raw": "inClear: StatusBool? <summary, transient>",
+    "file": "latches.xeto"
+   }
+  }
+ },
+ "Toggle": {
+  "file": "latches.xeto",
+  "line": 71,
+  "base": "Logic",
+  "slots": {
+   "out": {
+    "type": "StatusBool?",
+    "line": 12,
+    "raw": "out: StatusBool? <summary, transient, readonly, output>",
+    "file": "logic.xeto"
+   },
+   "in": {
+    "type": "StatusBool?",
+    "line": 73,
+    "raw": "in: StatusBool? <summary, transient>",
+    "file": "latches.xeto"
+   },
+   "inClear": {
+    "type": "StatusBool?",
+    "line": 76,
+    "raw": "inClear: StatusBool? <summary, transient>",
+    "file": "latches.xeto"
+   }
+  }
+ },
+ "pragma": {
+  "file": "lib.xeto",
+  "line": 9,
+  "base": "Lib",
+  "slots": {}
+ },
+ "Logic": {
+  "file": "logic.xeto",
+  "line": 10,
+  "base": "HxComp",
+  "slots": {
+   "out": {
+    "type": "StatusBool?",
+    "line": 12,
+    "raw": "out: StatusBool? <summary, transient, readonly, output>",
+    "file": "logic.xeto"
+   }
+  }
+ },
+ "Not": {
+  "file": "logic.xeto",
+  "line": 16,
+  "base": "Logic",
+  "slots": {
+   "out": {
+    "type": "StatusBool?",
+    "line": 12,
+    "raw": "out: StatusBool? <summary, transient, readonly, output>",
+    "file": "logic.xeto"
+   },
+   "in": {
+    "type": "StatusBool?",
+    "line": 17,
+    "raw": "in: StatusBool? <summary, transient>",
+    "file": "logic.xeto"
+   }
+  }
+ },
+ "QuadLogic": {
+  "file": "logic.xeto",
+  "line": 23,
+  "base": "Logic",
+  "slots": {
+   "out": {
+    "type": "StatusBool?",
+    "line": 12,
+    "raw": "out: StatusBool? <summary, transient, readonly, output>",
+    "file": "logic.xeto"
+   },
+   "inA": {
+    "type": "StatusBool?",
+    "line": 25,
+    "raw": "inA: StatusBool? <summary, transient>",
+    "file": "logic.xeto"
+   },
+   "inB": {
+    "type": "StatusBool?",
+    "line": 28,
+    "raw": "inB: StatusBool? <summary, transient>",
+    "file": "logic.xeto"
+   },
+   "inC": {
+    "type": "StatusBool?",
+    "line": 31,
+    "raw": "inC: StatusBool? <transient>",
+    "file": "logic.xeto"
+   },
+   "inD": {
+    "type": "StatusBool?",
+    "line": 34,
+    "raw": "inD: StatusBool? <transient>",
+    "file": "logic.xeto"
+   }
+  }
+ },
+ "And": {
+  "file": "logic.xeto",
+  "line": 38,
+  "base": "QuadLogic",
+  "slots": {
+   "out": {
+    "type": "StatusBool?",
+    "line": 12,
+    "raw": "out: StatusBool? <summary, transient, readonly, output>",
+    "file": "logic.xeto"
+   },
+   "inA": {
+    "type": "StatusBool?",
+    "line": 25,
+    "raw": "inA: StatusBool? <summary, transient>",
+    "file": "logic.xeto"
+   },
+   "inB": {
+    "type": "StatusBool?",
+    "line": 28,
+    "raw": "inB: StatusBool? <summary, transient>",
+    "file": "logic.xeto"
+   },
+   "inC": {
+    "type": "StatusBool?",
+    "line": 31,
+    "raw": "inC: StatusBool? <transient>",
+    "file": "logic.xeto"
+   },
+   "inD": {
+    "type": "StatusBool?",
+    "line": 34,
+    "raw": "inD: StatusBool? <transient>",
+    "file": "logic.xeto"
+   }
+  }
+ },
+ "Or": {
+  "file": "logic.xeto",
+  "line": 41,
+  "base": "QuadLogic",
+  "slots": {
+   "out": {
+    "type": "StatusBool?",
+    "line": 12,
+    "raw": "out: StatusBool? <summary, transient, readonly, output>",
+    "file": "logic.xeto"
+   },
+   "inA": {
+    "type": "StatusBool?",
+    "line": 25,
+    "raw": "inA: StatusBool? <summary, transient>",
+    "file": "logic.xeto"
+   },
+   "inB": {
+    "type": "StatusBool?",
+    "line": 28,
+    "raw": "inB: StatusBool? <summary, transient>",
+    "file": "logic.xeto"
+   },
+   "inC": {
+    "type": "StatusBool?",
+    "line": 31,
+    "raw": "inC: StatusBool? <transient>",
+    "file": "logic.xeto"
+   },
+   "inD": {
+    "type": "StatusBool?",
+    "line": 34,
+    "raw": "inD: StatusBool? <transient>",
+    "file": "logic.xeto"
+   }
+  }
+ },
+ "Xor": {
+  "file": "logic.xeto",
+  "line": 44,
+  "base": "QuadLogic",
+  "slots": {
+   "out": {
+    "type": "StatusBool?",
+    "line": 12,
+    "raw": "out: StatusBool? <summary, transient, readonly, output>",
+    "file": "logic.xeto"
+   },
+   "inA": {
+    "type": "StatusBool?",
+    "line": 25,
+    "raw": "inA: StatusBool? <summary, transient>",
+    "file": "logic.xeto"
+   },
+   "inB": {
+    "type": "StatusBool?",
+    "line": 28,
+    "raw": "inB: StatusBool? <summary, transient>",
+    "file": "logic.xeto"
+   },
+   "inC": {
+    "type": "StatusBool?",
+    "line": 31,
+    "raw": "inC: StatusBool? <transient>",
+    "file": "logic.xeto"
+   },
+   "inD": {
+    "type": "StatusBool?",
+    "line": 34,
+    "raw": "inD: StatusBool? <transient>",
+    "file": "logic.xeto"
+   }
+  }
+ },
+ "Comparison": {
+  "file": "logic.xeto",
+  "line": 47,
+  "base": "Logic",
+  "slots": {
+   "out": {
+    "type": "StatusBool?",
+    "line": 12,
+    "raw": "out: StatusBool? <summary, transient, readonly, output>",
+    "file": "logic.xeto"
+   },
+   "inA": {
+    "type": "StatusNumber?",
+    "line": 49,
+    "raw": "inA: StatusNumber? <summary, transient>",
+    "file": "logic.xeto"
+   },
+   "inB": {
+    "type": "StatusNumber?",
+    "line": 52,
+    "raw": "inB: StatusNumber? <summary, transient>",
+    "file": "logic.xeto"
+   }
+  }
+ },
+ "GreaterThan": {
+  "file": "logic.xeto",
+  "line": 56,
+  "base": "Comparison",
+  "slots": {
+   "out": {
+    "type": "StatusBool?",
+    "line": 12,
+    "raw": "out: StatusBool? <summary, transient, readonly, output>",
+    "file": "logic.xeto"
+   },
+   "inA": {
+    "type": "StatusNumber?",
+    "line": 49,
+    "raw": "inA: StatusNumber? <summary, transient>",
+    "file": "logic.xeto"
+   },
+   "inB": {
+    "type": "StatusNumber?",
+    "line": 52,
+    "raw": "inB: StatusNumber? <summary, transient>",
+    "file": "logic.xeto"
+   }
+  }
+ },
+ "GreaterThanEqual": {
+  "file": "logic.xeto",
+  "line": 59,
+  "base": "Comparison",
+  "slots": {
+   "out": {
+    "type": "StatusBool?",
+    "line": 12,
+    "raw": "out: StatusBool? <summary, transient, readonly, output>",
+    "file": "logic.xeto"
+   },
+   "inA": {
+    "type": "StatusNumber?",
+    "line": 49,
+    "raw": "inA: StatusNumber? <summary, transient>",
+    "file": "logic.xeto"
+   },
+   "inB": {
+    "type": "StatusNumber?",
+    "line": 52,
+    "raw": "inB: StatusNumber? <summary, transient>",
+    "file": "logic.xeto"
+   }
+  }
+ },
+ "LessThan": {
+  "file": "logic.xeto",
+  "line": 62,
+  "base": "Comparison",
+  "slots": {
+   "out": {
+    "type": "StatusBool?",
+    "line": 12,
+    "raw": "out: StatusBool? <summary, transient, readonly, output>",
+    "file": "logic.xeto"
+   },
+   "inA": {
+    "type": "StatusNumber?",
+    "line": 49,
+    "raw": "inA: StatusNumber? <summary, transient>",
+    "file": "logic.xeto"
+   },
+   "inB": {
+    "type": "StatusNumber?",
+    "line": 52,
+    "raw": "inB: StatusNumber? <summary, transient>",
+    "file": "logic.xeto"
+   }
+  }
+ },
+ "LessThanEqual": {
+  "file": "logic.xeto",
+  "line": 65,
+  "base": "Comparison",
+  "slots": {
+   "out": {
+    "type": "StatusBool?",
+    "line": 12,
+    "raw": "out: StatusBool? <summary, transient, readonly, output>",
+    "file": "logic.xeto"
+   },
+   "inA": {
+    "type": "StatusNumber?",
+    "line": 49,
+    "raw": "inA: StatusNumber? <summary, transient>",
+    "file": "logic.xeto"
+   },
+   "inB": {
+    "type": "StatusNumber?",
+    "line": 52,
+    "raw": "inB: StatusNumber? <summary, transient>",
+    "file": "logic.xeto"
+   }
+  }
+ },
+ "Equal": {
+  "file": "logic.xeto",
+  "line": 68,
+  "base": "Comparison",
+  "slots": {
+   "out": {
+    "type": "StatusBool?",
+    "line": 12,
+    "raw": "out: StatusBool? <summary, transient, readonly, output>",
+    "file": "logic.xeto"
+   },
+   "inA": {
+    "type": "StatusNumber?",
+    "line": 49,
+    "raw": "inA: StatusNumber? <summary, transient>",
+    "file": "logic.xeto"
+   },
+   "inB": {
+    "type": "StatusNumber?",
+    "line": 52,
+    "raw": "inB: StatusNumber? <summary, transient>",
+    "file": "logic.xeto"
+   }
+  }
+ },
+ "NotEqual": {
+  "file": "logic.xeto",
+  "line": 71,
+  "base": "Comparison",
+  "slots": {
+   "out": {
+    "type": "StatusBool?",
+    "line": 12,
+    "raw": "out: StatusBool? <summary, transient, readonly, output>",
+    "file": "logic.xeto"
+   },
+   "inA": {
+    "type": "StatusNumber?",
+    "line": 49,
+    "raw": "inA: StatusNumber? <summary, transient>",
+    "file": "logic.xeto"
+   },
+   "inB": {
+    "type": "StatusNumber?",
+    "line": 52,
+    "raw": "inB: StatusNumber? <summary, transient>",
+    "file": "logic.xeto"
+   }
+  }
+ },
+ "ComparisonHys": {
+  "file": "logic.xeto",
+  "line": 86,
+  "base": "Logic",
+  "slots": {
+   "out": {
+    "type": "StatusBool?",
+    "line": 12,
+    "raw": "out: StatusBool? <summary, transient, readonly, output>",
+    "file": "logic.xeto"
+   },
+   "inA": {
+    "type": "StatusNumber?",
+    "line": 88,
+    "raw": "inA: StatusNumber? <summary, transient>",
+    "file": "logic.xeto"
+   },
+   "inB": {
+    "type": "StatusNumber?",
+    "line": 91,
+    "raw": "inB: StatusNumber? <summary, transient>",
+    "file": "logic.xeto"
+   },
+   "deadband": {
+    "type": "Number",
+    "line": 95,
+    "raw": "deadband: Number <minVal:0> 0",
+    "file": "logic.xeto"
+   },
+   "initOut": {
+    "type": "Bool",
+    "line": 98,
+    "raw": "initOut: Bool \"false\"",
+    "file": "logic.xeto"
+   }
+  }
+ },
+ "GreaterThanHys": {
+  "file": "logic.xeto",
+  "line": 104,
+  "base": "ComparisonHys",
+  "slots": {
+   "out": {
+    "type": "StatusBool?",
+    "line": 12,
+    "raw": "out: StatusBool? <summary, transient, readonly, output>",
+    "file": "logic.xeto"
+   },
+   "inA": {
+    "type": "StatusNumber?",
+    "line": 88,
+    "raw": "inA: StatusNumber? <summary, transient>",
+    "file": "logic.xeto"
+   },
+   "inB": {
+    "type": "StatusNumber?",
+    "line": 91,
+    "raw": "inB: StatusNumber? <summary, transient>",
+    "file": "logic.xeto"
+   },
+   "deadband": {
+    "type": "Number",
+    "line": 95,
+    "raw": "deadband: Number <minVal:0> 0",
+    "file": "logic.xeto"
+   },
+   "initOut": {
+    "type": "Bool",
+    "line": 98,
+    "raw": "initOut: Bool \"false\"",
+    "file": "logic.xeto"
+   }
+  }
+ },
+ "LessThanHys": {
+  "file": "logic.xeto",
+  "line": 109,
+  "base": "ComparisonHys",
+  "slots": {
+   "out": {
+    "type": "StatusBool?",
+    "line": 12,
+    "raw": "out: StatusBool? <summary, transient, readonly, output>",
+    "file": "logic.xeto"
+   },
+   "inA": {
+    "type": "StatusNumber?",
+    "line": 88,
+    "raw": "inA: StatusNumber? <summary, transient>",
+    "file": "logic.xeto"
+   },
+   "inB": {
+    "type": "StatusNumber?",
+    "line": 91,
+    "raw": "inB: StatusNumber? <summary, transient>",
+    "file": "logic.xeto"
+   },
+   "deadband": {
+    "type": "Number",
+    "line": 95,
+    "raw": "deadband: Number <minVal:0> 0",
+    "file": "logic.xeto"
+   },
+   "initOut": {
+    "type": "Bool",
+    "line": 98,
+    "raw": "initOut: Bool \"false\"",
+    "file": "logic.xeto"
+   }
+  }
+ },
+ "Hysteresis": {
+  "file": "logic.xeto",
+  "line": 118,
+  "base": "Logic",
+  "slots": {
+   "out": {
+    "type": "StatusBool?",
+    "line": 12,
+    "raw": "out: StatusBool? <summary, transient, readonly, output>",
+    "file": "logic.xeto"
+   },
+   "in": {
+    "type": "StatusNumber?",
+    "line": 120,
+    "raw": "in: StatusNumber? <summary, transient>",
+    "file": "logic.xeto"
+   },
+   "low": {
+    "type": "Number",
+    "line": 123,
+    "raw": "low: Number",
+    "file": "logic.xeto"
+   },
+   "high": {
+    "type": "Number",
+    "line": 126,
+    "raw": "high: Number",
+    "file": "logic.xeto"
+   },
+   "initOut": {
+    "type": "Bool",
+    "line": 129,
+    "raw": "initOut: Bool \"false\"",
+    "file": "logic.xeto"
+   }
+  }
+ },
+ "BoolEdge": {
+  "file": "logic.xeto",
+  "line": 140,
+  "base": "Logic",
+  "slots": {
+   "out": {
+    "type": "StatusBool?",
+    "line": 12,
+    "raw": "out: StatusBool? <summary, transient, readonly, output>",
+    "file": "logic.xeto"
+   },
+   "in": {
+    "type": "StatusBool?",
+    "line": 142,
+    "raw": "in: StatusBool? <summary, transient>",
+    "file": "logic.xeto"
+   },
+   "edge": {
+    "type": "BoolEdgeType",
+    "line": 145,
+    "raw": "edge: BoolEdgeType \"rising\"",
+    "file": "logic.xeto"
+   },
+   "initPrev": {
+    "type": "Bool",
+    "line": 148,
+    "raw": "initPrev: Bool \"false\"",
+    "file": "logic.xeto"
+   }
+  }
+ },
+ "BoolEdgeType": {
+  "file": "logic.xeto",
+  "line": 152,
+  "base": "Enum",
+  "slots": {},
+  "items": [
+   "rising",
+   "falling",
+   "change"
+  ]
+ },
+ "NumberChange": {
+  "file": "logic.xeto",
+  "line": 171,
+  "base": "Logic",
+  "slots": {
+   "out": {
+    "type": "StatusBool?",
+    "line": 12,
+    "raw": "out: StatusBool? <summary, transient, readonly, output>",
+    "file": "logic.xeto"
+   },
+   "in": {
+    "type": "StatusNumber?",
+    "line": 173,
+    "raw": "in: StatusNumber? <summary, transient>",
+    "file": "logic.xeto"
+   },
+   "initPrev": {
+    "type": "Number",
+    "line": 176,
+    "raw": "initPrev: Number 0",
+    "file": "logic.xeto"
+   },
+   "up": {
+    "type": "StatusBool?",
+    "line": 179,
+    "raw": "up: StatusBool? <summary, transient, readonly, output>",
+    "file": "logic.xeto"
+   },
+   "down": {
+    "type": "StatusBool?",
+    "line": 182,
+    "raw": "down: StatusBool? <summary, transient, readonly, output>",
+    "file": "logic.xeto"
+   }
+  }
+ },
+ "Math": {
+  "file": "math.xeto",
+  "line": 10,
+  "base": "HxComp",
+  "slots": {
+   "out": {
+    "type": "StatusNumber?",
+    "line": 13,
+    "raw": "out: StatusNumber? <summary, transient, readonly, output>",
+    "file": "math.xeto"
+   }
+  }
+ },
+ "UnaryMath": {
+  "file": "math.xeto",
+  "line": 17,
+  "base": "Math",
+  "slots": {
+   "out": {
+    "type": "StatusNumber?",
+    "line": 13,
+    "raw": "out: StatusNumber? <summary, transient, readonly, output>",
+    "file": "math.xeto"
+   },
+   "inA": {
+    "type": "StatusNumber?",
+    "line": 19,
+    "raw": "inA: StatusNumber? <summary, transient>",
+    "file": "math.xeto"
+   }
+  }
+ },
+ "AbsValue": {
+  "file": "math.xeto",
+  "line": 23,
+  "base": "UnaryMath",
+  "slots": {
+   "out": {
+    "type": "StatusNumber?",
+    "line": 13,
+    "raw": "out: StatusNumber? <summary, transient, readonly, output>",
+    "file": "math.xeto"
+   },
+   "inA": {
+    "type": "StatusNumber?",
+    "line": 19,
+    "raw": "inA: StatusNumber? <summary, transient>",
+    "file": "math.xeto"
+   }
+  }
+ },
+ "Exponential": {
+  "file": "math.xeto",
+  "line": 26,
+  "base": "UnaryMath",
+  "slots": {
+   "out": {
+    "type": "StatusNumber?",
+    "line": 13,
+    "raw": "out: StatusNumber? <summary, transient, readonly, output>",
+    "file": "math.xeto"
+   },
+   "inA": {
+    "type": "StatusNumber?",
+    "line": 19,
+    "raw": "inA: StatusNumber? <summary, transient>",
+    "file": "math.xeto"
+   }
+  }
+ },
+ "Factorial": {
+  "file": "math.xeto",
+  "line": 30,
+  "base": "UnaryMath",
+  "slots": {
+   "out": {
+    "type": "StatusNumber?",
+    "line": 13,
+    "raw": "out: StatusNumber? <summary, transient, readonly, output>",
+    "file": "math.xeto"
+   },
+   "inA": {
+    "type": "StatusNumber?",
+    "line": 19,
+    "raw": "inA: StatusNumber? <summary, transient>",
+    "file": "math.xeto"
+   }
+  }
+ },
+ "LogBase10": {
+  "file": "math.xeto",
+  "line": 33,
+  "base": "UnaryMath",
+  "slots": {
+   "out": {
+    "type": "StatusNumber?",
+    "line": 13,
+    "raw": "out: StatusNumber? <summary, transient, readonly, output>",
+    "file": "math.xeto"
+   },
+   "inA": {
+    "type": "StatusNumber?",
+    "line": 19,
+    "raw": "inA: StatusNumber? <summary, transient>",
+    "file": "math.xeto"
+   }
+  }
+ },
+ "LogNatural": {
+  "file": "math.xeto",
+  "line": 36,
+  "base": "UnaryMath",
+  "slots": {
+   "out": {
+    "type": "StatusNumber?",
+    "line": 13,
+    "raw": "out: StatusNumber? <summary, transient, readonly, output>",
+    "file": "math.xeto"
+   },
+   "inA": {
+    "type": "StatusNumber?",
+    "line": 19,
+    "raw": "inA: StatusNumber? <summary, transient>",
+    "file": "math.xeto"
+   }
+  }
+ },
+ "Negative": {
+  "file": "math.xeto",
+  "line": 39,
+  "base": "UnaryMath",
+  "slots": {
+   "out": {
+    "type": "StatusNumber?",
+    "line": 13,
+    "raw": "out: StatusNumber? <summary, transient, readonly, output>",
+    "file": "math.xeto"
+   },
+   "inA": {
+    "type": "StatusNumber?",
+    "line": 19,
+    "raw": "inA: StatusNumber? <summary, transient>",
+    "file": "math.xeto"
+   }
+  }
+ },
+ "SquareRoot": {
+  "file": "math.xeto",
+  "line": 42,
+  "base": "UnaryMath",
+  "slots": {
+   "out": {
+    "type": "StatusNumber?",
+    "line": 13,
+    "raw": "out: StatusNumber? <summary, transient, readonly, output>",
+    "file": "math.xeto"
+   },
+   "inA": {
+    "type": "StatusNumber?",
+    "line": 19,
+    "raw": "inA: StatusNumber? <summary, transient>",
+    "file": "math.xeto"
+   }
+  }
+ },
+ "Sine": {
+  "file": "math.xeto",
+  "line": 45,
+  "base": "UnaryMath",
+  "slots": {
+   "out": {
+    "type": "StatusNumber?",
+    "line": 13,
+    "raw": "out: StatusNumber? <summary, transient, readonly, output>",
+    "file": "math.xeto"
+   },
+   "inA": {
+    "type": "StatusNumber?",
+    "line": 19,
+    "raw": "inA: StatusNumber? <summary, transient>",
+    "file": "math.xeto"
+   }
+  }
+ },
+ "Cosine": {
+  "file": "math.xeto",
+  "line": 48,
+  "base": "UnaryMath",
+  "slots": {
+   "out": {
+    "type": "StatusNumber?",
+    "line": 13,
+    "raw": "out: StatusNumber? <summary, transient, readonly, output>",
+    "file": "math.xeto"
+   },
+   "inA": {
+    "type": "StatusNumber?",
+    "line": 19,
+    "raw": "inA: StatusNumber? <summary, transient>",
+    "file": "math.xeto"
+   }
+  }
+ },
+ "Tangent": {
+  "file": "math.xeto",
+  "line": 51,
+  "base": "UnaryMath",
+  "slots": {
+   "out": {
+    "type": "StatusNumber?",
+    "line": 13,
+    "raw": "out: StatusNumber? <summary, transient, readonly, output>",
+    "file": "math.xeto"
+   },
+   "inA": {
+    "type": "StatusNumber?",
+    "line": 19,
+    "raw": "inA: StatusNumber? <summary, transient>",
+    "file": "math.xeto"
+   }
+  }
+ },
+ "ArcSine": {
+  "file": "math.xeto",
+  "line": 54,
+  "base": "UnaryMath",
+  "slots": {
+   "out": {
+    "type": "StatusNumber?",
+    "line": 13,
+    "raw": "out: StatusNumber? <summary, transient, readonly, output>",
+    "file": "math.xeto"
+   },
+   "inA": {
+    "type": "StatusNumber?",
+    "line": 19,
+    "raw": "inA: StatusNumber? <summary, transient>",
+    "file": "math.xeto"
+   }
+  }
+ },
+ "ArcCosine": {
+  "file": "math.xeto",
+  "line": 57,
+  "base": "UnaryMath",
+  "slots": {
+   "out": {
+    "type": "StatusNumber?",
+    "line": 13,
+    "raw": "out: StatusNumber? <summary, transient, readonly, output>",
+    "file": "math.xeto"
+   },
+   "inA": {
+    "type": "StatusNumber?",
+    "line": 19,
+    "raw": "inA: StatusNumber? <summary, transient>",
+    "file": "math.xeto"
+   }
+  }
+ },
+ "ArcTangent": {
+  "file": "math.xeto",
+  "line": 60,
+  "base": "UnaryMath",
+  "slots": {
+   "out": {
+    "type": "StatusNumber?",
+    "line": 13,
+    "raw": "out: StatusNumber? <summary, transient, readonly, output>",
+    "file": "math.xeto"
+   },
+   "inA": {
+    "type": "StatusNumber?",
+    "line": 19,
+    "raw": "inA: StatusNumber? <summary, transient>",
+    "file": "math.xeto"
+   }
+  }
+ },
+ "BinaryMath": {
+  "file": "math.xeto",
+  "line": 63,
+  "base": "Math",
+  "slots": {
+   "out": {
+    "type": "StatusNumber?",
+    "line": 13,
+    "raw": "out: StatusNumber? <summary, transient, readonly, output>",
+    "file": "math.xeto"
+   },
+   "inA": {
+    "type": "StatusNumber?",
+    "line": 65,
+    "raw": "inA: StatusNumber? <summary, transient>",
+    "file": "math.xeto"
+   },
+   "inB": {
+    "type": "StatusNumber?",
+    "line": 68,
+    "raw": "inB: StatusNumber? <summary, transient>",
+    "file": "math.xeto"
+   }
+  }
+ },
+ "Subtract": {
+  "file": "math.xeto",
+  "line": 72,
+  "base": "BinaryMath",
+  "slots": {
+   "out": {
+    "type": "StatusNumber?",
+    "line": 13,
+    "raw": "out: StatusNumber? <summary, transient, readonly, output>",
+    "file": "math.xeto"
+   },
+   "inA": {
+    "type": "StatusNumber?",
+    "line": 65,
+    "raw": "inA: StatusNumber? <summary, transient>",
+    "file": "math.xeto"
+   },
+   "inB": {
+    "type": "StatusNumber?",
+    "line": 68,
+    "raw": "inB: StatusNumber? <summary, transient>",
+    "file": "math.xeto"
+   }
+  }
+ },
+ "Divide": {
+  "file": "math.xeto",
+  "line": 75,
+  "base": "BinaryMath",
+  "slots": {
+   "out": {
+    "type": "StatusNumber?",
+    "line": 13,
+    "raw": "out: StatusNumber? <summary, transient, readonly, output>",
+    "file": "math.xeto"
+   },
+   "inA": {
+    "type": "StatusNumber?",
+    "line": 65,
+    "raw": "inA: StatusNumber? <summary, transient>",
+    "file": "math.xeto"
+   },
+   "inB": {
+    "type": "StatusNumber?",
+    "line": 68,
+    "raw": "inB: StatusNumber? <summary, transient>",
+    "file": "math.xeto"
+   }
+  }
+ },
+ "Modulus": {
+  "file": "math.xeto",
+  "line": 78,
+  "base": "BinaryMath",
+  "slots": {
+   "out": {
+    "type": "StatusNumber?",
+    "line": 13,
+    "raw": "out: StatusNumber? <summary, transient, readonly, output>",
+    "file": "math.xeto"
+   },
+   "inA": {
+    "type": "StatusNumber?",
+    "line": 65,
+    "raw": "inA: StatusNumber? <summary, transient>",
+    "file": "math.xeto"
+   },
+   "inB": {
+    "type": "StatusNumber?",
+    "line": 68,
+    "raw": "inB: StatusNumber? <summary, transient>",
+    "file": "math.xeto"
+   }
+  }
+ },
+ "Power": {
+  "file": "math.xeto",
+  "line": 81,
+  "base": "BinaryMath",
+  "slots": {
+   "out": {
+    "type": "StatusNumber?",
+    "line": 13,
+    "raw": "out: StatusNumber? <summary, transient, readonly, output>",
+    "file": "math.xeto"
+   },
+   "inA": {
+    "type": "StatusNumber?",
+    "line": 65,
+    "raw": "inA: StatusNumber? <summary, transient>",
+    "file": "math.xeto"
+   },
+   "inB": {
+    "type": "StatusNumber?",
+    "line": 68,
+    "raw": "inB: StatusNumber? <summary, transient>",
+    "file": "math.xeto"
+   }
+  }
+ },
+ "QuadMath": {
+  "file": "math.xeto",
+  "line": 86,
+  "base": "Math",
+  "slots": {
+   "out": {
+    "type": "StatusNumber?",
+    "line": 13,
+    "raw": "out: StatusNumber? <summary, transient, readonly, output>",
+    "file": "math.xeto"
+   },
+   "inA": {
+    "type": "StatusNumber?",
+    "line": 88,
+    "raw": "inA: StatusNumber? <summary, transient>",
+    "file": "math.xeto"
+   },
+   "inB": {
+    "type": "StatusNumber?",
+    "line": 91,
+    "raw": "inB: StatusNumber? <summary, transient>",
+    "file": "math.xeto"
+   },
+   "inC": {
+    "type": "StatusNumber?",
+    "line": 94,
+    "raw": "inC: StatusNumber? <transient>",
+    "file": "math.xeto"
+   },
+   "inD": {
+    "type": "StatusNumber?",
+    "line": 97,
+    "raw": "inD: StatusNumber? <transient>",
+    "file": "math.xeto"
+   }
+  }
+ },
+ "Add": {
+  "file": "math.xeto",
+  "line": 101,
+  "base": "QuadMath",
+  "slots": {
+   "out": {
+    "type": "StatusNumber?",
+    "line": 13,
+    "raw": "out: StatusNumber? <summary, transient, readonly, output>",
+    "file": "math.xeto"
+   },
+   "inA": {
+    "type": "StatusNumber?",
+    "line": 88,
+    "raw": "inA: StatusNumber? <summary, transient>",
+    "file": "math.xeto"
+   },
+   "inB": {
+    "type": "StatusNumber?",
+    "line": 91,
+    "raw": "inB: StatusNumber? <summary, transient>",
+    "file": "math.xeto"
+   },
+   "inC": {
+    "type": "StatusNumber?",
+    "line": 94,
+    "raw": "inC: StatusNumber? <transient>",
+    "file": "math.xeto"
+   },
+   "inD": {
+    "type": "StatusNumber?",
+    "line": 97,
+    "raw": "inD: StatusNumber? <transient>",
+    "file": "math.xeto"
+   }
+  }
+ },
+ "Multiply": {
+  "file": "math.xeto",
+  "line": 104,
+  "base": "QuadMath",
+  "slots": {
+   "out": {
+    "type": "StatusNumber?",
+    "line": 13,
+    "raw": "out: StatusNumber? <summary, transient, readonly, output>",
+    "file": "math.xeto"
+   },
+   "inA": {
+    "type": "StatusNumber?",
+    "line": 88,
+    "raw": "inA: StatusNumber? <summary, transient>",
+    "file": "math.xeto"
+   },
+   "inB": {
+    "type": "StatusNumber?",
+    "line": 91,
+    "raw": "inB: StatusNumber? <summary, transient>",
+    "file": "math.xeto"
+   },
+   "inC": {
+    "type": "StatusNumber?",
+    "line": 94,
+    "raw": "inC: StatusNumber? <transient>",
+    "file": "math.xeto"
+   },
+   "inD": {
+    "type": "StatusNumber?",
+    "line": 97,
+    "raw": "inD: StatusNumber? <transient>",
+    "file": "math.xeto"
+   }
+  }
+ },
+ "Average": {
+  "file": "math.xeto",
+  "line": 107,
+  "base": "QuadMath",
+  "slots": {
+   "out": {
+    "type": "StatusNumber?",
+    "line": 13,
+    "raw": "out: StatusNumber? <summary, transient, readonly, output>",
+    "file": "math.xeto"
+   },
+   "inA": {
+    "type": "StatusNumber?",
+    "line": 88,
+    "raw": "inA: StatusNumber? <summary, transient>",
+    "file": "math.xeto"
+   },
+   "inB": {
+    "type": "StatusNumber?",
+    "line": 91,
+    "raw": "inB: StatusNumber? <summary, transient>",
+    "file": "math.xeto"
+   },
+   "inC": {
+    "type": "StatusNumber?",
+    "line": 94,
+    "raw": "inC: StatusNumber? <transient>",
+    "file": "math.xeto"
+   },
+   "inD": {
+    "type": "StatusNumber?",
+    "line": 97,
+    "raw": "inD: StatusNumber? <transient>",
+    "file": "math.xeto"
+   }
+  }
+ },
+ "Maximum": {
+  "file": "math.xeto",
+  "line": 111,
+  "base": "QuadMath",
+  "slots": {
+   "out": {
+    "type": "StatusNumber?",
+    "line": 13,
+    "raw": "out: StatusNumber? <summary, transient, readonly, output>",
+    "file": "math.xeto"
+   },
+   "inA": {
+    "type": "StatusNumber?",
+    "line": 88,
+    "raw": "inA: StatusNumber? <summary, transient>",
+    "file": "math.xeto"
+   },
+   "inB": {
+    "type": "StatusNumber?",
+    "line": 91,
+    "raw": "inB: StatusNumber? <summary, transient>",
+    "file": "math.xeto"
+   },
+   "inC": {
+    "type": "StatusNumber?",
+    "line": 94,
+    "raw": "inC: StatusNumber? <transient>",
+    "file": "math.xeto"
+   },
+   "inD": {
+    "type": "StatusNumber?",
+    "line": 97,
+    "raw": "inD: StatusNumber? <transient>",
+    "file": "math.xeto"
+   }
+  }
+ },
+ "Minimum": {
+  "file": "math.xeto",
+  "line": 115,
+  "base": "QuadMath",
+  "slots": {
+   "out": {
+    "type": "StatusNumber?",
+    "line": 13,
+    "raw": "out: StatusNumber? <summary, transient, readonly, output>",
+    "file": "math.xeto"
+   },
+   "inA": {
+    "type": "StatusNumber?",
+    "line": 88,
+    "raw": "inA: StatusNumber? <summary, transient>",
+    "file": "math.xeto"
+   },
+   "inB": {
+    "type": "StatusNumber?",
+    "line": 91,
+    "raw": "inB: StatusNumber? <summary, transient>",
+    "file": "math.xeto"
+   },
+   "inC": {
+    "type": "StatusNumber?",
+    "line": 94,
+    "raw": "inC: StatusNumber? <transient>",
+    "file": "math.xeto"
+   },
+   "inD": {
+    "type": "StatusNumber?",
+    "line": 97,
+    "raw": "inD: StatusNumber? <transient>",
+    "file": "math.xeto"
+   }
+  }
+ },
+ "ArcTangent2": {
+  "file": "math.xeto",
+  "line": 133,
+  "base": "BinaryMath",
+  "slots": {
+   "out": {
+    "type": "StatusNumber?",
+    "line": 13,
+    "raw": "out: StatusNumber? <summary, transient, readonly, output>",
+    "file": "math.xeto"
+   },
+   "inA": {
+    "type": "StatusNumber?",
+    "line": 65,
+    "raw": "inA: StatusNumber? <summary, transient>",
+    "file": "math.xeto"
+   },
+   "inB": {
+    "type": "StatusNumber?",
+    "line": 68,
+    "raw": "inB: StatusNumber? <summary, transient>",
+    "file": "math.xeto"
+   }
+  }
+ },
+ "FlooredModulus": {
+  "file": "math.xeto",
+  "line": 149,
+  "base": "BinaryMath",
+  "slots": {
+   "out": {
+    "type": "StatusNumber?",
+    "line": 13,
+    "raw": "out: StatusNumber? <summary, transient, readonly, output>",
+    "file": "math.xeto"
+   },
+   "inA": {
+    "type": "StatusNumber?",
+    "line": 65,
+    "raw": "inA: StatusNumber? <summary, transient>",
+    "file": "math.xeto"
+   },
+   "inB": {
+    "type": "StatusNumber?",
+    "line": 68,
+    "raw": "inB: StatusNumber? <summary, transient>",
+    "file": "math.xeto"
+   }
+  }
+ },
+ "Limiter": {
+  "file": "math.xeto",
+  "line": 170,
+  "base": "Math",
+  "slots": {
+   "out": {
+    "type": "StatusNumber?",
+    "line": 13,
+    "raw": "out: StatusNumber? <summary, transient, readonly, output>",
+    "file": "math.xeto"
+   },
+   "in": {
+    "type": "StatusNumber?",
+    "line": 172,
+    "raw": "in: StatusNumber? <summary, transient>",
+    "file": "math.xeto"
+   },
+   "uMax": {
+    "type": "Number?",
+    "line": 175,
+    "raw": "uMax: Number?",
+    "file": "math.xeto"
+   },
+   "uMin": {
+    "type": "Number?",
+    "line": 178,
+    "raw": "uMin: Number?",
+    "file": "math.xeto"
+   }
+  }
+ },
+ "Round": {
+  "file": "math.xeto",
+  "line": 195,
+  "base": "Math",
+  "slots": {
+   "out": {
+    "type": "StatusNumber?",
+    "line": 13,
+    "raw": "out: StatusNumber? <summary, transient, readonly, output>",
+    "file": "math.xeto"
+   },
+   "in": {
+    "type": "StatusNumber?",
+    "line": 197,
+    "raw": "in: StatusNumber? <summary, transient>",
+    "file": "math.xeto"
+   },
+   "n": {
+    "type": "Int",
+    "line": 200,
+    "raw": "n: Int 0",
+    "file": "math.xeto"
+   }
+  }
+ },
+ "Line": {
+  "file": "math.xeto",
+  "line": 222,
+  "base": "Math",
+  "slots": {
+   "out": {
+    "type": "StatusNumber?",
+    "line": 13,
+    "raw": "out: StatusNumber? <summary, transient, readonly, output>",
+    "file": "math.xeto"
+   },
+   "in": {
+    "type": "StatusNumber?",
+    "line": 224,
+    "raw": "in: StatusNumber? <summary, transient>",
+    "file": "math.xeto"
+   },
+   "inX1": {
+    "type": "StatusNumber?",
+    "line": 227,
+    "raw": "inX1: StatusNumber? <transient>",
+    "file": "math.xeto"
+   },
+   "inF1": {
+    "type": "StatusNumber?",
+    "line": 230,
+    "raw": "inF1: StatusNumber? <transient>",
+    "file": "math.xeto"
+   },
+   "inX2": {
+    "type": "StatusNumber?",
+    "line": 233,
+    "raw": "inX2: StatusNumber? <transient>",
+    "file": "math.xeto"
+   },
+   "inF2": {
+    "type": "StatusNumber?",
+    "line": 236,
+    "raw": "inF2: StatusNumber? <transient>",
+    "file": "math.xeto"
+   },
+   "limitBelow": {
+    "type": "Bool",
+    "line": 239,
+    "raw": "limitBelow: Bool \"true\"",
+    "file": "math.xeto"
+   },
+   "limitAbove": {
+    "type": "Bool",
+    "line": 242,
+    "raw": "limitAbove: Bool \"true\"",
+    "file": "math.xeto"
+   }
+  }
+ },
+ "Proof": {
+  "file": "proof.xeto",
+  "line": 37,
+  "base": "HxComp",
+  "slots": {
+   "inSet": {
+    "type": "StatusBool?",
+    "line": 39,
+    "raw": "inSet: StatusBool? <summary, transient>",
+    "file": "proof.xeto"
+   },
+   "inMeas": {
+    "type": "StatusBool?",
+    "line": 42,
+    "raw": "inMeas: StatusBool? <summary, transient>",
+    "file": "proof.xeto"
+   },
+   "debounce": {
+    "type": "Duration",
+    "line": 45,
+    "raw": "debounce: Duration <minVal:0sec> 10sec",
+    "file": "proof.xeto"
+   },
+   "feedbackDelay": {
+    "type": "Duration",
+    "line": 48,
+    "raw": "feedbackDelay: Duration <minVal:0sec> 1min",
+    "file": "proof.xeto"
+   },
+   "lockedFalse": {
+    "type": "StatusBool?",
+    "line": 51,
+    "raw": "lockedFalse: StatusBool? <summary, transient, readonly, output>",
+    "file": "proof.xeto"
+   },
+   "lockedTrue": {
+    "type": "StatusBool?",
+    "line": 54,
+    "raw": "lockedTrue: StatusBool? <summary, transient, readonly, output>",
+    "file": "proof.xeto"
+   }
+  }
+ },
+ "Psychrometric": {
+  "file": "psychrometrics.xeto",
+  "line": 37,
+  "base": "Math",
+  "slots": {
+   "out": {
+    "type": "StatusNumber?",
+    "line": 13,
+    "raw": "out: StatusNumber? <summary, transient, readonly, output>",
+    "file": "math.xeto"
+   },
+   "inDryBulb": {
+    "type": "StatusNumber?",
+    "line": 39,
+    "raw": "inDryBulb: StatusNumber? <summary, transient>",
+    "file": "psychrometrics.xeto"
+   },
+   "inRelHumidity": {
+    "type": "StatusNumber?",
+    "line": 42,
+    "raw": "inRelHumidity: StatusNumber? <summary, transient>",
+    "file": "psychrometrics.xeto"
+   }
+  }
+ },
+ "DewPoint": {
+  "file": "psychrometrics.xeto",
+  "line": 70,
+  "base": "Psychrometric",
+  "slots": {
+   "out": {
+    "type": "StatusNumber?",
+    "line": 13,
+    "raw": "out: StatusNumber? <summary, transient, readonly, output>",
+    "file": "math.xeto"
+   },
+   "inDryBulb": {
+    "type": "StatusNumber?",
+    "line": 39,
+    "raw": "inDryBulb: StatusNumber? <summary, transient>",
+    "file": "psychrometrics.xeto"
+   },
+   "inRelHumidity": {
+    "type": "StatusNumber?",
+    "line": 42,
+    "raw": "inRelHumidity: StatusNumber? <summary, transient>",
+    "file": "psychrometrics.xeto"
+   }
+  }
+ },
+ "SpecificEnthalpy": {
+  "file": "psychrometrics.xeto",
+  "line": 88,
+  "base": "Psychrometric",
+  "slots": {
+   "out": {
+    "type": "StatusNumber?",
+    "line": 13,
+    "raw": "out: StatusNumber? <summary, transient, readonly, output>",
+    "file": "math.xeto"
+   },
+   "inDryBulb": {
+    "type": "StatusNumber?",
+    "line": 39,
+    "raw": "inDryBulb: StatusNumber? <summary, transient>",
+    "file": "psychrometrics.xeto"
+   },
+   "inRelHumidity": {
+    "type": "StatusNumber?",
+    "line": 42,
+    "raw": "inRelHumidity: StatusNumber? <summary, transient>",
+    "file": "psychrometrics.xeto"
+   },
+   "pAtm": {
+    "type": "Number",
+    "line": 93,
+    "raw": "pAtm: Number 101325",
+    "file": "psychrometrics.xeto"
+   }
+  }
+ },
+ "WetBulb": {
+  "file": "psychrometrics.xeto",
+  "line": 106,
+  "base": "Psychrometric",
+  "slots": {
+   "out": {
+    "type": "StatusNumber?",
+    "line": 13,
+    "raw": "out: StatusNumber? <summary, transient, readonly, output>",
+    "file": "math.xeto"
+   },
+   "inDryBulb": {
+    "type": "StatusNumber?",
+    "line": 39,
+    "raw": "inDryBulb: StatusNumber? <summary, transient>",
+    "file": "psychrometrics.xeto"
+   },
+   "inRelHumidity": {
+    "type": "StatusNumber?",
+    "line": 42,
+    "raw": "inRelHumidity: StatusNumber? <summary, transient>",
+    "file": "psychrometrics.xeto"
+   }
+  }
+ },
+ "BoolPulse": {
+  "file": "pulse.xeto",
+  "line": 22,
+  "base": "HxComp",
+  "slots": {
+   "width": {
+    "type": "Float",
+    "line": 24,
+    "raw": "width: Float 0.5",
+    "file": "pulse.xeto"
+   },
+   "period": {
+    "type": "Duration",
+    "line": 27,
+    "raw": "period: Duration 1min",
+    "file": "pulse.xeto"
+   },
+   "shift": {
+    "type": "Duration",
+    "line": 30,
+    "raw": "shift: Duration 0sec",
+    "file": "pulse.xeto"
+   },
+   "out": {
+    "type": "StatusBool?",
+    "line": 33,
+    "raw": "out: StatusBool? <summary, transient, readonly, output>",
+    "file": "pulse.xeto"
+   }
+  }
+ },
+ "SampleTrigger": {
+  "file": "sampling.xeto",
+  "line": 24,
+  "base": "HxComp",
+  "slots": {
+   "period": {
+    "type": "Duration",
+    "line": 26,
+    "raw": "period: Duration 1min",
+    "file": "sampling.xeto"
+   },
+   "shift": {
+    "type": "Duration",
+    "line": 29,
+    "raw": "shift: Duration 0sec",
+    "file": "sampling.xeto"
+   },
+   "out": {
+    "type": "StatusBool?",
+    "line": 32,
+    "raw": "out: StatusBool? <summary, transient, readonly, output>",
+    "file": "sampling.xeto"
+   }
+  }
+ },
+ "SampledComp": {
+  "file": "sampling.xeto",
+  "line": 57,
+  "base": "HxComp",
+  "slots": {
+   "in": {
+    "type": "StatusNumber?",
+    "line": 59,
+    "raw": "in: StatusNumber? <summary, transient>",
+    "file": "sampling.xeto"
+   },
+   "period": {
+    "type": "Duration",
+    "line": 62,
+    "raw": "period: Duration <minVal:1ms> 1min",
+    "file": "sampling.xeto"
+   },
+   "out": {
+    "type": "StatusNumber?",
+    "line": 65,
+    "raw": "out: StatusNumber? <summary, transient, readonly, output>",
+    "file": "sampling.xeto"
+   }
+  }
+ },
+ "Sampler": {
+  "file": "sampling.xeto",
+  "line": 72,
+  "base": "SampledComp",
+  "slots": {
+   "in": {
+    "type": "StatusNumber?",
+    "line": 59,
+    "raw": "in: StatusNumber? <summary, transient>",
+    "file": "sampling.xeto"
+   },
+   "period": {
+    "type": "Duration",
+    "line": 62,
+    "raw": "period: Duration <minVal:1ms> 1min",
+    "file": "sampling.xeto"
+   },
+   "out": {
+    "type": "StatusNumber?",
+    "line": 65,
+    "raw": "out: StatusNumber? <summary, transient, readonly, output>",
+    "file": "sampling.xeto"
+   }
+  }
+ },
+ "ZeroOrderHold": {
+  "file": "sampling.xeto",
+  "line": 86,
+  "base": "SampledComp",
+  "slots": {
+   "in": {
+    "type": "StatusNumber?",
+    "line": 59,
+    "raw": "in: StatusNumber? <summary, transient>",
+    "file": "sampling.xeto"
+   },
+   "period": {
+    "type": "Duration",
+    "line": 62,
+    "raw": "period: Duration <minVal:1ms> 1min",
+    "file": "sampling.xeto"
+   },
+   "out": {
+    "type": "StatusNumber?",
+    "line": 65,
+    "raw": "out: StatusNumber? <summary, transient, readonly, output>",
+    "file": "sampling.xeto"
+   }
+  }
+ },
+ "FirstOrderHold": {
+  "file": "sampling.xeto",
+  "line": 103,
+  "base": "SampledComp",
+  "slots": {
+   "in": {
+    "type": "StatusNumber?",
+    "line": 59,
+    "raw": "in: StatusNumber? <summary, transient>",
+    "file": "sampling.xeto"
+   },
+   "period": {
+    "type": "Duration",
+    "line": 62,
+    "raw": "period: Duration <minVal:1ms> 1min",
+    "file": "sampling.xeto"
+   },
+   "out": {
+    "type": "StatusNumber?",
+    "line": 65,
+    "raw": "out: StatusNumber? <summary, transient, readonly, output>",
+    "file": "sampling.xeto"
+   }
+  }
+ },
+ "UnitDelay": {
+  "file": "sampling.xeto",
+  "line": 119,
+  "base": "HxComp",
+  "slots": {
+   "in": {
+    "type": "StatusNumber?",
+    "line": 121,
+    "raw": "in: StatusNumber? <summary, transient>",
+    "file": "sampling.xeto"
+   },
+   "period": {
+    "type": "Duration",
+    "line": 124,
+    "raw": "period: Duration <minVal:1ms> 1min",
+    "file": "sampling.xeto"
+   },
+   "yStart": {
+    "type": "Number",
+    "line": 127,
+    "raw": "yStart: Number 0",
+    "file": "sampling.xeto"
+   },
+   "out": {
+    "type": "StatusNumber?",
+    "line": 130,
+    "raw": "out: StatusNumber? <summary, transient, readonly, output>",
+    "file": "sampling.xeto"
+   }
+  }
+ },
+ "ValSelect": {
+  "file": "selects.xeto",
+  "line": 13,
+  "base": "HxComp",
+  "slots": {
+   "select": {
+    "type": "StatusNumber?",
+    "line": 16,
+    "raw": "select: StatusNumber? <summary>",
+    "file": "selects.xeto"
+   },
+   "inA": {
+    "type": "StatusVal?",
+    "line": 19,
+    "raw": "inA: StatusVal? <summary, transient>",
+    "file": "selects.xeto"
+   },
+   "inB": {
+    "type": "StatusVal?",
+    "line": 22,
+    "raw": "inB: StatusVal? <summary, transient>",
+    "file": "selects.xeto"
+   },
+   "inC": {
+    "type": "StatusVal?",
+    "line": 25,
+    "raw": "inC: StatusVal? <summary, transient>",
+    "file": "selects.xeto"
+   },
+   "inD": {
+    "type": "StatusVal?",
+    "line": 28,
+    "raw": "inD: StatusVal? <summary, transient>",
+    "file": "selects.xeto"
+   },
+   "inE": {
+    "type": "StatusVal?",
+    "line": 31,
+    "raw": "inE: StatusVal? <transient>",
+    "file": "selects.xeto"
+   },
+   "inF": {
+    "type": "StatusVal?",
+    "line": 34,
+    "raw": "inF: StatusVal? <transient>",
+    "file": "selects.xeto"
+   },
+   "inG": {
+    "type": "StatusVal?",
+    "line": 37,
+    "raw": "inG: StatusVal? <transient>",
+    "file": "selects.xeto"
+   },
+   "inH": {
+    "type": "StatusVal?",
+    "line": 40,
+    "raw": "inH: StatusVal? <transient>",
+    "file": "selects.xeto"
+   },
+   "inI": {
+    "type": "StatusVal?",
+    "line": 43,
+    "raw": "inI: StatusVal? <transient>",
+    "file": "selects.xeto"
+   },
+   "inJ": {
+    "type": "StatusVal?",
+    "line": 46,
+    "raw": "inJ: StatusVal? <transient>",
+    "file": "selects.xeto"
+   },
+   "out": {
+    "type": "StatusVal?",
+    "line": 49,
+    "raw": "out: StatusVal? <summary, transient, readonly,output>",
+    "file": "selects.xeto"
+   },
+   "zeroBasedSelect": {
+    "type": "Bool",
+    "line": 54,
+    "raw": "zeroBasedSelect: Bool \"false\"",
+    "file": "selects.xeto"
+   },
+   "numInputs": {
+    "type": "Int",
+    "line": 57,
+    "raw": "numInputs: Int <minVal:3, maxVal:10> 3",
+    "file": "selects.xeto"
+   }
+  }
+ },
+ "BoolSelect": {
+  "file": "selects.xeto",
+  "line": 61,
+  "base": "ValSelect",
+  "slots": {
+   "select": {
+    "type": "StatusNumber?",
+    "line": 16,
+    "raw": "select: StatusNumber? <summary>",
+    "file": "selects.xeto"
+   },
+   "inA": {
+    "type": "StatusBool?",
+    "line": 63,
+    "raw": "inA: StatusBool? <summary>",
+    "file": "selects.xeto"
+   },
+   "inB": {
+    "type": "StatusBool?",
+    "line": 66,
+    "raw": "inB: StatusBool? <summary>",
+    "file": "selects.xeto"
+   },
+   "inC": {
+    "type": "StatusBool?",
+    "line": 69,
+    "raw": "inC: StatusBool? <summary>",
+    "file": "selects.xeto"
+   },
+   "inD": {
+    "type": "StatusBool?",
+    "line": 72,
+    "raw": "inD: StatusBool? <summary>",
+    "file": "selects.xeto"
+   },
+   "inE": {
+    "type": "StatusBool?",
+    "line": 75,
+    "raw": "inE: StatusBool?",
+    "file": "selects.xeto"
+   },
+   "inF": {
+    "type": "StatusBool?",
+    "line": 78,
+    "raw": "inF: StatusBool?",
+    "file": "selects.xeto"
+   },
+   "inG": {
+    "type": "StatusBool?",
+    "line": 81,
+    "raw": "inG: StatusBool?",
+    "file": "selects.xeto"
+   },
+   "inH": {
+    "type": "StatusBool?",
+    "line": 84,
+    "raw": "inH: StatusBool?",
+    "file": "selects.xeto"
+   },
+   "inI": {
+    "type": "StatusBool?",
+    "line": 87,
+    "raw": "inI: StatusBool?",
+    "file": "selects.xeto"
+   },
+   "inJ": {
+    "type": "StatusBool?",
+    "line": 90,
+    "raw": "inJ: StatusBool?",
+    "file": "selects.xeto"
+   },
+   "out": {
+    "type": "StatusBool?",
+    "line": 93,
+    "raw": "out: StatusBool? <summary, transient, readonly, output>",
+    "file": "selects.xeto"
+   },
+   "zeroBasedSelect": {
+    "type": "Bool",
+    "line": 54,
+    "raw": "zeroBasedSelect: Bool \"false\"",
+    "file": "selects.xeto"
+   },
+   "numInputs": {
+    "type": "Int",
+    "line": 57,
+    "raw": "numInputs: Int <minVal:3, maxVal:10> 3",
+    "file": "selects.xeto"
+   }
+  }
+ },
+ "NumberSelect": {
+  "file": "selects.xeto",
+  "line": 97,
+  "base": "ValSelect",
+  "slots": {
+   "select": {
+    "type": "StatusNumber?",
+    "line": 16,
+    "raw": "select: StatusNumber? <summary>",
+    "file": "selects.xeto"
+   },
+   "inA": {
+    "type": "StatusNumber?",
+    "line": 99,
+    "raw": "inA: StatusNumber? <summary>",
+    "file": "selects.xeto"
+   },
+   "inB": {
+    "type": "StatusNumber?",
+    "line": 102,
+    "raw": "inB: StatusNumber? <summary>",
+    "file": "selects.xeto"
+   },
+   "inC": {
+    "type": "StatusNumber?",
+    "line": 105,
+    "raw": "inC: StatusNumber? <summary>",
+    "file": "selects.xeto"
+   },
+   "inD": {
+    "type": "StatusNumber?",
+    "line": 108,
+    "raw": "inD: StatusNumber? <summary>",
+    "file": "selects.xeto"
+   },
+   "inE": {
+    "type": "StatusNumber?",
+    "line": 111,
+    "raw": "inE: StatusNumber?",
+    "file": "selects.xeto"
+   },
+   "inF": {
+    "type": "StatusNumber?",
+    "line": 114,
+    "raw": "inF: StatusNumber?",
+    "file": "selects.xeto"
+   },
+   "inG": {
+    "type": "StatusNumber?",
+    "line": 117,
+    "raw": "inG: StatusNumber?",
+    "file": "selects.xeto"
+   },
+   "inH": {
+    "type": "StatusNumber?",
+    "line": 120,
+    "raw": "inH: StatusNumber?",
+    "file": "selects.xeto"
+   },
+   "inI": {
+    "type": "StatusNumber?",
+    "line": 123,
+    "raw": "inI: StatusNumber?",
+    "file": "selects.xeto"
+   },
+   "inJ": {
+    "type": "StatusNumber?",
+    "line": 126,
+    "raw": "inJ: StatusNumber?",
+    "file": "selects.xeto"
+   },
+   "out": {
+    "type": "StatusVal?",
+    "line": 49,
+    "raw": "out: StatusVal? <summary, transient, readonly,output>",
+    "file": "selects.xeto"
+   },
+   "zeroBasedSelect": {
+    "type": "Bool",
+    "line": 54,
+    "raw": "zeroBasedSelect: Bool \"false\"",
+    "file": "selects.xeto"
+   },
+   "numInputs": {
+    "type": "Int",
+    "line": 57,
+    "raw": "numInputs: Int <minVal:3, maxVal:10> 3",
+    "file": "selects.xeto"
+   }
+  }
+ },
+ "StrSelect": {
+  "file": "selects.xeto",
+  "line": 130,
+  "base": "ValSelect",
+  "slots": {
+   "select": {
+    "type": "StatusNumber?",
+    "line": 16,
+    "raw": "select: StatusNumber? <summary>",
+    "file": "selects.xeto"
+   },
+   "inA": {
+    "type": "StatusStr?",
+    "line": 132,
+    "raw": "inA: StatusStr? <summary>",
+    "file": "selects.xeto"
+   },
+   "inB": {
+    "type": "StatusStr?",
+    "line": 135,
+    "raw": "inB: StatusStr? <summary>",
+    "file": "selects.xeto"
+   },
+   "inC": {
+    "type": "StatusStr?",
+    "line": 138,
+    "raw": "inC: StatusStr? <summary>",
+    "file": "selects.xeto"
+   },
+   "inD": {
+    "type": "StatusStr?",
+    "line": 141,
+    "raw": "inD: StatusStr? <summary>",
+    "file": "selects.xeto"
+   },
+   "inE": {
+    "type": "StatusStr?",
+    "line": 144,
+    "raw": "inE: StatusStr?",
+    "file": "selects.xeto"
+   },
+   "inF": {
+    "type": "StatusStr?",
+    "line": 147,
+    "raw": "inF: StatusStr?",
+    "file": "selects.xeto"
+   },
+   "inG": {
+    "type": "StatusStr?",
+    "line": 150,
+    "raw": "inG: StatusStr?",
+    "file": "selects.xeto"
+   },
+   "inH": {
+    "type": "StatusStr?",
+    "line": 153,
+    "raw": "inH: StatusStr?",
+    "file": "selects.xeto"
+   },
+   "inI": {
+    "type": "StatusStr?",
+    "line": 156,
+    "raw": "inI: StatusStr?",
+    "file": "selects.xeto"
+   },
+   "inJ": {
+    "type": "StatusStr?",
+    "line": 159,
+    "raw": "inJ: StatusStr?",
+    "file": "selects.xeto"
+   },
+   "out": {
+    "type": "StatusVal?",
+    "line": 49,
+    "raw": "out: StatusVal? <summary, transient, readonly,output>",
+    "file": "selects.xeto"
+   },
+   "zeroBasedSelect": {
+    "type": "Bool",
+    "line": 54,
+    "raw": "zeroBasedSelect: Bool \"false\"",
+    "file": "selects.xeto"
+   },
+   "numInputs": {
+    "type": "Int",
+    "line": 57,
+    "raw": "numInputs: Int <minVal:3, maxVal:10> 3",
+    "file": "selects.xeto"
+   }
+  }
+ },
+ "Stage": {
+  "file": "stage.xeto",
+  "line": 30,
+  "base": "HxComp",
+  "slots": {
+   "in": {
+    "type": "StatusNumber?",
+    "line": 32,
+    "raw": "in: StatusNumber? <summary, transient>",
+    "file": "stage.xeto"
+   },
+   "n": {
+    "type": "Int",
+    "line": 35,
+    "raw": "n: Int <minVal:1> 1",
+    "file": "stage.xeto"
+   },
+   "holdDuration": {
+    "type": "Duration",
+    "line": 38,
+    "raw": "holdDuration: Duration <minVal:0sec> 1min",
+    "file": "stage.xeto"
+   },
+   "h": {
+    "type": "Float?",
+    "line": 41,
+    "raw": "h: Float?",
+    "file": "stage.xeto"
+   },
+   "initVal": {
+    "type": "Int",
+    "line": 44,
+    "raw": "initVal: Int 0",
+    "file": "stage.xeto"
+   },
+   "out": {
+    "type": "StatusNumber?",
+    "line": 47,
+    "raw": "out: StatusNumber? <summary, transient, readonly, output>",
+    "file": "stage.xeto"
+   }
+  }
+ },
+ "StrConcat": {
+  "file": "str.xeto",
+  "line": 14,
+  "base": "HxComp",
+  "slots": {
+   "inA": {
+    "type": "StatusStr?",
+    "line": 16,
+    "raw": "inA: StatusStr? <summary, transient>",
+    "file": "str.xeto"
+   },
+   "inB": {
+    "type": "StatusStr?",
+    "line": 19,
+    "raw": "inB: StatusStr? <summary, transient>",
+    "file": "str.xeto"
+   },
+   "inC": {
+    "type": "StatusStr?",
+    "line": 22,
+    "raw": "inC: StatusStr? <summary, transient>",
+    "file": "str.xeto"
+   },
+   "inD": {
+    "type": "StatusStr?",
+    "line": 25,
+    "raw": "inD: StatusStr? <summary, transient>",
+    "file": "str.xeto"
+   },
+   "out": {
+    "type": "StatusStr",
+    "line": 28,
+    "raw": "out: StatusStr <summary, transient, readonly, output>",
+    "file": "str.xeto"
+   }
+  }
+ },
+ "StrContains": {
+  "file": "str.xeto",
+  "line": 32,
+  "base": "HxComp",
+  "slots": {
+   "inA": {
+    "type": "StatusStr?",
+    "line": 34,
+    "raw": "inA: StatusStr? <summary, transient>",
+    "file": "str.xeto"
+   },
+   "inB": {
+    "type": "StatusStr?",
+    "line": 37,
+    "raw": "inB: StatusStr? <summary, transient>",
+    "file": "str.xeto"
+   },
+   "out": {
+    "type": "StatusBool",
+    "line": 40,
+    "raw": "out: StatusBool <summary, transient, readonly, output>",
+    "file": "str.xeto"
+   },
+   "fromIndex": {
+    "type": "Int",
+    "line": 43,
+    "raw": "fromIndex: Int 0",
+    "file": "str.xeto"
+   },
+   "startIndex": {
+    "type": "Int",
+    "line": 46,
+    "raw": "startIndex: Int <transient, readonly> -1",
+    "file": "str.xeto"
+   },
+   "afterIndex": {
+    "type": "Int",
+    "line": 50,
+    "raw": "afterIndex: Int <transient, readonly> -1",
+    "file": "str.xeto"
+   }
+  }
+ },
+ "StrLen": {
+  "file": "str.xeto",
+  "line": 54,
+  "base": "HxComp",
+  "slots": {
+   "in": {
+    "type": "StatusStr?",
+    "line": 56,
+    "raw": "in: StatusStr? <summary, transient>",
+    "file": "str.xeto"
+   },
+   "out": {
+    "type": "StatusNumber",
+    "line": 59,
+    "raw": "out: StatusNumber <summary, transient, readonly, output>",
+    "file": "str.xeto"
+   }
+  }
+ },
+ "StrSubstr": {
+  "file": "str.xeto",
+  "line": 63,
+  "base": "HxComp",
+  "slots": {
+   "in": {
+    "type": "StatusStr?",
+    "line": 65,
+    "raw": "in: StatusStr? <summary, transient>",
+    "file": "str.xeto"
+   },
+   "out": {
+    "type": "StatusStr",
+    "line": 68,
+    "raw": "out: StatusStr <summary, transient, readonly, output>",
+    "file": "str.xeto"
+   },
+   "startIndex": {
+    "type": "Int",
+    "line": 71,
+    "raw": "startIndex: Int <minVal: 0> 0",
+    "file": "str.xeto"
+   },
+   "endIndex": {
+    "type": "Int",
+    "line": 75,
+    "raw": "endIndex: Int -1",
+    "file": "str.xeto"
+   }
+  }
+ },
+ "StrTrim": {
+  "file": "str.xeto",
+  "line": 79,
+  "base": "HxComp",
+  "slots": {
+   "in": {
+    "type": "StatusStr?",
+    "line": 81,
+    "raw": "in: StatusStr? <summary, transient>",
+    "file": "str.xeto"
+   },
+   "out": {
+    "type": "StatusStr",
+    "line": 84,
+    "raw": "out: StatusStr <summary, transient, readonly, output>",
+    "file": "str.xeto"
+   }
+  }
+ },
+ "StrTest": {
+  "file": "str.xeto",
+  "line": 89,
+  "base": "HxComp",
+  "slots": {
+   "inA": {
+    "type": "StatusStr?",
+    "line": 91,
+    "raw": "inA: StatusStr? <summary, transient>",
+    "file": "str.xeto"
+   },
+   "inB": {
+    "type": "StatusStr?",
+    "line": 94,
+    "raw": "inB: StatusStr? <summary, transient>",
+    "file": "str.xeto"
+   },
+   "out": {
+    "type": "StatusBool",
+    "line": 97,
+    "raw": "out: StatusBool <summary, transient, readonly, output>",
+    "file": "str.xeto"
+   },
+   "test": {
+    "type": "StrTestType",
+    "line": 100,
+    "raw": "test: StrTestType \"eq\"",
+    "file": "str.xeto"
+   }
+  }
+ },
+ "StrTestType": {
+  "file": "str.xeto",
+  "line": 104,
+  "base": "Enum",
+  "slots": {},
+  "items": [
+   "eq",
+   "eqIgnoreCase",
+   "startsWith",
+   "endsWith",
+   "contains"
+  ]
+ },
+ "ValSwitch": {
+  "file": "switches.xeto",
+  "line": 12,
+  "base": "HxComp",
+  "slots": {
+   "inSwitch": {
+    "type": "StatusBool?",
+    "line": 15,
+    "raw": "inSwitch: StatusBool? <summary, transient>",
+    "file": "switches.xeto"
+   },
+   "inTrue": {
+    "type": "StatusVal?",
+    "line": 18,
+    "raw": "inTrue: StatusVal? <summary>",
+    "file": "switches.xeto"
+   },
+   "inFalse": {
+    "type": "StatusVal?",
+    "line": 21,
+    "raw": "inFalse: StatusVal? <summary>",
+    "file": "switches.xeto"
+   },
+   "out": {
+    "type": "StatusVal?",
+    "line": 24,
+    "raw": "out: StatusVal? <summary, transient, readonly, output>",
+    "file": "switches.xeto"
+   }
+  }
+ },
+ "BoolSwitch": {
+  "file": "switches.xeto",
+  "line": 28,
+  "base": "ValSwitch",
+  "slots": {
+   "inSwitch": {
+    "type": "StatusBool?",
+    "line": 31,
+    "raw": "inSwitch: StatusBool? <summary, transient>",
+    "file": "switches.xeto"
+   },
+   "inTrue": {
+    "type": "StatusBool?",
+    "line": 34,
+    "raw": "inTrue: StatusBool? <summary>",
+    "file": "switches.xeto"
+   },
+   "inFalse": {
+    "type": "StatusBool?",
+    "line": 37,
+    "raw": "inFalse: StatusBool? <summary>",
+    "file": "switches.xeto"
+   },
+   "out": {
+    "type": "StatusBool?",
+    "line": 40,
+    "raw": "out: StatusBool? <summary, transient, readonly, output>",
+    "file": "switches.xeto"
+   }
+  }
+ },
+ "NumberSwitch": {
+  "file": "switches.xeto",
+  "line": 44,
+  "base": "ValSwitch",
+  "slots": {
+   "inSwitch": {
+    "type": "StatusBool?",
+    "line": 47,
+    "raw": "inSwitch: StatusBool? <summary, transient>",
+    "file": "switches.xeto"
+   },
+   "inTrue": {
+    "type": "StatusNumber?",
+    "line": 50,
+    "raw": "inTrue: StatusNumber? <summary>",
+    "file": "switches.xeto"
+   },
+   "inFalse": {
+    "type": "StatusNumber?",
+    "line": 53,
+    "raw": "inFalse: StatusNumber? <summary>",
+    "file": "switches.xeto"
+   },
+   "out": {
+    "type": "StatusNumber?",
+    "line": 56,
+    "raw": "out: StatusNumber? <summary, transient, readonly, output>",
+    "file": "switches.xeto"
+   }
+  }
+ },
+ "StrSwitch": {
+  "file": "switches.xeto",
+  "line": 60,
+  "base": "ValSwitch",
+  "slots": {
+   "inSwitch": {
+    "type": "StatusBool?",
+    "line": 63,
+    "raw": "inSwitch: StatusBool? <summary, transient>",
+    "file": "switches.xeto"
+   },
+   "inTrue": {
+    "type": "StatusStr?",
+    "line": 66,
+    "raw": "inTrue: StatusStr? <summary>",
+    "file": "switches.xeto"
+   },
+   "inFalse": {
+    "type": "StatusStr?",
+    "line": 69,
+    "raw": "inFalse: StatusStr? <summary>",
+    "file": "switches.xeto"
+   },
+   "out": {
+    "type": "StatusStr?",
+    "line": 72,
+    "raw": "out: StatusStr? <summary, transient, readonly, output>",
+    "file": "switches.xeto"
+   }
+  }
+ },
+ "StatusTestComp": {
+  "file": "test.xeto",
+  "line": 10,
+  "base": "HxComp",
+  "slots": {
+   "ok": {
+    "type": "StatusNumber",
+    "line": 11,
+    "raw": "ok:         StatusNumber <summary, readonly>",
+    "file": "test.xeto"
+   },
+   "alarm": {
+    "type": "StatusNumber",
+    "line": 12,
+    "raw": "alarm:      StatusNumber <summary, readonly>",
+    "file": "test.xeto"
+   },
+   "disabled": {
+    "type": "StatusNumber",
+    "line": 13,
+    "raw": "disabled:   StatusNumber <summary, readonly>",
+    "file": "test.xeto"
+   },
+   "down": {
+    "type": "StatusNumber",
+    "line": 14,
+    "raw": "down:       StatusNumber <summary, readonly>",
+    "file": "test.xeto"
+   },
+   "fault": {
+    "type": "StatusNumber",
+    "line": 15,
+    "raw": "fault:      StatusNumber <summary, readonly>",
+    "file": "test.xeto"
+   },
+   "nullVal": {
+    "type": "StatusNumber",
+    "line": 16,
+    "raw": "nullVal:    StatusNumber <summary, readonly>",
+    "file": "test.xeto"
+   },
+   "overridden": {
+    "type": "StatusNumber",
+    "line": 17,
+    "raw": "overridden: StatusNumber <summary, readonly>",
+    "file": "test.xeto"
+   },
+   "stale": {
+    "type": "StatusNumber",
+    "line": 18,
+    "raw": "stale:      StatusNumber <summary, readonly>",
+    "file": "test.xeto"
+   },
+   "unacked": {
+    "type": "StatusNumber",
+    "line": 19,
+    "raw": "unacked:    StatusNumber <summary, readonly>",
+    "file": "test.xeto"
+   }
+  }
+ },
+ "BoolDelay": {
+  "file": "timer.xeto",
+  "line": 19,
+  "base": "HxComp",
+  "slots": {
+   "in": {
+    "type": "StatusBool?",
+    "line": 21,
+    "raw": "in: StatusBool? <summary, transient>",
+    "file": "timer.xeto"
+   },
+   "onDelay": {
+    "type": "Duration",
+    "line": 25,
+    "raw": "onDelay: Duration <minVal:0sec> 1sec",
+    "file": "timer.xeto"
+   },
+   "offDelay": {
+    "type": "Duration",
+    "line": 29,
+    "raw": "offDelay: Duration <minVal:0sec> 1sec",
+    "file": "timer.xeto"
+   },
+   "delayOnInit": {
+    "type": "Bool",
+    "line": 33,
+    "raw": "delayOnInit: Bool \"false\"",
+    "file": "timer.xeto"
+   },
+   "out": {
+    "type": "StatusBool?",
+    "line": 36,
+    "raw": "out: StatusBool? <summary, transient, readonly, output>",
+    "file": "timer.xeto"
+   },
+   "outNot": {
+    "type": "StatusBool?",
+    "line": 39,
+    "raw": "outNot: StatusBool? <summary, transient, readonly, output>",
+    "file": "timer.xeto"
+   }
+  }
+ },
+ "CurTime": {
+  "file": "timer.xeto",
+  "line": 43,
+  "base": "HxComp",
+  "slots": {
+   "updateFreq": {
+    "type": "Duration",
+    "line": 45,
+    "raw": "updateFreq: Duration <minVal:0.5sec> 0.5sec",
+    "file": "timer.xeto"
+   },
+   "out": {
+    "type": "DateTime",
+    "line": 48,
+    "raw": "out: DateTime <summary, transient, readonly, output>",
+    "file": "timer.xeto"
+   }
+  }
+ },
+ "TimeDiff": {
+  "file": "timer.xeto",
+  "line": 53,
+  "base": "HxComp",
+  "slots": {
+   "in1": {
+    "type": "DateTime",
+    "line": 55,
+    "raw": "in1: DateTime <summary, transient>",
+    "file": "timer.xeto"
+   },
+   "in2": {
+    "type": "DateTime",
+    "line": 58,
+    "raw": "in2: DateTime <summary, transient>",
+    "file": "timer.xeto"
+   },
+   "out": {
+    "type": "Duration",
+    "line": 61,
+    "raw": "out: Duration <summary, transient, readonly, output>",
+    "file": "timer.xeto"
+   }
+  }
+ },
+ "BoolHold": {
+  "file": "timer.xeto",
+  "line": 73,
+  "base": "HxComp",
+  "slots": {
+   "in": {
+    "type": "StatusBool?",
+    "line": 75,
+    "raw": "in: StatusBool? <summary, transient>",
+    "file": "timer.xeto"
+   },
+   "trueHold": {
+    "type": "Duration",
+    "line": 78,
+    "raw": "trueHold: Duration <minVal:0sec> 0sec",
+    "file": "timer.xeto"
+   },
+   "falseHold": {
+    "type": "Duration",
+    "line": 82,
+    "raw": "falseHold: Duration <minVal:0sec> 0sec",
+    "file": "timer.xeto"
+   },
+   "out": {
+    "type": "StatusBool?",
+    "line": 85,
+    "raw": "out: StatusBool? <summary, transient, readonly, output>",
+    "file": "timer.xeto"
+   }
+  }
+ },
+ "Timer": {
+  "file": "timer.xeto",
+  "line": 100,
+  "base": "HxComp",
+  "slots": {
+   "in": {
+    "type": "StatusBool?",
+    "line": 102,
+    "raw": "in: StatusBool? <summary, transient>",
+    "file": "timer.xeto"
+   },
+   "threshold": {
+    "type": "Duration",
+    "line": 105,
+    "raw": "threshold: Duration 0sec",
+    "file": "timer.xeto"
+   },
+   "out": {
+    "type": "StatusNumber?",
+    "line": 108,
+    "raw": "out: StatusNumber? <summary, transient, readonly, output>",
+    "file": "timer.xeto"
+   },
+   "passed": {
+    "type": "StatusBool?",
+    "line": 111,
+    "raw": "passed: StatusBool? <summary, transient, readonly, output>",
+    "file": "timer.xeto"
+   }
+  }
+ },
+ "AccumTimer": {
+  "file": "timer.xeto",
+  "line": 134,
+  "base": "HxComp",
+  "slots": {
+   "in": {
+    "type": "StatusBool?",
+    "line": 136,
+    "raw": "in: StatusBool? <summary, transient>",
+    "file": "timer.xeto"
+   },
+   "reset": {
+    "type": "StatusBool?",
+    "line": 140,
+    "raw": "reset: StatusBool? <summary, transient>",
+    "file": "timer.xeto"
+   },
+   "threshold": {
+    "type": "Duration",
+    "line": 143,
+    "raw": "threshold: Duration 0sec",
+    "file": "timer.xeto"
+   },
+   "out": {
+    "type": "StatusNumber?",
+    "line": 146,
+    "raw": "out: StatusNumber? <summary, transient, readonly, output>",
+    "file": "timer.xeto"
+   },
+   "passed": {
+    "type": "StatusBool?",
+    "line": 149,
+    "raw": "passed: StatusBool? <summary, transient, readonly, output>",
+    "file": "timer.xeto"
+   }
+  }
+ },
+ "TriggeredComp": {
+  "file": "triggered.xeto",
+  "line": 22,
+  "base": "HxComp",
+  "slots": {
+   "in": {
+    "type": "StatusNumber?",
+    "line": 24,
+    "raw": "in: StatusNumber? <summary, transient>",
+    "file": "triggered.xeto"
+   },
+   "trigger": {
+    "type": "StatusBool?",
+    "line": 27,
+    "raw": "trigger: StatusBool? <summary, transient>",
+    "file": "triggered.xeto"
+   },
+   "out": {
+    "type": "StatusNumber?",
+    "line": 30,
+    "raw": "out: StatusNumber? <summary, transient, readonly, output>",
+    "file": "triggered.xeto"
+   }
+  }
+ },
+ "TriggeredSampler": {
+  "file": "triggered.xeto",
+  "line": 36,
+  "base": "TriggeredComp",
+  "slots": {
+   "in": {
+    "type": "StatusNumber?",
+    "line": 24,
+    "raw": "in: StatusNumber? <summary, transient>",
+    "file": "triggered.xeto"
+   },
+   "trigger": {
+    "type": "StatusBool?",
+    "line": 27,
+    "raw": "trigger: StatusBool? <summary, transient>",
+    "file": "triggered.xeto"
+   },
+   "out": {
+    "type": "StatusNumber?",
+    "line": 30,
+    "raw": "out: StatusNumber? <summary, transient, readonly, output>",
+    "file": "triggered.xeto"
+   },
+   "yStart": {
+    "type": "Number",
+    "line": 38,
+    "raw": "yStart: Number 0",
+    "file": "triggered.xeto"
+   }
+  }
+ },
+ "TriggeredMax": {
+  "file": "triggered.xeto",
+  "line": 45,
+  "base": "TriggeredComp",
+  "slots": {
+   "in": {
+    "type": "StatusNumber?",
+    "line": 24,
+    "raw": "in: StatusNumber? <summary, transient>",
+    "file": "triggered.xeto"
+   },
+   "trigger": {
+    "type": "StatusBool?",
+    "line": 27,
+    "raw": "trigger: StatusBool? <summary, transient>",
+    "file": "triggered.xeto"
+   },
+   "out": {
+    "type": "StatusNumber?",
+    "line": 30,
+    "raw": "out: StatusNumber? <summary, transient, readonly, output>",
+    "file": "triggered.xeto"
+   }
+  }
+ },
+ "TriggeredMovingMean": {
+  "file": "triggered.xeto",
+  "line": 53,
+  "base": "TriggeredComp",
+  "slots": {
+   "in": {
+    "type": "StatusNumber?",
+    "line": 24,
+    "raw": "in: StatusNumber? <summary, transient>",
+    "file": "triggered.xeto"
+   },
+   "trigger": {
+    "type": "StatusBool?",
+    "line": 27,
+    "raw": "trigger: StatusBool? <summary, transient>",
+    "file": "triggered.xeto"
+   },
+   "out": {
+    "type": "StatusNumber?",
+    "line": 30,
+    "raw": "out: StatusNumber? <summary, transient, readonly, output>",
+    "file": "triggered.xeto"
+   },
+   "n": {
+    "type": "Int",
+    "line": 55,
+    "raw": "n: Int <minVal:1> 1",
+    "file": "triggered.xeto"
+   }
+  }
+ },
+ "Folder": {
+  "file": "util.xeto",
+  "line": 11,
+  "base": "HxComp",
+  "slots": {}
+ },
+ "SineWave": {
+  "file": "util.xeto",
+  "line": 14,
+  "base": "HxComp",
+  "slots": {
+   "out": {
+    "type": "StatusNumber",
+    "line": 16,
+    "raw": "out: StatusNumber <summary, transient, readonly, output>",
+    "file": "util.xeto"
+   },
+   "period": {
+    "type": "Duration",
+    "line": 19,
+    "raw": "period: Duration <minVal:1sec> 30sec",
+    "file": "util.xeto"
+   },
+   "amplitude": {
+    "type": "Float",
+    "line": 22,
+    "raw": "amplitude: Float 50",
+    "file": "util.xeto"
+   },
+   "offset": {
+    "type": "Float",
+    "line": 25,
+    "raw": "offset: Float 50",
+    "file": "util.xeto"
+   },
+   "freq": {
+    "type": "Duration",
+    "line": 28,
+    "raw": "freq: Duration <minVal:1sec> 1sec",
+    "file": "util.xeto"
+   }
+  }
+ },
+ "Ramp": {
+  "file": "util.xeto",
+  "line": 32,
+  "base": "HxComp",
+  "slots": {
+   "out": {
+    "type": "StatusNumber",
+    "line": 34,
+    "raw": "out: StatusNumber <summary, transient, readonly, output>",
+    "file": "util.xeto"
+   },
+   "period": {
+    "type": "Duration",
+    "line": 37,
+    "raw": "period: Duration <minVal:1sec> 30sec",
+    "file": "util.xeto"
+   },
+   "amplitude": {
+    "type": "Float",
+    "line": 40,
+    "raw": "amplitude: Float 50",
+    "file": "util.xeto"
+   },
+   "offset": {
+    "type": "Float",
+    "line": 43,
+    "raw": "offset: Float 50",
+    "file": "util.xeto"
+   },
+   "freq": {
+    "type": "Duration",
+    "line": 46,
+    "raw": "freq: Duration <minVal: 1sec> 1sec",
+    "file": "util.xeto"
+   },
+   "waveform": {
+    "type": "RampWaveform",
+    "line": 49,
+    "raw": "waveform: RampWaveform \"triangle\"",
+    "file": "util.xeto"
+   }
+  }
+ },
+ "RampWaveform": {
+  "file": "util.xeto",
+  "line": 53,
+  "base": "Enum",
+  "slots": {},
+  "items": [
+   "triangle",
+   "sawtooth",
+   "invertedSawtooth"
+  ]
+ },
+ "AxonComp": {
+  "file": "util.xeto",
+  "line": 60,
+  "base": "HxComp",
+  "slots": {
+   "axon": {
+    "type": "Str",
+    "line": 61,
+    "raw": "axon: Str",
+    "file": "util.xeto"
+   }
+  }
+ },
+ "MinMaxAvg": {
+  "file": "util.xeto",
+  "line": 65,
+  "base": "HxComp",
+  "slots": {
+   "inA": {
+    "type": "StatusNumber?",
+    "line": 67,
+    "raw": "inA: StatusNumber? <summary, transient>",
+    "file": "util.xeto"
+   },
+   "inB": {
+    "type": "StatusNumber?",
+    "line": 70,
+    "raw": "inB: StatusNumber? <summary, transient>",
+    "file": "util.xeto"
+   },
+   "inC": {
+    "type": "StatusNumber?",
+    "line": 73,
+    "raw": "inC: StatusNumber? <transient>",
+    "file": "util.xeto"
+   },
+   "inD": {
+    "type": "StatusNumber?",
+    "line": 76,
+    "raw": "inD: StatusNumber? <transient>",
+    "file": "util.xeto"
+   },
+   "inE": {
+    "type": "StatusNumber?",
+    "line": 79,
+    "raw": "inE: StatusNumber? <transient>",
+    "file": "util.xeto"
+   },
+   "inF": {
+    "type": "StatusNumber?",
+    "line": 82,
+    "raw": "inF: StatusNumber? <transient>",
+    "file": "util.xeto"
+   },
+   "inG": {
+    "type": "StatusNumber?",
+    "line": 85,
+    "raw": "inG: StatusNumber? <transient>",
+    "file": "util.xeto"
+   },
+   "inH": {
+    "type": "StatusNumber?",
+    "line": 88,
+    "raw": "inH: StatusNumber? <transient>",
+    "file": "util.xeto"
+   },
+   "inI": {
+    "type": "StatusNumber?",
+    "line": 91,
+    "raw": "inI: StatusNumber? <transient>",
+    "file": "util.xeto"
+   },
+   "inJ": {
+    "type": "StatusNumber?",
+    "line": 94,
+    "raw": "inJ: StatusNumber? <transient>",
+    "file": "util.xeto"
+   },
+   "min": {
+    "type": "StatusNumber?",
+    "line": 97,
+    "raw": "min: StatusNumber? <summary, transient, readonly, output>",
+    "file": "util.xeto"
+   },
+   "max": {
+    "type": "StatusNumber?",
+    "line": 100,
+    "raw": "max: StatusNumber? <summary, transient, readonly, output>",
+    "file": "util.xeto"
+   },
+   "avg": {
+    "type": "StatusNumber?",
+    "line": 103,
+    "raw": "avg: StatusNumber? <summary, transient, readonly, output>",
+    "file": "util.xeto"
+   }
+  }
+ },
+ "MultiVibrator": {
+  "file": "util.xeto",
+  "line": 107,
+  "base": "HxComp",
+  "slots": {
+   "out": {
+    "type": "StatusBool",
+    "line": 109,
+    "raw": "out: StatusBool <summary, transient, readonly, output>",
+    "file": "util.xeto"
+   },
+   "period": {
+    "type": "Duration",
+    "line": 112,
+    "raw": "period: Duration <minVal:200ms> 1sec",
+    "file": "util.xeto"
+   },
+   "dutyCycle": {
+    "type": "Int",
+    "line": 116,
+    "raw": "dutyCycle: Int <minVal:0, maxVal:100> 50",
+    "file": "util.xeto"
+   }
+  }
+ },
+ "Random": {
+  "file": "util.xeto",
+  "line": 121,
+  "base": "HxComp",
+  "slots": {
+   "out": {
+    "type": "StatusNumber",
+    "line": 123,
+    "raw": "out: StatusNumber <summary, transient, readonly, output>",
+    "file": "util.xeto"
+   },
+   "multiplier": {
+    "type": "Float",
+    "line": 126,
+    "raw": "multiplier: Float 1.0",
+    "file": "util.xeto"
+   },
+   "offset": {
+    "type": "Float",
+    "line": 129,
+    "raw": "offset: Float",
+    "file": "util.xeto"
+   },
+   "freq": {
+    "type": "Duration",
+    "line": 132,
+    "raw": "freq: Duration <minVal: 0sec> 1sec",
+    "file": "util.xeto"
+   }
+  }
+ },
+ "Counter": {
+  "file": "util.xeto",
+  "line": 140,
+  "base": "HxComp",
+  "slots": {
+   "trigger": {
+    "type": "StatusBool?",
+    "line": 142,
+    "raw": "trigger: StatusBool? <summary, transient>",
+    "file": "util.xeto"
+   },
+   "reset": {
+    "type": "StatusBool?",
+    "line": 146,
+    "raw": "reset: StatusBool? <summary, transient>",
+    "file": "util.xeto"
+   },
+   "initVal": {
+    "type": "Int",
+    "line": 149,
+    "raw": "initVal: Int 0",
+    "file": "util.xeto"
+   },
+   "out": {
+    "type": "StatusNumber?",
+    "line": 152,
+    "raw": "out: StatusNumber? <summary, transient, readonly, output>",
+    "file": "util.xeto"
+   }
+  }
+ },
+ "CdlPid": {
+  "file": "util.xeto",
+  "line": 183,
+  "base": "HxComp",
+  "slots": {
+   "inSetpoint": {
+    "type": "StatusNumber?",
+    "line": 185,
+    "raw": "inSetpoint: StatusNumber? <summary, transient>",
+    "file": "util.xeto"
+   },
+   "inMeasurement": {
+    "type": "StatusNumber?",
+    "line": 188,
+    "raw": "inMeasurement: StatusNumber? <summary, transient>",
+    "file": "util.xeto"
+   },
+   "inReset": {
+    "type": "StatusBool?",
+    "line": 191,
+    "raw": "inReset: StatusBool? <summary, transient>",
+    "file": "util.xeto"
+   },
+   "controllerType": {
+    "type": "PidControllerType",
+    "line": 194,
+    "raw": "controllerType: PidControllerType \"pi\"",
+    "file": "util.xeto"
+   },
+   "k": {
+    "type": "Float",
+    "line": 197,
+    "raw": "k: Float 1",
+    "file": "util.xeto"
+   },
+   "ti": {
+    "type": "Duration",
+    "line": 200,
+    "raw": "ti: Duration <minVal:0sec> 0.5sec",
+    "file": "util.xeto"
+   },
+   "td": {
+    "type": "Duration",
+    "line": 203,
+    "raw": "td: Duration <minVal:0sec> 0.1sec",
+    "file": "util.xeto"
+   },
+   "r": {
+    "type": "Float",
+    "line": 206,
+    "raw": "r: Float 1",
+    "file": "util.xeto"
+   },
+   "yMax": {
+    "type": "Float",
+    "line": 209,
+    "raw": "yMax: Float 1",
+    "file": "util.xeto"
+   },
+   "yMin": {
+    "type": "Float",
+    "line": 212,
+    "raw": "yMin: Float 0",
+    "file": "util.xeto"
+   },
+   "ni": {
+    "type": "Float",
+    "line": 215,
+    "raw": "ni: Float 0.9",
+    "file": "util.xeto"
+   },
+   "nd": {
+    "type": "Float",
+    "line": 218,
+    "raw": "nd: Float 10",
+    "file": "util.xeto"
+   },
+   "xiStart": {
+    "type": "Float",
+    "line": 221,
+    "raw": "xiStart: Float 0",
+    "file": "util.xeto"
+   },
+   "ydStart": {
+    "type": "Float",
+    "line": 224,
+    "raw": "ydStart: Float 0",
+    "file": "util.xeto"
+   },
+   "reverseActing": {
+    "type": "Bool",
+    "line": 227,
+    "raw": "reverseActing: Bool \"true\"",
+    "file": "util.xeto"
+   },
+   "yReset": {
+    "type": "Float",
+    "line": 230,
+    "raw": "yReset: Float 0",
+    "file": "util.xeto"
+   },
+   "out": {
+    "type": "StatusNumber?",
+    "line": 233,
+    "raw": "out: StatusNumber? <summary, transient, readonly, output>",
+    "file": "util.xeto"
+   }
+  }
+ },
+ "PidControllerType": {
+  "file": "util.xeto",
+  "line": 237,
+  "base": "Enum",
+  "slots": {},
+  "items": [
+   "p",
+   "pi",
+   "pd",
+   "pid"
+  ]
+ },
+ "VariablePulse": {
+  "file": "variablePulse.xeto",
+  "line": 36,
+  "base": "HxComp",
+  "slots": {
+   "in": {
+    "type": "StatusNumber?",
+    "line": 38,
+    "raw": "in: StatusNumber? <summary, transient>",
+    "file": "variablePulse.xeto"
+   },
+   "period": {
+    "type": "Duration",
+    "line": 41,
+    "raw": "period: Duration 1min",
+    "file": "variablePulse.xeto"
+   },
+   "deltaU": {
+    "type": "Float",
+    "line": 44,
+    "raw": "deltaU: Float 0.01",
+    "file": "variablePulse.xeto"
+   },
+   "minHold": {
+    "type": "Duration?",
+    "line": 47,
+    "raw": "minHold: Duration?",
+    "file": "variablePulse.xeto"
+   },
+   "out": {
+    "type": "StatusBool?",
+    "line": 50,
+    "raw": "out: StatusBool? <summary, transient, readonly, output>",
+    "file": "variablePulse.xeto"
+   }
+  }
+ },
+ "BoolVar": {
+  "file": "vars.xeto",
+  "line": 10,
+  "base": "Var",
+  "slots": {
+   "val": {
+    "type": "Bool?",
+    "line": 10,
+    "raw": "val: Bool?",
+    "file": "vars.xeto"
+   }
+  }
+ },
+ "DateVar": {
+  "file": "vars.xeto",
+  "line": 13,
+  "base": "Var",
+  "slots": {
+   "val": {
+    "type": "Date?",
+    "line": 13,
+    "raw": "val: Date?",
+    "file": "vars.xeto"
+   }
+  }
+ },
+ "DateTimeVar": {
+  "file": "vars.xeto",
+  "line": 16,
+  "base": "Var",
+  "slots": {
+   "val": {
+    "type": "DateTime?",
+    "line": 16,
+    "raw": "val: DateTime?",
+    "file": "vars.xeto"
+   }
+  }
+ },
+ "NumberVar": {
+  "file": "vars.xeto",
+  "line": 19,
+  "base": "Var",
+  "slots": {
+   "val": {
+    "type": "Number?",
+    "line": 19,
+    "raw": "val: Number?",
+    "file": "vars.xeto"
+   }
+  }
+ },
+ "RefVar": {
+  "file": "vars.xeto",
+  "line": 22,
+  "base": "Var",
+  "slots": {
+   "val": {
+    "type": "Ref?",
+    "line": 22,
+    "raw": "val: Ref?",
+    "file": "vars.xeto"
+   }
+  }
+ },
+ "StrVar": {
+  "file": "vars.xeto",
+  "line": 25,
+  "base": "Var",
+  "slots": {
+   "val": {
+    "type": "Str?",
+    "line": 25,
+    "raw": "val: Str?",
+    "file": "vars.xeto"
+   }
+  }
+ },
+ "TimeVar": {
+  "file": "vars.xeto",
+  "line": 28,
+  "base": "Var",
+  "slots": {
+   "val": {
+    "type": "Time?",
+    "line": 28,
+    "raw": "val: Time?",
+    "file": "vars.xeto"
+   }
+  }
+ },
+ "EntityVar": {
+  "file": "vars.xeto",
+  "line": 31,
+  "base": "Var",
+  "slots": {
+   "val": {
+    "type": "Entity?",
+    "line": 31,
+    "raw": "val: Entity? <transient>",
+    "file": "vars.xeto"
+   }
+  }
+ },
+ "GridVar": {
+  "file": "vars.xeto",
+  "line": 34,
+  "base": "Var",
+  "slots": {
+   "val": {
+    "type": "Grid?",
+    "line": 34,
+    "raw": "val: Grid?",
+    "file": "vars.xeto"
+   }
+  }
+ },
+ "PointVar": {
+  "file": "vars.xeto",
+  "line": 42,
+  "base": "EntityVar",
+  "slots": {
+   "val": {
+    "type": "Entity?",
+    "line": 31,
+    "raw": "val: Entity? <transient>",
+    "file": "vars.xeto"
+   },
+   "bindSpec": {
+    "type": "Ref?",
+    "line": 43,
+    "raw": "bindSpec: Ref? <of:Spec>",
+    "file": "vars.xeto"
+   }
+  }
+ },
+ "PointInput": {
+  "file": "vars.xeto",
+  "line": 47,
+  "base": "PointVar",
+  "slots": {
+   "val": {
+    "type": "Entity?",
+    "line": 31,
+    "raw": "val: Entity? <transient>",
+    "file": "vars.xeto"
+   },
+   "bindSpec": {
+    "type": "Ref?",
+    "line": 43,
+    "raw": "bindSpec: Ref? <of:Spec>",
+    "file": "vars.xeto"
+   },
+   "curVal": {
+    "type": "StatusVal?",
+    "line": 47,
+    "raw": "curVal: StatusVal? <readonly, transient, summary, output>",
+    "file": "vars.xeto"
+   }
+  }
+ },
+ "NumberPointInput": {
+  "file": "vars.xeto",
+  "line": 50,
+  "base": "PointInput",
+  "slots": {
+   "val": {
+    "type": "Entity?",
+    "line": 31,
+    "raw": "val: Entity? <transient>",
+    "file": "vars.xeto"
+   },
+   "bindSpec": {
+    "type": "Ref?",
+    "line": 43,
+    "raw": "bindSpec: Ref? <of:Spec>",
+    "file": "vars.xeto"
+   },
+   "curVal": {
+    "type": "StatusNumber?",
+    "line": 50,
+    "raw": "curVal: StatusNumber?",
+    "file": "vars.xeto"
+   }
+  }
+ },
+ "BoolPointInput": {
+  "file": "vars.xeto",
+  "line": 53,
+  "base": "PointInput",
+  "slots": {
+   "val": {
+    "type": "Entity?",
+    "line": 31,
+    "raw": "val: Entity? <transient>",
+    "file": "vars.xeto"
+   },
+   "bindSpec": {
+    "type": "Ref?",
+    "line": 43,
+    "raw": "bindSpec: Ref? <of:Spec>",
+    "file": "vars.xeto"
+   },
+   "curVal": {
+    "type": "StatusBool?",
+    "line": 53,
+    "raw": "curVal: StatusBool?",
+    "file": "vars.xeto"
+   }
+  }
+ },
+ "StrPointInput": {
+  "file": "vars.xeto",
+  "line": 56,
+  "base": "PointInput",
+  "slots": {
+   "val": {
+    "type": "Entity?",
+    "line": 31,
+    "raw": "val: Entity? <transient>",
+    "file": "vars.xeto"
+   },
+   "bindSpec": {
+    "type": "Ref?",
+    "line": 43,
+    "raw": "bindSpec: Ref? <of:Spec>",
+    "file": "vars.xeto"
+   },
+   "curVal": {
+    "type": "StatusStr?",
+    "line": 56,
+    "raw": "curVal: StatusStr?",
+    "file": "vars.xeto"
+   }
+  }
+ },
+ "PointOutput": {
+  "file": "vars.xeto",
+  "line": 59,
+  "base": "PointVar",
+  "slots": {
+   "val": {
+    "type": "Entity?",
+    "line": 31,
+    "raw": "val: Entity? <transient>",
+    "file": "vars.xeto"
+   },
+   "bindSpec": {
+    "type": "Ref?",
+    "line": 43,
+    "raw": "bindSpec: Ref? <of:Spec>",
+    "file": "vars.xeto"
+   },
+   "in": {
+    "type": "StatusVal?",
+    "line": 60,
+    "raw": "in: StatusVal? <summary, transient>",
+    "file": "vars.xeto"
+   },
+   "bindToWriteLevel": {
+    "type": "Int?",
+    "line": 62,
+    "raw": "bindToWriteLevel: Int? <minVal: 1, maxVal: 17>",
+    "file": "vars.xeto"
+   }
+  }
+ },
+ "NumberPointOutput": {
+  "file": "vars.xeto",
+  "line": 65,
+  "base": "PointOutput",
+  "slots": {
+   "val": {
+    "type": "Entity?",
+    "line": 31,
+    "raw": "val: Entity? <transient>",
+    "file": "vars.xeto"
+   },
+   "bindSpec": {
+    "type": "Ref?",
+    "line": 43,
+    "raw": "bindSpec: Ref? <of:Spec>",
+    "file": "vars.xeto"
+   },
+   "in": {
+    "type": "StatusNumber?",
+    "line": 65,
+    "raw": "in: StatusNumber?",
+    "file": "vars.xeto"
+   },
+   "bindToWriteLevel": {
+    "type": "Int?",
+    "line": 62,
+    "raw": "bindToWriteLevel: Int? <minVal: 1, maxVal: 17>",
+    "file": "vars.xeto"
+   }
+  }
+ },
+ "BoolPointOutput": {
+  "file": "vars.xeto",
+  "line": 68,
+  "base": "PointOutput",
+  "slots": {
+   "val": {
+    "type": "Entity?",
+    "line": 31,
+    "raw": "val: Entity? <transient>",
+    "file": "vars.xeto"
+   },
+   "bindSpec": {
+    "type": "Ref?",
+    "line": 43,
+    "raw": "bindSpec: Ref? <of:Spec>",
+    "file": "vars.xeto"
+   },
+   "in": {
+    "type": "StatusBool?",
+    "line": 68,
+    "raw": "in: StatusBool?",
+    "file": "vars.xeto"
+   },
+   "bindToWriteLevel": {
+    "type": "Int?",
+    "line": 62,
+    "raw": "bindToWriteLevel: Int? <minVal: 1, maxVal: 17>",
+    "file": "vars.xeto"
+   }
+  }
+ },
+ "StrPointOutput": {
+  "file": "vars.xeto",
+  "line": 71,
+  "base": "PointOutput",
+  "slots": {
+   "val": {
+    "type": "Entity?",
+    "line": 31,
+    "raw": "val: Entity? <transient>",
+    "file": "vars.xeto"
+   },
+   "bindSpec": {
+    "type": "Ref?",
+    "line": 43,
+    "raw": "bindSpec: Ref? <of:Spec>",
+    "file": "vars.xeto"
+   },
+   "in": {
+    "type": "StatusStr?",
+    "line": 71,
+    "raw": "in: StatusStr?",
+    "file": "vars.xeto"
+   },
+   "bindToWriteLevel": {
+    "type": "Int?",
+    "line": 62,
+    "raw": "bindToWriteLevel: Int? <minVal: 1, maxVal: 17>",
+    "file": "vars.xeto"
+   }
+  }
+ }
+}

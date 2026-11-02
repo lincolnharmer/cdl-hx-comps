@@ -1,2 +1,6 @@
 # Design docs stay local and are shared by hand.
 docs/
+
+# Python bytecode and pytest state from running the generator and its tests.
+__pycache__/
+.pytest_cache/

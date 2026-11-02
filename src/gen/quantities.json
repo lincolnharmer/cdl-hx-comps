@@ -1,0 +1,657 @@
+{
+  "note": "K slots of the G36 libs that neither CXF nor MBL types as a temperature or a temperature difference, and that carry no displayUnit (MBL 14.0.0). Each is decided by its MBL description, quoted in why; generate.py writes the decided quantity and cdlQuantityInferred. Slots with displayUnit degC or K are decided by generate.DISPLAY_QUANTITY instead. A new such slot refuses generation until it is recorded here (test_every_k_slot_without_a_quantity_is_decided). A slot MBL declares with neither unit nor quantity may also be decided here with a unit, from the typed declaration it is wired or bound to, quoted in why; generate.py then writes the unit and quantity with cdlUnitInferred and cdlQuantityInferred and no cdlUnit (infer_unit). A unit decision other than K carries no quantity: only K needs one to say whether it is absolute or a difference. pointUnits names a slot MBL declares unit \"1\", or no unit, whose dimensionless number is counted in a unit (a slot with no unit takes \"1\" as an inferred unit), so a binder binds a point in that unit as it is: cdlPointUnit. literalUnits records the unit of a literal the static propagation cannot reach, keyed class.instance.parameter in CDL names: a factor or a sign that multiplies a value of known unit, which is dimensionless. unitOverrides corrects a unit MBL declares wrongly, after review: `from` is the unit MBL declares and `unit` the one written. The slot carries cdlUnitOverride naming MBL's unit. An override whose slot no longer declares `from` refuses generation, so a fixed MBL fails loudly.",
+  "decisions": {
+    "Buildings.Controls.OBC.ASHRAE.G36.AHUs.MultiZone.VAV.SetPoints.FreezeProtection.THys": {
+      "quantity": "temperatureDifferential",
+      "why": "Hysteresis for checking temperature difference"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.AHUs.SingleZone.VAV.Controller.THys": {
+      "quantity": "temperatureDifferential",
+      "why": "Hysteresis for checking temperature difference"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.AHUs.SingleZone.VAV.Controller.cooSetAdj": {
+      "unit": "K",
+      "quantity": "temperatureDifferential",
+      "why": "Cooling setpoint adjustment value. Declared with no unit or quantity in MBL 14.0.0; it is wired to ThermalZones.Setpoints.cooSetAdj, declared K/TemperatureDifference"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.AHUs.SingleZone.VAV.Controller.decTSetDem_1": {
+      "quantity": "temperatureDifferential",
+      "why": "Heating setpoint decrease value (degC) when heating demand limit level 1 is imposed"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.AHUs.SingleZone.VAV.Controller.decTSetDem_2": {
+      "quantity": "temperatureDifferential",
+      "why": "Heating setpoint decrease value (degC) when heating demand limit level 2 is imposed"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.AHUs.SingleZone.VAV.Controller.decTSetDem_3": {
+      "quantity": "temperatureDifferential",
+      "why": "Heating setpoint decrease value (degC) when heating demand limit level 3 is imposed"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.AHUs.SingleZone.VAV.Controller.heaSetAdj": {
+      "unit": "K",
+      "quantity": "temperatureDifferential",
+      "why": "Heating setpoint adjustment value. Declared with no unit or quantity in MBL 14.0.0; it is wired to ThermalZones.Setpoints.heaSetAdj, declared K/TemperatureDifference"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.AHUs.SingleZone.VAV.Controller.incTSetDem_1": {
+      "quantity": "temperatureDifferential",
+      "why": "Cooling setpoint increase value (degC) when cooling demand limit level 1 is imposed"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.AHUs.SingleZone.VAV.Controller.incTSetDem_2": {
+      "quantity": "temperatureDifferential",
+      "why": "Cooling setpoint increase value (degC) when cooling demand limit level 2 is imposed"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.AHUs.SingleZone.VAV.Controller.incTSetDem_3": {
+      "quantity": "temperatureDifferential",
+      "why": "Cooling setpoint increase value (degC) when cooling demand limit level 3 is imposed"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.AHUs.SingleZone.VAV.Controller.setAdj": {
+      "unit": "K",
+      "quantity": "temperatureDifferential",
+      "why": "The adjustment value for both heating and cooling setpoints if it allows only single setpoint adjustment. Declared with no unit or quantity in MBL 14.0.0; it is wired to ThermalZones.Setpoints.setAdj, declared K/TemperatureDifference"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.AHUs.SingleZone.VAV.SetPoints.FreezeProtection.THys": {
+      "quantity": "temperatureDifferential",
+      "why": "Hysteresis for checking temperature difference"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.AHUs.SingleZone.VAV.SetPoints.ModeAndSetPoints.cooSetAdj": {
+      "unit": "K",
+      "quantity": "temperatureDifferential",
+      "why": "Cooling setpoint adjustment value. Declared with no unit or quantity in MBL 14.0.0; it is wired to ThermalZones.Setpoints.cooSetAdj, declared K/TemperatureDifference"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.AHUs.SingleZone.VAV.SetPoints.ModeAndSetPoints.decTSetDem_1": {
+      "unit": "K",
+      "quantity": "temperatureDifferential",
+      "why": "Heating setpoint decrease value (degC) when heating demand limit level 1 is imposed. Declared with no unit in MBL 14.0.0 (Controller declares the same parameter unit=\"K\"); it is bound to ThermalZones.Setpoints.decTSetDem_1"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.AHUs.SingleZone.VAV.SetPoints.ModeAndSetPoints.decTSetDem_2": {
+      "unit": "K",
+      "quantity": "temperatureDifferential",
+      "why": "Heating setpoint decrease value (degC) when heating demand limit level 2 is imposed. Declared with no unit in MBL 14.0.0 (Controller declares the same parameter unit=\"K\"); it is bound to ThermalZones.Setpoints.decTSetDem_2"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.AHUs.SingleZone.VAV.SetPoints.ModeAndSetPoints.decTSetDem_3": {
+      "unit": "K",
+      "quantity": "temperatureDifferential",
+      "why": "Heating setpoint decrease value (degC) when heating demand limit level 3 is imposed. Declared with no unit in MBL 14.0.0 (Controller declares the same parameter unit=\"K\"); it is bound to ThermalZones.Setpoints.decTSetDem_3"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.AHUs.SingleZone.VAV.SetPoints.ModeAndSetPoints.heaSetAdj": {
+      "unit": "K",
+      "quantity": "temperatureDifferential",
+      "why": "Heating setpoint adjustment value. Declared with no unit or quantity in MBL 14.0.0; it is wired to ThermalZones.Setpoints.heaSetAdj, declared K/TemperatureDifference"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.AHUs.SingleZone.VAV.SetPoints.ModeAndSetPoints.incTSetDem_1": {
+      "unit": "K",
+      "quantity": "temperatureDifferential",
+      "why": "Cooling setpoint increase value (degC) when cooling demand limit level 1 is imposed. Declared with no unit in MBL 14.0.0 (Controller declares the same parameter unit=\"K\"); it is bound to ThermalZones.Setpoints.incTSetDem_1"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.AHUs.SingleZone.VAV.SetPoints.ModeAndSetPoints.incTSetDem_2": {
+      "unit": "K",
+      "quantity": "temperatureDifferential",
+      "why": "Cooling setpoint increase value (degC) when cooling demand limit level 2 is imposed. Declared with no unit in MBL 14.0.0 (Controller declares the same parameter unit=\"K\"); it is bound to ThermalZones.Setpoints.incTSetDem_2"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.AHUs.SingleZone.VAV.SetPoints.ModeAndSetPoints.incTSetDem_3": {
+      "unit": "K",
+      "quantity": "temperatureDifferential",
+      "why": "Cooling setpoint increase value (degC) when cooling demand limit level 3 is imposed. Declared with no unit in MBL 14.0.0 (Controller declares the same parameter unit=\"K\"); it is bound to ThermalZones.Setpoints.incTSetDem_3"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.AHUs.SingleZone.VAV.SetPoints.ModeAndSetPoints.setAdj": {
+      "unit": "K",
+      "quantity": "temperatureDifferential",
+      "why": "The adjustment value for both heating and cooling setpoints if it allows only single setpoint adjustment. Declared with no unit or quantity in MBL 14.0.0; it is wired to ThermalZones.Setpoints.setAdj, declared K/TemperatureDifference"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.FanCoilUnits.Controller.THys": {
+      "quantity": "temperatureDifferential",
+      "why": "Hysteresis for checking temperature difference"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.FanCoilUnits.Controller.chiWatResReqLim2": {
+      "quantity": "temperatureDifferential",
+      "why": "Temperature difference limit between setpoint and supply air temperature above which two chilled water reset requests are sent"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.FanCoilUnits.Controller.chiWatResReqLim3": {
+      "quantity": "temperatureDifferential",
+      "why": "Temperature difference limit between setpoint and supply air temperature above which three chilled water reset requests are sent"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.FanCoilUnits.Controller.decTSetDem_1": {
+      "quantity": "temperatureDifferential",
+      "why": "Heating setpoint decrease value (degK) when heating demand limit level 1 is imposed"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.FanCoilUnits.Controller.decTSetDem_2": {
+      "quantity": "temperatureDifferential",
+      "why": "Heating setpoint decrease value (degK) when heating demand limit level 2 is imposed"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.FanCoilUnits.Controller.decTSetDem_3": {
+      "quantity": "temperatureDifferential",
+      "why": "Heating setpoint decrease value (degK) when heating demand limit level 3 is imposed"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.FanCoilUnits.Controller.hotWatResReqLim2": {
+      "quantity": "temperatureDifferential",
+      "why": "Temperature difference limit between setpoint and supply air temperature above which two hot water reset requests are sent"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.FanCoilUnits.Controller.hotWatResReqLim3": {
+      "quantity": "temperatureDifferential",
+      "why": "Temperature difference limit between setpoint and supply air temperature above which three hot water reset requests are sent"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.FanCoilUnits.Controller.incTSetDem_1": {
+      "quantity": "temperatureDifferential",
+      "why": "Cooling setpoint increase value (degK) when cooling demand limit level 1 is imposed"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.FanCoilUnits.Controller.incTSetDem_2": {
+      "quantity": "temperatureDifferential",
+      "why": "Cooling setpoint increase value (degK) when cooling demand limit level 2 is imposed"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.FanCoilUnits.Controller.incTSetDem_3": {
+      "quantity": "temperatureDifferential",
+      "why": "Cooling setpoint increase value (degK) when cooling demand limit level 3 is imposed"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.FanCoilUnits.Subsequences.PlantRequests.THys": {
+      "quantity": "temperatureDifferential",
+      "why": "Hysteresis for checking temperature difference"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.FanCoilUnits.Subsequences.PlantRequests.chiWatResReqLim2": {
+      "quantity": "temperatureDifferential",
+      "why": "Temperature difference limit between setpoint and supply air temperature above which two chilled water reset requests are sent"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.FanCoilUnits.Subsequences.PlantRequests.chiWatResReqLim3": {
+      "quantity": "temperatureDifferential",
+      "why": "Temperature difference limit between setpoint and supply air temperature above which three chilled water reset requests are sent"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.FanCoilUnits.Subsequences.PlantRequests.hotWatResReqLim2": {
+      "quantity": "temperatureDifferential",
+      "why": "Temperature difference limit between setpoint and supply air temperature above which two hot water reset requests are sent"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.FanCoilUnits.Subsequences.PlantRequests.hotWatResReqLim3": {
+      "quantity": "temperatureDifferential",
+      "why": "Temperature difference limit between setpoint and supply air temperature above which three hot water reset requests are sent"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.CoolingOnly.Controller.dTHys": {
+      "quantity": "temperatureDifferential",
+      "why": "Near zero temperature difference, below which the difference will be seen as zero"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.CoolingOnly.Controller.thrTemDif": {
+      "quantity": "temperatureDifferential",
+      "why": "Threshold difference between zone temperature and cooling setpoint for generating 3 cooling SAT reset requests"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.CoolingOnly.Controller.twoTemDif": {
+      "quantity": "temperatureDifferential",
+      "why": "Threshold difference between zone temperature and cooling setpoint for generating 2 cooling SAT reset requests"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.CoolingOnly.Subsequences.Dampers.dTHys": {
+      "quantity": "temperatureDifferential",
+      "why": "Delta between the temperature hysteresis high and low limit"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.DualDuctColdDuctMin.Controller.dTHys": {
+      "quantity": "temperatureDifferential",
+      "why": "Near zero temperature difference, below which the difference will be seen as zero"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.DualDuctColdDuctMin.Controller.thrTemDif": {
+      "quantity": "temperatureDifferential",
+      "why": "Threshold difference between zone temperature and cooling setpoint for generating 3 cooling SAT reset requests"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.DualDuctColdDuctMin.Controller.twoTemDif": {
+      "quantity": "temperatureDifferential",
+      "why": "Threshold difference between zone temperature and cooling setpoint for generating 2 cooling SAT reset requests"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.DualDuctMixConDischargeSensor.Controller.dTHys": {
+      "quantity": "temperatureDifferential",
+      "why": "Near zero temperature difference, below which the difference will be seen as zero"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.DualDuctMixConDischargeSensor.Controller.thrTemDif": {
+      "quantity": "temperatureDifferential",
+      "why": "Threshold difference between zone temperature and cooling setpoint for generating 3 cooling SAT reset requests"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.DualDuctMixConDischargeSensor.Controller.twoTemDif": {
+      "quantity": "temperatureDifferential",
+      "why": "Threshold difference between zone temperature and cooling setpoint for generating 2 cooling SAT reset requests"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.DualDuctMixConInletSensor.Controller.dTHys": {
+      "quantity": "temperatureDifferential",
+      "why": "Near zero temperature difference, below which the difference will be seen as zero"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.DualDuctMixConInletSensor.Controller.thrTemDif": {
+      "quantity": "temperatureDifferential",
+      "why": "Threshold difference between zone temperature and cooling setpoint for generating 3 cooling SAT reset requests"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.DualDuctMixConInletSensor.Controller.twoTemDif": {
+      "quantity": "temperatureDifferential",
+      "why": "Threshold difference between zone temperature and cooling setpoint for generating 2 cooling SAT reset requests"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.DualDuctSnapActing.Controller.dTHys": {
+      "quantity": "temperatureDifferential",
+      "why": "Near zero temperature difference, below which the difference will be seen as zero"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.DualDuctSnapActing.Controller.thrTemDif": {
+      "quantity": "temperatureDifferential",
+      "why": "Threshold difference between zone temperature and cooling setpoint for generating 3 cooling SAT reset requests"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.DualDuctSnapActing.Controller.twoTemDif": {
+      "quantity": "temperatureDifferential",
+      "why": "Threshold difference between zone temperature and cooling setpoint for generating 2 cooling SAT reset requests"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.ParallelFanCVF.Controller.dTDisZonSetMax": {
+      "quantity": "temperatureDifferential",
+      "why": "Zone maximum discharge air temperature above heating setpoint"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.ParallelFanCVF.Controller.dTHys": {
+      "quantity": "temperatureDifferential",
+      "why": "Near zero temperature difference, below which the difference will be seen as zero"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.ParallelFanCVF.Controller.thrTDis_1": {
+      "quantity": "temperatureDifferential",
+      "why": "Threshold difference between discharge air temperature and its setpoint for generating 3 hot water reset requests"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.ParallelFanCVF.Controller.thrTDis_2": {
+      "quantity": "temperatureDifferential",
+      "why": "Threshold difference between discharge air temperature and its setpoint for generating 2 hot water reset requests"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.ParallelFanCVF.Controller.thrTemDif": {
+      "quantity": "temperatureDifferential",
+      "why": "Threshold difference between zone temperature and cooling setpoint for generating 3 cooling SAT reset requests"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.ParallelFanCVF.Controller.twoTemDif": {
+      "quantity": "temperatureDifferential",
+      "why": "Threshold difference between zone temperature and cooling setpoint for generating 2 cooling SAT reset requests"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.ParallelFanCVF.Subsequences.DamperValves.dTDisZonSetMax": {
+      "quantity": "temperatureDifferential",
+      "why": "Zone maximum discharge air temperature above heating setpoint"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.ParallelFanCVF.Subsequences.DamperValves.dTHys": {
+      "quantity": "temperatureDifferential",
+      "why": "Temperature difference hysteresis below which the temperature difference will be seen as zero"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.ParallelFanVVF.Controller.dTDisZonSetMax": {
+      "quantity": "temperatureDifferential",
+      "why": "Zone maximum discharge air temperature above heating setpoint"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.ParallelFanVVF.Controller.dTHys": {
+      "quantity": "temperatureDifferential",
+      "why": "Near zero temperature difference, below which the difference will be seen as zero"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.ParallelFanVVF.Controller.thrTDis_1": {
+      "quantity": "temperatureDifferential",
+      "why": "Threshold difference between discharge air temperature and its setpoint for generating 3 hot water reset requests"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.ParallelFanVVF.Controller.thrTDis_2": {
+      "quantity": "temperatureDifferential",
+      "why": "Threshold difference between discharge air temperature and its setpoint for generating 2 hot water reset requests"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.ParallelFanVVF.Controller.thrTemDif": {
+      "quantity": "temperatureDifferential",
+      "why": "Threshold difference between zone temperature and cooling setpoint for generating 3 cooling SAT reset requests"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.ParallelFanVVF.Controller.twoTemDif": {
+      "quantity": "temperatureDifferential",
+      "why": "Threshold difference between zone temperature and cooling setpoint for generating 2 cooling SAT reset requests"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.ParallelFanVVF.Subsequences.DamperValves.dTDisZonSetMax": {
+      "quantity": "temperatureDifferential",
+      "why": "Zone maximum discharge air temperature above heating setpoint"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.ParallelFanVVF.Subsequences.DamperValves.dTHys": {
+      "quantity": "temperatureDifferential",
+      "why": "Temperature difference hysteresis below which the temperature difference will be seen as zero"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.Reheat.Controller.dTDisZonSetMax": {
+      "quantity": "temperatureDifferential",
+      "why": "Zone maximum discharge air temperature above heating setpoint"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.Reheat.Controller.dTHys": {
+      "quantity": "temperatureDifferential",
+      "why": "Near zero temperature difference, below which the difference will be seen as zero"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.Reheat.Controller.thrTDis_1": {
+      "quantity": "temperatureDifferential",
+      "why": "Threshold difference between discharge air temperature and its setpoint for generating 3 hot water reset requests"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.Reheat.Controller.thrTDis_2": {
+      "quantity": "temperatureDifferential",
+      "why": "Threshold difference between discharge air temperature and its setpoint for generating 2 hot water reset requests"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.Reheat.Controller.thrTemDif": {
+      "quantity": "temperatureDifferential",
+      "why": "Threshold difference between zone temperature and cooling setpoint for generating 3 cooling SAT reset requests"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.Reheat.Controller.twoTemDif": {
+      "quantity": "temperatureDifferential",
+      "why": "Threshold difference between zone temperature and cooling setpoint for generating 2 cooling SAT reset requests"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.Reheat.Subsequences.DamperValves.dTDisZonSetMax": {
+      "quantity": "temperatureDifferential",
+      "why": "Zone maximum discharge air temperature above heating setpoint"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.Reheat.Subsequences.DamperValves.dTHys": {
+      "quantity": "temperatureDifferential",
+      "why": "Temperature difference hysteresis below which the temperature difference will be seen as zero"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.SeriesFanCVF.Controller.dTDisZonSetMax": {
+      "quantity": "temperatureDifferential",
+      "why": "Zone maximum discharge air temperature above heating setpoint"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.SeriesFanCVF.Controller.dTHys": {
+      "quantity": "temperatureDifferential",
+      "why": "Near zero temperature difference, below which the difference will be seen as zero"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.SeriesFanCVF.Controller.thrTDis_1": {
+      "quantity": "temperatureDifferential",
+      "why": "Threshold difference between discharge air temperature and its setpoint for generating 3 hot water reset requests"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.SeriesFanCVF.Controller.thrTDis_2": {
+      "quantity": "temperatureDifferential",
+      "why": "Threshold difference between discharge air temperature and its setpoint for generating 2 hot water reset requests"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.SeriesFanCVF.Controller.thrTemDif": {
+      "quantity": "temperatureDifferential",
+      "why": "Threshold difference between zone temperature and cooling setpoint for generating 3 cooling SAT reset requests"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.SeriesFanCVF.Controller.twoTemDif": {
+      "quantity": "temperatureDifferential",
+      "why": "Threshold difference between zone temperature and cooling setpoint for generating 2 cooling SAT reset requests"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.SeriesFanCVF.Subsequences.SystemRequests.dTHys": {
+      "quantity": "temperatureDifferential",
+      "why": "Near zero temperature difference, below which the difference will be seen as zero"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.SeriesFanCVF.Subsequences.SystemRequests.thrTDis_1": {
+      "quantity": "temperatureDifferential",
+      "why": "Threshold difference between discharge air temperature and its setpoint for generating 3 hot water reset requests"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.SeriesFanCVF.Subsequences.SystemRequests.thrTDis_2": {
+      "quantity": "temperatureDifferential",
+      "why": "Threshold difference between discharge air temperature and its setpoint for generating 2 hot water reset requests"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.SeriesFanCVF.Subsequences.SystemRequests.thrTemDif": {
+      "quantity": "temperatureDifferential",
+      "why": "Threshold difference between zone temperature and cooling setpoint for generating 3 cooling SAT reset requests"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.SeriesFanCVF.Subsequences.SystemRequests.twoTemDif": {
+      "quantity": "temperatureDifferential",
+      "why": "Threshold difference between zone temperature and cooling setpoint for generating 2 cooling SAT reset requests"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.SeriesFanVVF.Controller.dTDisZonSetMax": {
+      "quantity": "temperatureDifferential",
+      "why": "Zone maximum discharge air temperature above heating setpoint"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.SeriesFanVVF.Controller.dTHys": {
+      "quantity": "temperatureDifferential",
+      "why": "Near zero temperature difference, below which the difference will be seen as zero"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.SeriesFanVVF.Controller.thrTDis_1": {
+      "quantity": "temperatureDifferential",
+      "why": "Threshold difference between discharge air temperature and its setpoint for generating 3 hot water reset requests"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.SeriesFanVVF.Controller.thrTDis_2": {
+      "quantity": "temperatureDifferential",
+      "why": "Threshold difference between discharge air temperature and its setpoint for generating 2 hot water reset requests"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.SeriesFanVVF.Controller.thrTemDif": {
+      "quantity": "temperatureDifferential",
+      "why": "Threshold difference between zone temperature and cooling setpoint for generating 3 cooling SAT reset requests"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.SeriesFanVVF.Controller.twoTemDif": {
+      "quantity": "temperatureDifferential",
+      "why": "Threshold difference between zone temperature and cooling setpoint for generating 2 cooling SAT reset requests"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.ThermalZones.ControlLoops.dTHys": {
+      "quantity": "temperatureDifferential",
+      "why": "Delta between the temperature hysteresis high and low limit"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.ThermalZones.Setpoints.decTSetDem_1": {
+      "quantity": "temperatureDifferential",
+      "why": "Heating setpoint decrease value (degC) when heating demand limit level 1 is imposed"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.ThermalZones.Setpoints.decTSetDem_2": {
+      "quantity": "temperatureDifferential",
+      "why": "Heating setpoint decrease value (degC) when heating demand limit level 2 is imposed"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.ThermalZones.Setpoints.decTSetDem_3": {
+      "quantity": "temperatureDifferential",
+      "why": "Heating setpoint decrease value (degC) when heating demand limit level 3 is imposed"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.ThermalZones.Setpoints.incTSetDem_1": {
+      "quantity": "temperatureDifferential",
+      "why": "Cooling setpoint increase value (degC) when cooling demand limit level 1 is imposed"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.ThermalZones.Setpoints.incTSetDem_2": {
+      "quantity": "temperatureDifferential",
+      "why": "Cooling setpoint increase value (degC) when cooling demand limit level 2 is imposed"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.ThermalZones.Setpoints.incTSetDem_3": {
+      "quantity": "temperatureDifferential",
+      "why": "Cooling setpoint increase value (degC) when cooling demand limit level 3 is imposed"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.AHUs.MultiZone.VAV.Economizers.Subsequences.Enable.TOutHigLimCutLow": {
+      "unit": "K",
+      "quantity": "temperatureDifferential",
+      "why": "Hysteresis low limit cutoff, declared with no unit or quantity in MBL 14.0.0 as TOutHigLimCutHig - delTOutHis. TOutHigLimCutHig is declared K/TemperatureDifference and delTOutHis K/TemperatureDifference, and the two are the uLow and uHigh of one Hysteresis"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.AHUs.MultiZone.VAV.Economizers.Subsequences.Enable.hOutHigLimCutLow": {
+      "unit": "J/kg",
+      "why": "Hysteresis block low limit cutoff, declared with no unit or quantity in MBL 14.0.0 as hOutHigLimCutHig - delEntHis. hOutHigLimCutHig is declared J/kg/SpecificEnergy, and the two are the uLow and uHigh of one Hysteresis"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.AHUs.SingleZone.VAV.Economizers.Subsequences.Enable.TOutHigLimCutLow": {
+      "unit": "K",
+      "quantity": "temperatureDifferential",
+      "why": "Hysteresis low limit cutoff, declared with no unit or quantity in MBL 14.0.0 as TOutHigLimCutHig - delTOutHys. TOutHigLimCutHig is declared K/TemperatureDifference and delTOutHys K/TemperatureDifference, and the two are the uLow and uHigh of one Hysteresis"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.AHUs.SingleZone.VAV.Economizers.Subsequences.Enable.hOutHigLimCutLow": {
+      "unit": "J/kg",
+      "why": "Hysteresis block low limit cutoff, declared with no unit or quantity in MBL 14.0.0 as hOutHigLimCutHig - delEntHys. hOutHigLimCutHig is declared J/kg/SpecificEnergy, and the two are the uLow and uHigh of one Hysteresis"
+    }
+  },
+  "pointUnits": {
+    "Buildings.Controls.OBC.ASHRAE.G36.ThermalZones.Alarms.ppmCO2": {
+      "unit": "ppm",
+      "why": "Measured CO2 concentration. MBL 14.0.0 declares it unit \"1\", a dimensionless number, but the values it compares are parts per million (CO2Set is \"CO2 setpoint in ppm\", ppmHys \"Hysteresis value to check CO2 concentration\"), and the point it reads, ph.points::ZoneCo2Sensor, is invariant ppm"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.ThermalZones.Alarms.ppmHys": {
+      "unit": "ppm",
+      "why": "Hysteresis on the CO2 concentration ppmCO2, declared unit \"1\" in MBL 14.0.0: a band of parts per million beside the ppm values it separates"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.AHUs.SingleZone.VAV.Controller.ppmCO2": {
+      "unit": "ppm",
+      "why": "Detected CO2 concentration, declared with no unit in MBL 14.0.0. It is compared with ppmCO2Set, which the ventilation setpoints describe as \"CO2 concentration setpoint, in PPM\", and the point it reads, ph.points::ZoneCo2Sensor, is invariant ppm"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.AHUs.SingleZone.VAV.Controller.ppmCO2Set": {
+      "unit": "ppm",
+      "why": "CO2 concentration setpoint, declared with no unit in MBL 14.0.0; the ventilation setpoints describe it as \"in PPM\", and the point it reads, ph.points::ZoneCo2Sp, is invariant ppm"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.CoolingOnly.Controller.ppmCO2": {
+      "unit": "ppm",
+      "why": "Detected CO2 concentration, declared with no unit in MBL 14.0.0. It is compared with ppmCO2Set, which the ventilation setpoints describe as \"CO2 concentration setpoint, in PPM\", and the point it reads, ph.points::ZoneCo2Sensor, is invariant ppm"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.CoolingOnly.Controller.ppmCO2Set": {
+      "unit": "ppm",
+      "why": "CO2 concentration setpoint, declared with no unit in MBL 14.0.0; the ventilation setpoints describe it as \"in PPM\", and the point it reads, ph.points::ZoneCo2Sp, is invariant ppm"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.DualDuctColdDuctMin.Controller.ppmCO2": {
+      "unit": "ppm",
+      "why": "Detected CO2 concentration, declared with no unit in MBL 14.0.0. It is compared with ppmCO2Set, which the ventilation setpoints describe as \"CO2 concentration setpoint, in PPM\", and the point it reads, ph.points::ZoneCo2Sensor, is invariant ppm"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.DualDuctColdDuctMin.Controller.ppmCO2Set": {
+      "unit": "ppm",
+      "why": "CO2 concentration setpoint, declared with no unit in MBL 14.0.0; the ventilation setpoints describe it as \"in PPM\", and the point it reads, ph.points::ZoneCo2Sp, is invariant ppm"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.DualDuctMixConDischargeSensor.Controller.ppmCO2": {
+      "unit": "ppm",
+      "why": "Detected CO2 concentration, declared with no unit in MBL 14.0.0. It is compared with ppmCO2Set, which the ventilation setpoints describe as \"CO2 concentration setpoint, in PPM\", and the point it reads, ph.points::ZoneCo2Sensor, is invariant ppm"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.DualDuctMixConDischargeSensor.Controller.ppmCO2Set": {
+      "unit": "ppm",
+      "why": "CO2 concentration setpoint, declared with no unit in MBL 14.0.0; the ventilation setpoints describe it as \"in PPM\", and the point it reads, ph.points::ZoneCo2Sp, is invariant ppm"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.DualDuctMixConInletSensor.Controller.ppmCO2": {
+      "unit": "ppm",
+      "why": "Detected CO2 concentration, declared with no unit in MBL 14.0.0. It is compared with ppmCO2Set, which the ventilation setpoints describe as \"CO2 concentration setpoint, in PPM\", and the point it reads, ph.points::ZoneCo2Sensor, is invariant ppm"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.DualDuctMixConInletSensor.Controller.ppmCO2Set": {
+      "unit": "ppm",
+      "why": "CO2 concentration setpoint, declared with no unit in MBL 14.0.0; the ventilation setpoints describe it as \"in PPM\", and the point it reads, ph.points::ZoneCo2Sp, is invariant ppm"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.DualDuctSnapActing.Controller.ppmCO2": {
+      "unit": "ppm",
+      "why": "Detected CO2 concentration, declared with no unit in MBL 14.0.0. It is compared with ppmCO2Set, which the ventilation setpoints describe as \"CO2 concentration setpoint, in PPM\", and the point it reads, ph.points::ZoneCo2Sensor, is invariant ppm"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.DualDuctSnapActing.Controller.ppmCO2Set": {
+      "unit": "ppm",
+      "why": "CO2 concentration setpoint, declared with no unit in MBL 14.0.0; the ventilation setpoints describe it as \"in PPM\", and the point it reads, ph.points::ZoneCo2Sp, is invariant ppm"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.ParallelFanCVF.Controller.ppmCO2": {
+      "unit": "ppm",
+      "why": "Detected CO2 concentration, declared with no unit in MBL 14.0.0. It is compared with ppmCO2Set, which the ventilation setpoints describe as \"CO2 concentration setpoint, in PPM\", and the point it reads, ph.points::ZoneCo2Sensor, is invariant ppm"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.ParallelFanCVF.Controller.ppmCO2Set": {
+      "unit": "ppm",
+      "why": "CO2 concentration setpoint, declared with no unit in MBL 14.0.0; the ventilation setpoints describe it as \"in PPM\", and the point it reads, ph.points::ZoneCo2Sp, is invariant ppm"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.ParallelFanVVF.Controller.ppmCO2": {
+      "unit": "ppm",
+      "why": "Detected CO2 concentration, declared with no unit in MBL 14.0.0. It is compared with ppmCO2Set, which the ventilation setpoints describe as \"CO2 concentration setpoint, in PPM\", and the point it reads, ph.points::ZoneCo2Sensor, is invariant ppm"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.ParallelFanVVF.Controller.ppmCO2Set": {
+      "unit": "ppm",
+      "why": "CO2 concentration setpoint, declared with no unit in MBL 14.0.0; the ventilation setpoints describe it as \"in PPM\", and the point it reads, ph.points::ZoneCo2Sp, is invariant ppm"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.Reheat.Controller.ppmCO2": {
+      "unit": "ppm",
+      "why": "Detected CO2 concentration, declared with no unit in MBL 14.0.0. It is compared with ppmCO2Set, which the ventilation setpoints describe as \"CO2 concentration setpoint, in PPM\", and the point it reads, ph.points::ZoneCo2Sensor, is invariant ppm"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.Reheat.Controller.ppmCO2Set": {
+      "unit": "ppm",
+      "why": "CO2 concentration setpoint, declared with no unit in MBL 14.0.0; the ventilation setpoints describe it as \"in PPM\", and the point it reads, ph.points::ZoneCo2Sp, is invariant ppm"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.SeriesFanCVF.Controller.ppmCO2": {
+      "unit": "ppm",
+      "why": "Detected CO2 concentration, declared with no unit in MBL 14.0.0. It is compared with ppmCO2Set, which the ventilation setpoints describe as \"CO2 concentration setpoint, in PPM\", and the point it reads, ph.points::ZoneCo2Sensor, is invariant ppm"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.SeriesFanCVF.Controller.ppmCO2Set": {
+      "unit": "ppm",
+      "why": "CO2 concentration setpoint, declared with no unit in MBL 14.0.0; the ventilation setpoints describe it as \"in PPM\", and the point it reads, ph.points::ZoneCo2Sp, is invariant ppm"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.SeriesFanVVF.Controller.ppmCO2": {
+      "unit": "ppm",
+      "why": "Detected CO2 concentration, declared with no unit in MBL 14.0.0. It is compared with ppmCO2Set, which the ventilation setpoints describe as \"CO2 concentration setpoint, in PPM\", and the point it reads, ph.points::ZoneCo2Sensor, is invariant ppm"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.SeriesFanVVF.Controller.ppmCO2Set": {
+      "unit": "ppm",
+      "why": "CO2 concentration setpoint, declared with no unit in MBL 14.0.0; the ventilation setpoints describe it as \"in PPM\", and the point it reads, ph.points::ZoneCo2Sp, is invariant ppm"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.VentilationZones.ASHRAE62_1.Setpoints.ppmCO2": {
+      "unit": "ppm",
+      "why": "Detected CO2 concentration, declared with no unit in MBL 14.0.0. It is compared with ppmCO2Set, which the ventilation setpoints describe as \"CO2 concentration setpoint, in PPM\", and the point it reads, ph.points::ZoneCo2Sensor, is invariant ppm"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.VentilationZones.ASHRAE62_1.Setpoints.ppmCO2Set": {
+      "unit": "ppm",
+      "why": "CO2 concentration setpoint, declared with no unit in MBL 14.0.0; the ventilation setpoints describe it as \"in PPM\", and the point it reads, ph.points::ZoneCo2Sp, is invariant ppm"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.VentilationZones.Title24.Setpoints.ppmCO2": {
+      "unit": "ppm",
+      "why": "Detected CO2 concentration, declared with no unit in MBL 14.0.0. It is compared with ppmCO2Set, which the ventilation setpoints describe as \"CO2 concentration setpoint, in PPM\", and the point it reads, ph.points::ZoneCo2Sensor, is invariant ppm"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.VentilationZones.Title24.Setpoints.ppmCO2Set": {
+      "unit": "ppm",
+      "why": "CO2 concentration setpoint, declared with no unit in MBL 14.0.0; the ventilation setpoints describe it as \"in PPM\", and the point it reads, ph.points::ZoneCo2Sp, is invariant ppm"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.ThermalZones.Alarms.CO2Set": {
+      "unit": "ppm",
+      "why": "MBL 14.0.0 describes it as \"CO2 setpoint in ppm\" and declares no unit; it sets the threshold 1.1*CO2Set compared with ppmCO2"
+    }
+  },
+  "literalUnits": {
+    "Buildings.Controls.OBC.ASHRAE.G36.ThermalZones.Setpoints.booToRea.realTrue": {
+      "unit": "1",
+      "why": "BooleanToReal of a demand-limit or adjustment condition, 1 when it holds and 0 when not, multiplied with a setpoint adjustment in K (MBL 14.0.0 ThermalZones.Setpoints: booToRea.y into a Multiply pro): a factor, dimensionless"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.ThermalZones.Setpoints.booToRea.realFalse": {
+      "unit": "1",
+      "why": "BooleanToReal of a demand-limit or adjustment condition, 1 when it holds and 0 when not, multiplied with a setpoint adjustment in K (MBL 14.0.0 ThermalZones.Setpoints: booToRea.y into a Multiply pro): a factor, dimensionless"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.ThermalZones.Setpoints.booToRea1.realTrue": {
+      "unit": "1",
+      "why": "BooleanToReal of a demand-limit or adjustment condition, 1 when it holds and 0 when not, multiplied with a setpoint adjustment in K (MBL 14.0.0 ThermalZones.Setpoints: booToRea1.y into a Multiply pro): a factor, dimensionless"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.ThermalZones.Setpoints.booToRea1.realFalse": {
+      "unit": "1",
+      "why": "BooleanToReal of a demand-limit or adjustment condition, 1 when it holds and 0 when not, multiplied with a setpoint adjustment in K (MBL 14.0.0 ThermalZones.Setpoints: booToRea1.y into a Multiply pro): a factor, dimensionless"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.ThermalZones.Setpoints.booToRea2.realTrue": {
+      "unit": "1",
+      "why": "BooleanToReal of a demand-limit or adjustment condition, 1 when it holds and 0 when not, multiplied with a setpoint adjustment in K (MBL 14.0.0 ThermalZones.Setpoints: booToRea2.y into a Multiply pro): a factor, dimensionless"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.ThermalZones.Setpoints.booToRea2.realFalse": {
+      "unit": "1",
+      "why": "BooleanToReal of a demand-limit or adjustment condition, 1 when it holds and 0 when not, multiplied with a setpoint adjustment in K (MBL 14.0.0 ThermalZones.Setpoints: booToRea2.y into a Multiply pro): a factor, dimensionless"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.ThermalZones.Setpoints.booToRea3.realTrue": {
+      "unit": "1",
+      "why": "BooleanToReal of a demand-limit or adjustment condition, 1 when it holds and 0 when not, multiplied with a setpoint adjustment in K (MBL 14.0.0 ThermalZones.Setpoints: booToRea3.y into a Multiply pro): a factor, dimensionless"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.ThermalZones.Setpoints.booToRea3.realFalse": {
+      "unit": "1",
+      "why": "BooleanToReal of a demand-limit or adjustment condition, 1 when it holds and 0 when not, multiplied with a setpoint adjustment in K (MBL 14.0.0 ThermalZones.Setpoints: booToRea3.y into a Multiply pro): a factor, dimensionless"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.ThermalZones.Setpoints.booToRea4.realTrue": {
+      "unit": "1",
+      "why": "BooleanToReal of a demand-limit or adjustment condition, 1 when it holds and 0 when not, multiplied with a setpoint adjustment in K (MBL 14.0.0 ThermalZones.Setpoints: booToRea4.y into a Multiply pro): a factor, dimensionless"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.ThermalZones.Setpoints.booToRea4.realFalse": {
+      "unit": "1",
+      "why": "BooleanToReal of a demand-limit or adjustment condition, 1 when it holds and 0 when not, multiplied with a setpoint adjustment in K (MBL 14.0.0 ThermalZones.Setpoints: booToRea4.y into a Multiply pro): a factor, dimensionless"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.ThermalZones.Setpoints.booToRea5.realTrue": {
+      "unit": "1",
+      "why": "BooleanToReal of a demand-limit or adjustment condition, 1 when it holds and 0 when not, multiplied with a setpoint adjustment in K (MBL 14.0.0 ThermalZones.Setpoints: booToRea5.y into a Multiply pro): a factor, dimensionless"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.ThermalZones.Setpoints.booToRea5.realFalse": {
+      "unit": "1",
+      "why": "BooleanToReal of a demand-limit or adjustment condition, 1 when it holds and 0 when not, multiplied with a setpoint adjustment in K (MBL 14.0.0 ThermalZones.Setpoints: booToRea5.y into a Multiply pro): a factor, dimensionless"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.ThermalZones.Setpoints.booToRea6.realTrue": {
+      "unit": "1",
+      "why": "BooleanToReal of a demand-limit or adjustment condition, 1 when it holds and 0 when not, multiplied with a setpoint adjustment in K (MBL 14.0.0 ThermalZones.Setpoints: booToRea6.y into a Multiply pro): a factor, dimensionless"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.ThermalZones.Setpoints.booToRea6.realFalse": {
+      "unit": "1",
+      "why": "BooleanToReal of a demand-limit or adjustment condition, 1 when it holds and 0 when not, multiplied with a setpoint adjustment in K (MBL 14.0.0 ThermalZones.Setpoints: booToRea6.y into a Multiply pro): a factor, dimensionless"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.ThermalZones.Setpoints.booToRea7.realTrue": {
+      "unit": "1",
+      "why": "BooleanToReal of a demand-limit or adjustment condition, 1 when it holds and 0 when not, multiplied with a setpoint adjustment in K (MBL 14.0.0 ThermalZones.Setpoints: booToRea7.y into a Multiply pro): a factor, dimensionless"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.ThermalZones.Setpoints.booToRea7.realFalse": {
+      "unit": "1",
+      "why": "BooleanToReal of a demand-limit or adjustment condition, 1 when it holds and 0 when not, multiplied with a setpoint adjustment in K (MBL 14.0.0 ThermalZones.Setpoints: booToRea7.y into a Multiply pro): a factor, dimensionless"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.AHUs.MultiZone.VAV.SetPoints.ReliefFanGroup.booToRea1.realTrue": {
+      "unit": "1",
+      "why": "BooleanToReal of enaRelGro, 1 when the relief fan group is enabled, multiplied with the limited fan speed (MBL 14.0.0: booToRea1.y into pro.u1, lim.y into pro.u2): a factor, dimensionless"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.AHUs.MultiZone.VAV.SetPoints.ReliefFanGroup.booToRea1.realFalse": {
+      "unit": "1",
+      "why": "BooleanToReal of enaRelGro, 1 when the relief fan group is enabled, multiplied with the limited fan speed (MBL 14.0.0: booToRea1.y into pro.u1, lim.y into pro.u2): a factor, dimensionless"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.AHUs.SingleZone.VAV.SetPoints.ReliefFanGroup.booToRea1.realTrue": {
+      "unit": "1",
+      "why": "BooleanToReal of enaRelGro, 1 when the relief fan group is enabled, multiplied with the limited fan speed (MBL 14.0.0: booToRea1.y into pro.u1, lim.y into pro.u2): a factor, dimensionless"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.AHUs.SingleZone.VAV.SetPoints.ReliefFanGroup.booToRea1.realFalse": {
+      "unit": "1",
+      "why": "BooleanToReal of enaRelGro, 1 when the relief fan group is enabled, multiplied with the limited fan speed (MBL 14.0.0: booToRea1.y into pro.u1, lim.y into pro.u2): a factor, dimensionless"
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.Generic.TrimAndRespond.gai.k": {
+      "unit": "1",
+      "why": "MultiplyByParameter gai(final k=-1), \"Convert results back to negative\" in MBL 14.0.0: a sign, dimensionless whatever the unit of the setpoint it resets"
+    }
+  },
+  "unitOverrides": {
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.SeriesFanCVF.Subsequences.DamperValves.damPosHys": {
+      "from": "m³/s",
+      "unit": "1",
+      "mbl": "Buildings/Controls/OBC/ASHRAE/G36/TerminalUnits/SeriesFanCVF/Subsequences/DamperValves.mo:77 declares damPosHys(final unit=\"m3/s\") = 0.05",
+      "why": "An MBL 14.0.0 defect. Its description is \"Hysteresis for checking damper position\", and it is used only as t and h=damPosHys/2 of the LessThreshold cloDam on the damper position uDam, a 0 to 1 signal (DamperValves.mo:304-305). The SeriesFanCVF controller declares damPosHys(unit=\"1\") = 0.005, as every other terminal unit family does in its controller, alarms and system requests. A flow unit would convert the threshold into cfm and compare it with a position."
+    },
+    "Buildings.Controls.OBC.ASHRAE.G36.TerminalUnits.SeriesFanVVF.Subsequences.DamperValves.damPosHys": {
+      "from": "m³/s",
+      "unit": "1",
+      "mbl": "Buildings/Controls/OBC/ASHRAE/G36/TerminalUnits/SeriesFanVVF/Subsequences/DamperValves.mo:81 declares damPosHys(final unit=\"m3/s\") = 0.05",
+      "why": "An MBL 14.0.0 defect. Its description is \"Hysteresis for checking damper position\", and it is used only as t and h=damPosHys/2 of the LessThreshold cloDam on the damper position uDam, a 0 to 1 signal (DamperValves.mo:353-354). The SeriesFanVVF controller declares damPosHys(unit=\"1\") = 0.005, as every other terminal unit family does in its controller, alarms and system requests. A flow unit would convert the threshold into cfm and compare it with a position."
+    }
+  }
+}
