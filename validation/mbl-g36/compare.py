@@ -1,5 +1,5 @@
-# py <run> [...]: compare a replay trace with the MBL Dymola reference on the reference grid. Run it on
-# traces made at a small step (0.1 s or less). Writes runs/<run>/txt and prints it.
+# compare.py <run> [...]: compare a replay trace with the MBL Dymola reference on the reference grid. Run it on
+# traces made at a small step (0.1 s or less). Writes runs/<run>/compare.txt and prints it.
 #
 # The comp value at a reference grid time is formed as buildingspy formed the reference: Dymola's raw output (the
 # regular points k*rawDt plus every event time, holding the event's left limit) linearly resampled onto the grid.

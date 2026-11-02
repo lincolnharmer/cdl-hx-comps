@@ -3,7 +3,7 @@
 // Licensed under the Academic Free License version 3.0
 //
 // Replays one MBL G36 validation model through the cdlResolve flat hx.comps graph.
-// Run: fan G36Replay.fan <scenario.json>... [probe comp names...]
+// Run: fan G36Replay.fan <scenario.json>...
 //
 // The scenario (gen_inputs.py) names the controller, its parameters from the validation model, the step, the end
 // time and an input CSV computed from the validation model's source blocks. Each step: apply the CSV row for this
@@ -16,7 +16,6 @@
 //   events.csv   every change of every Boolean comp in the graph: the model's events, as Dymola stores events
 //   graph.xeto, driver.txt  the resolved graph, and the harness revision (environment variable G36_HARNESS_REV)
 //   changes.csv  every change of a Boolean or Integer (unit-less) point output and Boolean input, over all steps
-//   probe.csv    the `out` of each named comp on every step (diagnosis only)
 // and prints the resolve summary, fault counts and the run time.
 //
 using concurrent
@@ -119,22 +118,20 @@ class FbBlock
 
 class G36Replay
 {
-  ** Args: one or more scenario files (*.json), then probe names. Several scenarios run one after another in this
-  ** JVM, each in a fresh comp space; probes apply to every scenario.
+  ** Args: one or more scenario files. Several scenarios run one after another in this JVM, each in a fresh comp
+  ** space.
   Int main(Str[] args)
   {
-    files := args.findAll { it.endsWith(".json") }
-    probes := args.findAll { !it.endsWith(".json") }
     rc := 0
-    files.each |f|
+    args.each |f|
     {
-      try { r := runOne(f, probes.dup); if (r != 0) rc = r }
+      try { r := runOne(f); if (r != 0) rc = r }
       catch (Err e) { echo("RUN ERR $f: $e"); e.trace; rc = 4 }
     }
     return rc
   }
 
-  Int runOne(Str file, Str[] probes)
+  Int runOne(Str file)
   {
     sc := (Str:Obj?)JsonInStream(File.os(file).in).readJson
     ns := XetoEnv.cur.resolveNamespace(["kw.cdl.g36.terminal", "kw.cdl.g36.ahu"])
@@ -186,13 +183,16 @@ class G36Replay
 
     // inputs CSV
     rs := RowState()
-    // the inputs CSV is streamed: at a 0.1 s step a day is 864,001 rows
+    // the inputs CSV is streamed, a row at a time
     rs.inp = File.os(sc["inputsCsv"].toStr).in
     hdr := rs.inp.readLine.split(',')
     rs.pending = rs.inp.readLine
     Str:Obj? curIn := [:]
-    hdr.each |h, i| { if (i > 0 && !h.startsWith("src:") && ins[h] == null) echo("WARN input column $h has no point input") }
-    ins.each |c, n| { if (!hdr.contains(n) && !((Str:Obj?)sc["feedbackInputs"]).containsKey(n)) echo("WARN point input $n is driven by nothing") }
+    // an input the graph does not take, or a point input nothing drives, invalidates the run
+    errs := Str[,]
+    hdr.each |h, i| { if (i > 0 && !h.startsWith("src:") && ins[h] == null) errs.add("input column $h has no point input") }
+    ins.each |c, n| { if (!hdr.contains(n) && !((Str:Obj?)sc["feedbackInputs"]).containsKey(n)) errs.add("point input $n is driven by nothing") }
+    if (!errs.isEmpty) { errs.each { echo("ERROR $it") }; rs.inp.close; return 5 }
 
     // feedback blocks
     fbs := Str:FbBlock[:] { ordered = true }
@@ -214,8 +214,6 @@ class G36Replay
     nSteps := ((tEnd - tStart) / h).round.toInt
     hns := (h * 1e9f).round.toInt
     win := ((Num)sc["window"]).toInt
-    // dense: every step goes to the trace (the comparer needs the event points between raw points)
-    dense := sc["dense"] == true
     rec := Int:Bool[:]
     // record a window around every reference grid time and around every raw Dymola output point a grid value is
     // interpolated from
@@ -246,17 +244,6 @@ class G36Replay
     rs.trace.printLine("t," + cols.join(","))
     rs.chg = File.os(sc["changes"].toStr).out
     rs.chg.printLine("t,col,val")
-    OutStream? probe := null
-    // a probe name may be a glob (* and ?) over the flat comp names; each probe records `out`, or `in` on a point output
-    if (!probes.isEmpty)
-    {
-      all := Str[,]
-      cs.root.each |v, nm| { if (v is Comp) all.add(nm) }
-      exp := Str[,]
-      probes.each |p| { if (p.contains("*") || p.contains("?")) { re := Regex.glob(p); all.each |n| { if (re.matches(n)) exp.add(n) } } else exp.add(p) }
-      probes = exp
-      probe = File.os(sc["trace"].toStr.replace("trace.csv", "probe.csv")).out; probe.printLine("t," + probes.join(","))
-    }
 
     faultSteps := Str:Int[:]
     nullSteps := Str:Int[:]
@@ -298,9 +285,7 @@ class G36Replay
       if (logBools(rs.boolComps, rs.lastBool, rs.evo, t)) rs.anyEvent = true
       row := fmtT(t) + "," + cols.map |col->Str| { ic := innerCols[col]; return ic != null ? fmt(ic.get("out")) : fmt(outs[col]?.get("in") ?: ins[col]?.get("curVal")) }.join(",")
       // rows go out around every grid and raw point, and two steps either side of every event
-      rs.write(k, row, rec[k] == true || dense)
-      if (probe != null)
-        probe.printLine(fmtT(t) + "," + probes.map |p->Str| { dot := p.index("."); c := cs.root.get(dot == null ? p : p[0..<dot]) as Comp; if (c == null) return "absent"; if (dot != null) return fmt(c.get(p[dot+1..-1])); return fmt(c.spec.slot("out", false) != null ? c.get("out") : c.get("in")) }.join(","))
+      rs.write(k, row, rec[k] == true)
       // feedback blocks see this step's outputs; their outputs feed the next step
       if (!fbs.isEmpty || !fbIn.isEmpty)
       {
@@ -323,7 +308,6 @@ class G36Replay
     }
     rs.trace.close
     rs.chg.close
-    if (probe != null) probe.close
     rs.evo.close
     rs.inp.close
     secs := (Duration.now - tRun).toMillis / 1000f

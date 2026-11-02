@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # run.sh <work dir> all | <name>...: for each named instance (instances.txt), generate the scenario and inputs from
 # MBL, replay them through cdlResolve and hx.comps (one JVM per instance, one at a time), and compare the trace
-# with MBL's reference. Then prints the totals over the instances run (summarize.py).
+# with MBL's reference. Then prints the totals over the instances run (summarize.py). An instance whose generated
+# inputs disagree with the reference, or whose replay or comparison fails, is reported and makes the exit status 1.
 #
 # Environment:
 #   FAN_HOME   the Fantom installation that runs your Haxall build
@@ -33,13 +34,15 @@ for name in "${names[@]}"; do
   [ -n "${model:-}" ] || { echo "$name: not in instances.txt" >&2; rc=2; continue; }
   run=$name-${STEP}s; rd=$WORK/runs/$run
   echo "== $run: $model $inst"
-  "$PYTHON" "$HERE/gen_inputs.py" "$model" "$inst" "$STEP" "$run" | tail -1 || { echo "$run: input generation failed" >&2; rc=1; continue; }
+  "$PYTHON" "$HERE/gen_inputs.py" "$model" "$inst" "$STEP" "$run" | tail -1     || { echo "$run: input generation failed, or an input disagrees with the reference (see $rd/input-check.txt)" >&2; rc=1; continue; }
   ( cd "$WORK/env" && "$FAN_HOME/bin/fan" "$(osp "$HERE/G36Replay.fan")" "$(osp "$rd/scenario.json")" ) > "$rd/run.log" 2>&1
   r=$?; echo "rc=$r" >> "$rd/run.log"
-  grep -E '^(ran |REFUSED|RUN ERR)' "$rd/run.log"
+  grep -E '^(ran |REFUSED|RUN ERR|ERROR)' "$rd/run.log"
   [ $r -eq 0 ] || { echo "$run: replay failed (rc $r), see $rd/run.log" >&2; rc=1; continue; }
   "$PYTHON" "$HERE/compare.py" "$run" > /dev/null || { echo "$run: compare failed" >&2; rc=1; continue; }
   runs+=("$run")
 done
-[ ${#runs[@]} -gt 0 ] && "$PYTHON" "$HERE/summarize.py" "${runs[@]}"
+if [ ${#runs[@]} -gt 0 ]; then
+  "$PYTHON" "$HERE/summarize.py" "${runs[@]}" || { echo "summarize.py failed" >&2; rc=1; }
+fi
 exit $rc

@@ -10,7 +10,7 @@
 #   runs/<run>/input-check.txt every generated input that the reference records, checked on the reference grid
 # A block the evaluator does not know is refused by name. A parameter a block instance does not set takes the
 # default its own .mo declares. runs/ is under G36_WORK; the model files are under MBL_HOME (paths.py).
-import sys, os, json, math
+import sys, os, json, math, bisect, glob, re
 import numpy as np
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import mo, refres, paths
@@ -24,7 +24,6 @@ def qname_of(typ):
     lib = LIBS.get(path[0], "kw.cdl.g36.common")
     want = "".join(x[0].upper() + x[1:] for x in path)
     # the generator recases acronyms (AHUs -> Ahus, VAV -> Vav), so match the library's own spec names ignoring case
-    import glob, re
     names = set()
     for f in glob.glob(os.path.join(paths.XETO_SRC, lib, "*.xeto")):
         names |= set(re.findall(r"^([A-Z]\w*)\s*:", open(f, encoding="utf-8").read(), re.M))
@@ -189,7 +188,7 @@ def main():
         elif ty in ("CDL.Logical.And", "CDL.Logical.Or"):
             a, b = inp("u1") > 0.5, inp("u2") > 0.5
             y = ((a & b) if ty.endswith("And") else (a | b)).astype(float)
-        elif ty == "CDL.Logical.Timer" and p == "passed" or ty == "CDL.Logical.Timer":
+        elif ty == "CDL.Logical.Timer":
             u = inp("u"); th = float(m["t"]); ent = t[0]; pas = th <= 0; prevU = None
             yy = np.zeros(len(t)); pp = np.zeros(len(t))
             for k in range(len(t)):
@@ -295,31 +294,64 @@ def main():
           "inputsCsv": os.path.join(rd, "inputs.csv").replace("\\", "/"),
           "trace": os.path.join(rd, "trace.csv").replace("\\", "/"),
           "changes": os.path.join(rd, "changes.csv").replace("\\", "/"),
-          "grid": grid, "window": 10, "record": outs, "rawDt": rawDt, "tStart": tStart, "sourceEvents": srcEvents, "extraTimes": extra, "alias": aliases, "dense": False,
+          "grid": grid, "window": 10, "record": outs, "rawDt": rawDt, "tStart": tStart, "sourceEvents": srcEvents, "extraTimes": extra, "alias": aliases,
           "feedback": fb, "feedbackInputs": fbin, "feedbackInit": fbinit,
           "startIso": "2025-10-15T00:00:00Z"}
     json.dump(sc, open(os.path.join(rd, "scenario.json"), "w"), indent=1)
 
-    # input check against the reference's recorded inputs
+    # input check against the reference's recorded inputs. Each generated input is formed at each grid time as
+    # compare.py forms a comp value, so the two agree: Dymola's raw output (every rawDt plus every event of the
+    # validation model's sources, an event holding its left limit) resampled linearly onto the reference grid. The
+    # tolerances and the event window are compare.py's. The controller's own events are not known before the
+    # replay; compare.py checks the inputs again with them.
+    import compare
+    def at(y, tt):
+        k = int(round((tt - tStart) / h))
+        return float(y[k]) if 0 <= k < len(y) else None
+    def point(y, p, isev, exact):
+        if not isev: return at(y, p)
+        a1 = at(y, p - h)
+        if exact or a1 is None: return a1
+        a2 = at(y, p - 2 * h)
+        return a1 if a2 is None else 2 * a1 - a2
+    def near_event(p):
+        i = bisect.bisect_left(srcEvents, p - h - 1e-9)
+        return i < len(srcEvents) and srcEvents[i] <= p + h + 1e-9
+    def rng(y, p):
+        w = [v for v in (at(y, p + j * h) for j in (-1, 0, 1)) if v is not None]
+        return (min(w), max(w)) if w else None
     lines = []
     allok = True
     for n in names:
         rk = inst + "." + n
         if rk not in ref: lines.append("%-22s not recorded by the reference" % n); continue
         r = ref[rk]; y = cols[n]; bad = []; evb = []; mx = 0.0; mxat = None
-        # a Boolean or Integer input (every generated value whole) compares with the reference rounded, as
-        # compare.py does: buildingspy resamples Dymola's output linearly, so an event between two output points
-        # prints a fraction between 0 and 1
-        if np.all(y == np.round(y)): r = [float(round(v)) for v in r]
+        exact = bool(np.all(y == np.round(y)))
         for i, ti in enumerate(grid):
-            k = int(round((ti - tStart) / h))
-            if k >= len(y): break
-            e = abs(y[k] - r[i]); tol = 1e-5 * max(1.0, abs(r[i]))
+            if ti > tEnd + 1e-9: break
+            rp = compare.raw_points(ti, rawDt, srcEvents)
+            onraw = len(rp) == 1
+            vals = [point(y, p, ev, exact) for p, w, ev in rp]
+            rv = r[i]
+            if exact and onraw: rv = float(round(rv))
+            if any(v is None for v in vals): bad.append((ti, None, rv)); continue
+            cv = sum(v * w for v, (p, w, ev) in zip(vals, rp))
+            e = abs(cv - rv)
             if e > mx: mx, mxat = e, ti
-            if e <= tol: continue
-            win = y[max(0, k - 1):k + 2]
-            if win.min() - tol <= r[i] <= win.max() + tol: evb.append(ti)
-            else: bad.append((ti, y[k], r[i]))
+            tol = (0.0 if onraw else 1e-6) if exact else compare.RTOL * max(1.0, abs(rv))
+            if e <= tol + 1e-12: continue
+            if any(near_event(p) for p, w, ev in rp):
+                if not exact:
+                    rs = [rng(y, p) for p, w, ev in rp]
+                    if all(x is not None for x in rs):
+                        lo = sum(x[0] * w for x, (p, w, ev) in zip(rs, rp)); hi = sum(x[1] * w for x, (p, w, ev) in zip(rs, rp))
+                        if lo - tol <= rv <= hi + tol: evb.append(ti); continue
+                    if onraw:
+                        a1 = at(y, ti - h); a2 = at(y, ti - 2 * h)
+                        if a1 is not None and a2 is not None and abs(2 * a1 - a2 - rv) <= tol: evb.append(ti); continue
+                elif onraw and any(v is not None and abs(v - rv) < 1e-9 for v in (at(y, ti - h), at(y, ti), at(y, ti + h))):
+                    evb.append(ti); continue
+            bad.append((ti, cv, rv))
         ok = not bad; allok &= ok
         lines.append("%-22s %s  max|err| %.3g at %s  event-bound %s%s" % (n, "OK      " if ok else "MISMATCH", mx, mxat, evb,
                      "" if ok else "  bad " + str(bad[:6])))
@@ -329,9 +361,10 @@ def main():
     print("\n".join(lines))
     print("%s: %s inputs open loop, %d feedback blocks, %d recorded columns, %d rows on %d steps; inputs %s" %
           (run, len(names), len(fb), len(outs), N + 1, N + 1, "OK" if allok else "MISMATCH"))
+    # a generated input that disagrees with the reference invalidates the replay
+    if not allok: sys.exit(1)
 
 def raw_interval(model, stop):
-    import re
     p = os.path.join(paths.mbl(), "Resources/Scripts/Dymola/Controls/OBC/ASHRAE/G36", *model.split(".")) + ".mos"
     txt = open(p, encoding="utf-8").read()
     sim = re.search(r"simulateModel\((.*?)\);", txt, re.S).group(1)
@@ -346,7 +379,6 @@ _ctl_ports = {}
 def ctl_ports(typ):
     """the controller's connectors {name: (Real|Boolean|Integer, Input|Output)} from its own .mo"""
     if typ not in _ctl_ports:
-        import re
         path = typ[len("Buildings.Controls.OBC.ASHRAE.G36."):]
         src = mo.strip_comments(open(mo.mo_path(path), encoding="utf-8").read())
         _ctl_ports[typ] = {m.group(3): (m.group(1), m.group(2)) for m in

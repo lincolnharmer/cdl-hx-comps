@@ -31,7 +31,7 @@ def lag_of(run):
                 a = ix.get(round(ti - h, 6)); b = ix.get(round(ti + h, 6))
                 if a is None or b is None or c[col][a] is None or c[col][b] is None: continue
                 s = abs(c[col][b] - c[col][a]) / (2 * h)
-                if s > 0: best = min(best, 1e-5 * max(1, abs(r[i])) / s)
+                if s > 0: best = min(best, compare.RTOL * max(1, abs(r[i])) / s)
         else:
             best = math.inf
             rawpts = sorted(set([k * raw for k in range(int(g[-1] / raw) + 2)] + list(g)))
