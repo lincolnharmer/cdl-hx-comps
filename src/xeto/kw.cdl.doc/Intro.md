@@ -25,7 +25,7 @@ The specs are generated, not written by hand. The source is LBNL's Modelica Buil
 
 Every generated spec names the MBL class it came from in `cdlClass`. Every elementary class also records its Clause 7 number.
 
-The generator is in this repo, under `src/gen`, in Python. It rebuilds its inputs from MBL with modelica-json, checks every input file against a committed sha256 manifest, and writes the four libraries. Run on the pinned versions, it writes them byte for byte as committed. The repo keeps neither MBL's source nor modelica-json's output: MBL's `.mo` files are downloaded at the release tag and checked against their own sha256 manifest, and the modelica-json output is rebuilt on each machine. The repo's readme lists the prerequisites and the commands.
+The generator is in this repo, under `src/gen`, in Python. It rebuilds its inputs from MBL with modelica-json, checks every input file against a committed sha256 manifest, and writes the four libraries. Run on the pinned versions, it writes them byte for byte as committed. The repo keeps neither MBL's source nor modelica-json's output: MBL's `.mo` files are downloaded by the commit the 14.0.0 release tag points to, and checked against their own sha256 manifest, and the modelica-json output is rebuilt on each machine. The repo's readme lists the prerequisites and the commands.
 
 ASHRAE 231 links the Guideline 36 sample library informatively (A2.1) and does not make it normative. The G36 specs are the sample library's types, not the text of Guideline 36.
 
