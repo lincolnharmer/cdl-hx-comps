@@ -1,0 +1,19 @@
+# The 17 controller instances of MBL 14.0.0's 14 air-side Guideline 36 controller validation models.
+# name                           validation model, under Buildings.Controls.OBC.ASHRAE.G36             controller
+mzAhu                            AHUs.MultiZone.VAV.Validation.Controller                              conAHU
+mzAhuUnspec                      AHUs.MultiZone.VAV.Validation.Controller_UnspecifiedClimate           conAHU
+szAhu                            AHUs.SingleZone.VAV.Validation.Controller                             conVAV
+fcu-conFCU                       FanCoilUnits.Validation.Controller                                    conFCU
+fcu-conFCU1                      FanCoilUnits.Validation.Controller                                    conFCU1
+fcu-conFCU2                      FanCoilUnits.Validation.Controller                                    conFCU2
+fcu-conFCU3                      FanCoilUnits.Validation.Controller                                    conFCU3
+coolingOnly                      TerminalUnits.CoolingOnly.Validation.Controller                       cooBoxCon
+Reheat                           TerminalUnits.Reheat.Validation.Controller                            rehBoxCon
+ParallelFanCVF                   TerminalUnits.ParallelFanCVF.Validation.Controller                    parFanCon
+ParallelFanVVF                   TerminalUnits.ParallelFanVVF.Validation.Controller                    parFanCon
+SeriesFanCVF                     TerminalUnits.SeriesFanCVF.Validation.Controller                      serFanCon
+SeriesFanVVF                     TerminalUnits.SeriesFanVVF.Validation.Controller                      serFanCon
+DualDuctColdDuctMin              TerminalUnits.DualDuctColdDuctMin.Validation.Controller               duaDucCon
+DualDuctMixConDischargeSensor    TerminalUnits.DualDuctMixConDischargeSensor.Validation.Controller     duaDucCon
+DualDuctMixConInletSensor        TerminalUnits.DualDuctMixConInletSensor.Validation.Controller         duaDucCon
+DualDuctSnapActing               TerminalUnits.DualDuctSnapActing.Validation.Controller                duaDucCon

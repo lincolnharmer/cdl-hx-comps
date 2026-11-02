@@ -38,6 +38,10 @@ Everything builds with Haxall's own tools. No SkySpark install is needed.
 
 Browse the markdown documentation in this repo: [kw.cdl.doc](src/xeto/kw.cdl.doc/index.md).
 
+# Validation
+
+[validation/mbl-g36](validation/mbl-g36/README.md) replays MBL 14.0.0's air-side Guideline 36 controller validation models through the resolver and `hx.comps`, and compares every output with MBL's reference results. It downloads MBL at run time. No MBL results are kept in this repo.
+
 # License
 
 kW Engineering's work is licensed under the Academic Free License version 3.0 ([LICENSE](LICENSE)). Each library's `NOTICE` reproduces the MBL license, which covers the MBL names, defaults and descriptions the specs carry.
