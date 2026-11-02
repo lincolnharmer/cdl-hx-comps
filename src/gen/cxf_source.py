@@ -33,6 +33,8 @@ import sys
 
 HERE = pathlib.Path(__file__).resolve().parent
 MANIFEST = HERE / "source_manifest.json"
+# The file regen_cxf.sh writes into the source directory to mark it as its own. It is not an input.
+MARK = ".kw-cdl-source"
 REGEN = "bash src/gen/regen_cxf.sh"
 
 
@@ -58,9 +60,9 @@ def manifest(path=None):
 
 
 def files(src):
-    """Every file under `src`, as posix paths relative to it, sorted."""
+    """Every file under `src` but regen_cxf.sh's marker, as posix paths relative to it, sorted."""
     src = pathlib.Path(src)
-    return sorted(f.relative_to(src).as_posix() for f in src.rglob("*") if f.is_file())
+    return sorted(f.relative_to(src).as_posix() for f in src.rglob("*") if f.is_file() and f.name != MARK)
 
 
 def problems(src, man):
@@ -86,7 +88,7 @@ def verify(src=None, man=None):
     every file that differs from the manifest."""
     src = pathlib.Path(src) if src else source_root()
     man = man or manifest()
-    if not src.is_dir() or not any(f.is_file() for f in src.rglob("*")):
+    if not src.is_dir() or not files(src):
         raise SourceAbsent("no generator source in %s; run: %s" % (src, REGEN))
     bad = problems(src, man)
     if bad:

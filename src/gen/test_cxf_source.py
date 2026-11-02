@@ -54,6 +54,14 @@ def test_a_file_that_differs_from_the_manifest_stops_naming_the_file(tmp_path, c
     assert want in str(e.value) and not isinstance(e.value, cxf_source.SourceAbsent)
 
 
+def test_the_marker_regen_cxf_writes_is_not_an_input(tmp_path):
+    # Wrong behavior caught: the marker regen_cxf.sh leaves in its own directory refused as an unlisted file, so every
+    # regenerated source directory fails its own check.
+    src, man = _tree(tmp_path, FILES)
+    (src / cxf_source.MARK).write_bytes(b"")
+    assert cxf_source.verify(src, man) == src
+
+
 def test_no_source_directory_is_absent_and_names_the_command(tmp_path):
     # Wrong behavior caught: a missing source read as an empty one, so generation writes libs with nothing in them.
     with pytest.raises(cxf_source.SourceAbsent, match="regen_cxf.sh"):
